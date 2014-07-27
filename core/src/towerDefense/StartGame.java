@@ -73,6 +73,7 @@ public class StartGame extends ApplicationAdapter {
 		AppGameContainer appGameContainer;
 		try {
 			appGameContainer = new AppGameContainer(game, width, height, fullscreen);
+			appGameContainer.setDisplayMode(width, height, TowerDefense.isFULLSCREEN());
 			appGameContainer.start();
 			// game.init(appGameContainer);
 		} catch (SlickException e) {
