@@ -17,7 +17,7 @@ allprojects {
 
     version = '1.0'
     ext {
-        appName = 'theplanethatcouldntflygood'
+        appName = 'VirusDefense-libGDX-wrapped'
         gdxVersion = '1.0.0'
         roboVMVersion = '0.0.11'
     }
