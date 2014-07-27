@@ -1,10 +1,11 @@
-package com.badlogicgames.plane.android;
+package android;
 
 import android.os.Bundle;
 
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
-import com.badlogicgames.plane.PlaneGame;
+
+import core.PlaneGame;
 
 public class AndroidLauncher extends AndroidApplication {
 	@Override
