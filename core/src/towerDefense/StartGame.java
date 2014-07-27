@@ -1,5 +1,10 @@
 package towerDefense;
 
+import java.util.List;
+
+import org.newdawn.slick.AppGameContainer;
+import org.newdawn.slick.SlickException;
+
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
@@ -7,9 +12,7 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.Animation.PlayMode;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -18,6 +21,8 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
+
+import engine.TextFileToString;
 
 public class StartGame extends ApplicationAdapter {
 	private static final float PLANE_JUMP_IMPULSE = 350;
@@ -56,6 +61,25 @@ public class StartGame extends ApplicationAdapter {
 
 	@Override
 	public void create() {
+		List<String> settings = TextFileToString.getLines("settings.txt");
+		int width = Integer.parseInt(settings.get(0));
+		int height = Integer.parseInt(settings.get(1));
+		boolean fullscreen;
+		if (Integer.parseInt(settings.get(2)) == 0) {
+			fullscreen = false;
+		} else {
+			fullscreen = true;
+		}
+		final TowerDefense game = new TowerDefense(false);
+		AppGameContainer appGameContainer;
+		try {
+			appGameContainer = new AppGameContainer(game, width, height, fullscreen);
+			appGameContainer.start();
+		} catch (SlickException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 		this.shapeRenderer = new ShapeRenderer();
 		this.batch = new SpriteBatch();
 		this.camera = new OrthographicCamera();
@@ -66,34 +90,7 @@ public class StartGame extends ApplicationAdapter {
 
 		this.font = new BitmapFont(Gdx.files.internal("arial.fnt"));
 
-		this.background = new Texture("background.png");
-		this.ground = new TextureRegion(new Texture("ground.png"));
-		this.ceiling = new TextureRegion(this.ground);
-		this.ceiling.flip(true, true);
-
-		this.rock = new TextureRegion(new Texture("rock.png"));
-		this.rockDown = new TextureRegion(this.rock);
-		this.rockDown.flip(false, true);
-
-		Texture frame1 = new Texture("plane1.png");
-		frame1.setFilter(TextureFilter.Linear, TextureFilter.Linear);
-		Texture frame2 = new Texture("plane2.png");
-		Texture frame3 = new Texture("plane3.png");
-
-		this.ready = new TextureRegion(new Texture("ready.png"));
-		this.gameOver = new TextureRegion(new Texture("gameover.png"));
-
-		this.plane = new Animation(0.05f, new TextureRegion(frame1), new TextureRegion(frame2), new TextureRegion(frame3),
-				new TextureRegion(frame2));
-		this.plane.setPlayMode(PlayMode.LOOP);
-
-		this.music = Gdx.audio.newMusic(Gdx.files.internal("music.mp3"));
-		this.music.setLooping(true);
-		this.music.play();
-
-		this.explode = Gdx.audio.newSound(Gdx.files.internal("explode.wav"));
-
-		this.resetWorld();
+		// game.ini
 	}
 
 	private void resetWorld() {

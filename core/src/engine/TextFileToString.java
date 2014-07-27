@@ -16,9 +16,9 @@ public class TextFileToString {
 		try {
 			File f;
 			if (TowerDefense.isApplet()) {
-				f = new File("./data/files/" + path);
+				f = new File("D:/Users/Valep/git/libGDX-test/android/assets/data/files/" + path);
 			} else {
-				f = new File("./data/files/" + path);
+				f = new File("D:/Users/Valep/git/libGDX-test/android/assets/data/files/" + path);
 			}
 
 			BufferedReader reader = new BufferedReader(new FileReader(f));
@@ -33,5 +33,4 @@ public class TextFileToString {
 		}
 		return list;
 	}
-
 }
