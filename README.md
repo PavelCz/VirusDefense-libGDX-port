@@ -4,5 +4,5 @@ This is more or Less [Virus Defense](https://github.com/Valep42/VirusDefense) of
 
 The libGDX implementation is pased on a libGDX [Demo](https://github.com/badlogic/theplanethatcouldntflygood).
 
-I only tested the desktop Version and it seems to work the same with the same quirks and issues.
+I only tested the desktop Version and it seems to work like the slick2d version, with the same quirks and issues. I did not manage to create a working jar file, i only tested it through eclipse.
   
