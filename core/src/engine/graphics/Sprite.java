@@ -1,21 +1,18 @@
 package engine.graphics;
 
-import org.newdawn.slick.Image;
-import org.newdawn.slick.SlickException;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class Sprite extends RenderObject {
-	private Image image;
+	SpriteBatch batch;
+	Texture img;
 	private String imagePath;
 	private float defaultScale;
 
 	public Sprite(String imagePath) {
 		this.imagePath = imagePath;
-		try {
-			this.image = new Image("data/graphics/" + imagePath);
-		} catch (SlickException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		this.batch = new SpriteBatch();
+		this.img = new Texture("data/graphics/" + imagePath);
 
 		this.defaultScale = 1f;
 
@@ -31,24 +28,26 @@ public class Sprite extends RenderObject {
 
 	@Override
 	public void draw(float xCoordinate, float yCoordinate, float globalScale) {
-		this.image.draw(xCoordinate, yCoordinate, globalScale * this.defaultScale);
+		this.batch.begin();
+		this.batch.draw(this.img, xCoordinate, yCoordinate);
+		this.batch.end();
 	}
 
 	public float getWidth() {
-		return this.image.getWidth() * this.defaultScale;
+		return this.img.getWidth() * this.defaultScale;
 	}
 
 	public float getHeight() {
-		return this.image.getHeight() * this.defaultScale;
+		return this.img.getHeight() * this.defaultScale;
 	}
 
 	public void setAlpha(float alpha) {
-		this.image.setAlpha(alpha);
+		// this.img.setAlpha(alpha);
 
 	}
 
 	public void setColor(float r, float g, float b) {
-		this.image.setImageColor(r, g, b);
+		// this.img.setImageColor(r, g, b);
 	}
 
 	/*
