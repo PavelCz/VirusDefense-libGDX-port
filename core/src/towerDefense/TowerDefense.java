@@ -8,6 +8,7 @@ import java.util.Comparator;
 import java.util.List;
 
 import org.lwjgl.openal.AL;
+import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -70,6 +71,17 @@ public class TowerDefense extends BasicGame implements MusicListener {
 		this.currentGameComponent = this.menu;
 		long passedTime = System.nanoTime() - time;
 		// System.out.println(passedTime / 1000000000.0);
+		AppGameContainer gameContainer = (AppGameContainer) container;
+		System.out.println(gameContainer.getScreenWidth());
+		try {
+			gameContainer.setDisplayMode(TowerDefense.getWidth(), TowerDefense.getHeight(), TowerDefense.isFULLSCREEN());
+			this.reinitMenu(container);
+			this.reinitChooseLevel(container);
+			this.reinitComponents(gameContainer);
+		} catch (SlickException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	private void initSounds() {

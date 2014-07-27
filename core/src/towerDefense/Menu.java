@@ -35,6 +35,7 @@ public class Menu extends GameComponent {
 	@Override
 	public void init(GameContainer container) throws SlickException {
 		super.init(container);
+
 		this.background = new Background(1f, "viren.jpg", this.game.getGameplay());
 
 		this.pausedMessage.setPosition((TowerDefense.getWidth() - this.pausedMessage.getWidth()) / 2, TowerDefense.getHeight() / 4);

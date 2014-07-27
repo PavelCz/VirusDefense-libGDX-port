@@ -218,8 +218,8 @@ public class Settings extends GameComponent {
 	}
 
 	public void updateApplyButton(GameContainer container, int delta) {
-		this.widthField.setFocus(false);
-		this.heightField.setFocus(false);
+		// this.widthField.setFocus(false);
+		// this.heightField.setFocus(false);
 		String newWidthString = this.widthField.getText();
 		String newHeightString = this.heightField.getText();
 		try {
