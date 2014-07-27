@@ -39,182 +39,190 @@ public class PlaneGame extends ApplicationAdapter {
 	TextureRegion ready;
 	TextureRegion gameOver;
 	BitmapFont font;
-	
+
 	Vector2 planePosition = new Vector2();
 	Vector2 planeVelocity = new Vector2();
 	float planeStateTime = 0;
 	Vector2 gravity = new Vector2();
 	Array<Rock> rocks = new Array<Rock>();
-	
+
 	GameState gameState = GameState.Start;
 	int score = 0;
 	Rectangle rect1 = new Rectangle();
 	Rectangle rect2 = new Rectangle();
-	
+
 	Music music;
 	Sound explode;
-	
+
 	@Override
-	public void create () {
-		shapeRenderer = new ShapeRenderer();
-		batch = new SpriteBatch();
-		camera = new OrthographicCamera();
-		camera.setToOrtho(false, 800, 480);
-		uiCamera = new OrthographicCamera();
-		uiCamera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-		uiCamera.update();
-		
-		font = new BitmapFont(Gdx.files.internal("arial.fnt"));
-		
-		background = new Texture("background.png");	
-		ground = new TextureRegion(new Texture("ground.png"));
-		ceiling = new TextureRegion(ground);
-		ceiling.flip(true, true);
-		
-		rock = new TextureRegion(new Texture("rock.png"));
-		rockDown = new TextureRegion(rock);
-		rockDown.flip(false, true);
-		
+	public void create() {
+		this.shapeRenderer = new ShapeRenderer();
+		this.batch = new SpriteBatch();
+		this.camera = new OrthographicCamera();
+		this.camera.setToOrtho(false, 1600, 480);
+		this.uiCamera = new OrthographicCamera();
+		this.uiCamera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+		this.uiCamera.update();
+
+		this.font = new BitmapFont(Gdx.files.internal("arial.fnt"));
+
+		this.background = new Texture("background.png");
+		this.ground = new TextureRegion(new Texture("ground.png"));
+		this.ceiling = new TextureRegion(this.ground);
+		this.ceiling.flip(true, true);
+
+		this.rock = new TextureRegion(new Texture("rock.png"));
+		this.rockDown = new TextureRegion(this.rock);
+		this.rockDown.flip(false, true);
+
 		Texture frame1 = new Texture("plane1.png");
 		frame1.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		Texture frame2 = new Texture("plane2.png");
 		Texture frame3 = new Texture("plane3.png");
-		
-		ready = new TextureRegion(new Texture("ready.png"));
-		gameOver = new TextureRegion(new Texture("gameover.png"));
-		
-		plane = new Animation(0.05f, new TextureRegion(frame1), new TextureRegion(frame2), new TextureRegion(frame3), new TextureRegion(frame2));
-		plane.setPlayMode(PlayMode.LOOP);
-		
-		music = Gdx.audio.newMusic(Gdx.files.internal("music.mp3"));
-		music.setLooping(true);
-		music.play();
-		
-		explode = Gdx.audio.newSound(Gdx.files.internal("explode.wav"));
-		
-		resetWorld();
+
+		this.ready = new TextureRegion(new Texture("ready.png"));
+		this.gameOver = new TextureRegion(new Texture("gameover.png"));
+
+		this.plane = new Animation(0.05f, new TextureRegion(frame1), new TextureRegion(frame2), new TextureRegion(frame3),
+				new TextureRegion(frame2));
+		this.plane.setPlayMode(PlayMode.LOOP);
+
+		this.music = Gdx.audio.newMusic(Gdx.files.internal("music.mp3"));
+		this.music.setLooping(true);
+		this.music.play();
+
+		this.explode = Gdx.audio.newSound(Gdx.files.internal("explode.wav"));
+
+		this.resetWorld();
 	}
-	
+
 	private void resetWorld() {
-		score = 0;
-		groundOffsetX = 0;
-		planePosition.set(PLANE_START_X, PLANE_START_Y);
-		planeVelocity.set(0, 0);
-		gravity.set(0, GRAVITY);
-		camera.position.x = 400;
-		
-		rocks.clear();
-		for(int i = 0; i < 5; i++) {
+		this.score = 0;
+		this.groundOffsetX = 0;
+		this.planePosition.set(PLANE_START_X, PLANE_START_Y);
+		this.planeVelocity.set(0, 0);
+		this.gravity.set(0, GRAVITY);
+		this.camera.position.x = 400;
+
+		this.rocks.clear();
+		for (int i = 0; i < 5; i++) {
 			boolean isDown = MathUtils.randomBoolean();
-			rocks.add(new Rock(700 + i * 200, isDown?480-rock.getRegionHeight(): 0, isDown? rockDown: rock));
+			this.rocks
+					.add(new Rock(700 + i * 200, isDown ? 480 - this.rock.getRegionHeight() : 0, isDown ? this.rockDown : this.rock));
 		}
 	}
-	
+
 	private void updateWorld() {
 		float deltaTime = Gdx.graphics.getDeltaTime();
-		planeStateTime += deltaTime;
-		
-		if(Gdx.input.justTouched()) {
-			if(gameState == GameState.Start) {
-				gameState = GameState.Running;
+		this.planeStateTime += deltaTime;
+
+		if (Gdx.input.justTouched()) {
+			if (this.gameState == GameState.Start) {
+				this.gameState = GameState.Running;
 			}
-			if(gameState == GameState.Running) {
-				planeVelocity.set(PLANE_VELOCITY_X, PLANE_JUMP_IMPULSE);
+			if (this.gameState == GameState.Running) {
+				this.planeVelocity.set(PLANE_VELOCITY_X, PLANE_JUMP_IMPULSE);
 			}
-			if(gameState == GameState.GameOver) {
-				gameState = GameState.Start;
-				resetWorld();
+			if (this.gameState == GameState.GameOver) {
+				this.gameState = GameState.Start;
+				this.resetWorld();
 			}
 		}
-			
-		if(gameState != GameState.Start) planeVelocity.add(gravity);
-		
-		planePosition.mulAdd(planeVelocity, deltaTime);
-		
-		camera.position.x = planePosition.x + 350;		
-		if(camera.position.x - groundOffsetX > ground.getRegionWidth() + 400) {
-			groundOffsetX += ground.getRegionWidth();
+
+		if (this.gameState != GameState.Start)
+			this.planeVelocity.add(this.gravity);
+
+		this.planePosition.mulAdd(this.planeVelocity, deltaTime);
+
+		this.camera.position.x = this.planePosition.x + 350;
+		if (this.camera.position.x - this.groundOffsetX > this.ground.getRegionWidth() + 400) {
+			this.groundOffsetX += this.ground.getRegionWidth();
 		}
-				
-		rect1.set(planePosition.x + 20, planePosition.y, plane.getKeyFrames()[0].getRegionWidth() - 20, plane.getKeyFrames()[0].getRegionHeight());
-		for(Rock r: rocks) {
-			if(camera.position.x - r.position.x > 400 + r.image.getRegionWidth()) {
+
+		this.rect1.set(this.planePosition.x + 20, this.planePosition.y, this.plane.getKeyFrames()[0].getRegionWidth() - 20,
+				this.plane.getKeyFrames()[0].getRegionHeight());
+		for (Rock r : this.rocks) {
+			if (this.camera.position.x - r.position.x > 400 + r.image.getRegionWidth()) {
 				boolean isDown = MathUtils.randomBoolean();
 				r.position.x += 5 * 200;
-				r.position.y = isDown?480-rock.getRegionHeight(): 0;
-				r.image = isDown? rockDown: rock;
+				r.position.y = isDown ? 480 - this.rock.getRegionHeight() : 0;
+				r.image = isDown ? this.rockDown : this.rock;
 				r.counted = false;
 			}
-			rect2.set(r.position.x + (r.image.getRegionWidth() - 30) / 2 + 20, r.position.y, 20, r.image.getRegionHeight() - 10);
-			if(rect1.overlaps(rect2)) {
-				if(gameState != GameState.GameOver) explode.play();
-				gameState = GameState.GameOver;
-				planeVelocity.x = 0;				
+			this.rect2.set(r.position.x + (r.image.getRegionWidth() - 30) / 2 + 20, r.position.y, 20, r.image.getRegionHeight() - 10);
+			if (this.rect1.overlaps(this.rect2)) {
+				if (this.gameState != GameState.GameOver)
+					this.explode.play();
+				this.gameState = GameState.GameOver;
+				this.planeVelocity.x = 0;
 			}
-			if(r.position.x < planePosition.x && !r.counted) {
-				score++;
+			if (r.position.x < this.planePosition.x && !r.counted) {
+				this.score++;
 				r.counted = true;
 			}
 		}
-		
-		if(planePosition.y < ground.getRegionHeight() - 20 || 
-			planePosition.y + plane.getKeyFrames()[0].getRegionHeight() > 480 - ground.getRegionHeight() + 20) {
-			if(gameState != GameState.GameOver) explode.play();
-			gameState = GameState.GameOver;
-			planeVelocity.x = 0;
-		}		
+
+		if (this.planePosition.y < this.ground.getRegionHeight() - 20
+				|| this.planePosition.y + this.plane.getKeyFrames()[0].getRegionHeight() > 480 - this.ground.getRegionHeight() + 20) {
+			if (this.gameState != GameState.GameOver)
+				this.explode.play();
+			this.gameState = GameState.GameOver;
+			this.planeVelocity.x = 0;
+		}
 	}
-	
+
 	private void drawWorld() {
-		camera.update();
-		batch.setProjectionMatrix(camera.combined);
-		batch.begin();
-		batch.draw(background, camera.position.x - background.getWidth() / 2, 0);
-		for(Rock rock: rocks) {
-			batch.draw(rock.image, rock.position.x, rock.position.y);
+		this.camera.update();
+		this.batch.setProjectionMatrix(this.camera.combined);
+		this.batch.begin();
+		this.batch.draw(this.background, this.camera.position.x - this.background.getWidth() / 2, 0);
+		for (Rock rock : this.rocks) {
+			this.batch.draw(rock.image, rock.position.x, rock.position.y);
 		}
-		batch.draw(ground, groundOffsetX, 0);
-		batch.draw(ground, groundOffsetX + ground.getRegionWidth(), 0);
-		batch.draw(ceiling, groundOffsetX, 480 - ceiling.getRegionHeight());
-		batch.draw(ceiling, groundOffsetX + ceiling.getRegionWidth(), 480 - ceiling.getRegionHeight());
-		batch.draw(plane.getKeyFrame(planeStateTime), planePosition.x, planePosition.y);
-		batch.end();
-		
-		batch.setProjectionMatrix(uiCamera.combined);
-		batch.begin();		
-		if(gameState == GameState.Start) {
-			batch.draw(ready, Gdx.graphics.getWidth() / 2 - ready.getRegionWidth() / 2, Gdx.graphics.getHeight() / 2 - ready.getRegionHeight() / 2);
+		this.batch.draw(this.ground, this.groundOffsetX, 0);
+		this.batch.draw(this.ground, this.groundOffsetX + this.ground.getRegionWidth(), 0);
+		this.batch.draw(this.ceiling, this.groundOffsetX, 480 - this.ceiling.getRegionHeight());
+		this.batch.draw(this.ceiling, this.groundOffsetX + this.ceiling.getRegionWidth(), 480 - this.ceiling.getRegionHeight());
+		this.batch.draw(this.plane.getKeyFrame(this.planeStateTime), this.planePosition.x, this.planePosition.y);
+		this.batch.end();
+
+		this.batch.setProjectionMatrix(this.uiCamera.combined);
+		this.batch.begin();
+		if (this.gameState == GameState.Start) {
+			this.batch.draw(this.ready, Gdx.graphics.getWidth() / 2 - this.ready.getRegionWidth() / 2, Gdx.graphics.getHeight() / 2
+					- this.ready.getRegionHeight() / 2);
 		}
-		if(gameState == GameState.GameOver) {
-			batch.draw(gameOver, Gdx.graphics.getWidth() / 2 - gameOver.getRegionWidth() / 2, Gdx.graphics.getHeight() / 2 - gameOver.getRegionHeight() / 2);
+		if (this.gameState == GameState.GameOver) {
+			this.batch.draw(this.gameOver, Gdx.graphics.getWidth() / 2 - this.gameOver.getRegionWidth() / 2, Gdx.graphics.getHeight()
+					/ 2 - this.gameOver.getRegionHeight() / 2);
 		}
-		if(gameState == GameState.GameOver || gameState == GameState.Running) {
-			font.draw(batch, "" + score, Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() - 60);
+		if (this.gameState == GameState.GameOver || this.gameState == GameState.Running) {
+			this.font.draw(this.batch, "" + this.score, Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() - 60);
 		}
-		batch.end();
+		this.batch.end();
 	}
 
 	@Override
-	public void render () {
+	public void render() {
 		Gdx.gl.glClearColor(1, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		
-		updateWorld();
-		drawWorld();			
+
+		this.updateWorld();
+		this.drawWorld();
 	}
-	
+
 	static class Rock {
 		Vector2 position = new Vector2();
 		TextureRegion image;
 		boolean counted;
-		
+
 		public Rock(float x, float y, TextureRegion image) {
 			this.position.x = x;
 			this.position.y = y;
 			this.image = image;
 		}
 	}
-	
+
 	static enum GameState {
 		Start, Running, GameOver
 	}
