@@ -9,7 +9,6 @@ import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
@@ -75,22 +74,22 @@ public class StartGame extends ApplicationAdapter {
 		try {
 			appGameContainer = new AppGameContainer(game, width, height, fullscreen);
 			appGameContainer.start();
+			// game.init(appGameContainer);
 		} catch (SlickException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
-		this.shapeRenderer = new ShapeRenderer();
-		this.batch = new SpriteBatch();
-		this.camera = new OrthographicCamera();
-		this.camera.setToOrtho(false, 800, 480);
-		this.uiCamera = new OrthographicCamera();
-		this.uiCamera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-		this.uiCamera.update();
+		// this.shapeRenderer = new ShapeRenderer();
+		// this.batch = new SpriteBatch();
+		// this.camera = new OrthographicCamera();
+		// this.camera.setToOrtho(false, 800, 480);
+		// this.uiCamera = new OrthographicCamera();
+		// this.uiCamera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+		// this.uiCamera.update();
+		//
+		// this.font = new BitmapFont(Gdx.files.internal("arial.fnt"));
 
-		this.font = new BitmapFont(Gdx.files.internal("arial.fnt"));
-
-		// game.ini
 	}
 
 	private void resetWorld() {
@@ -201,11 +200,11 @@ public class StartGame extends ApplicationAdapter {
 
 	@Override
 	public void render() {
-		Gdx.gl.glClearColor(1, 0, 0, 1);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
-		this.updateWorld();
-		this.drawWorld();
+		// Gdx.gl.glClearColor(1, 0, 0, 1);
+		// Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+		//
+		// this.updateWorld();
+		// this.drawWorld();
 	}
 
 	static class Rock {
