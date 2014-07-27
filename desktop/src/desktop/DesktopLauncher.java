@@ -1,6 +1,6 @@
 package desktop;
 
-import towerDefense.PlaneGame;
+import towerDefense.StartGame;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
@@ -10,6 +10,6 @@ public class DesktopLauncher {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		config.width = 1600;
 		config.height = 480;
-		new LwjglApplication(new PlaneGame(), config);
+		new LwjglApplication(new StartGame(), config);
 	}
 }

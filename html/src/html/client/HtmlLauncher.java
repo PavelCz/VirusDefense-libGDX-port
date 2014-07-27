@@ -1,6 +1,6 @@
 package html.client;
 
-import towerDefense.PlaneGame;
+import towerDefense.StartGame;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.backends.gwt.GwtApplication;
@@ -15,6 +15,6 @@ public class HtmlLauncher extends GwtApplication {
 
         @Override
         public ApplicationListener getApplicationListener () {
-                return new PlaneGame();
+                return new StartGame();
         }
 }

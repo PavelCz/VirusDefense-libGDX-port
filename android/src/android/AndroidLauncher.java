@@ -1,6 +1,6 @@
 package android;
 
-import towerDefense.PlaneGame;
+import towerDefense.StartGame;
 import android.os.Bundle;
 
 import com.badlogic.gdx.backends.android.AndroidApplication;
@@ -11,6 +11,6 @@ public class AndroidLauncher extends AndroidApplication {
 	protected void onCreate (Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		AndroidApplicationConfiguration config = new AndroidApplicationConfiguration();
-		initialize(new PlaneGame(), config);
+		initialize(new StartGame(), config);
 	}
 }
