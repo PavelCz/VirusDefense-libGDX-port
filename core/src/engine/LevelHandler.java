@@ -9,7 +9,7 @@ public class LevelHandler {
 	private List<Level> levels;
 
 	public LevelHandler() {
-		this.levels = new ArrayList<>();
+		this.levels = new ArrayList<Level>();
 	}
 
 	public void add(String path, Gameplay game) {
