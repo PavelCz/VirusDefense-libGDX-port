@@ -7,19 +7,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import towerDefense.TowerDefense;
-
 public class TextFileToString {
 
 	public static List<String> getLines(String path) {
 		List<String> list = new ArrayList<String>();
 		try {
 			File f;
-			if (TowerDefense.isApplet()) {
-				f = new File("D:/Users/Valep/git/libGDX-test/android/assets/data/files/" + path);
-			} else {
-				f = new File("D:/Users/Valep/git/libGDX-test/android/assets/data/files/" + path);
-			}
+			f = new File("D:/Users/Valep/git/VirusDefense-libGDX-wrapped/android/assets/data/files/" + path);
 
 			BufferedReader reader = new BufferedReader(new FileReader(f));
 
