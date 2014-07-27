@@ -47,7 +47,6 @@ public class TowerDefense extends BasicGame implements MusicListener {
 
 	public TowerDefense(boolean applet) {
 		super("Virus Defense");
-		TowerDefense.applet = applet;
 	}
 
 	@Override
@@ -65,19 +64,19 @@ public class TowerDefense extends BasicGame implements MusicListener {
 		}
 		this.initSounds();
 		TowerDefense.updateDimensions(container);
-		this.reinitMenu(container);
-		this.reinitChooseLevel(container);
+		// this.reinitMenu(container);
+		// this.reinitChooseLevel(container);
 		this.mode = TowerDefense.MODE_MENU;
 		this.currentGameComponent = this.menu;
 		long passedTime = System.nanoTime() - time;
 		// System.out.println(passedTime / 1000000000.0);
 		AppGameContainer gameContainer = (AppGameContainer) container;
-		System.out.println(gameContainer.getScreenWidth());
 		try {
 			gameContainer.setDisplayMode(TowerDefense.getWidth(), TowerDefense.getHeight(), TowerDefense.isFULLSCREEN());
 			this.reinitMenu(container);
 			this.reinitChooseLevel(container);
 			this.reinitComponents(gameContainer);
+			TowerDefense.updateDimensions(container);
 		} catch (SlickException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -155,7 +154,6 @@ public class TowerDefense extends BasicGame implements MusicListener {
 	}
 
 	public static void updateDimensions(GameContainer container) {
-
 		TowerDefense.HEIGHT = container.getHeight();
 		TowerDefense.WIDTH = container.getWidth();
 	}
