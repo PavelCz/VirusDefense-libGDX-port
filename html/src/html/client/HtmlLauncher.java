@@ -1,10 +1,10 @@
 package html.client;
 
+import towerDefense.PlaneGame;
+
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.backends.gwt.GwtApplication;
 import com.badlogic.gdx.backends.gwt.GwtApplicationConfiguration;
-
-import engine.PlaneGame;
 
 public class HtmlLauncher extends GwtApplication {
 
