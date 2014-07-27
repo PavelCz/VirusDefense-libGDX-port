@@ -1,0 +1,7 @@
+Player, 850
+Player, 700
+Player, 700
+Player, 0
+Player, 0
+Player, 0
+Player, 0

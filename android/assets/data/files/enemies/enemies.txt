@@ -1,0 +1,7 @@
+100, 0.1, enemy/v1n.png, 32, 20, 0.5
+50, 0.3, enemy/Enemy_1_klein.png, 15, 30, 0.4
+200, 0.25, enemy/v2n.png, 25, 100, 0.4
+400, 0.1, enemy/Enemy_2_klein.png, 25, 30, 0.6
+700, 0.15, enemy/Enemy_3_klein.png, 20, 50, 0.9
+1500, 0.1, enemy/Enemy_1_klein.png, 15, 50, 0.9
+10000, 0.3, enemy/v1n.png, 32, 1000, 0.7
