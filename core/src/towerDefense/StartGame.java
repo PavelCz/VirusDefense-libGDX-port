@@ -211,7 +211,7 @@ public class StartGame extends ApplicationAdapter {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		//
 		try {
-			this.game.update(this.appGameContainer, (int) Gdx.graphics.getDeltaTime());
+			this.game.update(this.appGameContainer, (int) (Gdx.graphics.getDeltaTime() * 1000));
 			this.game.render(this.appGameContainer, this.appGameContainer.getGraphics());
 
 		} catch (SlickException e) {
