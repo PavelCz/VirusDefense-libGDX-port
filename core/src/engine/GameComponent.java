@@ -58,8 +58,8 @@ public abstract class GameComponent {
 		float x = input.getMouseX();
 		float y = input.getMouseY();
 		this.updateHovering(x, y);
-		// GDX if left mouse button is down: Gdx.input.isButtonPressed(com.badlogic.gdx.Input.Buttons.LEFT
-		// GDX if left mouse button is touched and released in short succession:
+		// GDX if left mouse button is down: Gdx.input.isButtonPressed(com.badlogic.gdx.Input.Buttons.LEFT)
+		// GDX if left mouse button is pressed and released in short succession: Gdx.input.justTouched()
 		if (Gdx.input.justTouched()) {
 			System.out.println("act");
 			this.mouseWasClicked = true;

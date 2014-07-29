@@ -11,6 +11,8 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 
+import com.badlogic.gdx.Gdx;
+
 import towerDefense.towers.BombTower;
 import towerDefense.towers.LongerShootingTower;
 import towerDefense.towers.RocketFastTower;
@@ -127,14 +129,14 @@ public class Gameplay extends GameComponent {
 		int offset = 20;
 		// Buttons; this has nothing to do with the draw sequence
 		this.towerButton1 = new TowerButton(Gameplay.INTERFACE_START_X, 4 * 64 * Gameplay.GLOBAL_GUI_SCALE + offset,
-				"buttons/PSButton1.png", "buttons/PSButton1_click.png", new LongerShootingTower(0, 0, new OwnSprite("tower/Tower2.png",
-						0.5f), this, 400, 0.16f, 400, container.getGraphics()), this);
+				"buttons/PSButton1.png", "buttons/PSButton1_click.png", new LongerShootingTower(0, 0, new OwnSprite(
+						"tower/Tower2.png", 0.5f), this, 400, 0.16f, 400, container.getGraphics()), this);
 		this.towerButton2 = new TowerButton(Gameplay.INTERFACE_START_X, 5 * 64 * Gameplay.GLOBAL_GUI_SCALE + offset,
-				"buttons/PSButton1.png", "buttons/PSButton1_click.png", new BombTower(0, 0, new OwnSprite("tower/t1n.png", 0.5f), this,
-						1500, 15f, 50), this);
+				"buttons/PSButton1.png", "buttons/PSButton1_click.png", new BombTower(0, 0, new OwnSprite("tower/t1n.png", 0.5f),
+						this, 1500, 15f, 50), this);
 		this.towerButton3 = new TowerButton(Gameplay.INTERFACE_START_X, 6 * 64 * Gameplay.GLOBAL_GUI_SCALE + offset,
-				"buttons/PSButton1.png", "buttons/PSButton1_click.png", new RocketTower(0, 0, new OwnSprite("tower/t1.png", 0.5f), this,
-						200, 15f, 50), this);
+				"buttons/PSButton1.png", "buttons/PSButton1_click.png", new RocketTower(0, 0, new OwnSprite("tower/t1.png", 0.5f),
+						this, 200, 15f, 50), this);
 		this.towerButton4 = new TowerButton(Gameplay.INTERFACE_START_X + 64 + 32, 4 * 64 * Gameplay.GLOBAL_GUI_SCALE + offset,
 				"buttons/PSButton1.png", "buttons/PSButton1_click.png", new RocketFastTower(0, 0, new OwnSprite(
 						"tower/roteBlutk_klein.png", 0.5f), this, 1000, 20f), this);
@@ -467,20 +469,20 @@ public class Gameplay extends GameComponent {
 
 		float scrollSpeed = 0.5f;
 		float scrollDistance = scrollSpeed * delta;
-		if (input.isKeyDown(Input.KEY_LEFT)) {
+		if (Gdx.input.isKeyPressed(com.badlogic.gdx.Input.Keys.LEFT)) {
 			Gameplay.camera.addX(-scrollDistance);
 
 		}
 
-		if (input.isKeyDown(Input.KEY_RIGHT)) {
+		if (Gdx.input.isKeyPressed(com.badlogic.gdx.Input.Keys.RIGHT)) {
 			Gameplay.camera.addX(+scrollDistance);
 
 		}
-		if (input.isKeyDown(Input.KEY_UP)) {
+		if (Gdx.input.isKeyPressed(com.badlogic.gdx.Input.Keys.UP)) {
 			Gameplay.camera.addY(-scrollDistance);
 
 		}
-		if (input.isKeyDown(Input.KEY_DOWN)) {
+		if (Gdx.input.isKeyPressed(com.badlogic.gdx.Input.Keys.DOWN)) {
 			Gameplay.camera.addY(+scrollDistance);
 
 		}
