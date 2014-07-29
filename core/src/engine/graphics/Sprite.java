@@ -1,5 +1,7 @@
 package engine.graphics;
 
+import towerDefense.TowerDefense;
+
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
@@ -29,7 +31,7 @@ public class Sprite extends RenderObject {
 	@Override
 	public void draw(float xCoordinate, float yCoordinate, float globalScale) {
 		this.batch.begin();
-		this.batch.draw(this.img, xCoordinate, yCoordinate);
+		this.batch.draw(this.img, xCoordinate, TowerDefense.getHeight() - yCoordinate);
 		this.batch.end();
 	}
 
