@@ -5,6 +5,8 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 
+import com.badlogic.gdx.Gdx;
+
 import engine.GameComponent;
 import engine.Level;
 import engine.LevelHandler;
@@ -80,7 +82,7 @@ public class ChooseLevel extends GameComponent {
 		float x = input.getMouseX();
 		float y = input.getMouseY();
 		super.updateHovering(x, y);
-		if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
+		if (Gdx.input.justTouched()) {
 			this.mouseWasClicked = true;
 
 			for (Clickable clickable : this.clickables) {
