@@ -5,7 +5,7 @@ import java.util.List;
 import towerDefense.Gameplay;
 import engine.graphics.Background;
 import engine.graphics.BackgroundTiles;
-import engine.graphics.Sprite;
+import engine.graphics.OwnSprite;
 
 public class Level {
 	private MapLayout map;
@@ -32,7 +32,7 @@ public class Level {
 		this.enemies.setGame(game);
 	}
 
-	public Sprite getPreviewPicture() {
+	public OwnSprite getPreviewPicture() {
 		return this.map.getPicture();
 	}
 

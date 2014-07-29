@@ -4,7 +4,7 @@ import towerDefense.Gameplay;
 import engine.Drawable;
 import engine.Enemy;
 import engine.Entity;
-import engine.graphics.Sprite;
+import engine.graphics.OwnSprite;
 
 public abstract class Tower extends Entity implements Drawable {
 	private int cost;
@@ -12,7 +12,7 @@ public abstract class Tower extends Entity implements Drawable {
 	protected String name;
 	protected float damage;
 	protected Gameplay game;
-	protected Sprite sprite;
+	protected OwnSprite sprite;
 	protected boolean building = true;
 	protected int buildingTimer = 150;
 	protected final float buildingTime = buildingTimer;
@@ -114,7 +114,7 @@ public abstract class Tower extends Entity implements Drawable {
 	@Override
 	public abstract Tower clone();
 
-	public Sprite getSprite() {
+	public OwnSprite getSprite() {
 		return this.sprite;
 	}
 

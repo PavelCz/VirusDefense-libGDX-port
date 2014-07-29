@@ -1,15 +1,15 @@
 package engine;
 
-import engine.graphics.Sprite;
+import engine.graphics.OwnSprite;
 
 public class TestEntity extends RotatableEntity implements Drawable {
 
-	private Sprite sprite;
+	private OwnSprite sprite;
 
 	public TestEntity(float x, float y, float rotation, String spritePath) {
 		super(x, y, rotation);
 
-		this.sprite = new Sprite(spritePath);
+		this.sprite = new OwnSprite(spritePath);
 	}
 
 	@Override

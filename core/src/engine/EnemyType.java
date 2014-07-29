@@ -1,7 +1,7 @@
 package engine;
 
 import towerDefense.Gameplay;
-import engine.graphics.Sprite;
+import engine.graphics.OwnSprite;
 
 /**
  * lets you make a preset for a specific enemy type
@@ -12,7 +12,7 @@ public class EnemyType {
 	private float radius;
 	private int health;
 	private float speed;
-	protected Sprite sprite;
+	protected OwnSprite sprite;
 	private int worth;
 
 	/**
@@ -29,7 +29,7 @@ public class EnemyType {
 		this.health = health;
 		this.speed = speed;
 		this.radius = radius;
-		this.sprite = new Sprite(sprite, size);
+		this.sprite = new OwnSprite(sprite, size);
 
 		this.worth = worth;
 	}
@@ -53,7 +53,7 @@ public class EnemyType {
 		return this.speed;
 	}
 
-	public Sprite getSprite() {
+	public OwnSprite getSprite() {
 		return this.sprite;
 	}
 

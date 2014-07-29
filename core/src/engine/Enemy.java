@@ -1,7 +1,7 @@
 package engine;
 
 import towerDefense.Gameplay;
-import engine.graphics.Sprite;
+import engine.graphics.OwnSprite;
 
 public class Enemy extends Entity implements Drawable {
 	private float radius;
@@ -9,7 +9,7 @@ public class Enemy extends Entity implements Drawable {
 	private int maxHealth;
 	private float speed;
 	private Gameplay game;
-	protected Sprite sprite;
+	protected OwnSprite sprite;
 	protected MyVector2f velocity;
 	protected Waypoint waypoint;
 	protected int direction;
@@ -19,7 +19,7 @@ public class Enemy extends Entity implements Drawable {
 	private double wobbleFactor;
 	private int wobbleTimer = 0;
 
-	private Enemy(int maxHealth, float speed, Sprite sprite, Waypoint startingWaypoint, Gameplay game, float radius, int worth) {
+	private Enemy(int maxHealth, float speed, OwnSprite sprite, Waypoint startingWaypoint, Gameplay game, float radius, int worth) {
 		super(startingWaypoint.getX() * Gameplay.DEFAULT_SIZE, startingWaypoint.getY() * Gameplay.DEFAULT_SIZE);
 		this.health = maxHealth;
 		this.maxHealth = maxHealth;

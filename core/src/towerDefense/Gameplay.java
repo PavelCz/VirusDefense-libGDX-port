@@ -28,7 +28,7 @@ import engine.graphics.Background;
 import engine.graphics.SlickRectangle;
 import engine.graphics.SlickUnfilledEllipse;
 import engine.graphics.SlickUnfilledRectangle;
-import engine.graphics.Sprite;
+import engine.graphics.OwnSprite;
 import engine.gui.Clickable;
 import engine.gui.GUI;
 import engine.gui.InterfaceBackground;
@@ -127,16 +127,16 @@ public class Gameplay extends GameComponent {
 		int offset = 20;
 		// Buttons; this has nothing to do with the draw sequence
 		this.towerButton1 = new TowerButton(Gameplay.INTERFACE_START_X, 4 * 64 * Gameplay.GLOBAL_GUI_SCALE + offset,
-				"buttons/PSButton1.png", "buttons/PSButton1_click.png", new LongerShootingTower(0, 0, new Sprite("tower/Tower2.png",
+				"buttons/PSButton1.png", "buttons/PSButton1_click.png", new LongerShootingTower(0, 0, new OwnSprite("tower/Tower2.png",
 						0.5f), this, 400, 0.16f, 400, container.getGraphics()), this);
 		this.towerButton2 = new TowerButton(Gameplay.INTERFACE_START_X, 5 * 64 * Gameplay.GLOBAL_GUI_SCALE + offset,
-				"buttons/PSButton1.png", "buttons/PSButton1_click.png", new BombTower(0, 0, new Sprite("tower/t1n.png", 0.5f), this,
+				"buttons/PSButton1.png", "buttons/PSButton1_click.png", new BombTower(0, 0, new OwnSprite("tower/t1n.png", 0.5f), this,
 						1500, 15f, 50), this);
 		this.towerButton3 = new TowerButton(Gameplay.INTERFACE_START_X, 6 * 64 * Gameplay.GLOBAL_GUI_SCALE + offset,
-				"buttons/PSButton1.png", "buttons/PSButton1_click.png", new RocketTower(0, 0, new Sprite("tower/t1.png", 0.5f), this,
+				"buttons/PSButton1.png", "buttons/PSButton1_click.png", new RocketTower(0, 0, new OwnSprite("tower/t1.png", 0.5f), this,
 						200, 15f, 50), this);
 		this.towerButton4 = new TowerButton(Gameplay.INTERFACE_START_X + 64 + 32, 4 * 64 * Gameplay.GLOBAL_GUI_SCALE + offset,
-				"buttons/PSButton1.png", "buttons/PSButton1_click.png", new RocketFastTower(0, 0, new Sprite(
+				"buttons/PSButton1.png", "buttons/PSButton1_click.png", new RocketFastTower(0, 0, new OwnSprite(
 						"tower/roteBlutk_klein.png", 0.5f), this, 1000, 20f), this);
 		this.clickables.add(this.towerButton1);
 		this.clickables.add(this.towerButton2);
@@ -248,9 +248,9 @@ public class Gameplay extends GameComponent {
 		this.renderDebug(container, graphics);
 
 		if (this.mode == 1) {
-			new Sprite("You Win.png").draw(0, 0, Gameplay.CURRENT_GAME_SCALE);
+			new OwnSprite("You Win.png").draw(0, 0, Gameplay.CURRENT_GAME_SCALE);
 		} else if (this.mode == -1) {
-			new Sprite("Game Over.png").draw(0, 0, Gameplay.CURRENT_GAME_SCALE);
+			new OwnSprite("Game Over.png").draw(0, 0, Gameplay.CURRENT_GAME_SCALE);
 		}
 		// for (int i = 0; i < this.towers.length; ++i) {
 		// for (int j = 0; j < this.towers[0].length; ++j) {
@@ -304,7 +304,7 @@ public class Gameplay extends GameComponent {
 	private void renderTowerShadow(GameContainer container, Graphics graphics) {
 
 		if (this.currentTower != null && this.getMode() == 0) {
-			Sprite sprite = this.currentTower.getSprite().clone();
+			OwnSprite sprite = this.currentTower.getSprite().clone();
 
 			if (this.currentTowerPlaceable) {
 				new SlickUnfilledRectangle(graphics, SIZE / Gameplay.CURRENT_GAME_SCALE, SIZE / Gameplay.CURRENT_GAME_SCALE,

@@ -4,7 +4,7 @@ import towerDefense.Gameplay;
 import engine.Drawable;
 import engine.Enemy;
 import engine.MyVector2f;
-import engine.graphics.Sprite;
+import engine.graphics.OwnSprite;
 
 public class Rocket extends Projectile implements Drawable {
 	private Enemy enemy;
@@ -17,7 +17,7 @@ public class Rocket extends Projectile implements Drawable {
 		this.speed = 0.15f;
 		this.velocity = new MyVector2f(enemy.getX() - x, enemy.getY() - y);
 		this.velocity.setLength(this.speed);
-		this.renderObject = new Sprite("shoot/Frame0010.png", 0.25f);
+		this.renderObject = new OwnSprite("shoot/Frame0010.png", 0.25f);
 		this.enemy = enemy;
 	}
 

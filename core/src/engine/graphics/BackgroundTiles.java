@@ -4,13 +4,13 @@ import towerDefense.Gameplay;
 
 public class BackgroundTiles extends Background {
 	private int horizontalTiles, verticalTiles;
-	private Sprite pictureOutOfBounds;
+	private OwnSprite pictureOutOfBounds;
 
 	public BackgroundTiles(float scale, String backgroundPath, int horizontalTiles, int verticalTiles, Gameplay game) {
 		super(scale, backgroundPath, game);
 		this.horizontalTiles = horizontalTiles;
 		this.verticalTiles = verticalTiles;
-		this.pictureOutOfBounds = new Sprite(backgroundPath);
+		this.pictureOutOfBounds = new OwnSprite(backgroundPath);
 		// this.pictureOutOfBounds.setAlpha(0.8f);
 
 		this.pictureOutOfBounds.setColor(0.7f, 0.7f, 0.7f);

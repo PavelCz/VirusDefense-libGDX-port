@@ -1,19 +1,19 @@
 package engine;
 
 import engine.graphics.PathTiler;
-import engine.graphics.Sprite;
+import engine.graphics.OwnSprite;
 
 public class MapLayout {
 	private int[][] path;
 	private PathTiler pathTiler;
 	private Waypoint waypoints;
-	private Sprite picture;
+	private OwnSprite picture;
 	private int tileLength;
 	private int numberTilesWidth, numberTilesHeight;
 
 	public MapLayout(String mapLayoutPath,  int tileLength, String picture) {
 		MapLayoutFromImage mapLayout = new MapLayoutFromImage("data/files/maps/" +mapLayoutPath);
-		this.picture = new Sprite(picture, 1.2f);
+		this.picture = new OwnSprite(picture, 1.2f);
 		this.path = mapLayout.getPath();
 		this.waypoints = mapLayout.getStartingPoint();
 		this.numberTilesWidth = this.path[0].length;
@@ -42,7 +42,7 @@ public class MapLayout {
 		return this.numberTilesHeight;
 	}
 
-	public Sprite getPicture() {
+	public OwnSprite getPicture() {
 		return picture;
 	}
 	

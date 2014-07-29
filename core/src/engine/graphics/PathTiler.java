@@ -3,22 +3,22 @@ package engine.graphics;
 import towerDefense.Gameplay;
 
 public class PathTiler {
-	private Sprite corner1, corner2, corner3, corner4, horizontal, vertical, top, bottom, left, right;
-	private Sprite[][] tiles;
+	private OwnSprite corner1, corner2, corner3, corner4, horizontal, vertical, top, bottom, left, right;
+	private OwnSprite[][] tiles;
 
 	public PathTiler(int[][] path) {
 		float scale = 0.5f;
-		this.corner1 = new Sprite("veins/ur.png", scale);
-		this.corner2 = new Sprite("veins/br.png", scale);
-		this.corner3 = new Sprite("veins/lb.png", scale);
-		this.corner4 = new Sprite("veins/ul.png", scale);
-		this.horizontal = new Sprite("veins/hori.png", scale);
-		this.vertical = new Sprite("veins/verti.png", scale);
-		this.top = new Sprite("veins/verti.png", scale);
-		this.bottom = new Sprite("veins/verti.png", scale);
-		this.left = new Sprite("veins/hori.png", scale);
-		this.right = new Sprite("veins/hori.png", scale);
-		this.tiles = new Sprite[path.length][path[0].length];
+		this.corner1 = new OwnSprite("veins/ur.png", scale);
+		this.corner2 = new OwnSprite("veins/br.png", scale);
+		this.corner3 = new OwnSprite("veins/lb.png", scale);
+		this.corner4 = new OwnSprite("veins/ul.png", scale);
+		this.horizontal = new OwnSprite("veins/hori.png", scale);
+		this.vertical = new OwnSprite("veins/verti.png", scale);
+		this.top = new OwnSprite("veins/verti.png", scale);
+		this.bottom = new OwnSprite("veins/verti.png", scale);
+		this.left = new OwnSprite("veins/hori.png", scale);
+		this.right = new OwnSprite("veins/hori.png", scale);
+		this.tiles = new OwnSprite[path.length][path[0].length];
 
 		for (int y = 0; y < path.length; ++y) {
 			for (int x = 0; x < path[0].length; ++x) {

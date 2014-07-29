@@ -2,7 +2,7 @@ package towerDefense.towers;
 
 import towerDefense.Gameplay;
 import engine.Enemy;
-import engine.graphics.Sprite;
+import engine.graphics.OwnSprite;
 import engine.projectiles.Bomb;
 
 public class BombTower extends Tower {
@@ -12,7 +12,7 @@ public class BombTower extends Tower {
 	protected float wobbleFactor;
 	private boolean wobble = true;
 
-	public BombTower(float x, float y, Sprite sprite, Gameplay game, int shootingInterval, float damage, int bombRadius) {
+	public BombTower(float x, float y, OwnSprite sprite, Gameplay game, int shootingInterval, float damage, int bombRadius) {
 		super(x, y, 100, 150, damage, game, shootingInterval);
 		this.sprite = sprite;
 		this.shootingInterval = shootingInterval;

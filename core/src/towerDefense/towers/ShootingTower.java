@@ -2,13 +2,13 @@ package towerDefense.towers;
 
 import towerDefense.Gameplay;
 import engine.Enemy;
-import engine.graphics.Sprite;
+import engine.graphics.OwnSprite;
 
 public class ShootingTower extends Tower {
 	protected int delta;
 	
 
-	public ShootingTower(float x, float y, Sprite sprite, Gameplay game, float shootingInterval, float damage) {
+	public ShootingTower(float x, float y, OwnSprite sprite, Gameplay game, float shootingInterval, float damage) {
 		super(x, y, 100, 128, damage, game,shootingInterval);
 
 		this.sprite = sprite;

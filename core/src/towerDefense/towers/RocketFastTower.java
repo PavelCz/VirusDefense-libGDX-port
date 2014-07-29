@@ -2,7 +2,7 @@ package towerDefense.towers;
 
 import towerDefense.Gameplay;
 import engine.Enemy;
-import engine.graphics.Sprite;
+import engine.graphics.OwnSprite;
 import engine.projectiles.RocketFast;
 
 public class RocketFastTower extends Tower {
@@ -10,7 +10,7 @@ public class RocketFastTower extends Tower {
 	protected float shootingInterval;
 	protected int bombRadius;
 
-	public RocketFastTower(float x, float y, Sprite sprite, Gameplay game, float shootingInterval, float damage) {
+	public RocketFastTower(float x, float y, OwnSprite sprite, Gameplay game, float shootingInterval, float damage) {
 		super(x, y, 100, 200, damage, game, shootingInterval);
 		this.sprite = sprite;
 		this.shootingInterval = shootingInterval;

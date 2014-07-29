@@ -1,6 +1,6 @@
 package engine.gui;
 
-import engine.graphics.Sprite;
+import engine.graphics.OwnSprite;
 import towerDefense.Gameplay;
 import towerDefense.towers.Tower;
 
@@ -18,7 +18,7 @@ public class TowerButton extends Button {
 	@Override
 	public void draw() {
 		super.draw();
-		Sprite s = this.tower.getSprite();
+		OwnSprite s = this.tower.getSprite();
 		s.setAlpha(0.8f);
 		float scale = 0.9f;
 		s.draw(this.x + (this.collisionWidth - s.getWidth() * scale) / 2 * Gameplay.GLOBAL_GUI_SCALE, this.y

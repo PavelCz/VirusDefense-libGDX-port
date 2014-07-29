@@ -6,13 +6,13 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-public class Sprite extends RenderObject {
+public class OwnSprite extends RenderObject {
 	SpriteBatch batch;
 	Texture img;
 	private String imagePath;
 	private float defaultScale;
 
-	public Sprite(String imagePath) {
+	public OwnSprite(String imagePath) {
 		this.imagePath = imagePath;
 		this.batch = new SpriteBatch();
 		this.img = new Texture("data/graphics/" + imagePath);
@@ -21,7 +21,7 @@ public class Sprite extends RenderObject {
 
 	}
 
-	public Sprite(String imagePath, float scale) {
+	public OwnSprite(String imagePath, float scale) {
 
 		this(imagePath);
 
@@ -62,8 +62,8 @@ public class Sprite extends RenderObject {
 	 * @see java.lang.Object#clone() returns a completely new Sprite with no references to the old one or attribute to the old one
 	 */
 	@Override
-	public Sprite clone() {
-		return new Sprite(this.imagePath, this.defaultScale);
+	public OwnSprite clone() {
+		return new OwnSprite(this.imagePath, this.defaultScale);
 	}
 
 }

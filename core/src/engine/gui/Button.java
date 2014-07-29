@@ -1,17 +1,17 @@
 package engine.gui;
 
-import engine.graphics.Sprite;
+import engine.graphics.OwnSprite;
 import towerDefense.Gameplay;
 
 public class Button extends Clickable {
-	private Sprite unclickedButton;
-	private Sprite clickedButton;
+	private OwnSprite unclickedButton;
+	private OwnSprite clickedButton;
 
 	public Button(float x, float y, String unclickedButtonPath, String clickedButtonPath, Gameplay game, boolean stayClicked) {
-		this(x, y, new Sprite(unclickedButtonPath), new Sprite(clickedButtonPath), game, stayClicked);
+		this(x, y, new OwnSprite(unclickedButtonPath), new OwnSprite(clickedButtonPath), game, stayClicked);
 	}
 
-	public Button(float x, float y, Sprite unclickedButton, Sprite clickedButton, Gameplay game, boolean stayClicked) {
+	public Button(float x, float y, OwnSprite unclickedButton, OwnSprite clickedButton, Gameplay game, boolean stayClicked) {
 		super(x, y, game, stayClicked);
 		this.unclickedButton = unclickedButton;
 		this.clickedButton = clickedButton;
@@ -42,11 +42,11 @@ public class Button extends Clickable {
 
 	}
 
-	public void setUnclickedButton(Sprite picture) {
+	public void setUnclickedButton(OwnSprite picture) {
 		this.unclickedButton = picture;
 	}
 
-	public void setClickedButton(Sprite picture) {
+	public void setClickedButton(OwnSprite picture) {
 		this.clickedButton = picture;
 	}
 

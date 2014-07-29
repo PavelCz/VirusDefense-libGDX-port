@@ -4,16 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AnimatedSprite extends RenderObject {
-	private List<Sprite> sprites;
+	private List<OwnSprite> sprites;
 	private int startSpeed;
 	private int speed;
 	private int index;
-	private Sprite currentSprite;
+	private OwnSprite currentSprite;
 
 	public AnimatedSprite(String[] images, float scale, int speed) {
-		this.sprites = new ArrayList<Sprite>();
+		this.sprites = new ArrayList<OwnSprite>();
 		for (String string : images) {
-			this.sprites.add(new Sprite(string, scale));
+			this.sprites.add(new OwnSprite(string, scale));
 
 		}
 		this.startSpeed = speed;
@@ -38,7 +38,7 @@ public class AnimatedSprite extends RenderObject {
 
 	}
 
-	public Sprite getCurrentSprite() {
+	public OwnSprite getCurrentSprite() {
 		return this.currentSprite;
 	}
 
