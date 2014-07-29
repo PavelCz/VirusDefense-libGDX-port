@@ -4,8 +4,8 @@ import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 
 public class SlickTwoColoredBar extends RenderObject {
-	private SlickRectangle base;
-	private SlickRectangle health;
+	private LibGDXRectangle base;
+	private LibGDXRectangle health;
 	private float length;
 	private float height;
 	private float length2;
@@ -18,8 +18,8 @@ public class SlickTwoColoredBar extends RenderObject {
 		this.height = height;
 		this.graphics = graphics;
 
-		this.base = new SlickRectangle(graphics, (int) this.length, (int) this.height, Color.red);
-		this.health = new SlickRectangle(graphics, (int) this.length, (int) this.height, Color.green);
+		this.base = new LibGDXRectangle(graphics, (int) this.length, (int) this.height, Color.red);
+		this.health = new LibGDXRectangle(graphics, (int) this.length, (int) this.height, Color.green);
 
 		this.length2 = length;
 	}
@@ -30,7 +30,7 @@ public class SlickTwoColoredBar extends RenderObject {
 		this.health.setWidth(this.length2);
 		this.health.draw(x, y, globalScale);
 		if (this.bordered) {
-			new SlickUnfilledRectangle(this.graphics, this.length, this.height, Color.black).draw(x, y, globalScale);
+			new LibGDXUnfilledRectangle(this.graphics, this.length, this.height, Color.black).draw(x, y, globalScale);
 			;
 		}
 

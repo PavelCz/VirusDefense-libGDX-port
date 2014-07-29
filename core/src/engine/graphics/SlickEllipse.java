@@ -9,7 +9,7 @@ import org.newdawn.slick.geom.Ellipse;
  * @author Pavel A Rectangle based on my other Project JBreakout. This Rectangle is based on LWJGL. I tworked once, but now it doesn't
  *         seem to work anymore
  */
-public class SlickEllipse extends SlickRectangle {
+public class SlickEllipse extends LibGDXRectangle {
 
 	public SlickEllipse(Graphics graphics, float width, float height, Color color) {
 		super(graphics, width, height, color);

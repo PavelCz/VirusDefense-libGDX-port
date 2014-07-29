@@ -9,17 +9,17 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
  * @author Pavel A Rectangle based on my other Project JBreakout. This Rectangle is based on LWJGL. I tworked once, but now it doesn't
  *         seem to work anymore
  */
-public class SlickUnfilledRectangle extends SlickRectangle {
+public class LibGDXUnfilledRectangle extends LibGDXRectangle {
 
-	public SlickUnfilledRectangle(Graphics graphics, float width, float height, Color color) {
+	public LibGDXUnfilledRectangle(Graphics graphics, float width, float height, Color color) {
 		super(graphics, width, height, color);
 	}
 
-	public SlickUnfilledRectangle(Graphics graphics, float width, float height) {
+	public LibGDXUnfilledRectangle(Graphics graphics, float width, float height) {
 		super(graphics, width, height);
 	}
 
-	public SlickUnfilledRectangle(Graphics graphics, float width, float height, float r, float g, float b) {
+	public LibGDXUnfilledRectangle(Graphics graphics, float width, float height, float r, float g, float b) {
 		super(graphics, width, height, r, g, b);
 	}
 

@@ -27,9 +27,9 @@ import engine.MyVector2f;
 import engine.Player;
 import engine.Waypoint;
 import engine.graphics.Background;
-import engine.graphics.SlickRectangle;
+import engine.graphics.LibGDXRectangle;
 import engine.graphics.SlickUnfilledEllipse;
-import engine.graphics.SlickUnfilledRectangle;
+import engine.graphics.LibGDXUnfilledRectangle;
 import engine.graphics.OwnSprite;
 import engine.gui.Clickable;
 import engine.gui.GUI;
@@ -309,10 +309,10 @@ public class Gameplay extends GameComponent {
 			OwnSprite sprite = this.currentTower.getSprite().clone();
 
 			if (this.currentTowerPlaceable) {
-				new SlickUnfilledRectangle(graphics, SIZE / Gameplay.CURRENT_GAME_SCALE, SIZE / Gameplay.CURRENT_GAME_SCALE,
+				new LibGDXUnfilledRectangle(graphics, SIZE / Gameplay.CURRENT_GAME_SCALE, SIZE / Gameplay.CURRENT_GAME_SCALE,
 						Color.green).draw(this.towerShadowX, this.towerShadowY, Gameplay.CURRENT_GAME_SCALE);
 			} else {
-				new SlickUnfilledRectangle(graphics, SIZE / Gameplay.CURRENT_GAME_SCALE, SIZE / Gameplay.CURRENT_GAME_SCALE, Color.red)
+				new LibGDXUnfilledRectangle(graphics, SIZE / Gameplay.CURRENT_GAME_SCALE, SIZE / Gameplay.CURRENT_GAME_SCALE, Color.red)
 						.draw(this.towerShadowX, this.towerShadowY, Gameplay.CURRENT_GAME_SCALE);
 				sprite.setAlpha(0.1f);
 				sprite.setColor(1f, 0, 0);
@@ -338,7 +338,7 @@ public class Gameplay extends GameComponent {
 			}
 
 			// create a black box that the FPS are visible
-			new SlickRectangle(graphics, 100, 20, Color.black).draw(5, 10, 1f);
+			new LibGDXRectangle(graphics, 100, 20, Color.black).draw(5, 10, 1f);
 		}
 	}
 
