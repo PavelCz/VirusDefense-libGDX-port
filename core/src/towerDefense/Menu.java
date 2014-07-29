@@ -107,7 +107,7 @@ public class Menu extends GameComponent {
 	@Override
 	public void render(GameContainer container, Graphics graphics) throws SlickException {
 		super.render(container, graphics);
-		this.t.render(container, graphics);
+		// this.t.render(container, graphics);
 
 		// this.version.draw();
 	}

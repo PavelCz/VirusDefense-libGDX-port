@@ -9,6 +9,7 @@ import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
@@ -24,6 +25,9 @@ import com.badlogic.gdx.utils.Array;
 import engine.TextFileToString;
 
 public class StartGame extends ApplicationAdapter {
+	private TowerDefense game;
+	AppGameContainer appGameContainer;
+	//
 	private static final float PLANE_JUMP_IMPULSE = 350;
 	private static final float GRAVITY = -20;
 	private static final float PLANE_VELOCITY_X = 200;
@@ -70,19 +74,19 @@ public class StartGame extends ApplicationAdapter {
 		} else {
 			fullscreen = true;
 		}
-		final TowerDefense game = new TowerDefense(false);
-		AppGameContainer appGameContainer;
+		this.game = new TowerDefense(false);
 		System.out.println(width + ", " + height);
 		try {
-			appGameContainer = new AppGameContainer(game, width, height, fullscreen);
-			appGameContainer.setDisplayMode(width, height, TowerDefense.isFULLSCREEN());
-			appGameContainer.start();
-			// game.init(appGameContainer);
+			this.appGameContainer = new AppGameContainer(this.game, width, height, fullscreen);
+			// appGameContainer.setDisplayMode(width, height, TowerDefense.isFULLSCREEN());
+			// appGameContainer.start();
+			this.game.init(this.appGameContainer);
 		} catch (SlickException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		// end
+
 		this.shapeRenderer = new ShapeRenderer();
 		this.batch = new SpriteBatch();
 		this.camera = new OrthographicCamera();
@@ -91,7 +95,7 @@ public class StartGame extends ApplicationAdapter {
 		this.uiCamera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		this.uiCamera.update();
 
-		this.font = new BitmapFont(Gdx.files.internal("arial.fnt"));
+		// this.font = new BitmapFont(Gdx.files.internal("arial.fnt"));
 
 	}
 
@@ -203,10 +207,17 @@ public class StartGame extends ApplicationAdapter {
 
 	@Override
 	public void render() {
-		System.out.println("act");
-		// Gdx.gl.glClearColor(1, 0, 0, 1);
-		// Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+		Gdx.gl.glClearColor(1, 0, 0, 1);
+		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		//
+		try {
+			this.game.update(this.appGameContainer, (int) Gdx.graphics.getDeltaTime());
+			this.game.render(this.appGameContainer, this.appGameContainer.getGraphics());
+
+		} catch (SlickException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		// this.updateWorld();
 		// this.drawWorld();
 	}
