@@ -32,10 +32,10 @@ public class Sprite extends RenderObject {
 	@Override
 	public void draw(float xCoordinate, float yCoordinate, float globalScale) {
 		OrthographicCamera camera = new OrthographicCamera();
-		camera.setToOrtho(true, TowerDefense.getWidth(), TowerDefense.getHeight());
+		camera.setToOrtho(false, TowerDefense.getWidth(), TowerDefense.getHeight());
 		this.batch.setProjectionMatrix(camera.combined);
 		this.batch.begin();
-		this.batch.draw(this.img, xCoordinate, yCoordinate);
+		this.batch.draw(this.img, xCoordinate, TowerDefense.getHeight() - yCoordinate);
 		this.batch.end();
 	}
 
