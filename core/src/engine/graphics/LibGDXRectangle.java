@@ -41,7 +41,7 @@ public class LibGDXRectangle extends RenderObject {
 		ShapeRenderer shapeRenderer = new ShapeRenderer();
 		// shapeRenderer.setProjectionMatrix(camera.combined);
 		shapeRenderer.begin(ShapeType.Filled);
-		shapeRenderer.setColor(1, 0, 0, 1); // r g b a
+		shapeRenderer.setColor(this.color.getRed(), this.color.getGreen(), this.color.getBlue(), 1); // r g b a
 		// shapeRenderer.line(x, y, x2, y2);
 		shapeRenderer.rect(x, TowerDefense.getHeight() - y, this.width * globalScale, this.height * globalScale);
 		// shapeRenderer.circle(x, y, radius);
