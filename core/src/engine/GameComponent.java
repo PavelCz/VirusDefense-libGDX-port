@@ -8,6 +8,8 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 
+import com.badlogic.gdx.Gdx;
+
 import towerDefense.Gameplay;
 import towerDefense.TowerDefense;
 import engine.graphics.Background;
@@ -56,7 +58,8 @@ public abstract class GameComponent {
 		float x = input.getMouseX();
 		float y = input.getMouseY();
 		this.updateHovering(x, y);
-		if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
+		if (Gdx.input.isButtonPressed(com.badlogic.gdx.Input.Buttons.LEFT)) {
+			System.out.println("act");
 			this.mouseWasClicked = true;
 			for (Clickable clickable : this.clickables) {
 				clickable.update(x, y, container);
