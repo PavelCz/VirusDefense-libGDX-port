@@ -2,8 +2,8 @@ package engine.graphics;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.fills.GradientFill;
-import org.newdawn.slick.geom.Rectangle;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 
 /**
  * @author Pavel A Rectangle based on my other Project JBreakout. This Rectangle is based on LWJGL. I tworked once, but now it doesn't
@@ -33,8 +33,16 @@ public class SlickRectangle extends RenderObject {
 
 	@Override
 	public void draw(float x, float y, float globalScale) {
-		this.graphics.fill(new Rectangle(x, y, this.width * globalScale, this.height * globalScale), new GradientFill(0, 0,
-				this.color, this.width * globalScale, this.height * globalScale, this.color));
+		// this.graphics.fill(new Rectangle(x, y, this.width * globalScale, this.height * globalScale), new GradientFill(0, 0,
+		// this.color, this.width * globalScale, this.height * globalScale, this.color));
+		ShapeRenderer shapeRenderer = new ShapeRenderer();
+		// shapeRenderer.setProjectionMatrix(camera.combined);
+		shapeRenderer.begin(ShapeType.Filled);
+		shapeRenderer.setColor(1, 0, 0, 1); // r g b a
+		// shapeRenderer.line(x, y, x2, y2);
+		shapeRenderer.rect(x, y, this.width * globalScale, this.height * globalScale);
+		// shapeRenderer.circle(x, y, radius);
+		shapeRenderer.end();
 	}
 
 	public void setWidth(float width) {
