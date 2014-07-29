@@ -2,6 +2,9 @@ package engine.graphics;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
+
+import towerDefense.TowerDefense;
+
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 
@@ -32,7 +35,7 @@ public class LibGDXUnfilledRectangle extends LibGDXRectangle {
 		shapeRenderer.begin(ShapeType.Line);
 		shapeRenderer.setColor(1, 0, 0, 1); // r g b a
 		// shapeRenderer.line(x, y, x2, y2);
-		shapeRenderer.rect(x, y, this.width * globalScale, this.height * globalScale);
+		shapeRenderer.rect(x, TowerDefense.getHeight() - y, this.width * globalScale, this.height * globalScale);
 		// shapeRenderer.circle(x, y, radius);
 		shapeRenderer.end();
 	}
