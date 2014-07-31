@@ -79,7 +79,7 @@ public class StartGame extends ApplicationAdapter {
 		// this.appGameContainer = new AppGameContainer(this.game, width, height, fullscreen);
 		// appGameContainer.setDisplayMode(width, height, TowerDefense.isFULLSCREEN());
 		// appGameContainer.start();
-		this.game.init(this.appGameContainer);
+		this.game.init();
 		// } catch (SlickException e) {
 		// // TODO Auto-generated catch block
 		// e.printStackTrace();

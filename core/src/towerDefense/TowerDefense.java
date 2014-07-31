@@ -7,8 +7,6 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
-import org.newdawn.slick.AppGameContainer;
-import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -48,7 +46,7 @@ public class TowerDefense {
 	}
 
 	// @Override
-	public void init(GameContainer container) {
+	public void init() {
 		this.batch = new SpriteBatch();
 		// container.setShowFPS(false);
 		long time = System.nanoTime();
@@ -69,7 +67,7 @@ public class TowerDefense {
 		this.currentGameComponent = this.menu;
 		long passedTime = System.nanoTime() - time;
 		// System.out.println(passedTime / 1000000000.0);
-		AppGameContainer gameContainer = (AppGameContainer) container;
+		// AppGameContainer gameContainer = (AppGameContainer) container;
 		// try {
 		// gameContainer.setDisplayMode(TowerDefense.getWidth(), TowerDefense.getHeight(), TowerDefense.isFULLSCREEN());
 		this.reinitMenu();
