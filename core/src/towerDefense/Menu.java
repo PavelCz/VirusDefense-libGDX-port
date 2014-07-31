@@ -49,7 +49,7 @@ public class Menu extends GameComponent {
 		this.resumeButton.setVisible(false);
 		this.resumeButton.deactivate();
 
-		this.startButton = new StartClickable(0, 0, this.game, container);
+		this.startButton = new StartClickable(0, 0, this.game);
 		this.clickables.add(this.startButton);
 		this.guiElements.add(this.startButton);
 		y += this.startButton.getTextHeight();
