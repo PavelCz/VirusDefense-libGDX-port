@@ -343,47 +343,47 @@ public class Gameplay extends GameComponent {
 
 	@Override
 	public void update(int originalDelta) throws SlickException {
-		System.out.println(originalDelta);
-		if (originalDelta < 100) {
-			this.passedMilliseconds += originalDelta;
-			this.passedTime.setText(this.passedTimeToString());
-			this.moneyAmount.setText("" + this.player.getMoney());
-			this.score.setText("" + this.player.getScore());
-			int delta = (int) (originalDelta * this.speed);
-			if (this.mode == 0) {
-				for (Enemy enemy : this.enemies) {
+		// System.out.println(originalDelta);
+		// if (originalDelta < 100) {
+		this.passedMilliseconds += originalDelta;
+		this.passedTime.setText(this.passedTimeToString());
+		this.moneyAmount.setText("" + this.player.getMoney());
+		this.score.setText("" + this.player.getScore());
+		int delta = (int) (originalDelta * this.speed);
+		if (this.mode == 0) {
+			for (Enemy enemy : this.enemies) {
 
-					if (enemy != null)
-						enemy.update(delta);
-				}
-				for (int i = 0; i < this.towers.length; ++i) {
-					for (int j = 0; j < this.towers[0].length; ++j) {
-						if (this.towers[i][j] != null) {
-							this.towers[i][j].update(delta);
-						}
+				if (enemy != null)
+					enemy.update(delta);
+			}
+			for (int i = 0; i < this.towers.length; ++i) {
+				for (int j = 0; j < this.towers[0].length; ++j) {
+					if (this.towers[i][j] != null) {
+						this.towers[i][j].update(delta);
 					}
 				}
-
-				this.currentLevel.getWaveHandler().update(delta, container);
-			}
-			this.updateTowerShadow();
-			this.mouseEvents(delta);
-			this.keyboardEvents(container, delta);
-
-			if (this.player.getLives() <= 0) {
-				TowerDefense.writeScoreToFile(this.game.getGameplay().getPlayer().getName(), this.game.getGameplay().getPlayer()
-						.getScore());
-				this.game.resetScores();
-				this.game.setLost(this.player.getScore(), this.player.getName());
-				this.game.setMode(TowerDefense.MODE_MENU);
-				this.game.getMenu().setStartMenu();
 			}
 
-			for (Projectile projectiles : this.projectiles) {
-				projectiles.update(delta);
-			}
-
+			this.currentLevel.getWaveHandler().update(delta);
 		}
+		this.updateTowerShadow();
+		this.mouseEvents(delta);
+		// this.keyboardEvents(container, delta);
+
+		if (this.player.getLives() <= 0) {
+			TowerDefense.writeScoreToFile(this.game.getGameplay().getPlayer().getName(), this.game.getGameplay().getPlayer()
+					.getScore());
+			this.game.resetScores();
+			this.game.setLost(this.player.getScore(), this.player.getName());
+			this.game.setMode(TowerDefense.MODE_MENU);
+			this.game.getMenu().setStartMenu();
+		}
+
+		for (Projectile projectiles : this.projectiles) {
+			projectiles.update(delta);
+		}
+
+		// }
 	}
 
 	private void updateTowerShadow() {
