@@ -13,7 +13,7 @@ public class TextFileToString {
 		List<String> list = new ArrayList<String>();
 		try {
 			File f;
-			f = new File("D:/Users/Valep/git/VirusDefense-libGDX-wrapped/android/assets/data/files/" + path);
+			f = new File("D:/Users/Valep/git/VirusDefense-libGDX-port/android/assets/data/files/" + path);
 
 			BufferedReader reader = new BufferedReader(new FileReader(f));
 

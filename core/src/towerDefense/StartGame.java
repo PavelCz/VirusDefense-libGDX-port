@@ -75,9 +75,6 @@ public class StartGame extends ApplicationAdapter {
 			fullscreen = true;
 		}
 		this.game = new TowerDefense(false);
-		System.out.println(width + ", " + height);
-		width = 1024;
-		height = 768;
 		// try {
 		// this.appGameContainer = new AppGameContainer(this.game, width, height, fullscreen);
 		// appGameContainer.setDisplayMode(width, height, TowerDefense.isFULLSCREEN());
