@@ -366,8 +366,8 @@ public class Gameplay extends GameComponent {
 
 				this.currentLevel.getWaveHandler().update(delta, container);
 			}
-			this.updateTowerShadow(container);
-			this.mouseEvents(container, delta);
+			this.updateTowerShadow();
+			this.mouseEvents(delta);
 			this.keyboardEvents(container, delta);
 
 			if (this.player.getLives() <= 0) {
@@ -386,17 +386,16 @@ public class Gameplay extends GameComponent {
 		}
 	}
 
-	private void updateTowerShadow(GameContainer container) {
+	private void updateTowerShadow() {
 		if (this.currentTower != null && this.getMode() == 0) {
-			Input input = container.getInput();
 			// old version of shadow Coordinates, with pixel accurate
 			// coordinates
 			// this.towerShadowX = (int) (input.getMouseX() -
 			// this.currentTower.getSprite().getWidth() / 2);
 			// this.towerShadowY = (int) (input.getMouseY() -
 			// this.currentTower.getSprite().getHeight() / 2);
-			int x = input.getMouseX() + Gameplay.getCameraX();
-			int y = input.getMouseY() + Gameplay.getCameraY();
+			int x = Gdx.input.getX() + Gameplay.getCameraX();
+			int y = Gdx.input.getY() + Gameplay.getCameraY();
 			int newX = (x) / Gameplay.SIZE;
 			int newY = (y) / Gameplay.SIZE;
 			this.towerShadowX = (int) (newX * Gameplay.SIZE - Gameplay.getCameraX());
@@ -517,28 +516,29 @@ public class Gameplay extends GameComponent {
 	 * @param container
 	 * @param delta
 	 */
-	private void mouseEvents(GameContainer container, int delta) {
+	private void mouseEvents(int delta) {
 		if (this.mode == 0) {
-			Input input = container.getInput();
 
-			float x = input.getMouseX();
-			float y = input.getMouseY();
-			if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
-				this.placeTower(input);
+			float x = Gdx.input.getX();
+			float y = Gdx.input.getY();
+			// mouse button presses may be wrong, previoulsy in slick it was mouse button pressed wich is equal to justTouched() (here
+			// and below)
+			if (Gdx.input.isButtonPressed(com.badlogic.gdx.Input.Buttons.LEFT)) {
+				this.placeTower();
 				for (Clickable clickable : this.clickables) {
 					clickable.update(x, y);
 				}
 
-			} else if (input.isMousePressed(Input.MOUSE_RIGHT_BUTTON)) {
+			} else if (Gdx.input.isButtonPressed(com.badlogic.gdx.Input.Buttons.RIGHT)) {
 				this.releaseAllClickables();
 
 			}
 		}
 	}
 
-	private void placeTower(Input input) {
-		float x = input.getMouseX() + Gameplay.getCameraX();
-		float y = input.getMouseY() + Gameplay.getCameraY();
+	private void placeTower() {
+		float x = Gdx.input.getX() + Gameplay.getCameraX();
+		float y = Gdx.input.getY() + Gameplay.getCameraY();
 		int newX = (int) x / Gameplay.SIZE;
 		int newY = (int) y / Gameplay.SIZE;
 
