@@ -9,12 +9,12 @@ import java.util.List;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
-import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.TrueTypeFont;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import engine.GameComponent;
@@ -67,20 +67,20 @@ public class Settings extends GameComponent {
 		fieldsX += fieldWidth + 5;
 
 		this.apply = new ClickableText(fieldsX, fieldsY, "Apply", Gameplay.GLOBAL_GUI_SCALE, game.getGameplay(), false);
-		this.apply.setColor(Color.black);
+		this.apply.setColor(Color.BLACK);
 		this.clickables.add(this.apply);
 		this.guiElements.add(this.apply);
 
 		fieldsX += this.apply.getWidth() + 10;
 
-		this.warning = new StaticText(fieldsX, fieldsY, Color.red, "Please enter a number.");
+		this.warning = new StaticText(fieldsX, fieldsY, Color.RED, "Please enter a number.");
 		this.warning.setVisible(false);
 		this.guiElements.add(this.warning);
 		fieldsX = 0;
 		// fieldsY += this.widthField.getHeight();
 		this.fullscreen = new ClickableText(fieldsX, fieldsY, "Toggle fullscreen", Gameplay.GLOBAL_GUI_SCALE, game.getGameplay(),
 				false);
-		this.fullscreen.setColor(Color.black);
+		this.fullscreen.setColor(Color.BLACK);
 		this.clickables.add(this.fullscreen);
 		this.guiElements.add(this.fullscreen);
 
@@ -92,7 +92,7 @@ public class Settings extends GameComponent {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		this.supportedResolutionsText = new StaticText(0, 0, (int) 15, Color.black, "Supported Fullscreen\nResolutions:");
+		this.supportedResolutionsText = new StaticText(0, 0, (int) 15, Color.BLACK, "Supported Fullscreen\nResolutions:");
 
 		this.guiElements.add(this.supportedResolutionsText);
 
@@ -101,7 +101,7 @@ public class Settings extends GameComponent {
 		for (int i = 0; i < this.resolutionClickables.length; ++i) {
 			this.resolutionClickables[i] = new ClickableText(0, 0, supportedResolutions[i][0] + " x " + supportedResolutions[i][1],
 					Gameplay.GLOBAL_GUI_SCALE, game.getGameplay(), false);
-			this.resolutionClickables[i].setColor(Color.black);
+			this.resolutionClickables[i].setColor(Color.BLACK);
 			this.clickables.add(this.resolutionClickables[i]);
 			this.guiElements.add(this.resolutionClickables[i]);
 

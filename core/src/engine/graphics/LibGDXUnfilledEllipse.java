@@ -1,9 +1,8 @@
 package engine.graphics;
 
-import org.newdawn.slick.Color;
-
 import towerDefense.TowerDefense;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -33,7 +32,7 @@ public class LibGDXUnfilledEllipse extends LibGDXEllipse {
 		ShapeRenderer shapeRenderer = new ShapeRenderer();
 		shapeRenderer.setProjectionMatrix(camera.combined);
 		shapeRenderer.begin(ShapeType.Line);
-		shapeRenderer.setColor(this.color.getRed(), this.color.getGreen(), this.color.getBlue(), 1); // r g b a
+		shapeRenderer.setColor(this.color.r, this.color.g, this.color.b, 1); // r g b a
 		// shapeRenderer.line(x, y, x2, y2);
 		shapeRenderer.circle(x, TowerDefense.getHeight() - y, this.width / 2 * globalScale);
 		// shapeRenderer.circle(x, y, radius);

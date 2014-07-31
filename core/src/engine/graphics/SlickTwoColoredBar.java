@@ -1,7 +1,6 @@
 package engine.graphics;
 
-import org.newdawn.slick.Color;
-
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class SlickTwoColoredBar extends RenderObject {
@@ -17,9 +16,9 @@ public class SlickTwoColoredBar extends RenderObject {
 	public SlickTwoColoredBar(float length, float height) {
 		this.length = length;
 		this.height = height;
-		this.border = new LibGDXUnfilledRectangle(this.length, this.height, Color.black);
-		this.base = new LibGDXRectangle((int) this.length, (int) this.height, Color.red);
-		this.health = new LibGDXRectangle((int) this.length, (int) this.height, Color.green);
+		this.border = new LibGDXUnfilledRectangle(this.length, this.height, Color.BLACK);
+		this.base = new LibGDXRectangle((int) this.length, (int) this.height, Color.RED);
+		this.health = new LibGDXRectangle((int) this.length, (int) this.height, Color.GREEN);
 
 		this.length2 = length;
 	}

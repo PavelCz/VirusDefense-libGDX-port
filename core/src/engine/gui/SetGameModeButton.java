@@ -1,9 +1,9 @@
 package engine.gui;
 
-import org.newdawn.slick.Color;
-
 import towerDefense.Gameplay;
 import towerDefense.TowerDefense;
+
+import com.badlogic.gdx.graphics.Color;
 
 public class SetGameModeButton extends ClickableText {
 	private TowerDefense towerDefense;
@@ -13,7 +13,7 @@ public class SetGameModeButton extends ClickableText {
 		super(x, y, text, Gameplay.GLOBAL_GUI_SCALE, towerDefense.getGameplay(), false);
 		this.towerDefense = towerDefense;
 		this.gameMode = gameMode;
-		this.setColor(Color.black);
+		this.setColor(Color.BLACK);
 
 	}
 

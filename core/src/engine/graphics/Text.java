@@ -1,10 +1,9 @@
 package engine.graphics;
 
-import org.newdawn.slick.Color;
-
 import towerDefense.TowerDefense;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
@@ -30,7 +29,7 @@ public class Text extends RenderObject {
 
 	@Override
 	public void draw(float x, float y, float globalScale, SpriteBatch batch) {
-		this.bmfont.setColor(this.color.getRed() / 255, this.color.getGreen() / 255, this.color.getBlue() / 255, 1);
+		this.bmfont.setColor(this.color.r, this.color.g, this.color.b, 1);
 		// this.bmfont.setColor(1, 1, 1, 1);
 		if (this.visible) {
 			// this.bmfont.draw(batch, this.text, x, y);

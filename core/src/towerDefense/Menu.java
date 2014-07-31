@@ -1,9 +1,9 @@
 package towerDefense;
 
-import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import engine.GameComponent;
@@ -22,7 +22,7 @@ public class Menu extends GameComponent {
 	private StartClickable startButton;
 	private SetGameModeButton resumeButton;
 	GoToSettingsButton settings;
-	private StaticText pausedMessage = new StaticText(0, 0, 50, Color.white, "VIRUS DEFENSE");
+	private StaticText pausedMessage = new StaticText(0, 0, 50, Color.WHITE, "VIRUS DEFENSE");
 
 	public Menu(TowerDefense game) {
 		super(game);
@@ -37,7 +37,7 @@ public class Menu extends GameComponent {
 		this.pausedMessage.setPosition((TowerDefense.getWidth() - this.pausedMessage.getWidth()) / 2, TowerDefense.getHeight() / 4);
 		this.guiElements.add(this.pausedMessage);
 
-		this.lostWonMessage = new StaticText(TowerDefense.getWidth() / 4, 0, 20, Color.red, "");
+		this.lostWonMessage = new StaticText(TowerDefense.getWidth() / 4, 0, 20, Color.RED, "");
 		this.guiElements.add(this.lostWonMessage);
 
 		this.resumeButton = new SetGameModeButton(0, 0, "Resume game", this.game, TowerDefense.MODE_GAME);
@@ -46,7 +46,7 @@ public class Menu extends GameComponent {
 		int y = TowerDefense.getHeight() / 2 + TowerDefense.getHeight() / 8 - this.resumeButton.getTextHeight();
 		this.resumeButton.setX(TowerDefense.getWidth() / 2 - this.resumeButton.getWidth() / 2);
 		this.resumeButton.setY(y - 1);
-		this.resumeButton.setColor(Color.white);
+		this.resumeButton.setColor(Color.WHITE);
 		this.resumeButton.setVisible(false);
 		this.resumeButton.deactivate();
 
@@ -66,7 +66,7 @@ public class Menu extends GameComponent {
 		y += this.startButton.getTextHeight() + 1;
 
 		SetGameModeButton scores = new SetGameModeButton(0, 0, "Highscores", this.game, TowerDefense.MODE_SCORES);
-		scores.setColor(Color.white);
+		scores.setColor(Color.WHITE);
 		this.clickables.add(scores);
 		this.guiElements.add(scores);
 		scores.setX(TowerDefense.getWidth() / 2 - scores.getWidth() / 2);
@@ -117,7 +117,7 @@ public class Menu extends GameComponent {
 	public void setLost(int score, String name) {
 		this.lostWonMessage.setText("You lost, " + name + "!\nYour Score was: " + score + " Points.");
 		this.lostWonMessage.setPosition((TowerDefense.getWidth() - this.lostWonMessage.getWidth()) / 2, 0);
-		this.lostWonMessage.setColor(Color.red);
+		this.lostWonMessage.setColor(Color.RED);
 	}
 
 	public void setPauseMenu() {
@@ -127,7 +127,7 @@ public class Menu extends GameComponent {
 		this.pausedMessage.setHeight(30);
 		this.pausedMessage.setPosition((TowerDefense.getWidth() - this.pausedMessage.getWidth()) / 2, TowerDefense.getHeight() / 4);
 		this.settings.deactivate();
-		this.settings.setColor(Color.lightGray);
+		this.settings.setColor(Color.LIGHT_GRAY);
 		this.lostWonMessage.setVisible(false);
 	}
 
@@ -138,7 +138,7 @@ public class Menu extends GameComponent {
 		this.pausedMessage.setHeight(50);
 		this.pausedMessage.setPosition((TowerDefense.getWidth() - this.pausedMessage.getWidth()) / 2, TowerDefense.getHeight() / 4);
 		this.settings.activate();
-		this.settings.setColor(Color.white);
+		this.settings.setColor(Color.WHITE);
 		this.lostWonMessage.setVisible(true);
 	}
 
@@ -157,7 +157,7 @@ public class Menu extends GameComponent {
 	public void setWon(int score, String name) {
 		this.lostWonMessage.setText("You beat the level, " + name + "!\nYour Score was: " + score + " Points.");
 		this.lostWonMessage.setPosition((TowerDefense.getWidth() - this.lostWonMessage.getWidth()) / 2, 0);
-		this.lostWonMessage.setColor(Color.green);
+		this.lostWonMessage.setColor(Color.GREEN);
 
 	}
 

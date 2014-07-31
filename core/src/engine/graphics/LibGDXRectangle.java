@@ -1,9 +1,8 @@
 package engine.graphics;
 
-import org.newdawn.slick.Color;
-
 import towerDefense.TowerDefense;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
@@ -18,11 +17,11 @@ public class LibGDXRectangle extends RenderObject {
 	protected float height;
 
 	public LibGDXRectangle(float width, float height) {
-		this(width, height, Color.pink);
+		this(width, height, Color.PINK);
 	}
 
 	public LibGDXRectangle(float width, float height, float r, float g, float b) {
-		this(width, height, new Color(r, g, b));
+		this(width, height, new Color(r, g, b, 1));
 
 	}
 
@@ -42,7 +41,7 @@ public class LibGDXRectangle extends RenderObject {
 		ShapeRenderer shapeRenderer = new ShapeRenderer();
 		// shapeRenderer.setProjectionMatrix(camera.combined);
 		shapeRenderer.begin(ShapeType.Filled);
-		shapeRenderer.setColor(this.color.getRed(), this.color.getGreen(), this.color.getBlue(), 1); // r g b a
+		shapeRenderer.setColor(this.color.r, this.color.g, this.color.b, 1); // r g b a
 		// shapeRenderer.line(x, y, x2, y2);
 		shapeRenderer.rect(x, TowerDefense.getHeight() - y, this.width * globalScale, this.height * globalScale);
 		// shapeRenderer.circle(x, y, radius);

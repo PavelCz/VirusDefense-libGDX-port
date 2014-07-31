@@ -1,9 +1,8 @@
 package engine.gui;
 
-import org.newdawn.slick.Color;
-
 import towerDefense.Gameplay;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import engine.graphics.Text;

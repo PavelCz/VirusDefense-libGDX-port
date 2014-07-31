@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
-import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
 
@@ -17,6 +16,7 @@ import towerDefense.towers.Tower;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import engine.Camera;
@@ -165,7 +165,7 @@ public class Gameplay extends GameComponent implements InputProcessor {
 	}
 
 	private void initGUI() {
-
+		Color defaultTextColor = Color.WHITE;
 		float guiTileSize = 64 * Gameplay.GLOBAL_GUI_SCALE;
 		float textHeight = 20 * Gameplay.GLOBAL_GUI_SCALE;
 		float guiX = 3 * Gameplay.GLOBAL_GUI_SCALE;
@@ -175,36 +175,36 @@ public class Gameplay extends GameComponent implements InputProcessor {
 		float cursorX = cursorXStart;
 		float cursorY = cursorYStart;
 
-		this.playerName = new StaticText(cursorX, cursorY, Color.white, "Player: " + this.player.getName());
+		this.playerName = new StaticText(cursorX, cursorY, defaultTextColor, "Player: " + this.player.getName());
 		this.guiElements.add(this.playerName);
 		cursorY += textHeight;
 
-		StaticText livesText = new StaticText(cursorX, cursorY, Color.white, "Lives: ");
+		StaticText livesText = new StaticText(cursorX, cursorY, defaultTextColor, "Lives: ");
 		this.guiElements.add(livesText);
 		cursorX += livesText.getWidth();
-		this.numberLives = new StaticText(cursorX, cursorY, Color.white, "" + this.player.getLives());
+		this.numberLives = new StaticText(cursorX, cursorY, defaultTextColor, "" + this.player.getLives());
 		this.guiElements.add(this.numberLives);
 		cursorX = cursorXStart;
 		cursorY += textHeight;
 
-		StaticText moneyText = new StaticText(cursorX, cursorY, Color.white, "Money: ");
+		StaticText moneyText = new StaticText(cursorX, cursorY, defaultTextColor, "Money: ");
 		this.guiElements.add(moneyText);
 		cursorX += moneyText.getWidth();
-		this.moneyAmount = new StaticText(cursorX, cursorY, Color.white, "" + this.player.getMoney());
+		this.moneyAmount = new StaticText(cursorX, cursorY, defaultTextColor, "" + this.player.getMoney());
 		this.guiElements.add(this.moneyAmount);
 		cursorX = cursorXStart;
 		cursorY += textHeight;
 
-		StaticText scoreText = new StaticText(cursorX, cursorY, Color.white, "Score: ");
+		StaticText scoreText = new StaticText(cursorX, cursorY, defaultTextColor, "Score: ");
 		this.guiElements.add(scoreText);
 		cursorX += scoreText.getWidth();
-		this.score = new StaticText(cursorX, cursorY, Color.white, "" + this.player.getScore());
+		this.score = new StaticText(cursorX, cursorY, defaultTextColor, "" + this.player.getScore());
 		this.guiElements.add(this.score);
 
-		this.towerName = new StaticText(Gameplay.INTERFACE_START_X + guiTileSize, 10, Color.white, "");
-		this.towerInfo = new StaticText(Gameplay.INTERFACE_START_X, guiTileSize, Color.white, "");
+		this.towerName = new StaticText(Gameplay.INTERFACE_START_X + guiTileSize, 10, defaultTextColor, "");
+		this.towerInfo = new StaticText(Gameplay.INTERFACE_START_X, guiTileSize, defaultTextColor, "");
 
-		this.passedTime = new StaticText(Gameplay.INTERFACE_START_X + guiX, TowerDefense.getHeight() - textHeight, Color.white,
+		this.passedTime = new StaticText(Gameplay.INTERFACE_START_X + guiX, TowerDefense.getHeight() - textHeight, defaultTextColor,
 				this.passedTimeToString());
 
 		this.guiElements.add(this.interfaceBackground);
@@ -338,13 +338,13 @@ public class Gameplay extends GameComponent implements InputProcessor {
 	private void renderDebug(SpriteBatch batch) {
 		if (this.debugMode) {
 			for (Enemy enemy : this.enemies) {
-				new LibGDXUnfilledEllipse(enemy.getRadius() * 2, enemy.getRadius() * 2, Color.blue).draw((enemy.getX())
+				new LibGDXUnfilledEllipse(enemy.getRadius() * 2, enemy.getRadius() * 2, Color.BLUE).draw((enemy.getX())
 						* Gameplay.CURRENT_GAME_SCALE - Gameplay.getCameraX(),
 						(enemy.getY()) * Gameplay.CURRENT_GAME_SCALE - Gameplay.getCameraY(), Gameplay.CURRENT_GAME_SCALE, batch);
 			}
 
 			// create a black box that the FPS are visible
-			new LibGDXRectangle(100, 20, Color.black).draw(5, 10, 1f, batch);
+			new LibGDXRectangle(100, 20, Color.BLACK).draw(5, 10, 1f, batch);
 		}
 	}
 

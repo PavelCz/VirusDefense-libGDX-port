@@ -1,7 +1,6 @@
 package engine.gui;
 
-import org.newdawn.slick.Color;
-
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import engine.GameComponent;
@@ -13,8 +12,8 @@ public class ClickableText extends Clickable {
 
 	public ClickableText(float x, float y, String text, float globalScale, GameComponent game, boolean stayClicked) {
 		super(x, y, game, stayClicked);
-		this.text = new Text(15, text, Color.white, globalScale);
-		this.savedColor = Color.white;
+		this.text = new Text(15, text, Color.WHITE, globalScale);
+		this.savedColor = Color.WHITE;
 		this.collisionWidth = this.text.getWidth();
 		this.collisionHeight = this.text.getTextHeight();
 	}
@@ -31,7 +30,7 @@ public class ClickableText extends Clickable {
 	public void onClick() {
 		if (this.active) {
 			super.onClick();
-			this.text.setColor(Color.blue);
+			this.text.setColor(Color.BLUE);
 		}
 
 	}
@@ -39,7 +38,7 @@ public class ClickableText extends Clickable {
 	@Override
 	public void onRelease() {
 		super.onRelease();
-		this.text.setColor(Color.white);
+		this.text.setColor(Color.WHITE);
 
 	}
 
@@ -51,7 +50,7 @@ public class ClickableText extends Clickable {
 
 	@Override
 	public void onHover() {
-		this.text.setColor(Color.gray);
+		this.text.setColor(Color.GRAY);
 
 	}
 

@@ -29,7 +29,7 @@ public class MapLayoutFromImage {
 	public MapLayoutFromImage(String imagePath) {
 
 		try {
-			this.image = new Image( imagePath);
+			this.image = new Image(imagePath);
 		} catch (SlickException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
