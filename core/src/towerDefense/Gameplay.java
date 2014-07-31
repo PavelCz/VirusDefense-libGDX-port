@@ -341,9 +341,9 @@ public class Gameplay extends GameComponent {
 		}
 	}
 
-	// @Override
-	public void update(GameContainer container, int originalDelta) throws SlickException {
-
+	@Override
+	public void update(int originalDelta) throws SlickException {
+		System.out.println(originalDelta);
 		if (originalDelta < 100) {
 			this.passedMilliseconds += originalDelta;
 			this.passedTime.setText(this.passedTimeToString());

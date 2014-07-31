@@ -9,7 +9,6 @@ import java.util.List;
 
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 
 import engine.GameComponent;
@@ -119,6 +118,7 @@ public class TowerDefense {
 			}
 			this.currentGameComponent = this.scores;
 		}
+		// System.out.println(delta);
 		this.currentGameComponent.update(delta);
 
 	}
