@@ -5,10 +5,12 @@ import java.util.List;
 
 import org.newdawn.slick.SlickException;
 
-import com.badlogic.gdx.Gdx;
-
 import towerDefense.Gameplay;
 import towerDefense.TowerDefense;
+
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+
 import engine.graphics.Background;
 import engine.gui.Clickable;
 import engine.gui.GUI;
@@ -30,9 +32,9 @@ public abstract class GameComponent {
 		this.clickables = new ArrayList<Clickable>();
 	}
 
-	private void renderGUI() {
+	private void renderGUI(SpriteBatch batch) {
 		for (GUI guiElement : this.guiElements) {
-			guiElement.draw();
+			guiElement.draw(batch);
 		}
 	}
 
@@ -43,11 +45,11 @@ public abstract class GameComponent {
 		this.updateClickables(delta);
 	}
 
-	public void render() throws SlickException {
+	public void render(SpriteBatch batch) throws SlickException {
 		if (this.background != null) {
-			this.background.draw();
+			this.background.draw(batch);
 		}
-		this.renderGUI();
+		this.renderGUI(batch);
 	}
 
 	private void updateClickables(int delta) {

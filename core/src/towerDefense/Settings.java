@@ -14,6 +14,9 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.TrueTypeFont;
+
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+
 import engine.GameComponent;
 import engine.gui.Clickable;
 import engine.gui.ClickableText;
@@ -129,8 +132,8 @@ public class Settings extends GameComponent {
 	}
 
 	@Override
-	public void render() throws SlickException {
-		super.render();
+	public void render(SpriteBatch batch) throws SlickException {
+		super.render(batch);
 		// this.widthField.render(container, graphics);
 		// this.heightField.render(container, graphics);
 		// this.warning.draw();

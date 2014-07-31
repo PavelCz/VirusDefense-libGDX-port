@@ -2,8 +2,11 @@ package engine.gui;
 
 import org.newdawn.slick.Color;
 
-import engine.graphics.Text;
 import towerDefense.Gameplay;
+
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+
+import engine.graphics.Text;
 
 public class StaticText extends GUI {
 	private Text text;
@@ -25,8 +28,8 @@ public class StaticText extends GUI {
 	}
 
 	@Override
-	public void draw() {
-		this.text.draw(this.x, this.y, Gameplay.GLOBAL_GUI_SCALE);
+	public void draw(SpriteBatch batch) {
+		this.text.draw(this.x, this.y, Gameplay.GLOBAL_GUI_SCALE, batch);
 
 	}
 

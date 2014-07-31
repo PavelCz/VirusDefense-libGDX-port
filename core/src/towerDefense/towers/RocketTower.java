@@ -1,6 +1,9 @@
 package towerDefense.towers;
 
 import towerDefense.Gameplay;
+
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+
 import engine.Enemy;
 import engine.graphics.OwnSprite;
 import engine.projectiles.Rocket;
@@ -20,9 +23,9 @@ public class RocketTower extends Tower {
 	}
 
 	@Override
-	public void draw() {
+	public void draw(SpriteBatch batch) {
 		this.sprite.draw(this.x * Gameplay.SIZE - Gameplay.getCameraX(), this.y * Gameplay.SIZE - Gameplay.getCameraY(),
-				Gameplay.CURRENT_GAME_SCALE);
+				Gameplay.CURRENT_GAME_SCALE, batch);
 
 	}
 

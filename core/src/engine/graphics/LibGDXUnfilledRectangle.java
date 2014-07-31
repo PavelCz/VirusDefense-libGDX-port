@@ -1,9 +1,11 @@
 package engine.graphics;
 
 import org.newdawn.slick.Color;
+
 import towerDefense.TowerDefense;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 
@@ -26,7 +28,7 @@ public class LibGDXUnfilledRectangle extends LibGDXRectangle {
 	}
 
 	@Override
-	public void draw(float x, float y, float globalScale) {
+	public void draw(float x, float y, float globalScale, SpriteBatch batch) {
 		// this.graphics.draw(new Rectangle(x, y, this.width * globalScale, this.height * globalScale), new GradientFill(0, 0,
 		// this.color, this.width * globalScale, this.height * globalScale, this.color));
 		OrthographicCamera camera = new OrthographicCamera();

@@ -2,6 +2,8 @@ package engine.gui;
 
 import org.newdawn.slick.Color;
 
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+
 import engine.GameComponent;
 import engine.graphics.Text;
 
@@ -42,8 +44,8 @@ public class ClickableText extends Clickable {
 	}
 
 	@Override
-	public void draw() {
-		this.text.draw(this.x, this.y, 1f);
+	public void draw(SpriteBatch batch) {
+		this.text.draw(this.x, this.y, 1f, batch);
 
 	}
 

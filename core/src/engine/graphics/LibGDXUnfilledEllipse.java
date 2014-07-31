@@ -1,9 +1,11 @@
 package engine.graphics;
 
 import org.newdawn.slick.Color;
+
 import towerDefense.TowerDefense;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 
@@ -22,7 +24,7 @@ public class LibGDXUnfilledEllipse extends LibGDXEllipse {
 	}
 
 	@Override
-	public void draw(float x, float y, float globalScale) {
+	public void draw(float x, float y, float globalScale, SpriteBatch batch) {
 		// this.graphics.draw(new Ellipse(x, y, this.width / 2 * globalScale, this.height / 2 * globalScale), new GradientFill(0, 0,
 		// this.color, this.width / 2 * globalScale, this.height / 2 * globalScale, this.color));
 		OrthographicCamera camera = new OrthographicCamera();

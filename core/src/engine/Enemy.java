@@ -1,6 +1,9 @@
 package engine;
 
 import towerDefense.Gameplay;
+
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+
 import engine.graphics.OwnSprite;
 
 public class Enemy extends Entity implements Drawable {
@@ -99,16 +102,16 @@ public class Enemy extends Entity implements Drawable {
 	}
 
 	@Override
-	public void draw() {
+	public void draw(SpriteBatch batch) {
 		if (this.health > 0) {
 			if (this.wobble) {
 				float scale = (float) this.wobbleFactor;
 				float size = (Gameplay.DEFAULT_SIZE - this.sprite.getWidth() * scale) / 2;
 				this.sprite.draw((this.x + size) * Gameplay.CURRENT_GAME_SCALE - Gameplay.getCameraX(), (this.y + size)
-						* Gameplay.CURRENT_GAME_SCALE - Gameplay.getCameraY(), scale * Gameplay.CURRENT_GAME_SCALE);
+						* Gameplay.CURRENT_GAME_SCALE - Gameplay.getCameraY(), scale * Gameplay.CURRENT_GAME_SCALE, batch);
 			} else {
 				this.sprite.draw((this.x) * Gameplay.CURRENT_GAME_SCALE, (this.y) * Gameplay.CURRENT_GAME_SCALE,
-						Gameplay.CURRENT_GAME_SCALE);
+						Gameplay.CURRENT_GAME_SCALE, batch);
 			}
 		}
 	}

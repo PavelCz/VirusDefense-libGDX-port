@@ -2,6 +2,8 @@ package engine.graphics;
 
 import org.newdawn.slick.Color;
 
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+
 public class SlickTwoColoredBar extends RenderObject {
 	private LibGDXRectangle base;
 	private LibGDXRectangle health;
@@ -22,12 +24,12 @@ public class SlickTwoColoredBar extends RenderObject {
 	}
 
 	@Override
-	public void draw(float x, float y, float globalScale) {
-		this.base.draw(x, y, globalScale);
+	public void draw(float x, float y, float globalScale, SpriteBatch batch) {
+		this.base.draw(x, y, globalScale, batch);
 		this.health.setWidth(this.length2);
-		this.health.draw(x, y, globalScale);
+		this.health.draw(x, y, globalScale, batch);
 		if (this.bordered) {
-			new LibGDXUnfilledRectangle(this.length, this.height, Color.black).draw(x, y, globalScale);
+			new LibGDXUnfilledRectangle(this.length, this.height, Color.black).draw(x, y, globalScale, batch);
 			;
 		}
 

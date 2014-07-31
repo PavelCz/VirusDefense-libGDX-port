@@ -3,6 +3,9 @@ package towerDefense;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
+
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+
 import engine.GameComponent;
 import engine.graphics.Background;
 import engine.gui.ExitClickable;
@@ -98,8 +101,8 @@ public class Menu extends GameComponent {
 	}
 
 	@Override
-	public void render() throws SlickException {
-		super.render();
+	public void render(SpriteBatch batch) throws SlickException {
+		super.render(batch);
 		// this.t.render(container, graphics);
 
 		// this.version.draw();

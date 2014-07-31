@@ -3,6 +3,8 @@ package engine.graphics;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+
 public class AnimatedSprite extends RenderObject {
 	private List<OwnSprite> sprites;
 	private int startSpeed;
@@ -33,8 +35,8 @@ public class AnimatedSprite extends RenderObject {
 	}
 
 	@Override
-	public void draw(float x, float y, float globalScale) {
-		this.currentSprite.draw(x, y, globalScale);
+	public void draw(float x, float y, float globalScale, SpriteBatch batch) {
+		this.currentSprite.draw(x, y, globalScale, batch);
 
 	}
 

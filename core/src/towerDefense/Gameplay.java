@@ -10,13 +10,15 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 
-import com.badlogic.gdx.Gdx;
-
 import towerDefense.towers.BombTower;
 import towerDefense.towers.LongerShootingTower;
 import towerDefense.towers.RocketFastTower;
 import towerDefense.towers.RocketTower;
 import towerDefense.towers.Tower;
+
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+
 import engine.Camera;
 import engine.Enemy;
 import engine.EnemyTypeHandler;
@@ -215,21 +217,21 @@ public class Gameplay extends GameComponent {
 	}
 
 	@Override
-	public void render() throws SlickException {
-		super.render();
-		this.drawBackground();
-		this.currentLevel.renderPath();
-		this.renderEnemies();
-		this.renderTowers();
+	public void render(SpriteBatch batch) throws SlickException {
+		super.render(batch);
+		this.drawBackground(batch);
+		this.currentLevel.renderPath(batch);
+		this.renderEnemies(batch);
+		this.renderTowers(batch);
 
-		this.renderTowerShadow();
-		this.renderGUI();
+		this.renderTowerShadow(batch);
+		this.renderGUI(batch);
 
 		for (Projectile projectiles : this.projectiles) {
-			projectiles.draw();
+			projectiles.draw(batch);
 		}
 		if (this.currentTower != null) {
-			this.currentTower.getSprite().draw(INTERFACE_START_X, 0, GLOBAL_GUI_SCALE);
+			this.currentTower.getSprite().draw(INTERFACE_START_X, 0, GLOBAL_GUI_SCALE, batch);
 			this.towerName.setText(this.currentTower.getName());
 			this.towerInfo.setText("Radius: " + this.currentTower.getRadius() + "\nKosten: " + this.currentTower.getCost()
 					+ "\nSchaden: " + this.currentTower.getDamage());
@@ -240,17 +242,17 @@ public class Gameplay extends GameComponent {
 
 	}
 
-	private void renderGUI() {
+	private void renderGUI(SpriteBatch batch) {
 		for (GUI guiElement : this.guiElements) {
-			guiElement.draw();
+			guiElement.draw(batch);
 		}
-		this.renderHealthBars();
-		this.renderDebug();
+		this.renderHealthBars(batch);
+		this.renderDebug(batch);
 
 		if (this.mode == 1) {
-			new OwnSprite("You Win.png").draw(0, 0, Gameplay.CURRENT_GAME_SCALE);
+			new OwnSprite("You Win.png").draw(0, 0, Gameplay.CURRENT_GAME_SCALE, batch);
 		} else if (this.mode == -1) {
-			new OwnSprite("Game Over.png").draw(0, 0, Gameplay.CURRENT_GAME_SCALE);
+			new OwnSprite("Game Over.png").draw(0, 0, Gameplay.CURRENT_GAME_SCALE, batch);
 		}
 		// for (int i = 0; i < this.towers.length; ++i) {
 		// for (int j = 0; j < this.towers[0].length; ++j) {
@@ -265,7 +267,7 @@ public class Gameplay extends GameComponent {
 		// }
 	}
 
-	private void renderHealthBars() {
+	private void renderHealthBars(SpriteBatch batch) {
 		for (Enemy enemy : this.enemies) {
 			int barLength = 30;
 			int barHeight = 7;
@@ -275,24 +277,24 @@ public class Gameplay extends GameComponent {
 					enemy.getMaxHealth(), barLength, barHeight);
 			h.setHealth(enemy.getHealth());
 			h.setBordered(true);
-			h.draw();
+			h.draw(batch);
 		}
 	}
 
-	private void renderTowers() {
+	private void renderTowers(SpriteBatch batch) {
 		for (Tower[] towerArray : this.towers) {
 			for (Tower tower : towerArray) {
 				if (tower != null) {
-					tower.draw();
+					tower.draw(batch);
 				}
 			}
 		}
 	}
 
-	private void renderEnemies() {
+	private void renderEnemies(SpriteBatch batch) {
 		for (Enemy enemy : this.enemies) {
 			if (enemy != null)
-				enemy.draw();
+				enemy.draw(batch);
 		}
 	}
 
@@ -302,7 +304,7 @@ public class Gameplay extends GameComponent {
 	 * @param container
 	 * @param graphics
 	 */
-	private void renderTowerShadow() {
+	private void renderTowerShadow(SpriteBatch batch) {
 		//
 		// if (this.currentTower != null && this.getMode() == 0) {
 		// OwnSprite sprite = this.currentTower.getSprite().clone();
@@ -328,16 +330,16 @@ public class Gameplay extends GameComponent {
 	 * @param container
 	 * @param graphics
 	 */
-	private void renderDebug() {
+	private void renderDebug(SpriteBatch batch) {
 		if (this.debugMode) {
 			for (Enemy enemy : this.enemies) {
 				new LibGDXUnfilledEllipse(enemy.getRadius() * 2, enemy.getRadius() * 2, Color.blue).draw((enemy.getX())
 						* Gameplay.CURRENT_GAME_SCALE - Gameplay.getCameraX(),
-						(enemy.getY()) * Gameplay.CURRENT_GAME_SCALE - Gameplay.getCameraY(), Gameplay.CURRENT_GAME_SCALE);
+						(enemy.getY()) * Gameplay.CURRENT_GAME_SCALE - Gameplay.getCameraY(), Gameplay.CURRENT_GAME_SCALE, batch);
 			}
 
 			// create a black box that the FPS are visible
-			new LibGDXRectangle(100, 20, Color.black).draw(5, 10, 1f);
+			new LibGDXRectangle(100, 20, Color.black).draw(5, 10, 1f, batch);
 		}
 	}
 
@@ -652,8 +654,8 @@ public class Gameplay extends GameComponent {
 		return this.currentLevel.getNumberTilesWidth();
 	}
 
-	public void drawBackground() {
-		this.getMapBackground().draw();
+	public void drawBackground(SpriteBatch batch) {
+		this.getMapBackground().draw(batch);
 	}
 
 	public Background getMapBackground() {

@@ -1,6 +1,9 @@
 package engine.projectiles;
 
 import towerDefense.Gameplay;
+
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+
 import engine.Drawable;
 import engine.Enemy;
 import engine.MyVector2f;
@@ -60,10 +63,10 @@ public class Bomb extends Projectile implements Drawable {
 	}
 
 	@Override
-	public void draw() {
+	public void draw(SpriteBatch batch) {
 		this.animatedSprite.draw((this.x - this.animatedSprite.getCurrentSprite().getWidth() / 2) * Gameplay.CURRENT_GAME_SCALE
 				- Gameplay.getCameraX(), (this.y - this.animatedSprite.getCurrentSprite().getWidth() / 2)
-				* Gameplay.CURRENT_GAME_SCALE - Gameplay.getCameraY(), Gameplay.CURRENT_GAME_SCALE);
+				* Gameplay.CURRENT_GAME_SCALE - Gameplay.getCameraY(), Gameplay.CURRENT_GAME_SCALE, batch);
 	}
 
 	public void fire() {

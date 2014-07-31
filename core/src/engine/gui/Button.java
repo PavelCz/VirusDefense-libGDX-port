@@ -1,7 +1,10 @@
 package engine.gui;
 
-import engine.graphics.OwnSprite;
 import towerDefense.Gameplay;
+
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+
+import engine.graphics.OwnSprite;
 
 public class Button extends Clickable {
 	private OwnSprite unclickedButton;
@@ -20,12 +23,12 @@ public class Button extends Clickable {
 	}
 
 	@Override
-	public void draw() {
+	public void draw(SpriteBatch batch) {
 		if (!this.clicked) {
-			this.unclickedButton.draw(this.x, this.y, Gameplay.GLOBAL_GUI_SCALE);
+			this.unclickedButton.draw(this.x, this.y, Gameplay.GLOBAL_GUI_SCALE, batch);
 
 		} else {
-			this.clickedButton.draw(this.x, this.y, Gameplay.GLOBAL_GUI_SCALE);
+			this.clickedButton.draw(this.x, this.y, Gameplay.GLOBAL_GUI_SCALE, batch);
 		}
 
 	}

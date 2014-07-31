@@ -1,15 +1,17 @@
 package towerDefense.towers;
 
 import towerDefense.Gameplay;
+
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+
 import engine.Enemy;
 import engine.graphics.OwnSprite;
 
 public class ShootingTower extends Tower {
 	protected int delta;
-	
 
 	public ShootingTower(float x, float y, OwnSprite sprite, Gameplay game, float shootingInterval, float damage) {
-		super(x, y, 100, 128, damage, game,shootingInterval);
+		super(x, y, 100, 128, damage, game, shootingInterval);
 
 		this.sprite = sprite;
 		this.shootingInterval = shootingInterval;
@@ -22,16 +24,16 @@ public class ShootingTower extends Tower {
 	}
 
 	@Override
-	public void draw() {
+	public void draw(SpriteBatch batch) {
 		if (this.building) {
-			float scale = (this.buildingTime - this.buildingTimer) / buildingTime;
+			float scale = (this.buildingTime - this.buildingTimer) / this.buildingTime;
 			float size = (Gameplay.DEFAULT_SIZE - this.sprite.getWidth() * scale) / 2;
 			this.sprite.draw((this.x * Gameplay.DEFAULT_SIZE + size) * Gameplay.CURRENT_GAME_SCALE - Gameplay.getCameraX(), (this.y
 					* Gameplay.DEFAULT_SIZE + size)
-					* Gameplay.CURRENT_GAME_SCALE - Gameplay.getCameraY(), Gameplay.CURRENT_GAME_SCALE * scale);
+					* Gameplay.CURRENT_GAME_SCALE - Gameplay.getCameraY(), Gameplay.CURRENT_GAME_SCALE * scale, batch);
 		} else {
 			this.sprite.draw(this.x * Gameplay.SIZE - Gameplay.getCameraX(), this.y * Gameplay.SIZE - Gameplay.getCameraY(),
-					Gameplay.CURRENT_GAME_SCALE);
+					Gameplay.CURRENT_GAME_SCALE, batch);
 		}
 	}
 
@@ -40,7 +42,7 @@ public class ShootingTower extends Tower {
 		super.update(delta);
 		this.delta -= delta;
 		if (this.delta <= 0) {
-			this.delta = (int)this.shootingInterval;
+			this.delta = (int) this.shootingInterval;
 			this.shoot();
 		}
 	}

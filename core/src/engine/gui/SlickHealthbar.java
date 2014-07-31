@@ -1,7 +1,10 @@
 package engine.gui;
 
-import engine.graphics.SlickTwoColoredBar;
 import towerDefense.Gameplay;
+
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+
+import engine.graphics.SlickTwoColoredBar;
 
 /**
  * @author Pavel see LWJGLRectangle
@@ -36,9 +39,9 @@ public class SlickHealthbar extends GUI {
 	}
 
 	@Override
-	public void draw() {
+	public void draw(SpriteBatch batch) {
 		this.bar.setFractionLeft(this.healthLeft / this.maxHealth);
-		this.bar.draw(this.x, this.y, Gameplay.CURRENT_GAME_SCALE);
+		this.bar.draw(this.x, this.y, Gameplay.CURRENT_GAME_SCALE, batch);
 
 	}
 

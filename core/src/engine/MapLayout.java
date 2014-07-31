@@ -1,7 +1,9 @@
 package engine;
 
-import engine.graphics.PathTiler;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+
 import engine.graphics.OwnSprite;
+import engine.graphics.PathTiler;
 
 public class MapLayout {
 	private int[][] path;
@@ -11,8 +13,8 @@ public class MapLayout {
 	private int tileLength;
 	private int numberTilesWidth, numberTilesHeight;
 
-	public MapLayout(String mapLayoutPath,  int tileLength, String picture) {
-		MapLayoutFromImage mapLayout = new MapLayoutFromImage("data/files/maps/" +mapLayoutPath);
+	public MapLayout(String mapLayoutPath, int tileLength, String picture) {
+		MapLayoutFromImage mapLayout = new MapLayoutFromImage("data/files/maps/" + mapLayoutPath);
 		this.picture = new OwnSprite(picture, 1.2f);
 		this.path = mapLayout.getPath();
 		this.waypoints = mapLayout.getStartingPoint();
@@ -43,13 +45,11 @@ public class MapLayout {
 	}
 
 	public OwnSprite getPicture() {
-		return picture;
+		return this.picture;
 	}
-	
-	public void renderPath() {
-		this.pathTiler.render();
+
+	public void renderPath(SpriteBatch batch) {
+		this.pathTiler.render(batch);
 	}
-	
-	
 
 }

@@ -3,6 +3,9 @@ package engine;
 import java.util.List;
 
 import towerDefense.Gameplay;
+
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+
 import engine.graphics.Background;
 import engine.graphics.BackgroundTiles;
 import engine.graphics.OwnSprite;
@@ -36,8 +39,8 @@ public class Level {
 		return this.map.getPicture();
 	}
 
-	public void renderPath() {
-		this.map.renderPath();
+	public void renderPath(SpriteBatch batch) {
+		this.map.renderPath(batch);
 	}
 
 	public int[][] getPath() {

@@ -29,19 +29,16 @@ public class Text extends RenderObject {
 	}
 
 	@Override
-	public void draw(float x, float y, float globalScale) {
+	public void draw(float x, float y, float globalScale, SpriteBatch batch) {
 		this.bmfont.setColor(this.color.getRed() / 255, this.color.getGreen() / 255, this.color.getBlue() / 255, 1);
 		// this.bmfont.setColor(1, 1, 1, 1);
 		if (this.visible) {
-			SpriteBatch batch = new SpriteBatch();
-			batch.begin();
 			// this.bmfont.draw(batch, this.text, x, y);
 
 			for (String line : this.text.split("\n")) {
 				this.bmfont.draw(batch, line, x, TowerDefense.getHeight() - y);
 				y += this.bmfont.getLineHeight();
 			}
-			batch.end();
 		}
 
 	}

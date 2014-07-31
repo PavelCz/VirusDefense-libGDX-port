@@ -11,6 +11,8 @@ import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
 
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+
 import engine.GameComponent;
 import engine.Level;
 import engine.SoundHandler;
@@ -19,6 +21,7 @@ import engine.TextFileToString;
 public class TowerDefense {
 
 	protected static SoundHandler soundHandler = new SoundHandler();
+	private SpriteBatch batch;
 	public static final int MODE_MENU = 0;
 	public static final int MODE_GAME = 1;
 	public static final int MODE_MAPS = 2;
@@ -46,6 +49,7 @@ public class TowerDefense {
 
 	// @Override
 	public void init(GameContainer container) {
+		this.batch = new SpriteBatch();
 		// container.setShowFPS(false);
 		long time = System.nanoTime();
 		// if (!container.isFullscreen()) {/* "./data/graphics/icons/icon24.png", (this may be necessary for other platforms(mac)) */
@@ -125,7 +129,9 @@ public class TowerDefense {
 
 	// @Override
 	public void render() throws SlickException {
-		this.currentGameComponent.render();
+		this.batch.begin();
+		this.currentGameComponent.render(this.batch);
+		this.batch.end();
 
 	}
 

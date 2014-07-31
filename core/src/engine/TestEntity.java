@@ -1,5 +1,7 @@
 package engine;
 
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+
 import engine.graphics.OwnSprite;
 
 public class TestEntity extends RotatableEntity implements Drawable {
@@ -13,8 +15,8 @@ public class TestEntity extends RotatableEntity implements Drawable {
 	}
 
 	@Override
-	public void draw() {
-		this.sprite.draw(this.x, this.y, 1);
+	public void draw(SpriteBatch batch) {
+		this.sprite.draw(this.x, this.y, 1, batch);
 
 	}
 

@@ -8,7 +8,6 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class OwnSprite extends RenderObject {
-	SpriteBatch batch;
 	Texture img;
 	private Sprite sprite;
 	private String imagePath;
@@ -16,7 +15,6 @@ public class OwnSprite extends RenderObject {
 
 	public OwnSprite(String imagePath) {
 		this.imagePath = imagePath;
-		this.batch = new SpriteBatch();
 		this.img = new Texture("data/graphics/" + imagePath);
 
 		this.sprite = new Sprite(this.img);
@@ -33,16 +31,14 @@ public class OwnSprite extends RenderObject {
 	}
 
 	@Override
-	public void draw(float xCoordinate, float yCoordinate, float globalScale) {
+	public void draw(float xCoordinate, float yCoordinate, float globalScale, SpriteBatch batch) {
 		OrthographicCamera camera = new OrthographicCamera();
 		camera.setToOrtho(false, TowerDefense.getWidth(), TowerDefense.getHeight());
 
-		this.batch.setProjectionMatrix(camera.combined);
-		this.batch.begin();
+		batch.setProjectionMatrix(camera.combined);
 		this.sprite.setScale(this.defaultScale * globalScale);
 		this.sprite.setPosition(xCoordinate, TowerDefense.getHeight() - yCoordinate);
-		this.sprite.draw(this.batch);
-		this.batch.end();
+		this.sprite.draw(batch);
 	}
 
 	public float getWidth() {

@@ -1,6 +1,9 @@
 package engine.projectiles;
 
 import towerDefense.Gameplay;
+
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+
 import engine.Entity;
 import engine.MyVector2f;
 import engine.graphics.RenderObject;
@@ -22,10 +25,10 @@ public abstract class Projectile extends Entity {
 
 	public abstract void update(int delta);
 
-	public void draw() {
+	public void draw(SpriteBatch batch) {
 		this.renderObject.draw((this.x - Gameplay.DEFAULT_SIZE / 2) * Gameplay.CURRENT_GAME_SCALE - Gameplay.getCameraX(),
 				(this.y - Gameplay.DEFAULT_SIZE / 2) * Gameplay.CURRENT_GAME_SCALE - Gameplay.getCameraY(),
-				Gameplay.CURRENT_GAME_SCALE);
+				Gameplay.CURRENT_GAME_SCALE, batch);
 	}
 
 }

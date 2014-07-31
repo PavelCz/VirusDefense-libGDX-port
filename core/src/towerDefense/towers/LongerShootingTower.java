@@ -1,6 +1,9 @@
 package towerDefense.towers;
 
 import towerDefense.Gameplay;
+
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+
 import engine.Enemy;
 import engine.graphics.OwnSprite;
 
@@ -78,8 +81,8 @@ public class LongerShootingTower extends ShootingTower {
 	}
 
 	@Override
-	public void draw() {
-		super.draw();
+	public void draw(SpriteBatch batch) {
+		super.draw(batch);
 		if (this.attacking && this.currentlyAttacking != null) {
 			// this draws the attack "laser" of the tower
 			// this.graphics.setColor(Color.green);

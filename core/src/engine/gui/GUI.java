@@ -1,5 +1,7 @@
 package engine.gui;
 
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+
 public abstract class GUI {
 	protected float x, y;
 
@@ -8,5 +10,5 @@ public abstract class GUI {
 		this.y = y;
 	}
 
-	public abstract void draw();
+	public abstract void draw(SpriteBatch batch);
 }

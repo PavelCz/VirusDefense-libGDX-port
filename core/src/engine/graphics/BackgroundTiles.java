@@ -2,6 +2,8 @@ package engine.graphics;
 
 import towerDefense.Gameplay;
 
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+
 public class BackgroundTiles extends Background {
 	private int horizontalTiles, verticalTiles;
 	private OwnSprite pictureOutOfBounds;
@@ -18,16 +20,16 @@ public class BackgroundTiles extends Background {
 	}
 
 	@Override
-	public void draw() {
+	public void draw(SpriteBatch batch) {
 		// if (this.game != null) {
 		for (int i = 0; i < this.horizontalTiles + 1; ++i) {
 			for (int j = 0; j < this.verticalTiles + 1; ++j) {
 				if (i < this.horizontalTiles && j < this.verticalTiles) {
 					this.picture.draw(i * Gameplay.SIZE - Gameplay.getCameraX(), j * Gameplay.SIZE - Gameplay.getCameraY(),
-							Gameplay.CURRENT_GAME_SCALE);
+							Gameplay.CURRENT_GAME_SCALE, batch);
 				} else {
 					this.pictureOutOfBounds.draw(i * Gameplay.SIZE - Gameplay.getCameraX(), j * Gameplay.SIZE - Gameplay.getCameraY(),
-							Gameplay.CURRENT_GAME_SCALE);
+							Gameplay.CURRENT_GAME_SCALE, batch);
 				}
 			}
 			// }

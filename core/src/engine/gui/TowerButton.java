@@ -1,8 +1,11 @@
 package engine.gui;
 
-import engine.graphics.OwnSprite;
 import towerDefense.Gameplay;
 import towerDefense.towers.Tower;
+
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+
+import engine.graphics.OwnSprite;
 
 public class TowerButton extends Button {
 	private Tower tower;
@@ -16,13 +19,14 @@ public class TowerButton extends Button {
 	}
 
 	@Override
-	public void draw() {
-		super.draw();
+	public void draw(SpriteBatch batch) {
+		super.draw(batch);
 		OwnSprite s = this.tower.getSprite();
 		s.setAlpha(0.8f);
 		float scale = 0.9f;
 		s.draw(this.x + (this.collisionWidth - s.getWidth() * scale) / 2 * Gameplay.GLOBAL_GUI_SCALE, this.y
-				+ (this.collisionHeight - s.getHeight() * scale) / 2 * Gameplay.GLOBAL_GUI_SCALE, scale * Gameplay.GLOBAL_GUI_SCALE);
+				+ (this.collisionHeight - s.getHeight() * scale) / 2 * Gameplay.GLOBAL_GUI_SCALE, scale * Gameplay.GLOBAL_GUI_SCALE,
+				batch);
 	}
 
 	@Override
