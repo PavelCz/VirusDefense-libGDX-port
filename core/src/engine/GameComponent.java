@@ -3,12 +3,7 @@ package engine;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
-
-import com.badlogic.gdx.Gdx;
 
 import towerDefense.Gameplay;
 import towerDefense.TowerDefense;
@@ -42,43 +37,43 @@ public abstract class GameComponent {
 	public void init() throws SlickException {
 	}
 
-	public void update(GameContainer container, int delta) throws SlickException {
-		this.updateClickables(container, delta);
+	public void update(int delta) throws SlickException {
+		this.updateClickables(delta);
 	}
 
-	public void render(GameContainer container, Graphics graphics) throws SlickException {
+	public void render() throws SlickException {
 		if (this.background != null) {
 			this.background.draw();
 		}
 		this.renderGUI();
 	}
 
-	private void updateClickables(GameContainer container, int delta) {
-		Input input = container.getInput();
-		float x = input.getMouseX();
-		float y = input.getMouseY();
-		this.updateHovering(x, y);
-		// GDX if left mouse button is down: Gdx.input.isButtonPressed(com.badlogic.gdx.Input.Buttons.LEFT)
-		// GDX if left mouse button is pressed and released in short succession: Gdx.input.justTouched()
-		if (Gdx.input.justTouched()) {
-			System.out.println("act");
-			this.mouseWasClicked = true;
-			for (Clickable clickable : this.clickables) {
-				clickable.update(x, y, container);
-			}
-
-		} else if (this.mouseWasClicked && !input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
-			this.mouseWasClicked = false;
-			for (Clickable clickable : this.clickables) {
-				if (!clickable.isStayClicked() && clickable.isActive()) {
-					if (clickable.isClicked() && clickable.collides((int) x, (int) y, Gameplay.GLOBAL_GUI_SCALE)) {
-						clickable.onRelease();
-					} else if (clickable.isClicked()) {
-						clickable.setClicked(false);
-					}
-				}
-			}
-		}
+	private void updateClickables(int delta) {
+		// Input input = container.getInput();
+		// float x = input.getMouseX();
+		// float y = input.getMouseY();
+		// this.updateHovering(x, y);
+		// // GDX if left mouse button is down: Gdx.input.isButtonPressed(com.badlogic.gdx.Input.Buttons.LEFT)
+		// // GDX if left mouse button is pressed and released in short succession: Gdx.input.justTouched()
+		// if (Gdx.input.justTouched()) {
+		// System.out.println("act");
+		// this.mouseWasClicked = true;
+		// for (Clickable clickable : this.clickables) {
+		// clickable.update(x, y, container);
+		// }
+		//
+		// } else if (this.mouseWasClicked && !input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
+		// this.mouseWasClicked = false;
+		// for (Clickable clickable : this.clickables) {
+		// if (!clickable.isStayClicked() && clickable.isActive()) {
+		// if (clickable.isClicked() && clickable.collides((int) x, (int) y, Gameplay.GLOBAL_GUI_SCALE)) {
+		// clickable.onRelease();
+		// } else if (clickable.isClicked()) {
+		// clickable.setClicked(false);
+		// }
+		// }
+		// }
+		// }
 	}
 
 	public void updateHovering(float x, float y) {

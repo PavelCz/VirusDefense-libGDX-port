@@ -1,8 +1,6 @@
 package towerDefense;
 
 import org.newdawn.slick.Color;
-import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 
 import com.badlogic.gdx.Gdx;
@@ -70,57 +68,60 @@ public class ChooseLevel extends GameComponent {
 	}
 
 	@Override
-	public void update(GameContainer container, int delta) throws SlickException {
+	public void update(int delta) throws SlickException {
 
-		this.mouseEvents(container, delta);
+		this.mouseEvents(delta);
 		this.button.setUnclickedButton(this.currentLevel.getPreviewPicture());
 		this.button.setClickedButton(this.currentLevel.getPreviewPicture());
 	}
 
-	private void mouseEvents(GameContainer container, int delta) {
-		Input input = container.getInput();
-		float x = input.getMouseX();
-		float y = input.getMouseY();
+	private void mouseEvents(int delta) {
+		// Input input = container.getInput();
+		// float x = input.getMouseX();
+		// float y = input.getMouseY();
+		float x = Gdx.input.getX();
+		float y = Gdx.input.getY();
 		super.updateHovering(x, y);
 		if (Gdx.input.justTouched()) {
 			this.mouseWasClicked = true;
 
 			for (Clickable clickable : this.clickables) {
-				clickable.update(x, y, container);
+				clickable.update(x, y);
 			}
 
-		} else if (this.mouseWasClicked && !input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
-			this.mouseWasClicked = false;
-			for (Clickable clickable : this.clickables) {
-				if (!clickable.isStayClicked()) {
-					if (clickable.isClicked() && clickable.collides((int) x, (int) y, Gameplay.GLOBAL_GUI_SCALE)) {
-						clickable.onRelease();
-						if (clickable == this.left) {
-							--this.page;
-							if (this.page < 0) {
-								this.page = this.lastPage;
-							}
-							this.currentLevel = this.levelHandler.get(this.page);
-							this.currentLevel = this.levelHandler.get(this.page);
-						} else if (clickable == this.right) {
-							this.page += 1;
-							if (this.page > this.lastPage) {
-								this.page = 0;
-							}
-							this.currentLevel = this.levelHandler.get(this.page);
-						} else if (clickable == this.button) {
-
-							this.game.initGameplay(this.currentLevel);
-							// this.game.setLevel(this.currentLevel);
-							this.game.getGameplay().setPlayerName(this.game.getPlayerName());
-							this.game.setMode(TowerDefense.MODE_GAME);
-						}
-					} else if (clickable.isClicked()) {
-						clickable.setClicked(false);
-					}
-				}
-			}
 		}
+		// else if (this.mouseWasClicked && !input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
+		// this.mouseWasClicked = false;
+		// for (Clickable clickable : this.clickables) {
+		// if (!clickable.isStayClicked()) {
+		// if (clickable.isClicked() && clickable.collides((int) x, (int) y, Gameplay.GLOBAL_GUI_SCALE)) {
+		// clickable.onRelease();
+		// if (clickable == this.left) {
+		// --this.page;
+		// if (this.page < 0) {
+		// this.page = this.lastPage;
+		// }
+		// this.currentLevel = this.levelHandler.get(this.page);
+		// this.currentLevel = this.levelHandler.get(this.page);
+		// } else if (clickable == this.right) {
+		// this.page += 1;
+		// if (this.page > this.lastPage) {
+		// this.page = 0;
+		// }
+		// this.currentLevel = this.levelHandler.get(this.page);
+		// } else if (clickable == this.button) {
+		//
+		// this.game.initGameplay(this.currentLevel);
+		// // this.game.setLevel(this.currentLevel);
+		// this.game.getGameplay().setPlayerName(this.game.getPlayerName());
+		// this.game.setMode(TowerDefense.MODE_GAME);
+		// }
+		// } else if (clickable.isClicked()) {
+		// clickable.setClicked(false);
+		// }
+		// }
+		// }
+		// }
 	}
 
 }

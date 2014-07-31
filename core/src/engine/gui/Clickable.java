@@ -1,7 +1,5 @@
 package engine.gui;
 
-import org.newdawn.slick.GameContainer;
-
 import engine.GameComponent;
 import towerDefense.Gameplay;
 import towerDefense.TowerDefense;
@@ -19,7 +17,7 @@ public abstract class Clickable extends GUI {
 		this.stayClicked = stayClicked;
 	}
 
-	public void update(float mouseX, float mouseY, GameContainer container) {
+	public void update(float mouseX, float mouseY) {
 		if (this.active) {
 			if (this.collides((int) mouseX, (int) mouseY, Gameplay.GLOBAL_GUI_SCALE)) {
 				if (this.clicked) {

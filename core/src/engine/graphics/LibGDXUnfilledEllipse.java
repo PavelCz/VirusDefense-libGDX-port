@@ -1,8 +1,6 @@
 package engine.graphics;
 
 import org.newdawn.slick.Color;
-import org.newdawn.slick.Graphics;
-
 import towerDefense.TowerDefense;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -11,16 +9,16 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 
 public class LibGDXUnfilledEllipse extends LibGDXEllipse {
 
-	public LibGDXUnfilledEllipse(Graphics graphics, float width, float height, Color color) {
-		super(graphics, width, height, color);
+	public LibGDXUnfilledEllipse(float width, float height, Color color) {
+		super(width, height, color);
 	}
 
-	public LibGDXUnfilledEllipse(Graphics graphics, float width, float height, float r, float g, float b) {
-		super(graphics, width, height, r, g, b);
+	public LibGDXUnfilledEllipse(float width, float height, float r, float g, float b) {
+		super(width, height, r, g, b);
 	}
 
-	public LibGDXUnfilledEllipse(Graphics graphics, float width, float height) {
-		super(graphics, width, height);
+	public LibGDXUnfilledEllipse(float width, float height) {
+		super(width, height);
 	}
 
 	@Override

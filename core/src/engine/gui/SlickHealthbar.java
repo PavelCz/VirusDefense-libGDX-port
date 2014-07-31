@@ -1,7 +1,5 @@
 package engine.gui;
 
-import org.newdawn.slick.Graphics;
-
 import engine.graphics.SlickTwoColoredBar;
 import towerDefense.Gameplay;
 
@@ -16,14 +14,14 @@ public class SlickHealthbar extends GUI {
 	private int height;
 	private SlickTwoColoredBar bar;
 
-	public SlickHealthbar(Graphics graphics, float x, float y, int maxHealth, int length, int height) {
+	public SlickHealthbar(float x, float y, int maxHealth, int length, int height) {
 		super(x, y);
 		this.maxHealth = maxHealth;
 		this.healthLeft = maxHealth;
 		this.length = length;
 		this.height = height;
 
-		this.bar = new SlickTwoColoredBar(graphics, this.length, this.height);
+		this.bar = new SlickTwoColoredBar(this.length, this.height);
 
 	}
 

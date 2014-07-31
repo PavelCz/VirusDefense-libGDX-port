@@ -1,8 +1,6 @@
 package engine.graphics;
 
 import org.newdawn.slick.Color;
-import org.newdawn.slick.Graphics;
-
 import towerDefense.TowerDefense;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -15,16 +13,16 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
  */
 public class LibGDXEllipse extends LibGDXRectangle {
 
-	public LibGDXEllipse(Graphics graphics, float width, float height, Color color) {
-		super(graphics, width, height, color);
+	public LibGDXEllipse(float width, float height, Color color) {
+		super(width, height, color);
 	}
 
-	public LibGDXEllipse(Graphics graphics, float width, float height) {
-		super(graphics, width, height);
+	public LibGDXEllipse(float width, float height) {
+		super(width, height);
 	}
 
-	public LibGDXEllipse(Graphics graphics, float width, float height, float r, float g, float b) {
-		super(graphics, width, height, r, g, b);
+	public LibGDXEllipse(float width, float height, float r, float g, float b) {
+		super(width, height, r, g, b);
 	}
 
 	@Override

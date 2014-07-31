@@ -78,15 +78,15 @@ public class StartGame extends ApplicationAdapter {
 		System.out.println(width + ", " + height);
 		width = 1024;
 		height = 768;
-		try {
-			this.appGameContainer = new AppGameContainer(this.game, width, height, fullscreen);
-			// appGameContainer.setDisplayMode(width, height, TowerDefense.isFULLSCREEN());
-			// appGameContainer.start();
-			this.game.init(this.appGameContainer);
-		} catch (SlickException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		// try {
+		// this.appGameContainer = new AppGameContainer(this.game, width, height, fullscreen);
+		// appGameContainer.setDisplayMode(width, height, TowerDefense.isFULLSCREEN());
+		// appGameContainer.start();
+		this.game.init(this.appGameContainer);
+		// } catch (SlickException e) {
+		// // TODO Auto-generated catch block
+		// e.printStackTrace();
+		// }
 		// end
 
 		this.shapeRenderer = new ShapeRenderer();
@@ -213,8 +213,8 @@ public class StartGame extends ApplicationAdapter {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		//
 		try {
-			this.game.update(this.appGameContainer, (int) (Gdx.graphics.getDeltaTime() * 1000));
-			this.game.render(this.appGameContainer, this.appGameContainer.getGraphics());
+			this.game.update((int) (Gdx.graphics.getDeltaTime() * 1000));
+			this.game.render();
 
 		} catch (SlickException e) {
 			// TODO Auto-generated catch block

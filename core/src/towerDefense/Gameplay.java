@@ -7,7 +7,6 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 import org.lwjgl.input.Mouse;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 
@@ -29,7 +28,6 @@ import engine.Waypoint;
 import engine.graphics.Background;
 import engine.graphics.LibGDXRectangle;
 import engine.graphics.LibGDXUnfilledEllipse;
-import engine.graphics.LibGDXUnfilledRectangle;
 import engine.graphics.OwnSprite;
 import engine.gui.Clickable;
 import engine.gui.GUI;
@@ -217,15 +215,15 @@ public class Gameplay extends GameComponent {
 	}
 
 	@Override
-	public void render(GameContainer container, Graphics graphics) throws SlickException {
-		super.render(container, graphics);
+	public void render() throws SlickException {
+		super.render();
 		this.drawBackground();
 		this.currentLevel.renderPath();
 		this.renderEnemies();
 		this.renderTowers();
 
-		this.renderTowerShadow(container, graphics);
-		this.renderGUI(container, graphics);
+		this.renderTowerShadow();
+		this.renderGUI();
 
 		for (Projectile projectiles : this.projectiles) {
 			projectiles.draw();
@@ -242,12 +240,12 @@ public class Gameplay extends GameComponent {
 
 	}
 
-	private void renderGUI(GameContainer container, Graphics graphics) {
+	private void renderGUI() {
 		for (GUI guiElement : this.guiElements) {
 			guiElement.draw();
 		}
-		this.renderHealthBars(container, graphics);
-		this.renderDebug(container, graphics);
+		this.renderHealthBars();
+		this.renderDebug();
 
 		if (this.mode == 1) {
 			new OwnSprite("You Win.png").draw(0, 0, Gameplay.CURRENT_GAME_SCALE);
@@ -267,13 +265,14 @@ public class Gameplay extends GameComponent {
 		// }
 	}
 
-	private void renderHealthBars(GameContainer container, Graphics graphics) {
+	private void renderHealthBars() {
 		for (Enemy enemy : this.enemies) {
 			int barLength = 30;
 			int barHeight = 7;
-			SlickHealthbar h = new SlickHealthbar(graphics, (enemy.getX() - barLength / 2) * Gameplay.CURRENT_GAME_SCALE
-					- Gameplay.getCameraX(), (enemy.getY() - Gameplay.DEFAULT_SIZE / 2) * Gameplay.CURRENT_GAME_SCALE
-					- Gameplay.getCameraY(), enemy.getMaxHealth(), barLength, barHeight);
+			SlickHealthbar h = new SlickHealthbar(
+					(enemy.getX() - barLength / 2) * Gameplay.CURRENT_GAME_SCALE - Gameplay.getCameraX(),
+					(enemy.getY() - Gameplay.DEFAULT_SIZE / 2) * Gameplay.CURRENT_GAME_SCALE - Gameplay.getCameraY(),
+					enemy.getMaxHealth(), barLength, barHeight);
 			h.setHealth(enemy.getHealth());
 			h.setBordered(true);
 			h.draw();
@@ -303,24 +302,24 @@ public class Gameplay extends GameComponent {
 	 * @param container
 	 * @param graphics
 	 */
-	private void renderTowerShadow(GameContainer container, Graphics graphics) {
-
-		if (this.currentTower != null && this.getMode() == 0) {
-			OwnSprite sprite = this.currentTower.getSprite().clone();
-
-			if (this.currentTowerPlaceable) {
-				new LibGDXUnfilledRectangle(graphics, SIZE / Gameplay.CURRENT_GAME_SCALE, SIZE / Gameplay.CURRENT_GAME_SCALE,
-						Color.green).draw(this.towerShadowX, this.towerShadowY, Gameplay.CURRENT_GAME_SCALE);
-			} else {
-				new LibGDXUnfilledRectangle(graphics, SIZE / Gameplay.CURRENT_GAME_SCALE, SIZE / Gameplay.CURRENT_GAME_SCALE,
-						Color.red).draw(this.towerShadowX, this.towerShadowY, Gameplay.CURRENT_GAME_SCALE);
-				sprite.setAlpha(0.1f);
-				sprite.setColor(1f, 0, 0);
-
-			}
-
-			sprite.draw(this.towerShadowX, this.towerShadowY, Gameplay.CURRENT_GAME_SCALE);
-		}
+	private void renderTowerShadow() {
+		//
+		// if (this.currentTower != null && this.getMode() == 0) {
+		// OwnSprite sprite = this.currentTower.getSprite().clone();
+		//
+		// if (this.currentTowerPlaceable) {
+		// new LibGDXUnfilledRectangle(graphics, SIZE / Gameplay.CURRENT_GAME_SCALE, SIZE / Gameplay.CURRENT_GAME_SCALE,
+		// Color.green).draw(this.towerShadowX, this.towerShadowY, Gameplay.CURRENT_GAME_SCALE);
+		// } else {
+		// new LibGDXUnfilledRectangle(graphics, SIZE / Gameplay.CURRENT_GAME_SCALE, SIZE / Gameplay.CURRENT_GAME_SCALE,
+		// Color.red).draw(this.towerShadowX, this.towerShadowY, Gameplay.CURRENT_GAME_SCALE);
+		// sprite.setAlpha(0.1f);
+		// sprite.setColor(1f, 0, 0);
+		//
+		// }
+		//
+		// sprite.draw(this.towerShadowX, this.towerShadowY, Gameplay.CURRENT_GAME_SCALE);
+		// }
 	}
 
 	/**
@@ -329,20 +328,20 @@ public class Gameplay extends GameComponent {
 	 * @param container
 	 * @param graphics
 	 */
-	private void renderDebug(GameContainer container, Graphics graphics) {
+	private void renderDebug() {
 		if (this.debugMode) {
 			for (Enemy enemy : this.enemies) {
-				new LibGDXUnfilledEllipse(graphics, enemy.getRadius() * 2, enemy.getRadius() * 2, Color.blue).draw((enemy.getX())
+				new LibGDXUnfilledEllipse(enemy.getRadius() * 2, enemy.getRadius() * 2, Color.blue).draw((enemy.getX())
 						* Gameplay.CURRENT_GAME_SCALE - Gameplay.getCameraX(),
 						(enemy.getY()) * Gameplay.CURRENT_GAME_SCALE - Gameplay.getCameraY(), Gameplay.CURRENT_GAME_SCALE);
 			}
 
 			// create a black box that the FPS are visible
-			new LibGDXRectangle(graphics, 100, 20, Color.black).draw(5, 10, 1f);
+			new LibGDXRectangle(100, 20, Color.black).draw(5, 10, 1f);
 		}
 	}
 
-	@Override
+	// @Override
 	public void update(GameContainer container, int originalDelta) throws SlickException {
 
 		if (originalDelta < 100) {
@@ -527,7 +526,7 @@ public class Gameplay extends GameComponent {
 			if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
 				this.placeTower(input);
 				for (Clickable clickable : this.clickables) {
-					clickable.update(x, y, container);
+					clickable.update(x, y);
 				}
 
 			} else if (input.isMousePressed(Input.MOUSE_RIGHT_BUTTON)) {

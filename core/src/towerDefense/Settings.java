@@ -11,7 +11,6 @@ import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.TrueTypeFont;
@@ -34,7 +33,7 @@ public class Settings extends GameComponent {
 	private Integer[][] resolutions;
 	private final int minWidth = 600, minHeight = 480;
 
-	public Settings(TowerDefense game, GameContainer container) {
+	public Settings(TowerDefense game) {
 		super(game);
 
 		this.back = new SetGameModeButton(0, 0, "Back", this.game, TowerDefense.MODE_MENU);
@@ -130,8 +129,8 @@ public class Settings extends GameComponent {
 	}
 
 	@Override
-	public void render(GameContainer container, Graphics graphics) throws SlickException {
-		super.render(container, graphics);
+	public void render() throws SlickException {
+		super.render();
 		// this.widthField.render(container, graphics);
 		// this.heightField.render(container, graphics);
 		// this.warning.draw();
@@ -139,7 +138,7 @@ public class Settings extends GameComponent {
 		// this.supportedResolutions.draw();
 	}
 
-	@Override
+	// @Override
 	public void update(GameContainer container, int delta) {
 		Input input = container.getInput();
 		float x = input.getMouseX();
@@ -150,7 +149,7 @@ public class Settings extends GameComponent {
 			this.mouseWasClicked = true;
 
 			for (Clickable clickable : this.clickables) {
-				clickable.update(x, y, container);
+				clickable.update(x, y);
 			}
 
 		} else if (this.mouseWasClicked && !input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {

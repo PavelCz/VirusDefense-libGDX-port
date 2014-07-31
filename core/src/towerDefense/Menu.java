@@ -2,8 +2,6 @@ package towerDefense;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import engine.GameComponent;
 import engine.graphics.Background;
@@ -89,19 +87,19 @@ public class Menu extends GameComponent {
 
 	}
 
-	@Override
+	// @Override
 	public void update(GameContainer container, int delta) throws SlickException {
-		super.update(container, delta);
-		Input input = container.getInput();
-		if (input.isKeyPressed(Input.KEY_ENTER)) {
-			// this.t.deactivate();
-		}
+		super.update(delta);
+		// Input input = container.getInput();
+		// if (input.isKeyPressed(Input.KEY_ENTER)) {
+		// // this.t.deactivate();
+		// }
 
 	}
 
 	@Override
-	public void render(GameContainer container, Graphics graphics) throws SlickException {
-		super.render(container, graphics);
+	public void render() throws SlickException {
+		super.render();
 		// this.t.render(container, graphics);
 
 		// this.version.draw();

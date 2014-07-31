@@ -1,8 +1,6 @@
 package engine.graphics;
 
 import org.newdawn.slick.Color;
-import org.newdawn.slick.Graphics;
-
 import towerDefense.TowerDefense;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -15,24 +13,22 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
  */
 public class LibGDXRectangle extends RenderObject {
 	protected Color color;
-	protected Graphics graphics;
 	protected float width;
 	protected float height;
 
-	public LibGDXRectangle(Graphics graphics, float width, float height) {
-		this(graphics, width, height, Color.pink);
+	public LibGDXRectangle(float width, float height) {
+		this(width, height, Color.pink);
 	}
 
-	public LibGDXRectangle(Graphics graphics, float width, float height, float r, float g, float b) {
-		this(graphics, width, height, new Color(r, g, b));
+	public LibGDXRectangle(float width, float height, float r, float g, float b) {
+		this(width, height, new Color(r, g, b));
 
 	}
 
-	public LibGDXRectangle(Graphics graphics, float width, float height, Color color) {
+	public LibGDXRectangle(float width, float height, Color color) {
 		this.width = width;
 		this.height = height;
 		this.color = color;
-		this.graphics = graphics;
 	}
 
 	@Override

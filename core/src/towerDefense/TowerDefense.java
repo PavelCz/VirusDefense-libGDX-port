@@ -7,9 +7,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
-import org.lwjgl.openal.AL;
 import org.newdawn.slick.AppGameContainer;
-import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
@@ -19,7 +17,7 @@ import engine.Level;
 import engine.SoundHandler;
 import engine.TextFileToString;
 
-public class TowerDefense extends BasicGame {
+public class TowerDefense {
 
 	protected static SoundHandler soundHandler = new SoundHandler();
 	public static final int MODE_MENU = 0;
@@ -44,10 +42,10 @@ public class TowerDefense extends BasicGame {
 	private int mode;
 
 	public TowerDefense(boolean applet) {
-		super("Virus Defense");
+		// super("Virus Defense");
 	}
 
-	@Override
+	// @Override
 	public void init(GameContainer container) {
 		// container.setShowFPS(false);
 		long time = System.nanoTime();
@@ -69,16 +67,16 @@ public class TowerDefense extends BasicGame {
 		long passedTime = System.nanoTime() - time;
 		// System.out.println(passedTime / 1000000000.0);
 		AppGameContainer gameContainer = (AppGameContainer) container;
-		try {
-			gameContainer.setDisplayMode(TowerDefense.getWidth(), TowerDefense.getHeight(), TowerDefense.isFULLSCREEN());
-			this.reinitMenu();
-			this.reinitChooseLevel();
-			this.reinitComponents();
-			TowerDefense.updateDimensions();
-		} catch (SlickException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		// try {
+		// gameContainer.setDisplayMode(TowerDefense.getWidth(), TowerDefense.getHeight(), TowerDefense.isFULLSCREEN());
+		this.reinitMenu();
+		this.reinitChooseLevel();
+		this.reinitComponents();
+		TowerDefense.updateDimensions();
+		// } catch (SlickException e) {
+		// TODO Auto-generated catch block
+		// e.printStackTrace();
+		// }
 	}
 
 	private void initSounds() {
@@ -93,12 +91,12 @@ public class TowerDefense extends BasicGame {
 		TowerDefense.soundHandler.addWav("shotT2");
 	}
 
-	@Override
-	public void update(GameContainer container, int delta) throws SlickException {
-		if (this.quitGame) {
-			container.exit();
-			AL.destroy();
-		}
+	// @Override
+	public void update(int delta) throws SlickException {
+		// if (this.quitGame) {
+		// container.exit();
+		// AL.destroy();
+		// }
 		if (this.mode == TowerDefense.MODE_GAME) {
 			this.currentGameComponent = this.gameplay;
 		} else if (this.mode == TowerDefense.MODE_MAPS) {
@@ -107,7 +105,7 @@ public class TowerDefense extends BasicGame {
 		} else if (this.mode == TowerDefense.MODE_SETTINGS) {
 			if (this.currentGameComponent != this.settings) {
 				// this.settings.activate(container);
-				this.settings = new Settings(this, container);
+				this.settings = new Settings(this);
 			}
 			this.currentGameComponent = this.settings;
 		} else if (this.mode == TowerDefense.MODE_MENU) {
@@ -121,13 +119,13 @@ public class TowerDefense extends BasicGame {
 			}
 			this.currentGameComponent = this.scores;
 		}
-		this.currentGameComponent.update(container, delta);
+		this.currentGameComponent.update(delta);
 
 	}
 
-	@Override
-	public void render(GameContainer container, Graphics graphics) throws SlickException {
-		this.currentGameComponent.render(container, graphics);
+	// @Override
+	public void render() throws SlickException {
+		this.currentGameComponent.render();
 
 	}
 
