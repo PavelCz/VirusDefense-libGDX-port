@@ -1,8 +1,8 @@
 package engine;
 
-import org.newdawn.slick.Color;
-import org.newdawn.slick.Image;
-import org.newdawn.slick.SlickException;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Pixmap;
 
 // @formatter:off
 /**
@@ -21,31 +21,29 @@ import org.newdawn.slick.SlickException;
  */
 // @formatter:on
 public class MapLayoutFromImage {
-	private Image image;
 	private Color[][] colors;
 	private int[][] path; // 0 = Pfad, 1 = TowerYes, 2 = TowerNo
 	private Waypoint startingPoint;
 
 	public MapLayoutFromImage(String imagePath) {
 
-		try {
-			this.image = new Image(imagePath);
-		} catch (SlickException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		this.setColorArray();
+		Pixmap pm = new Pixmap(Gdx.files.internal(imagePath));
+		this.setColorArray(pm);
+		pm.dispose();
 		this.setPath();
 		this.setWaypoints();
 
 	}
 
-	private void setColorArray() {
-		this.colors = new Color[this.image.getHeight()][this.image.getWidth()];
+	private void setColorArray(Pixmap pm) {
+		this.colors = new Color[pm.getHeight()][pm.getWidth()];
 		for (int y = 0; y < this.colors.length; ++y) {
 			for (int x = 0; x < this.colors[0].length; ++x) {
-				this.colors[y][x] = this.image.getColor(x, y);
+				// this.colors[y][x] = this.image.getColor(x, y);
+				Color c = new Color();
+				// Color.rgba8888ToColor(c, pm.getPixel(x, y)); this also works
+				c.set(pm.getPixel(x, y));
+				this.colors[y][x] = c;
 			}
 		}
 	}
@@ -140,14 +138,14 @@ public class MapLayoutFromImage {
 	}
 
 	private boolean isRed(Color color) {
-		if (color.getRed() / 255 >= 0.8f && color.getBlue() / 255 <= 0.2f && color.getGreen() / 255 <= 0.2f) {
+		if (color.r >= 0.8f && color.b <= 0.2f && color.g <= 0.2f) {
 			return true;
 		}
 		return false;
 	}
 
 	private boolean isGreen(Color color) {
-		if (color.getRed() / 255 <= 0.2f && color.getBlue() / 255 <= 0.2f && color.getGreen() / 255 >= 0.8f) {
+		if (color.r <= 0.2f && color.b <= 0.2f && color.g >= 0.8f) {
 			return true;
 		}
 		return false;
@@ -155,7 +153,7 @@ public class MapLayoutFromImage {
 	}
 
 	private boolean isWhite(Color color) {
-		if (color.getRed() / 255 >= 0.8f && color.getBlue() / 255 >= 0.8f && color.getGreen() / 255 >= 0.8f) {
+		if (color.r >= 0.8f && color.b >= 0.8f && color.g >= 0.8f) {
 			return true;
 		}
 		return false;
