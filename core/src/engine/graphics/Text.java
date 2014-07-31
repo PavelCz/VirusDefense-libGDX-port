@@ -18,7 +18,6 @@ public class Text extends RenderObject {
 	public Text(int height, String text, Color color, float globalScale) {
 		this.bmfont = new BitmapFont(Gdx.files.internal("arial.fnt"));
 		this.height = this.bmfont.getCapHeight();
-		System.out.println(this.bmfont.getCapHeight());
 		this.setHeight(height);
 		this.text = text;
 		this.color = color;
@@ -38,7 +37,7 @@ public class Text extends RenderObject {
 			// this.bmfont.draw(batch, this.text, x, y);
 
 			for (String line : this.text.split("\n")) {
-				this.bmfont.draw(batch, this.text, x, TowerDefense.getHeight() - y);
+				this.bmfont.draw(batch, line, x, TowerDefense.getHeight() - y);
 				y += this.bmfont.getLineHeight();
 			}
 			batch.end();
