@@ -90,7 +90,7 @@ public class StartGame extends ApplicationAdapter {
 		this.shapeRenderer = new ShapeRenderer();
 		this.batch = new SpriteBatch();
 		this.camera = new OrthographicCamera();
-		this.camera.setToOrtho(false, 800, 480);
+		this.camera.setToOrtho(false, 1024, 768);
 		this.uiCamera = new OrthographicCamera();
 		this.uiCamera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		this.uiCamera.update();
