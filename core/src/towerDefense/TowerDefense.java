@@ -51,17 +51,17 @@ public class TowerDefense extends BasicGame implements MusicListener {
 
 	@Override
 	public void init(GameContainer container) {
-//		container.setShowFPS(false);
+		// container.setShowFPS(false);
 		long time = System.nanoTime();
-//		if (!container.isFullscreen()) {/* "./data/graphics/icons/icon24.png", (this may be necessary for other platforms(mac)) */
-//			String[] icons = { "./data/graphics/icons/icon16.png", "./data/graphics/icons/icon32.png" };
-//			try {
-//				container.setIcons(icons);
-//			} catch (SlickException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//		}
+		// if (!container.isFullscreen()) {/* "./data/graphics/icons/icon24.png", (this may be necessary for other platforms(mac)) */
+		// String[] icons = { "./data/graphics/icons/icon16.png", "./data/graphics/icons/icon32.png" };
+		// try {
+		// container.setIcons(icons);
+		// } catch (SlickException e) {
+		// // TODO Auto-generated catch block
+		// e.printStackTrace();
+		// }
+		// }
 		this.initSounds();
 		TowerDefense.updateDimensions(container);
 		// this.reinitMenu(container);
@@ -73,7 +73,7 @@ public class TowerDefense extends BasicGame implements MusicListener {
 		AppGameContainer gameContainer = (AppGameContainer) container;
 		try {
 			gameContainer.setDisplayMode(TowerDefense.getWidth(), TowerDefense.getHeight(), TowerDefense.isFULLSCREEN());
-			this.reinitMenu(container);
+			this.reinitMenu();
 			this.reinitChooseLevel(container);
 			this.reinitComponents(gameContainer);
 			TowerDefense.updateDimensions(container);
@@ -189,11 +189,11 @@ public class TowerDefense extends BasicGame implements MusicListener {
 		FULLSCREEN = fULLSCREEN;
 	}
 
-	public void reinitMenu(GameContainer container) {
+	public void reinitMenu() {
 
 		this.menu = new Menu(this);
 		try {
-			this.menu.init(container);
+			this.menu.init();
 		} catch (SlickException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -277,7 +277,7 @@ public class TowerDefense extends BasicGame implements MusicListener {
 	public void reinitComponents(GameContainer container) {
 		TowerDefense.updateDimensions(container);
 		// this.gameplay = new Gameplay(this);
-		this.reinitMenu(container);
+		this.reinitMenu();
 		this.reinitChooseLevel(container);
 		// this.settings = new Settings(this, container);
 		this.currentGameComponent = this.menu;

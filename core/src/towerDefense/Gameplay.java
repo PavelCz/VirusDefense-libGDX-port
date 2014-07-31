@@ -88,7 +88,7 @@ public class Gameplay extends GameComponent {
 		super(game);
 		this.currentLevel = level;
 		try {
-			this.init(container);
+			this.init();
 		} catch (SlickException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -96,8 +96,8 @@ public class Gameplay extends GameComponent {
 	}
 
 	@Override
-	public void init(GameContainer container) throws SlickException {
-		super.init(container);
+	public void init() throws SlickException {
+		super.init();
 		this.currentLevel.setGame(this);
 		// container.getInput().clearKeyPressedRecord();
 		this.initDefaults();

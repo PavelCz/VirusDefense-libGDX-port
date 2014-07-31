@@ -28,8 +28,8 @@ public class Menu extends GameComponent {
 	}
 
 	@Override
-	public void init(GameContainer container) throws SlickException {
-		super.init(container);
+	public void init() throws SlickException {
+		super.init();
 
 		this.background = new Background(1f, "viren.jpg", this.game.getGameplay());
 
