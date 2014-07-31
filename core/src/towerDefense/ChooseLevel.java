@@ -89,39 +89,38 @@ public class ChooseLevel extends GameComponent {
 				clickable.update(x, y);
 			}
 
+		} else if (this.mouseWasClicked && !Gdx.input.isButtonPressed(com.badlogic.gdx.Input.Buttons.LEFT)) {
+			this.mouseWasClicked = false;
+			for (Clickable clickable : this.clickables) {
+				if (!clickable.isStayClicked()) {
+					if (clickable.isClicked() && clickable.collides((int) x, (int) y, Gameplay.GLOBAL_GUI_SCALE)) {
+						clickable.onRelease();
+						if (clickable == this.left) {
+							--this.page;
+							if (this.page < 0) {
+								this.page = this.lastPage;
+							}
+							this.currentLevel = this.levelHandler.get(this.page);
+							this.currentLevel = this.levelHandler.get(this.page);
+						} else if (clickable == this.right) {
+							this.page += 1;
+							if (this.page > this.lastPage) {
+								this.page = 0;
+							}
+							this.currentLevel = this.levelHandler.get(this.page);
+						} else if (clickable == this.button) {
+
+							this.game.initGameplay(this.currentLevel);
+							// this.game.setLevel(this.currentLevel);
+							this.game.getGameplay().setPlayerName(this.game.getPlayerName());
+							this.game.setMode(TowerDefense.MODE_GAME);
+						}
+					} else if (clickable.isClicked()) {
+						clickable.setClicked(false);
+					}
+				}
+			}
 		}
-		// else if (this.mouseWasClicked && !input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
-		// this.mouseWasClicked = false;
-		// for (Clickable clickable : this.clickables) {
-		// if (!clickable.isStayClicked()) {
-		// if (clickable.isClicked() && clickable.collides((int) x, (int) y, Gameplay.GLOBAL_GUI_SCALE)) {
-		// clickable.onRelease();
-		// if (clickable == this.left) {
-		// --this.page;
-		// if (this.page < 0) {
-		// this.page = this.lastPage;
-		// }
-		// this.currentLevel = this.levelHandler.get(this.page);
-		// this.currentLevel = this.levelHandler.get(this.page);
-		// } else if (clickable == this.right) {
-		// this.page += 1;
-		// if (this.page > this.lastPage) {
-		// this.page = 0;
-		// }
-		// this.currentLevel = this.levelHandler.get(this.page);
-		// } else if (clickable == this.button) {
-		//
-		// this.game.initGameplay(this.currentLevel);
-		// // this.game.setLevel(this.currentLevel);
-		// this.game.getGameplay().setPlayerName(this.game.getPlayerName());
-		// this.game.setMode(TowerDefense.MODE_GAME);
-		// }
-		// } else if (clickable.isClicked()) {
-		// clickable.setClicked(false);
-		// }
-		// }
-		// }
-		// }
 	}
 
 }
