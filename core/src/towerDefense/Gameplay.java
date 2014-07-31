@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
-import org.lwjgl.input.Mouse;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
@@ -17,6 +16,7 @@ import towerDefense.towers.Tower;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import engine.Camera;
@@ -42,7 +42,7 @@ import engine.projectiles.Projectile;
 /**
  * @author Pavel
  */
-public class Gameplay extends GameComponent {
+public class Gameplay extends GameComponent implements InputProcessor {
 	private static Camera camera;
 	private float height, width;
 	private ConcurrentLinkedQueue<Enemy> enemies;
@@ -86,6 +86,7 @@ public class Gameplay extends GameComponent {
 	//
 	public Gameplay(TowerDefense game, Level level) {
 		super(game);
+		Gdx.input.setInputProcessor(this);
 		this.currentLevel = level;
 		try {
 			this.init();
@@ -438,20 +439,6 @@ public class Gameplay extends GameComponent {
 			this.game.setMode(TowerDefense.MODE_MENU);
 		}
 
-		int mouseWheel = Mouse.getDWheel();
-		if (mouseWheel > 0) { // mouse wheel up
-			Gameplay.CURRENT_GAME_SCALE *= 1.1f;
-			if (Gameplay.CURRENT_GAME_SCALE > 6) {
-				Gameplay.CURRENT_GAME_SCALE = 6f;
-			}
-			Gameplay.SIZE = (int) (Gameplay.DEFAULT_SIZE * Gameplay.CURRENT_GAME_SCALE);
-		} else if (mouseWheel < 0) {// mouse wheel down
-			Gameplay.CURRENT_GAME_SCALE *= 0.9f;
-			if (Gameplay.CURRENT_GAME_SCALE < Gameplay.MAX_GAME_SCALE) {
-				Gameplay.CURRENT_GAME_SCALE = Gameplay.MAX_GAME_SCALE;
-			}
-			Gameplay.SIZE = (int) (Gameplay.DEFAULT_SIZE * Gameplay.CURRENT_GAME_SCALE);
-		}
 		float cameraWidth = Gameplay.INTERFACE_START_X;
 		float cameraHeight = TowerDefense.getHeight();
 		if (Gameplay.getCameraX() < 0) {
@@ -468,20 +455,20 @@ public class Gameplay extends GameComponent {
 
 		float scrollSpeed = 0.5f;
 		float scrollDistance = scrollSpeed * delta;
-		if (Gdx.input.isKeyPressed(com.badlogic.gdx.Input.Keys.LEFT)) {
+		if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
 			Gameplay.camera.addX(-scrollDistance);
 
 		}
 
-		if (Gdx.input.isKeyPressed(com.badlogic.gdx.Input.Keys.RIGHT)) {
+		if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
 			Gameplay.camera.addX(+scrollDistance);
 
 		}
-		if (Gdx.input.isKeyPressed(com.badlogic.gdx.Input.Keys.UP)) {
+		if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
 			Gameplay.camera.addY(-scrollDistance);
 
 		}
-		if (Gdx.input.isKeyPressed(com.badlogic.gdx.Input.Keys.DOWN)) {
+		if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
 			Gameplay.camera.addY(+scrollDistance);
 
 		}
@@ -700,5 +687,66 @@ public class Gameplay extends GameComponent {
 	public void setPlayerName(String playerName) {
 		this.player.setName(playerName);
 		this.playerName.setText("Player: " + this.player.getName());
+	}
+
+	@Override
+	public boolean keyDown(int keycode) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean keyUp(int keycode) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean keyTyped(char character) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean touchDragged(int screenX, int screenY, int pointer) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean mouseMoved(int screenX, int screenY) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean scrolled(int amount) {
+		int mouseWheel = -amount;
+		if (mouseWheel > 0) { // mouse wheel up
+			Gameplay.CURRENT_GAME_SCALE *= 1.1f;
+			if (Gameplay.CURRENT_GAME_SCALE > 6) {
+				Gameplay.CURRENT_GAME_SCALE = 6f;
+			}
+			Gameplay.SIZE = (int) (Gameplay.DEFAULT_SIZE * Gameplay.CURRENT_GAME_SCALE);
+		} else if (mouseWheel < 0) {// mouse wheel down
+			Gameplay.CURRENT_GAME_SCALE *= 0.9f;
+			if (Gameplay.CURRENT_GAME_SCALE < Gameplay.MAX_GAME_SCALE) {
+				Gameplay.CURRENT_GAME_SCALE = Gameplay.MAX_GAME_SCALE;
+			}
+			Gameplay.SIZE = (int) (Gameplay.DEFAULT_SIZE * Gameplay.CURRENT_GAME_SCALE);
+		}
+		return true;
 	}
 }
