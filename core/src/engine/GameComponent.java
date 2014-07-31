@@ -46,10 +46,10 @@ public abstract class GameComponent {
 	}
 
 	public void render(SpriteBatch batch) throws SlickException {
+		System.out.println(1);
 		if (this.background != null) {
 			this.background.draw(batch);
 		}
-		this.renderGUI(batch);
 	}
 
 	private void updateClickables(int delta) {

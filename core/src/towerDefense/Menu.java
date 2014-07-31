@@ -103,6 +103,7 @@ public class Menu extends GameComponent {
 	@Override
 	public void render(SpriteBatch batch) throws SlickException {
 		super.render(batch);
+		super.renderGUI(batch);
 		// this.t.render(container, graphics);
 
 		// this.version.draw();

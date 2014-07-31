@@ -4,6 +4,7 @@ import org.newdawn.slick.Color;
 import org.newdawn.slick.SlickException;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import engine.GameComponent;
 import engine.Level;
@@ -65,6 +66,13 @@ public class ChooseLevel extends GameComponent {
 		this.lastPage = this.levelHandler.getLength() - 1;
 
 		this.lastPage = this.levelHandler.getLength() - 1;
+	}
+
+	@Override
+	public void render(SpriteBatch batch) throws SlickException {
+		super.render(batch);
+
+		super.renderGUI(batch);
 	}
 
 	@Override

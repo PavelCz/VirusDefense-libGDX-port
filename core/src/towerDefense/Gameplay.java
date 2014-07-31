@@ -32,6 +32,7 @@ import engine.graphics.LibGDXRectangle;
 import engine.graphics.LibGDXUnfilledEllipse;
 import engine.graphics.OwnSprite;
 import engine.gui.Clickable;
+import engine.gui.GUI;
 import engine.gui.InterfaceBackground;
 import engine.gui.SlickHealthbar;
 import engine.gui.StaticText;
@@ -219,6 +220,7 @@ public class Gameplay extends GameComponent implements InputProcessor {
 	@Override
 	public void render(SpriteBatch batch) throws SlickException {
 		super.render(batch);
+		System.out.println(2);
 		this.drawBackground(batch);
 		this.currentLevel.renderPath(batch);
 		this.renderEnemies(batch);
@@ -244,7 +246,9 @@ public class Gameplay extends GameComponent implements InputProcessor {
 
 	@Override
 	protected void renderGUI(SpriteBatch batch) {
-		super.renderGUI(batch);
+		for (GUI guiElement : this.guiElements) {
+			guiElement.draw(batch);
+		}
 		this.renderHealthBars(batch);
 		this.renderDebug(batch);
 
