@@ -2,7 +2,6 @@ package engine.graphics;
 
 import towerDefense.TowerDefense;
 
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -32,10 +31,10 @@ public class OwnSprite extends RenderObject {
 
 	@Override
 	public void draw(float xCoordinate, float yCoordinate, float globalScale, SpriteBatch batch) {
-		OrthographicCamera camera = new OrthographicCamera();
-		camera.setToOrtho(false, TowerDefense.getWidth(), TowerDefense.getHeight());
+		// OrthographicCamera camera = new OrthographicCamera();
+		// camera.setToOrtho(false, TowerDefense.getWidth(), TowerDefense.getHeight());
 
-		batch.setProjectionMatrix(camera.combined);
+		// batch.setProjectionMatrix(camera.combined);
 		this.sprite.setScale(this.defaultScale * globalScale);
 		this.sprite.setPosition(xCoordinate, TowerDefense.getHeight() - yCoordinate);
 		this.sprite.draw(batch);
