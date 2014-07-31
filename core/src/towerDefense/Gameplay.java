@@ -515,7 +515,7 @@ public class Gameplay extends GameComponent implements InputProcessor {
 			float y = Gdx.input.getY();
 			// mouse button presses may be wrong, previoulsy in slick it was mouse button pressed wich is equal to justTouched() (here
 			// and below)
-			if (Gdx.input.isButtonPressed(com.badlogic.gdx.Input.Buttons.LEFT)) {
+			if (Gdx.input.justTouched()) {
 				this.placeTower();
 				for (Clickable clickable : this.clickables) {
 					clickable.update(x, y);
