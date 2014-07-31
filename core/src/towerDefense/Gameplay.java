@@ -163,7 +163,7 @@ public class Gameplay extends GameComponent implements InputProcessor {
 	}
 
 	private void initGUI() {
-		this.guiElements.add(this.interfaceBackground);
+
 		float guiTileSize = 64 * Gameplay.GLOBAL_GUI_SCALE;
 		float textHeight = 20 * Gameplay.GLOBAL_GUI_SCALE;
 		float guiX = 3 * Gameplay.GLOBAL_GUI_SCALE;
@@ -205,6 +205,7 @@ public class Gameplay extends GameComponent implements InputProcessor {
 		this.passedTime = new StaticText(Gameplay.INTERFACE_START_X + guiX, TowerDefense.getHeight() - textHeight, Color.white,
 				this.passedTimeToString());
 
+		this.guiElements.add(this.interfaceBackground);
 		this.guiElements.add(this.towerButton1);
 		this.guiElements.add(this.towerButton2);
 		this.guiElements.add(this.towerButton3);
