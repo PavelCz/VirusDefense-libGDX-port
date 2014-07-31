@@ -1,8 +1,5 @@
 package towerDefense.towers;
 
-import org.newdawn.slick.Color;
-import org.newdawn.slick.Graphics;
-
 import towerDefense.Gameplay;
 import engine.Enemy;
 import engine.graphics.OwnSprite;
@@ -10,17 +7,17 @@ import engine.graphics.OwnSprite;
 public class LongerShootingTower extends ShootingTower {
 	private final int shootingDuration;
 	private Enemy currentlyAttacking = null;
-	private Graphics graphics;
+	// private Graphics graphics;
 	private boolean attacking;
 
 	public LongerShootingTower(float x, float y, OwnSprite sprite, Gameplay game, float shootingInterval, float damage,
-			int shootingDuration, Graphics graphics) {
+			int shootingDuration/* , Graphics graphics */) {
 		super(x, y, sprite, game, shootingInterval, damage);
 		this.attacking = false;
 		this.shootingDuration = shootingDuration;
 		this.delta = 0;
 		this.name = "Erythrozyt";
-		this.graphics = graphics;
+		// this.graphics = graphics;
 	}
 
 	@Override
@@ -60,7 +57,7 @@ public class LongerShootingTower extends ShootingTower {
 	@Override
 	public Tower clone() {
 		return new LongerShootingTower(this.x, this.y, this.sprite.clone(), this.game, this.shootingInterval, this.damage,
-				this.shootingDuration, this.graphics);
+				this.shootingDuration/* , this.graphics */);
 	}
 
 	protected void shootAt(Enemy enemy) {
@@ -84,13 +81,14 @@ public class LongerShootingTower extends ShootingTower {
 	public void draw() {
 		super.draw();
 		if (this.attacking && this.currentlyAttacking != null) {
-			this.graphics.setColor(Color.green);
-			this.graphics.drawLine((this.x * Gameplay.DEFAULT_SIZE + Gameplay.DEFAULT_SIZE / 2) * Gameplay.CURRENT_GAME_SCALE
-					- Gameplay.getCameraX(), (this.y * Gameplay.DEFAULT_SIZE + Gameplay.DEFAULT_SIZE / 2)
-					* Gameplay.CURRENT_GAME_SCALE - Gameplay.getCameraY(), (this.currentlyAttacking.getX())
-					* Gameplay.CURRENT_GAME_SCALE - Gameplay.getCameraX(), (this.currentlyAttacking.getY())
-					* Gameplay.CURRENT_GAME_SCALE - Gameplay.getCameraY());
-			this.graphics.setColor(Color.white);
+			// this draws the attack "laser" of the tower
+			// this.graphics.setColor(Color.green);
+			// this.graphics.drawLine((this.x * Gameplay.DEFAULT_SIZE + Gameplay.DEFAULT_SIZE / 2) * Gameplay.CURRENT_GAME_SCALE
+			// - Gameplay.getCameraX(), (this.y * Gameplay.DEFAULT_SIZE + Gameplay.DEFAULT_SIZE / 2)
+			// * Gameplay.CURRENT_GAME_SCALE - Gameplay.getCameraY(), (this.currentlyAttacking.getX())
+			// * Gameplay.CURRENT_GAME_SCALE - Gameplay.getCameraX(), (this.currentlyAttacking.getY())
+			// * Gameplay.CURRENT_GAME_SCALE - Gameplay.getCameraY());
+			// this.graphics.setColor(Color.white);
 		}
 
 	}

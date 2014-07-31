@@ -99,7 +99,7 @@ public class Gameplay extends GameComponent {
 	public void init(GameContainer container) throws SlickException {
 		super.init(container);
 		this.currentLevel.setGame(this);
-		container.getInput().clearKeyPressedRecord();
+		// container.getInput().clearKeyPressedRecord();
 		this.initDefaults();
 		Gameplay.camera = new Camera(0, 0, this);
 		// this.currentMapLayout = new MapLayout("maps/map.png", "veins/bg.png",
@@ -130,7 +130,7 @@ public class Gameplay extends GameComponent {
 		// Buttons; this has nothing to do with the draw sequence
 		this.towerButton1 = new TowerButton(Gameplay.INTERFACE_START_X, 4 * 64 * Gameplay.GLOBAL_GUI_SCALE + offset,
 				"buttons/PSButton1.png", "buttons/PSButton1_click.png", new LongerShootingTower(0, 0, new OwnSprite(
-						"tower/Tower2.png", 0.5f), this, 400, 0.16f, 400, container.getGraphics()), this);
+						"tower/Tower2.png", 0.5f), this, 400, 0.16f, 400/* , container.getGraphics() */), this);
 		this.towerButton2 = new TowerButton(Gameplay.INTERFACE_START_X, 5 * 64 * Gameplay.GLOBAL_GUI_SCALE + offset,
 				"buttons/PSButton1.png", "buttons/PSButton1_click.png", new BombTower(0, 0, new OwnSprite("tower/t1n.png", 0.5f),
 						this, 1500, 15f, 50), this);
@@ -147,7 +147,7 @@ public class Gameplay extends GameComponent {
 
 		//
 		this.initGUI();
-		container.setShowFPS(this.debugMode);
+		// container.setShowFPS(this.debugMode);
 
 	}
 
@@ -312,8 +312,8 @@ public class Gameplay extends GameComponent {
 				new LibGDXUnfilledRectangle(graphics, SIZE / Gameplay.CURRENT_GAME_SCALE, SIZE / Gameplay.CURRENT_GAME_SCALE,
 						Color.green).draw(this.towerShadowX, this.towerShadowY, Gameplay.CURRENT_GAME_SCALE);
 			} else {
-				new LibGDXUnfilledRectangle(graphics, SIZE / Gameplay.CURRENT_GAME_SCALE, SIZE / Gameplay.CURRENT_GAME_SCALE, Color.red)
-						.draw(this.towerShadowX, this.towerShadowY, Gameplay.CURRENT_GAME_SCALE);
+				new LibGDXUnfilledRectangle(graphics, SIZE / Gameplay.CURRENT_GAME_SCALE, SIZE / Gameplay.CURRENT_GAME_SCALE,
+						Color.red).draw(this.towerShadowX, this.towerShadowY, Gameplay.CURRENT_GAME_SCALE);
 				sprite.setAlpha(0.1f);
 				sprite.setColor(1f, 0, 0);
 
