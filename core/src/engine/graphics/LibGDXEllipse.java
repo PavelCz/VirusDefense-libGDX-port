@@ -29,6 +29,7 @@ public class LibGDXEllipse extends LibGDXRectangle {
 
 	@Override
 	public void draw(float x, float y, float globalScale, SpriteBatch batch) {
+		batch.end();
 		// this.graphics.fill(new Ellipse(x, y, this.width / 2 * globalScale, this.height / 2 * globalScale), new GradientFill(0, 0,
 		// this.color, this.width / 2 * globalScale, this.height / 2 * globalScale, this.color));
 		OrthographicCamera camera = new OrthographicCamera();
@@ -41,6 +42,7 @@ public class LibGDXEllipse extends LibGDXRectangle {
 		shapeRenderer.circle(x, TowerDefense.getHeight() - y, this.width / 2 * globalScale);
 		// shapeRenderer.circle(x, y, radius);
 		shapeRenderer.end();
+		batch.begin();
 	}
 
 }

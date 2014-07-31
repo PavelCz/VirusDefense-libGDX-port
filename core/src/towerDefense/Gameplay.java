@@ -251,7 +251,6 @@ public class Gameplay extends GameComponent implements InputProcessor {
 	protected void renderGUI(SpriteBatch batch) {
 
 		super.renderGUI(batch);
-		new OwnSprite("enemy/v1n.png").draw(0, 00, 1f, batch);
 		this.renderHealthBars(batch);
 		this.renderDebug(batch);
 

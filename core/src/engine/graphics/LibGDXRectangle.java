@@ -34,6 +34,7 @@ public class LibGDXRectangle extends RenderObject {
 
 	@Override
 	public void draw(float x, float y, float globalScale, SpriteBatch batch) {
+		batch.end();
 		// this.graphics.fill(new Rectangle(x, y, this.width * globalScale, this.height * globalScale), new GradientFill(0, 0,
 		// this.color, this.width * globalScale, this.height * globalScale, this.color));
 		// OrthographicCamera camera = new OrthographicCamera();
@@ -46,6 +47,7 @@ public class LibGDXRectangle extends RenderObject {
 		shapeRenderer.rect(x, TowerDefense.getHeight() - y, this.width * globalScale, this.height * globalScale);
 		// shapeRenderer.circle(x, y, radius);
 		shapeRenderer.end();
+		batch.begin();
 	}
 
 	public void setWidth(float width) {

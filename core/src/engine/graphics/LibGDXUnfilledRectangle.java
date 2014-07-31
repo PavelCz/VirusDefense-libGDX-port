@@ -29,6 +29,7 @@ public class LibGDXUnfilledRectangle extends LibGDXRectangle {
 
 	@Override
 	public void draw(float x, float y, float globalScale, SpriteBatch batch) {
+		batch.end();
 		// this.graphics.draw(new Rectangle(x, y, this.width * globalScale, this.height * globalScale), new GradientFill(0, 0,
 		// this.color, this.width * globalScale, this.height * globalScale, this.color));
 		OrthographicCamera camera = new OrthographicCamera();
@@ -41,6 +42,7 @@ public class LibGDXUnfilledRectangle extends LibGDXRectangle {
 		shapeRenderer.rect(x, TowerDefense.getHeight() - y, this.width * globalScale, this.height * globalScale);
 		// shapeRenderer.circle(x, y, radius);
 		shapeRenderer.end();
+		batch.begin();
 	}
 
 }
