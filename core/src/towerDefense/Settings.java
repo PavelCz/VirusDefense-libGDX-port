@@ -9,15 +9,12 @@ import java.util.List;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
-import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.TrueTypeFont;
-import org.newdawn.slick.gui.TextField;
-
 import engine.GameComponent;
 import engine.gui.Clickable;
 import engine.gui.ClickableText;
@@ -26,8 +23,8 @@ import engine.gui.StaticText;
 
 public class Settings extends GameComponent {
 
-	private TextField widthField;
-	private TextField heightField;
+	// private TextField widthField;
+	// private TextField heightField;
 	private ClickableText apply;
 	private StaticText warning;
 	private SetGameModeButton back;
@@ -51,20 +48,20 @@ public class Settings extends GameComponent {
 		int fieldsX = 0;
 		int fieldsY = 100;
 		int fieldWidth = 50;
-		this.widthField = new TextField(container, ttt, fieldsX, fieldsY, fieldWidth, 25);
-		this.widthField.setText(TowerDefense.getWidth() + "");
-		this.widthField.setBorderColor(Color.gray);
-		this.widthField.setBackgroundColor(Color.lightGray);
-		this.widthField.setMaxLength(4);
-		this.widthField.setCursorPos(this.widthField.getWidth());
+		// this.widthField = new TextField(container, ttt, fieldsX, fieldsY, fieldWidth, 25);
+		// this.widthField.setText(TowerDefense.getWidth() + "");
+		// this.widthField.setBorderColor(Color.gray);
+		// this.widthField.setBackgroundColor(Color.lightGray);
+		// this.widthField.setMaxLength(4);
+		// this.widthField.setCursorPos(this.widthField.getWidth());
 		fieldsX += fieldWidth;
 
-		this.heightField = new TextField(container, ttt, fieldsX, fieldsY, fieldWidth, 25);
-		this.heightField.setText(TowerDefense.getHeight() + "");
-		this.heightField.setBorderColor(Color.gray);
-		this.heightField.setBackgroundColor(Color.lightGray);
-		this.heightField.setMaxLength(4);
-		this.heightField.setCursorPos(this.heightField.getWidth());
+		// this.heightField = new TextField(container, ttt, fieldsX, fieldsY, fieldWidth, 25);
+		// this.heightField.setText(TowerDefense.getHeight() + "");
+		// this.heightField.setBorderColor(Color.gray);
+		// this.heightField.setBackgroundColor(Color.lightGray);
+		// this.heightField.setMaxLength(4);
+		// this.heightField.setCursorPos(this.heightField.getWidth());
 		fieldsX += fieldWidth + 5;
 
 		this.apply = new ClickableText(fieldsX, fieldsY, "Apply", Gameplay.GLOBAL_GUI_SCALE, game.getGameplay(), false);
@@ -78,7 +75,7 @@ public class Settings extends GameComponent {
 		this.warning.setVisible(false);
 		this.guiElements.add(this.warning);
 		fieldsX = 0;
-		fieldsY += this.widthField.getHeight();
+		// fieldsY += this.widthField.getHeight();
 		this.fullscreen = new ClickableText(fieldsX, fieldsY, "Toggle fullscreen", Gameplay.GLOBAL_GUI_SCALE, game.getGameplay(),
 				false);
 		this.fullscreen.setColor(Color.black);
@@ -135,8 +132,8 @@ public class Settings extends GameComponent {
 	@Override
 	public void render(GameContainer container, Graphics graphics) throws SlickException {
 		super.render(container, graphics);
-		this.widthField.render(container, graphics);
-		this.heightField.render(container, graphics);
+		// this.widthField.render(container, graphics);
+		// this.heightField.render(container, graphics);
 		// this.warning.draw();
 		// this.fullscreen.draw();
 		// this.supportedResolutions.draw();
@@ -169,8 +166,8 @@ public class Settings extends GameComponent {
 						}
 						for (int i = 0; i < this.resolutions.length; ++i) {
 							if (this.resolutionClickables[i] == clickable) {
-								this.widthField.setText(this.resolutions[i][0].toString());
-								this.heightField.setText(this.resolutions[i][1].toString());
+								// this.widthField.setText(this.resolutions[i][0].toString());
+								// this.heightField.setText(this.resolutions[i][1].toString());
 							}
 						}
 
@@ -182,17 +179,17 @@ public class Settings extends GameComponent {
 			}
 		}
 		if (input.isKeyPressed(Input.KEY_TAB)) {
-			if (this.widthField.hasFocus()) {
-				this.widthField.setFocus(false);
-				this.heightField.setFocus(true);
-			}
+			// if (this.widthField.hasFocus()) {
+			// this.widthField.setFocus(false);
+			// this.heightField.setFocus(true);
+			// }
 		}
 
 	}
 
 	public void updateFullscreenButton(GameContainer container, int delta) {
-		this.widthField.setFocus(false);
-		this.heightField.setFocus(false);
+		// this.widthField.setFocus(false);
+		// this.heightField.setFocus(false);
 		if (TowerDefense.isFULLSCREEN()) {
 			try {
 				container.setFullscreen(false);
@@ -220,39 +217,39 @@ public class Settings extends GameComponent {
 	public void updateApplyButton(GameContainer container, int delta) {
 		// this.widthField.setFocus(false);
 		// this.heightField.setFocus(false);
-		String newWidthString = this.widthField.getText();
-		String newHeightString = this.heightField.getText();
-		try {
-			int newWidth = Integer.parseInt(newWidthString);
-			int newHeight = Integer.parseInt(newHeightString);
-			this.warning.setVisible(false);
-			if (newWidth >= this.minWidth && newHeight >= this.minHeight) {
-
-				try {
-					AppGameContainer gameContainer = (AppGameContainer) container;
-					gameContainer.setDisplayMode(newWidth, newHeight, TowerDefense.isFULLSCREEN());
-					TowerDefense.updateDimensions(container);
-					TowerDefense.writeSettingsToFile();
-					this.back.setX(0);
-					this.back.setY(TowerDefense.getHeight() - this.back.getTextHeight() * 2);
-					this.game.reinitMenu(container);
-					this.game.reinitChooseLevel(container);
-					this.game.reinitComponents(gameContainer);
-					this.updateResolutionsPosition();
-				} catch (SlickException e) {
-					this.warning.setText("Not a supported fullscreen resolution.");
-					this.warning.setVisible(true);
-				}
-
-			} else {
-				this.warning.setText("Minimum is " + this.minWidth + " x " + this.minHeight);
-				this.warning.setVisible(true);
-			}
-
-		} catch (NumberFormatException nfe) {
-			this.warning.setText("Please enter a number.");
-			this.warning.setVisible(true);
-		}
+		// String newWidthString = this.widthField.getText();
+		// String newHeightString = this.heightField.getText();
+		// try {
+		// int newWidth = Integer.parseInt(newWidthString);
+		// int newHeight = Integer.parseInt(newHeightString);
+		// this.warning.setVisible(false);
+		// if (newWidth >= this.minWidth && newHeight >= this.minHeight) {
+		//
+		// try {
+		// AppGameContainer gameContainer = (AppGameContainer) container;
+		// gameContainer.setDisplayMode(newWidth, newHeight, TowerDefense.isFULLSCREEN());
+		// TowerDefense.updateDimensions(container);
+		// TowerDefense.writeSettingsToFile();
+		// this.back.setX(0);
+		// this.back.setY(TowerDefense.getHeight() - this.back.getTextHeight() * 2);
+		// this.game.reinitMenu(container);
+		// this.game.reinitChooseLevel(container);
+		// this.game.reinitComponents(gameContainer);
+		// this.updateResolutionsPosition();
+		// } catch (SlickException e) {
+		// this.warning.setText("Not a supported fullscreen resolution.");
+		// this.warning.setVisible(true);
+		// }
+		//
+		// } else {
+		// this.warning.setText("Minimum is " + this.minWidth + " x " + this.minHeight);
+		// this.warning.setVisible(true);
+		// }
+		//
+		// } catch (NumberFormatException nfe) {
+		// this.warning.setText("Please enter a number.");
+		// this.warning.setVisible(true);
+		// }
 	}
 
 	public void deactivate() {
@@ -262,13 +259,13 @@ public class Settings extends GameComponent {
 
 	public void activate(GameContainer container) {
 		// this.widthField = new TextField(container, new TrueTypeFont(new Font("Verdana", Font.PLAIN, 15), true), 0, 100, 50, 25);
-		this.widthField.setText(TowerDefense.getWidth() + "");
+		// this.widthField.setText(TowerDefense.getWidth() + "");
 		// this.widthField.setBorderColor(Color.gray);
 		// this.widthField.setBackgroundColor(Color.lightGray);
 		// this.widthField.setMaxLength(5);
 		//
 		// this.heightField = new TextField(container, new TrueTypeFont(new Font("Verdana", Font.PLAIN, 15), true), 50, 100, 50, 25);
-		this.heightField.setText(TowerDefense.getHeight() + "");
+		// this.heightField.setText(TowerDefense.getHeight() + "");
 		// this.heightField.setBorderColor(Color.gray);
 		// this.heightField.setBackgroundColor(Color.lightGray);
 		// this.heightField.setMaxLength(5);

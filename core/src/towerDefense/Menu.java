@@ -1,15 +1,10 @@
 package towerDefense;
 
-import java.awt.Font;
-
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.TrueTypeFont;
-import org.newdawn.slick.gui.TextField;
-
 import engine.GameComponent;
 import engine.graphics.Background;
 import engine.gui.ExitClickable;
@@ -20,7 +15,7 @@ import engine.gui.StaticText;
 
 public class Menu extends GameComponent {
 
-	private TextField t;
+	// private TextField t;
 	// private StaticText version = new StaticText(0, 0, 10, Color.white, "v0.6");
 	private StaticText lostWonMessage;
 	private StartClickable startButton;
@@ -84,13 +79,13 @@ public class Menu extends GameComponent {
 		e.setY(y);
 		y += this.startButton.getTextHeight() + 1;
 
-		this.t = new TextField(container, new TrueTypeFont(new Font("Verdana", Font.PLAIN, 15), true), 0, 0, 75, 25);
-		this.t.setText("Player");
-		this.t.setBorderColor(Color.gray);
-		this.t.setBackgroundColor(Color.lightGray);
-		this.t.setMaxLength(32);
-		this.t.setLocation(TowerDefense.getWidth() / 2 - this.t.getWidth() / 2, y);
-		this.t.setCursorPos(6);
+		// this.t = new TextField(container, new TrueTypeFont(new Font("Verdana", Font.PLAIN, 15), true), 0, 0, 75, 25);
+		// this.t.setText("Player");
+		// this.t.setBorderColor(Color.gray);
+		// this.t.setBackgroundColor(Color.lightGray);
+		// this.t.setMaxLength(32);
+		// this.t.setLocation(TowerDefense.getWidth() / 2 - this.t.getWidth() / 2, y);
+		// this.t.setCursorPos(6);
 
 	}
 
@@ -113,7 +108,8 @@ public class Menu extends GameComponent {
 	}
 
 	public String getPlayerName() {
-		return this.t.getText();
+		// return this.t.getText();
+		return "";
 	}
 
 	public void setLost(int score, String name) {
