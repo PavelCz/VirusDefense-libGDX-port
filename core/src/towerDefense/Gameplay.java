@@ -7,7 +7,6 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 import org.lwjgl.input.Mouse;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 
 import towerDefense.towers.BombTower;
@@ -17,6 +16,7 @@ import towerDefense.towers.RocketTower;
 import towerDefense.towers.Tower;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import engine.Camera;
@@ -370,7 +370,7 @@ public class Gameplay extends GameComponent {
 		}
 		this.updateTowerShadow();
 		this.mouseEvents(delta);
-		// this.keyboardEvents(container, delta);
+		this.keyboardEvents(delta);
 
 		if (this.player.getLives() <= 0) {
 			TowerDefense.writeScoreToFile(this.game.getGameplay().getPlayer().getName(), this.game.getGameplay().getPlayer()
@@ -420,8 +420,7 @@ public class Gameplay extends GameComponent {
 	 * @param container
 	 * @param delta
 	 */
-	private void keyboardEvents(GameContainer container, int delta) {
-		Input input = container.getInput();
+	private void keyboardEvents(int delta) {
 
 		// if (input.isKeyPressed(Input.KEY_I)) {
 		// this.debugMode = !this.debugMode;
@@ -434,7 +433,7 @@ public class Gameplay extends GameComponent {
 		// this.speed = 1f;
 		// }
 		// }
-		if (input.isKeyPressed(Input.KEY_ESCAPE)) {
+		if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
 			this.game.getMenu().setPauseMenu();
 			this.game.setMode(TowerDefense.MODE_MENU);
 		}
@@ -500,16 +499,16 @@ public class Gameplay extends GameComponent {
 	 * @param delta
 	 */
 	private void debugKeyboardEvents(GameContainer container, int delta) {
-		Input input = container.getInput();
-		if (input.isKeyPressed(Input.KEY_ADD)) {
-			this.speed *= 2f;
-		}
-		if (input.isKeyPressed(Input.KEY_SUBTRACT)) {
-			this.speed /= 2f;
-		}
-		if (input.isKeyPressed(Input.KEY_L)) {
-			this.enemies.add(this.getEnemyTypes().createEnemy(0));
-		}
+		// Input input = container.getInput();
+		// if (input.isKeyPressed(Input.KEY_ADD)) {
+		// this.speed *= 2f;
+		// }
+		// if (input.isKeyPressed(Input.KEY_SUBTRACT)) {
+		// this.speed /= 2f;
+		// }
+		// if (input.isKeyPressed(Input.KEY_L)) {
+		// this.enemies.add(this.getEnemyTypes().createEnemy(0));
+		// }
 	}
 
 	/**
