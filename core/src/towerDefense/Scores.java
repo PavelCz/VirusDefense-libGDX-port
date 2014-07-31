@@ -3,6 +3,7 @@ package towerDefense;
 import java.util.List;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import engine.GameComponent;
 import engine.TextFileToString;
@@ -38,5 +39,11 @@ public class Scores extends GameComponent {
 		scores.setColor(Color.BLACK);
 		this.guiElements.add(scores);
 
+	}
+
+	@Override
+	public void render(SpriteBatch batch) {
+		super.render(batch);
+		super.renderGUI(batch);
 	}
 }
