@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 public class SlickTwoColoredBar extends RenderObject {
 	private LibGDXRectangle base;
 	private LibGDXRectangle health;
+	LibGDXUnfilledRectangle border;
 	private float length;
 	private float height;
 	private float length2;
@@ -16,7 +17,7 @@ public class SlickTwoColoredBar extends RenderObject {
 	public SlickTwoColoredBar(float length, float height) {
 		this.length = length;
 		this.height = height;
-
+		this.border = new LibGDXUnfilledRectangle(this.length, this.height, Color.black);
 		this.base = new LibGDXRectangle((int) this.length, (int) this.height, Color.red);
 		this.health = new LibGDXRectangle((int) this.length, (int) this.height, Color.green);
 
@@ -29,8 +30,8 @@ public class SlickTwoColoredBar extends RenderObject {
 		this.health.setWidth(this.length2);
 		this.health.draw(x, y, globalScale, batch);
 		if (this.bordered) {
-			new LibGDXUnfilledRectangle(this.length, this.height, Color.black).draw(x, y, globalScale, batch);
-			;
+			this.border.draw(x, y, globalScale, batch);
+
 		}
 
 	}
@@ -42,4 +43,5 @@ public class SlickTwoColoredBar extends RenderObject {
 	public void setFractionLeft(float fraction) {
 		this.length2 = this.length * fraction;
 	}
+
 }

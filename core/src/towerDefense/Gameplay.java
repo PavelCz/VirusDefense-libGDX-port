@@ -42,6 +42,7 @@ import engine.projectiles.Projectile;
  * @author Pavel
  */
 public class Gameplay extends GameComponent implements InputProcessor {
+	private SlickHealthbar h;
 	private static Camera camera;
 	private float height, width;
 	private ConcurrentLinkedQueue<Enemy> enemies;
@@ -98,6 +99,7 @@ public class Gameplay extends GameComponent implements InputProcessor {
 	@Override
 	public void init() throws SlickException {
 		super.init();
+		this.h = new SlickHealthbar(0, 0, 0, 30, 7);
 		this.currentLevel.setGame(this);
 		// container.getInput().clearKeyPressedRecord();
 		this.initDefaults();
@@ -222,10 +224,12 @@ public class Gameplay extends GameComponent implements InputProcessor {
 		super.render(batch);
 		this.drawBackground(batch);
 		this.currentLevel.renderPath(batch);
+
 		this.renderEnemies(batch);
 		this.renderTowers(batch);
 
 		this.renderTowerShadow(batch);
+
 		this.renderGUI(batch);
 
 		for (Projectile projectiles : this.projectiles) {
@@ -245,7 +249,9 @@ public class Gameplay extends GameComponent implements InputProcessor {
 
 	@Override
 	protected void renderGUI(SpriteBatch batch) {
+
 		super.renderGUI(batch);
+		new OwnSprite("enemy/v1n.png").draw(0, 00, 1f, batch);
 		this.renderHealthBars(batch);
 		this.renderDebug(batch);
 
@@ -268,16 +274,16 @@ public class Gameplay extends GameComponent implements InputProcessor {
 	}
 
 	private void renderHealthBars(SpriteBatch batch) {
+
 		for (Enemy enemy : this.enemies) {
 			int barLength = 30;
 			int barHeight = 7;
-			SlickHealthbar h = new SlickHealthbar(
-					(enemy.getX() - barLength / 2) * Gameplay.CURRENT_GAME_SCALE - Gameplay.getCameraX(),
-					(enemy.getY() - Gameplay.DEFAULT_SIZE / 2) * Gameplay.CURRENT_GAME_SCALE - Gameplay.getCameraY(),
-					enemy.getMaxHealth(), barLength, barHeight);
-			h.setHealth(enemy.getHealth());
-			h.setBordered(true);
-			h.draw(batch);
+			this.h.setX((enemy.getX() - barLength / 2) * Gameplay.CURRENT_GAME_SCALE - Gameplay.getCameraX());
+			this.h.setY((enemy.getY() - Gameplay.DEFAULT_SIZE / 2) * Gameplay.CURRENT_GAME_SCALE - Gameplay.getCameraY());
+			this.h.setMaxHealth(enemy.getMaxHealth());
+			this.h.setHealth(enemy.getHealth());
+			this.h.setBordered(true);
+			this.h.draw(batch);
 		}
 	}
 

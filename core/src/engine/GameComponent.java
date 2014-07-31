@@ -36,6 +36,7 @@ public abstract class GameComponent {
 		for (GUI guiElement : this.guiElements) {
 			guiElement.draw(batch);
 		}
+
 	}
 
 	public void init() throws SlickException {

@@ -54,4 +54,18 @@ public class SlickHealthbar extends GUI {
 		return "(" + this.x + ", " + this.y + ")";
 	}
 
+	public void setX(float f) {
+		this.x = f;
+
+	}
+
+	public void setY(float f) {
+		this.y = f;
+
+	}
+
+	public void setMaxHealth(int f) {
+		this.maxHealth = f;
+	}
+
 }
