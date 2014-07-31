@@ -90,9 +90,9 @@ public class StartGame extends ApplicationAdapter {
 		this.batch = new SpriteBatch();
 		this.camera = new OrthographicCamera();
 		this.camera.setToOrtho(false, 1024, 768);
-		this.uiCamera = new OrthographicCamera();
-		this.uiCamera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-		this.uiCamera.update();
+		// this.uiCamera = new OrthographicCamera();
+		// this.uiCamera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+		// this.uiCamera.update();
 
 		// this.font = new BitmapFont(Gdx.files.internal("arial.fnt"));
 
