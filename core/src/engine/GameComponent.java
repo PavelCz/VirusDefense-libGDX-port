@@ -32,7 +32,7 @@ public abstract class GameComponent {
 		this.clickables = new ArrayList<Clickable>();
 	}
 
-	private void renderGUI(SpriteBatch batch) {
+	protected void renderGUI(SpriteBatch batch) {
 		for (GUI guiElement : this.guiElements) {
 			guiElement.draw(batch);
 		}
