@@ -132,7 +132,7 @@ public class Settings extends GameComponent {
 	}
 
 	@Override
-	public void render(SpriteBatch batch) throws SlickException {
+	public void render(SpriteBatch batch) {
 		super.render(batch);
 
 		super.renderGUI(batch);

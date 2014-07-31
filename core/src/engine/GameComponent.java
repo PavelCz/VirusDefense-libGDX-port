@@ -46,7 +46,7 @@ public abstract class GameComponent {
 		this.updateClickables(delta);
 	}
 
-	public void render(SpriteBatch batch) throws SlickException {
+	public void render(SpriteBatch batch) {
 		if (this.background != null) {
 			this.background.draw(batch);
 		}
@@ -60,7 +60,6 @@ public abstract class GameComponent {
 		// GDX if left mouse button is down: Gdx.input.isButtonPressed(com.badlogic.gdx.Input.Buttons.LEFT)
 		// GDX if left mouse button is pressed and released in short succession: Gdx.input.justTouched()
 		if (Gdx.input.justTouched()) {
-			System.out.println("act");
 			this.mouseWasClicked = true;
 			for (Clickable clickable : this.clickables) {
 				clickable.update(x, y);
