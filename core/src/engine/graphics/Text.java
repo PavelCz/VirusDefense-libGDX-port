@@ -1,24 +1,28 @@
 package engine.graphics;
 
-import java.awt.Font;
-
 import org.newdawn.slick.Color;
-import org.newdawn.slick.TrueTypeFont;
 
-import towerDefense.Gameplay;
+import towerDefense.TowerDefense;
+
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class Text extends RenderObject {
-	private Font fontSettings;
-	private TrueTypeFont font;
 	private String text;
+	private BitmapFont bmfont;
 	private Color color;
-	private int height;
+	private float height;
 	private boolean visible = true;
 
 	public Text(int height, String text, Color color, float globalScale) {
+		this.bmfont = new BitmapFont(Gdx.files.internal("arial.fnt"));
+		this.height = this.bmfont.getCapHeight();
+		System.out.println(this.bmfont.getCapHeight());
 		this.setHeight(height);
 		this.text = text;
 		this.color = color;
+
 	}
 
 	public void setText(String text) {
@@ -27,13 +31,19 @@ public class Text extends RenderObject {
 
 	@Override
 	public void draw(float x, float y, float globalScale) {
+		this.bmfont.setColor(this.color.getRedByte(), this.color.getGreenByte(), this.color.getBlueByte(), 1);
 		if (this.visible) {
-			// this.font.drawString(x, y, this.text, this.color);
+			SpriteBatch batch = new SpriteBatch();
+			batch.begin();
+			// this.bmfont.draw(batch, this.text, x, y);
+
 			for (String line : this.text.split("\n")) {
-				this.font.drawString(x, y, line, this.color);
-				y += this.font.getHeight();
+				this.bmfont.draw(batch, this.text, x, TowerDefense.getHeight() - y);
+				y += this.bmfont.getLineHeight();
 			}
+			batch.end();
 		}
+
 	}
 
 	public void setColor(Color color) {
@@ -55,21 +65,21 @@ public class Text extends RenderObject {
 
 	public int getWidth(int line) {
 		String[] lines = this.text.split("\n");
-		return this.font.getWidth(lines[line]);
+		// return this.font.getWidth(lines[line]);
+		return this.text.toCharArray().length * 5;
 	}
 
 	public int getTextHeight() {
-		return this.font.getHeight();
+		return (int) this.bmfont.getLineHeight();
 	}
 
 	public int getActualHeight() {
-		return this.font.getHeight() * this.text.split("\n").length;
+		return this.getTextHeight() * this.text.split("\n").length;
 	}
 
 	public void setHeight(int height) {
+		this.bmfont.setScale(height / this.height);
 		this.height = height;
-		this.fontSettings = new Font("Verdana", Font.PLAIN, (int) (this.height * Gameplay.GLOBAL_GUI_SCALE));
-		this.font = new TrueTypeFont(this.fontSettings, true);
 	}
 
 	public void setVisible(boolean visible) {
