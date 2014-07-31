@@ -62,11 +62,12 @@ public class Text extends RenderObject {
 	public int getWidth(int line) {
 		String[] lines = this.text.split("\n");
 		// return this.font.getWidth(lines[line]);
-		return this.text.toCharArray().length * 5;
+		return (int) this.bmfont.getBounds(lines[line]).width;
 	}
 
 	public int getTextHeight() {
-		return (int) this.bmfont.getLineHeight();
+		// return (int) this.bmfont.getLineHeight();
+		return (int) this.bmfont.getBounds(this.text).height;
 	}
 
 	public int getActualHeight() {
