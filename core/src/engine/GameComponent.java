@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.newdawn.slick.SlickException;
 
+import com.badlogic.gdx.Gdx;
+
 import towerDefense.Gameplay;
 import towerDefense.TowerDefense;
 import engine.graphics.Background;
@@ -49,31 +51,30 @@ public abstract class GameComponent {
 	}
 
 	private void updateClickables(int delta) {
-		// Input input = container.getInput();
-		// float x = input.getMouseX();
-		// float y = input.getMouseY();
-		// this.updateHovering(x, y);
-		// // GDX if left mouse button is down: Gdx.input.isButtonPressed(com.badlogic.gdx.Input.Buttons.LEFT)
-		// // GDX if left mouse button is pressed and released in short succession: Gdx.input.justTouched()
-		// if (Gdx.input.justTouched()) {
-		// System.out.println("act");
-		// this.mouseWasClicked = true;
-		// for (Clickable clickable : this.clickables) {
-		// clickable.update(x, y, container);
-		// }
-		//
-		// } else if (this.mouseWasClicked && !input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
-		// this.mouseWasClicked = false;
-		// for (Clickable clickable : this.clickables) {
-		// if (!clickable.isStayClicked() && clickable.isActive()) {
-		// if (clickable.isClicked() && clickable.collides((int) x, (int) y, Gameplay.GLOBAL_GUI_SCALE)) {
-		// clickable.onRelease();
-		// } else if (clickable.isClicked()) {
-		// clickable.setClicked(false);
-		// }
-		// }
-		// }
-		// }
+		float x = Gdx.input.getX();
+		float y = Gdx.input.getY();
+		this.updateHovering(x, y);
+		// GDX if left mouse button is down: Gdx.input.isButtonPressed(com.badlogic.gdx.Input.Buttons.LEFT)
+		// GDX if left mouse button is pressed and released in short succession: Gdx.input.justTouched()
+		if (Gdx.input.justTouched()) {
+			System.out.println("act");
+			this.mouseWasClicked = true;
+			for (Clickable clickable : this.clickables) {
+				clickable.update(x, y);
+			}
+
+		} else if (this.mouseWasClicked && !Gdx.input.isButtonPressed(com.badlogic.gdx.Input.Buttons.LEFT)) {
+			this.mouseWasClicked = false;
+			for (Clickable clickable : this.clickables) {
+				if (!clickable.isStayClicked() && clickable.isActive()) {
+					if (clickable.isClicked() && clickable.collides((int) x, (int) y, Gameplay.GLOBAL_GUI_SCALE)) {
+						clickable.onRelease();
+					} else if (clickable.isClicked()) {
+						clickable.setClicked(false);
+					}
+				}
+			}
+		}
 	}
 
 	public void updateHovering(float x, float y) {
