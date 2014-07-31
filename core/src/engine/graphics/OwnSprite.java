@@ -36,7 +36,11 @@ public class OwnSprite extends RenderObject {
 
 		// batch.setProjectionMatrix(camera.combined);
 		this.sprite.setScale(this.defaultScale * globalScale);
-		this.sprite.setPosition(xCoordinate, TowerDefense.getHeight() - yCoordinate);
+		float x = xCoordinate;
+		float y = yCoordinate;
+		y = TowerDefense.getHeight() - y; // sets coordinate System from up - right to down - right
+		y = y - this.img.getHeight(); // sets picture anchor to top left corner instead of bottom left
+		this.sprite.setPosition(x, y);
 		this.sprite.draw(batch);
 	}
 
