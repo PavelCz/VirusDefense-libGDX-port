@@ -63,7 +63,7 @@ public class TowerDefense extends BasicGame implements MusicListener {
 		// }
 		// }
 		this.initSounds();
-		TowerDefense.updateDimensions(container);
+		TowerDefense.updateDimensions();
 		// this.reinitMenu(container);
 		// this.reinitChooseLevel(container);
 		this.mode = TowerDefense.MODE_MENU;
@@ -74,9 +74,9 @@ public class TowerDefense extends BasicGame implements MusicListener {
 		try {
 			gameContainer.setDisplayMode(TowerDefense.getWidth(), TowerDefense.getHeight(), TowerDefense.isFULLSCREEN());
 			this.reinitMenu();
-			this.reinitChooseLevel(container);
-			this.reinitComponents(gameContainer);
-			TowerDefense.updateDimensions(container);
+			this.reinitChooseLevel();
+			this.reinitComponents();
+			TowerDefense.updateDimensions();
 		} catch (SlickException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -153,9 +153,11 @@ public class TowerDefense extends BasicGame implements MusicListener {
 		return TowerDefense.WIDTH;
 	}
 
-	public static void updateDimensions(GameContainer container) {
-		TowerDefense.HEIGHT = container.getHeight();
-		TowerDefense.WIDTH = container.getWidth();
+	public static void updateDimensions() {
+		// TowerDefense.HEIGHT = container.getHeight();
+		// TowerDefense.WIDTH = container.getWidth();
+		TowerDefense.HEIGHT = 768;
+		TowerDefense.WIDTH = 1024;
 	}
 
 	public void setLevel(Level level) {
@@ -200,9 +202,9 @@ public class TowerDefense extends BasicGame implements MusicListener {
 		}
 	}
 
-	public void reinitChooseLevel(GameContainer container) {
+	public void reinitChooseLevel() {
 
-		this.maps = new ChooseLevel(this, container);
+		this.maps = new ChooseLevel(this);
 
 	}
 
@@ -274,11 +276,11 @@ public class TowerDefense extends BasicGame implements MusicListener {
 		this.scores = new Scores(this);
 	}
 
-	public void reinitComponents(GameContainer container) {
-		TowerDefense.updateDimensions(container);
+	public void reinitComponents() {
+		TowerDefense.updateDimensions();
 		// this.gameplay = new Gameplay(this);
 		this.reinitMenu();
-		this.reinitChooseLevel(container);
+		this.reinitChooseLevel();
 		// this.settings = new Settings(this, container);
 		this.currentGameComponent = this.menu;
 		this.scores = new Scores(this);

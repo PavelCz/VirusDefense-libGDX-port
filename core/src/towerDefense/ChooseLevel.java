@@ -26,7 +26,7 @@ public class ChooseLevel extends GameComponent {
 
 	private LevelHandler levelHandler = new LevelHandler();
 
-	public ChooseLevel(TowerDefense game, GameContainer container) {
+	public ChooseLevel(TowerDefense game) {
 		super(game);
 		this.title.setPosition((TowerDefense.getWidth() - this.title.getWidth()) / 2, TowerDefense.getHeight() / 4);
 		this.guiElements.add(this.title);
