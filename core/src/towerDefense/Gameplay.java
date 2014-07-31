@@ -219,7 +219,6 @@ public class Gameplay extends GameComponent implements InputProcessor {
 	@Override
 	public void render(SpriteBatch batch) throws SlickException {
 		super.render(batch);
-		System.out.println(2);
 		this.drawBackground(batch);
 		this.currentLevel.renderPath(batch);
 		this.renderEnemies(batch);
