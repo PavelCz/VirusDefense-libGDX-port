@@ -32,7 +32,6 @@ import engine.graphics.LibGDXRectangle;
 import engine.graphics.LibGDXUnfilledEllipse;
 import engine.graphics.OwnSprite;
 import engine.gui.Clickable;
-import engine.gui.GUI;
 import engine.gui.InterfaceBackground;
 import engine.gui.SlickHealthbar;
 import engine.gui.StaticText;
@@ -246,9 +245,7 @@ public class Gameplay extends GameComponent implements InputProcessor {
 
 	@Override
 	protected void renderGUI(SpriteBatch batch) {
-		for (GUI guiElement : this.guiElements) {
-			guiElement.draw(batch);
-		}
+		super.renderGUI(batch);
 		this.renderHealthBars(batch);
 		this.renderDebug(batch);
 
