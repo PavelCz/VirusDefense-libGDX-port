@@ -30,7 +30,8 @@ public class Text extends RenderObject {
 
 	@Override
 	public void draw(float x, float y, float globalScale) {
-		this.bmfont.setColor(this.color.getRedByte(), this.color.getGreenByte(), this.color.getBlueByte(), 1);
+		this.bmfont.setColor(this.color.getRed() / 255, this.color.getGreen() / 255, this.color.getBlue() / 255, 1);
+		// this.bmfont.setColor(1, 1, 1, 1);
 		if (this.visible) {
 			SpriteBatch batch = new SpriteBatch();
 			batch.begin();
