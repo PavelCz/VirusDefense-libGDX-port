@@ -110,7 +110,7 @@ public class ChooseLevel extends GameComponent {
 							this.currentLevel = this.levelHandler.get(this.page);
 						} else if (clickable == this.button) {
 
-							this.game.initGameplay(container, this.currentLevel);
+							this.game.initGameplay(this.currentLevel);
 							// this.game.setLevel(this.currentLevel);
 							this.game.getGameplay().setPlayerName(this.game.getPlayerName());
 							this.game.setMode(TowerDefense.MODE_GAME);

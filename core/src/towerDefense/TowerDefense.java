@@ -164,8 +164,8 @@ public class TowerDefense extends BasicGame implements MusicListener {
 		this.gameplay.setLevel(level);
 	}
 
-	public void initGameplay(GameContainer container, Level level) {
-		this.gameplay = new Gameplay(this, level, container);
+	public void initGameplay(Level level) {
+		this.gameplay = new Gameplay(this, level);
 		// try {
 		// this.gameplay.init(container);
 		// } catch (SlickException e) {

@@ -84,7 +84,7 @@ public class Gameplay extends GameComponent {
 	// Tests:
 
 	//
-	public Gameplay(TowerDefense game, Level level, GameContainer container) {
+	public Gameplay(TowerDefense game, Level level) {
 		super(game);
 		this.currentLevel = level;
 		try {
