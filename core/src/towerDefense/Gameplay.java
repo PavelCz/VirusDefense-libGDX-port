@@ -27,6 +27,7 @@ import engine.Waypoint;
 import engine.graphics.Background;
 import engine.graphics.LibGDXRectangle;
 import engine.graphics.LibGDXUnfilledEllipse;
+import engine.graphics.LibGDXUnfilledRectangle;
 import engine.graphics.OwnSprite;
 import engine.gui.Clickable;
 import engine.gui.InterfaceBackground;
@@ -300,23 +301,23 @@ public class Gameplay extends GameComponent implements InputProcessor {
 	 * @param graphics
 	 */
 	private void renderTowerShadow(SpriteBatch batch) {
-		//
-		// if (this.currentTower != null && this.getMode() == 0) {
-		// OwnSprite sprite = this.currentTower.getSprite().clone();
-		//
-		// if (this.currentTowerPlaceable) {
-		// new LibGDXUnfilledRectangle(graphics, SIZE / Gameplay.CURRENT_GAME_SCALE, SIZE / Gameplay.CURRENT_GAME_SCALE,
-		// Color.green).draw(this.towerShadowX, this.towerShadowY, Gameplay.CURRENT_GAME_SCALE);
-		// } else {
-		// new LibGDXUnfilledRectangle(graphics, SIZE / Gameplay.CURRENT_GAME_SCALE, SIZE / Gameplay.CURRENT_GAME_SCALE,
-		// Color.red).draw(this.towerShadowX, this.towerShadowY, Gameplay.CURRENT_GAME_SCALE);
-		// sprite.setAlpha(0.1f);
-		// sprite.setColor(1f, 0, 0);
-		//
-		// }
-		//
-		// sprite.draw(this.towerShadowX, this.towerShadowY, Gameplay.CURRENT_GAME_SCALE);
-		// }
+
+		if (this.currentTower != null && this.getMode() == 0) {
+			OwnSprite sprite = this.currentTower.getSprite().clone();
+
+			if (this.currentTowerPlaceable) {
+				new LibGDXUnfilledRectangle(SIZE / Gameplay.CURRENT_GAME_SCALE, SIZE / Gameplay.CURRENT_GAME_SCALE, Color.GREEN).draw(
+						this.towerShadowX, this.towerShadowY, Gameplay.CURRENT_GAME_SCALE, batch);
+			} else {
+				new LibGDXUnfilledRectangle(SIZE / Gameplay.CURRENT_GAME_SCALE, SIZE / Gameplay.CURRENT_GAME_SCALE, Color.RED).draw(
+						this.towerShadowX, this.towerShadowY, Gameplay.CURRENT_GAME_SCALE, batch);
+				sprite.setAlpha(0.1f);
+				sprite.setColor(1f, 0, 0);
+
+			}
+
+			sprite.draw(this.towerShadowX, this.towerShadowY, Gameplay.CURRENT_GAME_SCALE, batch);
+		}
 	}
 
 	/**
