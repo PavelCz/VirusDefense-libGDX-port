@@ -1,12 +1,11 @@
 package towerDefense;
 
-import java.util.List;
-
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import engine.GameComponent;
-import engine.TextFileToString;
 import engine.gui.SetGameModeButton;
 import engine.gui.StaticText;
 
@@ -21,16 +20,21 @@ public class Scores extends GameComponent {
 		this.guiElements.add(back);
 
 		String scoreString = "Highscores:\n";
-		List<String> scoresList = TextFileToString.getLines("score.txt");
+
+		// reading preferences
+		Preferences prefs = Gdx.app.getPreferences("VirusDefense");
+		String[] scoresList = prefs.getString("score").split("\n");
 		for (int i = 0; i < 9; ++i) {
-			if (scoresList.size() > i) {
-				String[] parts = scoresList.get(i).split(", ");
-				scoreString += "  " + (i + 1) + ": " + parts[0] + ", " + parts[1] + " Punkte\n";
+			if (scoresList.length > i) {
+				String[] parts = scoresList[i].split(", ");
+				if (parts.length == 2) {
+					scoreString += "  " + (i + 1) + ": " + parts[0] + ", " + parts[1] + " Punkte\n";
+				}
 			}
 		}
 		int i = 9;
-		if (scoresList.size() > i) {
-			String[] parts = scoresList.get(i).split(", ");
+		if (scoresList.length > i) {
+			String[] parts = scoresList[i].split(", ");
 			scoreString += (i + 1) + ": " + parts[0] + ", " + parts[1] + " Punkte\n";
 		}
 		StaticText scores = new StaticText(0, 0, Color.WHITE, scoreString);

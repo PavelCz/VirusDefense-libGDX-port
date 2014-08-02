@@ -5,11 +5,9 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
-import org.lwjgl.LWJGLException;
-import org.lwjgl.opengl.Display;
-import org.lwjgl.opengl.DisplayMode;
-
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Graphics;
+import com.badlogic.gdx.Graphics.DisplayMode;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
@@ -81,13 +79,7 @@ public class Settings extends GameComponent {
 		this.guiElements.add(this.fullscreen);
 
 		Integer[][] supportedResolutions = new Integer[0][0];
-		try {
-
-			supportedResolutions = this.getSupportedDisplayModes();
-		} catch (LWJGLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		supportedResolutions = this.getSupportedDisplayModes();
 		this.supportedResolutionsText = new StaticText(0, 0, (int) 15, Color.BLACK, "Supported Fullscreen\nResolutions:");
 
 		this.guiElements.add(this.supportedResolutionsText);
@@ -263,17 +255,18 @@ public class Settings extends GameComponent {
 		// this.heightField.setMaxLength(5);
 	}
 
-	private Integer[][] getSupportedDisplayModes() throws LWJGLException {
-		DisplayMode[] modes = Display.getAvailableDisplayModes();
+	private Integer[][] getSupportedDisplayModes() {
 
+		// DisplayMode[] modes = Display.getAvailableDisplayModes();
+		DisplayMode[] modes = Gdx.graphics.getDisplayModes();
 		List<int[]> resolutionsList = new ArrayList<int[]>();
 		// copies the resolutions int a List of arrays
 		// TODO: this is the reason the game takes so long to start up
 		int[] resolution = new int[2];
-		for (DisplayMode displayMode : modes) {
+		for (Graphics.DisplayMode displayMode : modes) {
 
-			resolution[0] = displayMode.getWidth();
-			resolution[1] = displayMode.getHeight();
+			resolution[0] = displayMode.width;
+			resolution[1] = displayMode.height;
 			boolean contained = false;
 			for (int[] addedResolution : resolutionsList) {
 

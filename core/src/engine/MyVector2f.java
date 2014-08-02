@@ -1,13 +1,13 @@
 package engine;
 
-import org.lwjgl.util.vector.Vector2f;
+import com.badlogic.gdx.math.Vector2;
 
 /**
  * @author pavel.czempin
  * 
  */
 public class MyVector2f {
-	private Vector2f vector;
+	private Vector2 vector;
 	private float angleRadians;
 	private float length;
 
@@ -20,7 +20,7 @@ public class MyVector2f {
 	 *            the y coordinate of the vector
 	 */
 	public MyVector2f(float x, float y) {
-		this.vector = new Vector2f(x, y);
+		this.vector = new Vector2(x, y);
 
 		this.length = (float) (Math.sqrt(x * x + y * y));
 
@@ -29,22 +29,22 @@ public class MyVector2f {
 	}
 
 	public float getX() {
-		return this.vector.getX();
+		return this.vector.x;
 	}
 
 	public float getY() {
-		return this.vector.getY();
+		return this.vector.y;
 	}
 
 	public void setX(float x) {
-		this.vector.setX(x);
-		this.angleRadians = calculateAngle(x, this.vector.getY());
+		this.vector.x = x;
+		this.angleRadians = calculateAngle(x, this.vector.y);
 		this.angleRadians = normalizeAngle(this.angleRadians);
 	}
 
 	public void setY(float y) {
-		this.vector.setY(y);
-		this.angleRadians = calculateAngle(this.vector.getX(), y);
+		this.vector.y = y;
+		this.angleRadians = calculateAngle(this.vector.x, y);
 		this.angleRadians = normalizeAngle(this.angleRadians);
 	}
 
@@ -187,6 +187,6 @@ public class MyVector2f {
 
 	@Override
 	public MyVector2f clone() {
-		return new MyVector2f(this.vector.getX(), this.vector.getY());
+		return new MyVector2f(this.vector.x, this.vector.y);
 	}
 }

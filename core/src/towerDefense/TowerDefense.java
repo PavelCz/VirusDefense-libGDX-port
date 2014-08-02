@@ -1,18 +1,16 @@
 package towerDefense;
 
-import java.io.FileNotFoundException;
 import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
 import java.util.Comparator;
-import java.util.List;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import engine.GameComponent;
 import engine.Level;
 import engine.SoundHandler;
-import engine.TextFileToString;
 
 public class TowerDefense {
 
@@ -92,10 +90,9 @@ public class TowerDefense {
 
 	// @Override
 	public void update(int delta) {
-		// if (this.quitGame) {
-		// container.exit();
-		// AL.destroy();
-		// }
+		if (this.quitGame) {
+			Gdx.app.exit();
+		}
 		if (this.mode == TowerDefense.MODE_GAME) {
 			this.currentGameComponent = this.gameplay;
 		} else if (this.mode == TowerDefense.MODE_MAPS) {
@@ -128,7 +125,6 @@ public class TowerDefense {
 		this.batch.begin();
 		this.currentGameComponent.render(this.batch);
 		this.batch.end();
-
 	}
 
 	public void setMode(int mode) {
@@ -207,38 +203,41 @@ public class TowerDefense {
 
 	public static void writeSettingsToFile() {
 		PrintWriter writer;
-		try {
-			writer = new PrintWriter("D:/Users/Valep/git/VirusDefense-libGDX-wrapped/android/assets/data/files/settings.txt", "UTF-8");
-			writer.println(TowerDefense.getWidth());
-			writer.println(TowerDefense.getHeight());
-			if (TowerDefense.isFULLSCREEN()) {
-				writer.println(1);
-			} else {
-				writer.println(0);
-			}
-			writer.close();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		writer = new PrintWriter(Gdx.files.internal("data/files/settings.txt").writer(false, "UTF-8"));
+		writer.println(TowerDefense.getWidth());
+		writer.println(TowerDefense.getHeight());
+		if (TowerDefense.isFULLSCREEN()) {
+			writer.println(1);
+		} else {
+			writer.println(0);
 		}
+		writer.close();
 
 	}
 
 	public static void writeScoreToFile(String name, int score) {
-		List<String> savedScores = TextFileToString.getLines("score.txt");
-		String[][] scores = new String[savedScores.size() + 1][2];
-		for (int i = 0; i < savedScores.size(); ++i) {
-			String[] separateStrings = savedScores.get(i).split(", ");
-			scores[i][0] = separateStrings[0];
-			scores[i][1] = separateStrings[1];
+		// reading Preferences
+		Preferences prefs = Gdx.app.getPreferences("VirusDefense");
+		String[] savedScores = prefs.getString("score").split("\n");
+		String[][] scores = new String[savedScores.length + 1][2];
+		for (int i = 0; i < savedScores.length; ++i) {
+			String[] parts = savedScores[i].split(", ");
+			if (parts.length == 2) {
+				scores[i][0] = parts[0];
+
+				scores[i][1] = parts[1];
+			} else if (savedScores.length == 1) {
+				scores = new String[1][2];
+				scores[0][0] = name;
+				scores[0][1] = new Integer(score).toString();
+			}
 		}
-
-		scores[savedScores.size()][0] = name;
-		scores[savedScores.size()][1] = new Integer(score).toString();
-
+		// if (scores[0][0] != null) { // false when the file not exists
+		// adding new score
+		if (scores.length == savedScores.length + 1) {
+			scores[savedScores.length][0] = name;
+			scores[savedScores.length][1] = new Integer(score).toString();
+		}
 		// converts the String in the second column to ints and then sorts them by that int value
 		Arrays.sort(scores, new Comparator<String[]>() {
 			@Override
@@ -249,21 +248,18 @@ public class TowerDefense {
 			}
 		});
 
-		PrintWriter writer;
-		try {
-			writer = new PrintWriter("D:/Users/Valep/git/VirusDefense-libGDX-port/android/assets/data/files/score.txt", "UTF-8");
-			for (int i = 0; i < scores.length; ++i) {
-				writer.println(scores[i][0] + ", " + scores[i][1]);
-			}
-			writer.close();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		// saving in preferences
+		StringBuilder builder = new StringBuilder();
+		for (int i = 0; i < scores.length; ++i) {
+			builder.append(scores[i][0] + ", " + scores[i][1] + "\n");
 		}
+		String s = builder.toString();
+
+		prefs.putString("score", s);
+		prefs.flush();
 	}
+
+	// }
 
 	public void resetScores() {
 		this.scores = new Scores(this);
