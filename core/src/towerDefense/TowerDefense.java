@@ -194,12 +194,7 @@ public class TowerDefense {
 	public void reinitMenu() {
 
 		this.menu = new Menu(this);
-		try {
-			this.menu.init();
-		} catch (SlickException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		this.menu.init();
 	}
 
 	public void reinitChooseLevel() {

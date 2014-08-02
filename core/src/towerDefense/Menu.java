@@ -29,7 +29,7 @@ public class Menu extends GameComponent {
 	}
 
 	@Override
-	public void init() throws SlickException {
+	public void init() {
 		super.init();
 
 		this.background = new Background(1f, "viren.jpg", this.game.getGameplay());

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
-import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
 
 import towerDefense.towers.BombTower;
@@ -88,16 +87,11 @@ public class Gameplay extends GameComponent implements InputProcessor {
 		super(game);
 		Gdx.input.setInputProcessor(this);
 		this.currentLevel = level;
-		try {
-			this.init();
-		} catch (SlickException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		this.init();
 	}
 
 	@Override
-	public void init() throws SlickException {
+	public void init() {
 		super.init();
 		this.h = new SlickHealthbar(0, 0, 0, 30, 7);
 		this.currentLevel.setGame(this);
@@ -491,7 +485,7 @@ public class Gameplay extends GameComponent implements InputProcessor {
 	 * @param container
 	 * @param delta
 	 */
-	private void debugKeyboardEvents(GameContainer container, int delta) {
+	private void debugKeyboardEvents(int delta) {
 		// Input input = container.getInput();
 		// if (input.isKeyPressed(Input.KEY_ADD)) {
 		// this.speed *= 2f;

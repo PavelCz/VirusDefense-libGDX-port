@@ -39,7 +39,7 @@ public abstract class GameComponent {
 
 	}
 
-	public void init() throws SlickException {
+	public void init() {
 	}
 
 	public void update(int delta) throws SlickException {
