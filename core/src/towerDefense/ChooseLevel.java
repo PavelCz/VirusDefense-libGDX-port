@@ -1,7 +1,5 @@
 package towerDefense;
 
-import org.newdawn.slick.SlickException;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -76,7 +74,7 @@ public class ChooseLevel extends GameComponent {
 	}
 
 	@Override
-	public void update(int delta) throws SlickException {
+	public void update(int delta) {
 
 		this.mouseEvents(delta);
 		this.button.setUnclickedButton(this.currentLevel.getPreviewPicture());

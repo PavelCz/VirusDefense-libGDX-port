@@ -3,8 +3,6 @@ package engine;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.newdawn.slick.SlickException;
-
 import towerDefense.Gameplay;
 import towerDefense.TowerDefense;
 
@@ -42,7 +40,7 @@ public abstract class GameComponent {
 	public void init() {
 	}
 
-	public void update(int delta) throws SlickException {
+	public void update(int delta) {
 		this.updateClickables(delta);
 	}
 

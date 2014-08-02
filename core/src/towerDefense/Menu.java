@@ -1,8 +1,5 @@
 package towerDefense;
 
-import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.SlickException;
-
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
@@ -91,7 +88,8 @@ public class Menu extends GameComponent {
 	}
 
 	// @Override
-	public void update(GameContainer container, int delta) throws SlickException {
+	@Override
+	public void update(int delta) {
 		super.update(delta);
 		// Input input = container.getInput();
 		// if (input.isKeyPressed(Input.KEY_ENTER)) {
