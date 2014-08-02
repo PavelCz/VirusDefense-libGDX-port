@@ -1,18 +1,16 @@
 package towerDefense;
 
-import java.io.FileNotFoundException;
 import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
 import java.util.Comparator;
-import java.util.List;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import engine.GameComponent;
 import engine.Level;
 import engine.SoundHandler;
-import engine.TextFileToString;
 
 public class TowerDefense {
 
@@ -207,37 +205,40 @@ public class TowerDefense {
 
 	public static void writeSettingsToFile() {
 		PrintWriter writer;
-		try {
-			writer = new PrintWriter("D:/Users/Valep/git/VirusDefense-libGDX-wrapped/android/assets/data/files/settings.txt", "UTF-8");
-			writer.println(TowerDefense.getWidth());
-			writer.println(TowerDefense.getHeight());
-			if (TowerDefense.isFULLSCREEN()) {
-				writer.println(1);
-			} else {
-				writer.println(0);
-			}
-			writer.close();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		writer = new PrintWriter(Gdx.files.internal("data/files/settings.txt").writer(false, "UTF-8"));
+		writer.println(TowerDefense.getWidth());
+		writer.println(TowerDefense.getHeight());
+		if (TowerDefense.isFULLSCREEN()) {
+			writer.println(1);
+		} else {
+			writer.println(0);
 		}
+		writer.close();
 
 	}
 
 	public static void writeScoreToFile(String name, int score) {
-		List<String> savedScores = TextFileToString.getLines("score.txt");
-		String[][] scores = new String[savedScores.size() + 1][2];
-		for (int i = 0; i < savedScores.size(); ++i) {
-			String[] separateStrings = savedScores.get(i).split(", ");
-			scores[i][0] = separateStrings[0];
-			scores[i][1] = separateStrings[1];
+		// List<String> savedScores = TextFileToString.getLines("score.txt");
+		// String[][] scores = new String[savedScores.size() + 1][2];
+		// for (int i = 0; i < savedScores.size(); ++i) {
+		// String[] separateStrings = savedScores.get(i).split(", ");
+		// scores[i][0] = separateStrings[0];
+		// scores[i][1] = separateStrings[1];
+		// }
+
+		Preferences prefs = Gdx.app.getPreferences("VirusDefense");
+		String[] savedScores = prefs.getString("score").split("\n");
+		String[][] scores = new String[savedScores.length + 1][2];
+		for (int i = 0; i < savedScores.length; ++i) {
+			String[] parts = savedScores[i].split(", ");
+			scores[i][0] = parts[0];
+
+			scores[i][1] = parts[1];
+
 		}
 
-		scores[savedScores.size()][0] = name;
-		scores[savedScores.size()][1] = new Integer(score).toString();
+		scores[savedScores.length][0] = name;
+		scores[savedScores.length][1] = new Integer(score).toString();
 
 		// converts the String in the second column to ints and then sorts them by that int value
 		Arrays.sort(scores, new Comparator<String[]>() {
@@ -249,20 +250,34 @@ public class TowerDefense {
 			}
 		});
 
-		PrintWriter writer;
-		try {
-			writer = new PrintWriter("D:/Users/Valep/git/VirusDefense-libGDX-port/android/assets/data/files/score.txt", "UTF-8");
-			for (int i = 0; i < scores.length; ++i) {
-				writer.println(scores[i][0] + ", " + scores[i][1]);
-			}
-			writer.close();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		// PrintWriter writer;
+		// FileHandle file = Gdx.files.local("data/files/score.txt");
+		// boolean isLocalDirAvailable = Gdx.files.isLocalStorageAvailable();
+		StringBuilder builder = new StringBuilder();
+		for (int i = 0; i < scores.length; ++i) {
+			builder.append(scores[i][0] + ", " + scores[i][1] + "\n");
 		}
+		String s = builder.toString();
+
+		prefs.putString("score", s);
+		prefs.flush();
+		// System.out.println(prefs.getString("score"));
+
+		// if (isLocalDirAvailable) {
+		// String localDir = Gdx.files.getExternalStoragePath();
+		// try {
+		// System.out.println(localDir + "data/files/score.txt");
+		// writer = new PrintWriter(localDir + "data/files/score.txt");
+		//
+		// for (int i = 0; i < scores.length; ++i) {
+		// writer.println(scores[i][0] + ", " + scores[i][1]);
+		// }
+		// writer.close();
+		// } catch (FileNotFoundException e) {
+		// // TODO Auto-generated catch block
+		// e.printStackTrace();
+		// }
+		// }
 	}
 
 	public void resetScores() {

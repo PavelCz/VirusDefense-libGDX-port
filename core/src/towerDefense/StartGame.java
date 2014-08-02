@@ -25,7 +25,6 @@ public class StartGame extends ApplicationAdapter {
 		}
 		this.game = new TowerDefense(false);
 		this.game.init();
-
 	}
 
 	@Override
