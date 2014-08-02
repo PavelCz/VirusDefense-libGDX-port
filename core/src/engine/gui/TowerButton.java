@@ -27,6 +27,8 @@ public class TowerButton extends Button {
 		s.draw(this.x + (this.collisionWidth - s.getWidth() * scale) / 2 * Gameplay.GLOBAL_GUI_SCALE, this.y
 				+ (this.collisionHeight - s.getHeight() * scale) / 2 * Gameplay.GLOBAL_GUI_SCALE, scale * Gameplay.GLOBAL_GUI_SCALE,
 				batch);
+		// temporary
+		// s.draw(0, 0, scale * Gameplay.GLOBAL_GUI_SCALE, batch);
 	}
 
 	@Override

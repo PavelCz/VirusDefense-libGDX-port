@@ -35,7 +35,9 @@ public class OwnSprite extends RenderObject {
 		// camera.setToOrtho(false, TowerDefense.getWidth(), TowerDefense.getHeight());
 
 		// batch.setProjectionMatrix(camera.combined);
-		this.sprite.setScale(this.defaultScale * globalScale);
+		float scaling = this.defaultScale * globalScale;
+		// this.sprite.setScale(scaling);
+		this.sprite.setSize(this.img.getWidth() * scaling, this.img.getHeight() * scaling);
 		float x = xCoordinate;
 		float y = yCoordinate;
 		y = TowerDefense.getHeight() - y; // sets coordinate System from up - right to down - right
