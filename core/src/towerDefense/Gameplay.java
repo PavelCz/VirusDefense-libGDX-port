@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
-import org.newdawn.slick.SlickException;
-
 import towerDefense.towers.BombTower;
 import towerDefense.towers.LongerShootingTower;
 import towerDefense.towers.RocketFastTower;
@@ -345,7 +343,7 @@ public class Gameplay extends GameComponent implements InputProcessor {
 	}
 
 	@Override
-	public void update(int originalDelta) throws SlickException {
+	public void update(int originalDelta) {
 		// System.out.println(originalDelta);
 		// if (originalDelta < 100) {
 		this.passedMilliseconds += originalDelta;
