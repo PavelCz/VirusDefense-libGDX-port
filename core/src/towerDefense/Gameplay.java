@@ -418,17 +418,16 @@ public class Gameplay extends GameComponent implements InputProcessor {
 	 */
 	private void keyboardEvents(int delta) {
 
-		// if (input.isKeyPressed(Input.KEY_I)) {
-		// this.debugMode = !this.debugMode;
-		// container.setShowFPS(this.debugMode);
-		// if (this.debugMode) {
-		// System.out.println("debug");
-		// this.player.setMoney(100000);
-		// } else {
-		// System.out.println("not debug");
-		// this.speed = 1f;
-		// }
-		// }
+		if (Gdx.input.isKeyPressed(Input.Keys.I)) {
+			this.debugMode = !this.debugMode;
+			if (this.debugMode) {
+				System.out.println("debug");
+				this.player.setMoney(100000);
+			} else {
+				System.out.println("not debug");
+				this.speed = 1f;
+			}
+		}
 		if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
 			this.game.getMenu().setPauseMenu();
 			this.game.setMode(TowerDefense.MODE_MENU);
@@ -468,9 +467,9 @@ public class Gameplay extends GameComponent implements InputProcessor {
 
 		}
 
-		// if (this.debugMode) {
-		// this.debugKeyboardEvents(container, delta);
-		// }
+		if (this.debugMode) {
+			this.debugKeyboardEvents(delta);
+		}
 
 	}
 
@@ -481,16 +480,15 @@ public class Gameplay extends GameComponent implements InputProcessor {
 	 * @param delta
 	 */
 	private void debugKeyboardEvents(int delta) {
-		// Input input = container.getInput();
-		// if (input.isKeyPressed(Input.KEY_ADD)) {
-		// this.speed *= 2f;
-		// }
-		// if (input.isKeyPressed(Input.KEY_SUBTRACT)) {
-		// this.speed /= 2f;
-		// }
-		// if (input.isKeyPressed(Input.KEY_L)) {
-		// this.enemies.add(this.getEnemyTypes().createEnemy(0));
-		// }
+		if (Gdx.input.isKeyPressed(Input.Keys.PLUS)) {
+			this.speed *= 2f;
+		}
+		if (Gdx.input.isKeyPressed(Input.Keys.MINUS)) {
+			this.speed /= 2f;
+		}
+		if (Gdx.input.isKeyPressed(Input.Keys.L)) {
+			this.enemies.add(this.getEnemyTypes().createEnemy(0));
+		}
 	}
 
 	/**
