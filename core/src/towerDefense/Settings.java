@@ -1,6 +1,5 @@
 package towerDefense;
 
-import java.awt.Font;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -9,11 +8,8 @@ import java.util.List;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
-import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Input;
-import org.newdawn.slick.SlickException;
-import org.newdawn.slick.TrueTypeFont;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
@@ -46,7 +42,7 @@ public class Settings extends GameComponent {
 		this.back.setX(0);
 		this.back.setY(TowerDefense.getHeight() - this.back.getTextHeight() * 2);
 
-		TrueTypeFont ttt = new TrueTypeFont(new Font("Verdana", Font.PLAIN, 15), true);
+		// TrueTypeFont ttt = new TrueTypeFont(new Font("Verdana", Font.PLAIN, 15), true);
 		int fieldsX = 0;
 		int fieldsY = 100;
 		int fieldWidth = 50;
@@ -144,12 +140,12 @@ public class Settings extends GameComponent {
 	}
 
 	// @Override
-	public void update(GameContainer container, int delta) {
-		Input input = container.getInput();
-		float x = input.getMouseX();
-		float y = input.getMouseY();
+	@Override
+	public void update(int delta) {
+		float x = Gdx.input.getX();
+		float y = Gdx.input.getY();
 		super.updateHovering(x, y);
-		if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
+		if (Gdx.input.isButtonPressed(com.badlogic.gdx.Input.Buttons.LEFT)) {
 
 			this.mouseWasClicked = true;
 
@@ -157,16 +153,16 @@ public class Settings extends GameComponent {
 				clickable.update(x, y);
 			}
 
-		} else if (this.mouseWasClicked && !input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
+		} else if (this.mouseWasClicked && !Gdx.input.isButtonPressed(com.badlogic.gdx.Input.Buttons.LEFT)) {
 			this.mouseWasClicked = false;
 			for (Clickable clickable : this.clickables) {
 				if (!clickable.isStayClicked()) {
 					if (clickable.isClicked() && clickable.collides((int) x, (int) y, Gameplay.GLOBAL_GUI_SCALE)) {
 						clickable.onRelease();
 						if (clickable == this.apply) {
-							this.updateApplyButton(container, delta);
+							this.updateApplyButton(delta);
 						} else if (clickable == this.fullscreen) {
-							this.updateFullscreenButton(container, delta);
+							this.updateFullscreenButton(delta);
 						}
 						for (int i = 0; i < this.resolutions.length; ++i) {
 							if (this.resolutionClickables[i] == clickable) {
@@ -182,43 +178,35 @@ public class Settings extends GameComponent {
 
 			}
 		}
-		if (input.isKeyPressed(Input.KEY_TAB)) {
-			// if (this.widthField.hasFocus()) {
-			// this.widthField.setFocus(false);
-			// this.heightField.setFocus(true);
-			// }
-		}
+		// if (input.isKeyPressed(Input.KEY_TAB)) {
+		// // if (this.widthField.hasFocus()) {
+		// // this.widthField.setFocus(false);
+		// // this.heightField.setFocus(true);
+		// // }
+		// }
 
 	}
 
-	public void updateFullscreenButton(GameContainer container, int delta) {
+	public void updateFullscreenButton(int delta) {
 		// this.widthField.setFocus(false);
 		// this.heightField.setFocus(false);
 		if (TowerDefense.isFULLSCREEN()) {
-			try {
-				container.setFullscreen(false);
-				TowerDefense.setFULLSCREEN(false);
-
-			} catch (SlickException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			// container.setFullscreen(false);
+			TowerDefense.setFULLSCREEN(false);
 
 		} else {
-			try {
-				container.setFullscreen(true);
-				TowerDefense.setFULLSCREEN(true);
-				this.warning.setVisible(false);
-			} catch (SlickException e) {
-				this.warning.setText("Not a supported fullscreen resolution.");
-				this.warning.setVisible(true);
-			}
+			// container.setFullscreen(true);
+			TowerDefense.setFULLSCREEN(true);
+			this.warning.setVisible(false);
+			this.warning.setText("Not a supported fullscreen resolution.");
+			this.warning.setVisible(true);
+
 		}
 
 		TowerDefense.writeSettingsToFile();
 	}
 
-	public void updateApplyButton(GameContainer container, int delta) {
+	public void updateApplyButton(int delta) {
 		// this.widthField.setFocus(false);
 		// this.heightField.setFocus(false);
 		// String newWidthString = this.widthField.getText();
@@ -261,7 +249,7 @@ public class Settings extends GameComponent {
 		// this.heightField.deactivate();
 	}
 
-	public void activate(GameContainer container) {
+	public void activate() {
 		// this.widthField = new TextField(container, new TrueTypeFont(new Font("Verdana", Font.PLAIN, 15), true), 0, 100, 50, 25);
 		// this.widthField.setText(TowerDefense.getWidth() + "");
 		// this.widthField.setBorderColor(Color.gray);
