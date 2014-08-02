@@ -176,30 +176,23 @@ public class Gameplay extends GameComponent implements InputProcessor {
 		float cursorY = cursorYStart;
 
 		this.playerName = new StaticText(cursorX, cursorY, defaultTextColor, "Player: " + this.player.getName());
-		this.guiElements.add(this.playerName);
 		cursorY += textHeight;
 
 		StaticText livesText = new StaticText(cursorX, cursorY, defaultTextColor, "Lives: ");
-		this.guiElements.add(livesText);
 		cursorX += livesText.getWidth();
 		this.numberLives = new StaticText(cursorX, cursorY, defaultTextColor, "" + this.player.getLives());
-		this.guiElements.add(this.numberLives);
 		cursorX = cursorXStart;
 		cursorY += textHeight;
 
 		StaticText moneyText = new StaticText(cursorX, cursorY, defaultTextColor, "Money: ");
-		this.guiElements.add(moneyText);
 		cursorX += moneyText.getWidth();
 		this.moneyAmount = new StaticText(cursorX, cursorY, defaultTextColor, "" + this.player.getMoney());
-		this.guiElements.add(this.moneyAmount);
 		cursorX = cursorXStart;
 		cursorY += textHeight;
 
 		StaticText scoreText = new StaticText(cursorX, cursorY, defaultTextColor, "Score: ");
-		this.guiElements.add(scoreText);
 		cursorX += scoreText.getWidth();
 		this.score = new StaticText(cursorX, cursorY, defaultTextColor, "" + this.player.getScore());
-		this.guiElements.add(this.score);
 
 		this.towerName = new StaticText(Gameplay.INTERFACE_START_X + guiTileSize, 10, defaultTextColor, "");
 		this.towerInfo = new StaticText(Gameplay.INTERFACE_START_X, guiTileSize, defaultTextColor, "");
@@ -208,6 +201,15 @@ public class Gameplay extends GameComponent implements InputProcessor {
 				this.passedTimeToString());
 
 		this.guiElements.add(this.interfaceBackground);
+
+		this.guiElements.add(scoreText);
+
+		this.guiElements.add(livesText);
+		this.guiElements.add(this.moneyAmount);
+		this.guiElements.add(this.playerName);
+		this.guiElements.add(this.numberLives);
+		this.guiElements.add(moneyText);
+		this.guiElements.add(this.score);
 		this.guiElements.add(this.towerButton1);
 		this.guiElements.add(this.towerButton2);
 		this.guiElements.add(this.towerButton3);
