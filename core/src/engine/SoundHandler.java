@@ -3,19 +3,15 @@ package engine;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.newdawn.slick.SlickException;
-import org.newdawn.slick.Sound;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 
 public class SoundHandler {
 	private Map<String, Sound> sounds = new HashMap<String, Sound>();
 
 	public void add(String name, String location) {
-		try {
-			this.sounds.put(name, new Sound("data/sound/" + location));
-		} catch (SlickException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		Sound s = Gdx.audio.newSound(Gdx.files.internal("data/sound/" + location));
+		this.sounds.put(name, s);
 	}
 
 	public void addWav(String name) {
