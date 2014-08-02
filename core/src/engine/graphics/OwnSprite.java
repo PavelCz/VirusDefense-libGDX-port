@@ -55,12 +55,12 @@ public class OwnSprite extends RenderObject {
 	}
 
 	public void setAlpha(float alpha) {
-		// this.img.setAlpha(alpha);
+		this.sprite.setAlpha(alpha);
 
 	}
 
 	public void setColor(float r, float g, float b) {
-		// this.img.setImageColor(r, g, b);
+		this.sprite.setColor(r, g, b, 1f);
 	}
 
 	/*
