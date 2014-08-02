@@ -21,6 +21,7 @@ public class Scores extends GameComponent {
 
 		String scoreString = "Highscores:\n";
 
+		// reading preferences
 		Preferences prefs = Gdx.app.getPreferences("VirusDefense");
 		String[] scoresList = prefs.getString("score").split("\n");
 		for (int i = 0; i < 9; ++i) {

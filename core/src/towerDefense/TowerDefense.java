@@ -218,6 +218,7 @@ public class TowerDefense {
 	}
 
 	public static void writeScoreToFile(String name, int score) {
+		// reading Preferences
 		Preferences prefs = Gdx.app.getPreferences("VirusDefense");
 		String[] savedScores = prefs.getString("score").split("\n");
 		String[][] scores = new String[savedScores.length + 1][2];
@@ -228,7 +229,7 @@ public class TowerDefense {
 			scores[i][1] = parts[1];
 
 		}
-
+		// adding new score
 		scores[savedScores.length][0] = name;
 		scores[savedScores.length][1] = new Integer(score).toString();
 
@@ -242,6 +243,7 @@ public class TowerDefense {
 			}
 		});
 
+		// saving in preferences
 		StringBuilder builder = new StringBuilder();
 		for (int i = 0; i < scores.length; ++i) {
 			builder.append(scores[i][0] + ", " + scores[i][1] + "\n");
