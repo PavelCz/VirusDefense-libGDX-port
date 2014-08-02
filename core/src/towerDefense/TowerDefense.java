@@ -253,7 +253,7 @@ public class TowerDefense {
 
 		PrintWriter writer;
 		try {
-			writer = new PrintWriter("data/files/score.txt", "UTF-8");
+			writer = new PrintWriter("D:/Users/Valep/git/VirusDefense-libGDX-port/android/assets/data/files/score.txt", "UTF-8");
 			for (int i = 0; i < scores.length; ++i) {
 				writer.println(scores[i][0] + ", " + scores[i][1]);
 			}
