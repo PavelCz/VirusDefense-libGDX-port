@@ -536,6 +536,10 @@ public class Gameplay extends GameComponent implements InputProcessor {
 				this.player.reduceMoney(cost);
 				this.game.getSoundHandler().play("place");
 
+				// if this is included buttons are unpressed after each tower placement
+				this.currentTower = null;
+				this.releaseAllClickables();
+
 			} else {
 				boolean mouseCollidesButton = false;
 				for (Clickable clickable : this.clickables) {
