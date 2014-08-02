@@ -54,7 +54,6 @@ public class StaticText extends GUI {
 
 	public void setText(String text) {
 		this.text.setText(text);
-		;
 	}
 
 	public void setPosition(float x, float y) {
