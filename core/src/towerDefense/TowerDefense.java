@@ -90,10 +90,9 @@ public class TowerDefense {
 
 	// @Override
 	public void update(int delta) {
-		// if (this.quitGame) {
-		// container.exit();
-		// AL.destroy();
-		// }
+		if (this.quitGame) {
+			Gdx.app.exit();
+		}
 		if (this.mode == TowerDefense.MODE_GAME) {
 			this.currentGameComponent = this.gameplay;
 		} else if (this.mode == TowerDefense.MODE_MAPS) {
@@ -126,7 +125,6 @@ public class TowerDefense {
 		this.batch.begin();
 		this.currentGameComponent.render(this.batch);
 		this.batch.end();
-
 	}
 
 	public void setMode(int mode) {
