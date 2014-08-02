@@ -224,15 +224,22 @@ public class TowerDefense {
 		String[][] scores = new String[savedScores.length + 1][2];
 		for (int i = 0; i < savedScores.length; ++i) {
 			String[] parts = savedScores[i].split(", ");
-			scores[i][0] = parts[0];
+			if (parts.length == 2) {
+				scores[i][0] = parts[0];
 
-			scores[i][1] = parts[1];
-
+				scores[i][1] = parts[1];
+			} else if (savedScores.length == 1) {
+				scores = new String[1][2];
+				scores[0][0] = name;
+				scores[0][1] = new Integer(score).toString();
+			}
 		}
+		// if (scores[0][0] != null) { // false when the file not exists
 		// adding new score
-		scores[savedScores.length][0] = name;
-		scores[savedScores.length][1] = new Integer(score).toString();
-
+		if (scores.length == savedScores.length + 1) {
+			scores[savedScores.length][0] = name;
+			scores[savedScores.length][1] = new Integer(score).toString();
+		}
 		// converts the String in the second column to ints and then sorts them by that int value
 		Arrays.sort(scores, new Comparator<String[]>() {
 			@Override
@@ -253,6 +260,8 @@ public class TowerDefense {
 		prefs.putString("score", s);
 		prefs.flush();
 	}
+
+	// }
 
 	public void resetScores() {
 		this.scores = new Scores(this);
