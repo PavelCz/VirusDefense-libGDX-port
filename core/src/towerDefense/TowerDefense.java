@@ -7,8 +7,6 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
-import org.newdawn.slick.SlickException;
-
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import engine.GameComponent;
@@ -93,7 +91,7 @@ public class TowerDefense {
 	}
 
 	// @Override
-	public void update(int delta) throws SlickException {
+	public void update(int delta) {
 		// if (this.quitGame) {
 		// container.exit();
 		// AL.destroy();
@@ -126,7 +124,7 @@ public class TowerDefense {
 	}
 
 	// @Override
-	public void render() throws SlickException {
+	public void render() {
 		this.batch.begin();
 		this.currentGameComponent.render(this.batch);
 		this.batch.end();
