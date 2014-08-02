@@ -93,11 +93,8 @@ public class Gameplay extends GameComponent implements InputProcessor {
 		super.init();
 		this.h = new SlickHealthbar(0, 0, 0, 30, 7);
 		this.currentLevel.setGame(this);
-		// container.getInput().clearKeyPressedRecord();
 		this.initDefaults();
 		Gameplay.camera = new Camera(0, 0, this);
-		// this.currentMapLayout = new MapLayout("maps/map.png", "veins/bg.png",
-		// DEFAULT_SIZE);
 		this.currentTileLength = Gameplay.DEFAULT_SIZE;
 		this.height = Gameplay.DEFAULT_SIZE * this.getVerticalTiles();
 		this.width = Gameplay.DEFAULT_SIZE * this.getHorizontalTiles();
@@ -141,7 +138,6 @@ public class Gameplay extends GameComponent implements InputProcessor {
 
 		//
 		this.initGUI();
-		// container.setShowFPS(this.debugMode);
 
 	}
 
