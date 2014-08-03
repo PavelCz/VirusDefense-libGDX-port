@@ -3,10 +3,8 @@ package towerDefense;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
-import com.badlogic.gdx.scenes.scene2d.ui.TextField.TextFieldListener;
 
 import engine.GameComponent;
 import engine.graphics.Background;
@@ -90,15 +88,15 @@ public class Menu extends GameComponent {
 		this.t.setPosition(x, TowerDefense.getHeight() - y - this.t.getHeight());
 		this.t.setCursorPosition(6);
 
-		this.t.setTouchable(Touchable.enabled);
-		this.t.setTextFieldListener(new TextFieldListener() {
-
-			@Override
-			public void keyTyped(TextField textField, char c) {
-				textField.setText(textField.getText() + c);
-
-			}
-		});
+		// this.t.setTouchable(Touchable.enabled);
+		// this.t.setTextFieldListener(new TextFieldListener() {
+		//
+		// @Override
+		// public void keyTyped(TextField textField, char c) {
+		// textField.setText(textField.getText() + c);
+		//
+		// }
+		// });
 		// this.t.initialize();
 
 		// this.t = new TextField(container, new TrueTypeFont(new Font("Verdana", Font.PLAIN, 15), true), 0, 0, 75, 25);
@@ -115,6 +113,7 @@ public class Menu extends GameComponent {
 	@Override
 	public void update(int delta) {
 		super.update(delta);
+		this.t.act(delta);
 		// Input input = container.getInput();
 		// if (input.isKeyPressed(Input.KEY_ENTER)) {
 		// // this.t.deactivate();
