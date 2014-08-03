@@ -3,6 +3,7 @@ package towerDefense;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 
@@ -17,6 +18,7 @@ import engine.gui.StaticText;
 public class Menu extends GameComponent {
 
 	private TextField t;
+	private Stage stage;
 	// private StaticText version = new StaticText(0, 0, 10, Color.white, "v0.6");
 	private StaticText lostWonMessage;
 	private StartClickable startButton;
@@ -31,6 +33,8 @@ public class Menu extends GameComponent {
 	@Override
 	public void init() {
 		super.init();
+
+		this.stage = new Stage();
 
 		this.background = new Background(1f, "viren.jpg", this.game.getGameplay());
 
@@ -87,8 +91,15 @@ public class Menu extends GameComponent {
 		System.out.println(this.t.getWidth() / 2);
 		this.t.setPosition(x, TowerDefense.getHeight() - y - this.t.getHeight());
 		this.t.setCursorPosition(6);
+		this.t.setDisabled(false);
 
-		// this.t.setTouchable(Touchable.enabled);
+		this.stage.addActor(this.t);
+		Gdx.input.setInputProcessor(this.stage);
+		// this.t.addListener(new TextFieldClickListener() {
+		//
+		// });
+		//
+		// // this.t.setTouchable(Touchable.enabled);
 		// this.t.setTextFieldListener(new TextFieldListener() {
 		//
 		// @Override
