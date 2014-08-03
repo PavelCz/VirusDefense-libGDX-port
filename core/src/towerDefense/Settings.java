@@ -209,39 +209,40 @@ public class Settings extends GameComponent {
 	public void updateApplyButton(int delta) {
 		// this.widthField.setFocus(false);
 		// this.heightField.setFocus(false);
-		// String newWidthString = this.widthField.getText();
-		// String newHeightString = this.heightField.getText();
-		// try {
-		// int newWidth = Integer.parseInt(newWidthString);
-		// int newHeight = Integer.parseInt(newHeightString);
-		// this.warning.setVisible(false);
-		// if (newWidth >= this.minWidth && newHeight >= this.minHeight) {
-		//
-		// try {
-		// AppGameContainer gameContainer = (AppGameContainer) container;
-		// gameContainer.setDisplayMode(newWidth, newHeight, TowerDefense.isFULLSCREEN());
-		// TowerDefense.updateDimensions(container);
-		// TowerDefense.writeSettingsToFile();
-		// this.back.setX(0);
-		// this.back.setY(TowerDefense.getHeight() - this.back.getTextHeight() * 2);
-		// this.game.reinitMenu(container);
-		// this.game.reinitChooseLevel(container);
-		// this.game.reinitComponents(gameContainer);
-		// this.updateResolutionsPosition();
-		// } catch (SlickException e) {
-		// this.warning.setText("Not a supported fullscreen resolution.");
-		// this.warning.setVisible(true);
-		// }
-		//
-		// } else {
-		// this.warning.setText("Minimum is " + this.minWidth + " x " + this.minHeight);
-		// this.warning.setVisible(true);
-		// }
-		//
-		// } catch (NumberFormatException nfe) {
-		// this.warning.setText("Please enter a number.");
-		// this.warning.setVisible(true);
-		// }
+		String newWidthString = this.widthField.getText();
+		String newHeightString = this.heightField.getText();
+		try {
+			int newWidth = Integer.parseInt(newWidthString);
+			int newHeight = Integer.parseInt(newHeightString);
+			this.warning.setVisible(false);
+			if (newWidth >= this.minWidth && newHeight >= this.minHeight) {
+
+				// try {
+				Gdx.graphics.setDisplayMode(newWidth, newHeight, TowerDefense.isFULLSCREEN());
+				// AppGameContainer gameContainer = (AppGameContainer) container;
+				// gameContainer.setDisplayMode(newWidth, newHeight, TowerDefense.isFULLSCREEN());
+				TowerDefense.updateDimensions();
+				// TowerDefense.writeSettingsToFile();
+				this.back.setX(0);
+				this.back.setY(TowerDefense.getHeight() - this.back.getTextHeight() * 2);
+				this.game.reinitMenu();
+				this.game.reinitChooseLevel();
+				this.game.reinitComponents();
+				this.updateResolutionsPosition();
+				// } catch (SlickException e) {
+				// this.warning.setText("Not a supported fullscreen resolution.");
+				// this.warning.setVisible(true);
+				// }
+
+			} else {
+				this.warning.setText("Minimum is " + this.minWidth + " x " + this.minHeight);
+				this.warning.setVisible(true);
+			}
+
+		} catch (NumberFormatException nfe) {
+			this.warning.setText("Please enter a number.");
+			this.warning.setVisible(true);
+		}
 	}
 
 	public void deactivate() {
