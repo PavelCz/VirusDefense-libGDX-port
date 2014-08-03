@@ -312,7 +312,9 @@ public class Settings extends GameComponent {
 	public void setStage(Stage stage) {
 		this.stage = stage;
 
-		// this.getStage().addActor(this.t);
+		this.getStage().addActor(this.heightField);
+
+		this.getStage().addActor(this.widthField);
 	}
 
 }

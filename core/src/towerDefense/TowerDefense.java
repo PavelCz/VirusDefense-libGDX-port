@@ -78,7 +78,6 @@ public class TowerDefense {
 		// }
 
 		this.menu.setStage(this.stage);
-		// this.settings.setStage(stage);
 	}
 
 	private void initSounds() {
@@ -111,6 +110,8 @@ public class TowerDefense {
 			if (this.currentGameComponent != this.settings) {
 				// this.settings.activate(container);
 				this.settings = new Settings(this);
+
+				this.settings.setStage(this.stage);
 			}
 			this.currentGameComponent = this.settings;
 		} else if (this.mode == TowerDefense.MODE_MENU) {
