@@ -416,16 +416,16 @@ public class Gameplay extends GameComponent implements InputProcessor {
 	 */
 	private void keyboardEvents(int delta) {
 
-		if (Gdx.input.isKeyPressed(Input.Keys.I)) {
-			this.debugMode = !this.debugMode;
-			if (this.debugMode) {
-				System.out.println("debug");
-				this.player.setMoney(100000);
-			} else {
-				System.out.println("not debug");
-				this.speed = 1f;
-			}
-		}
+		// if (Gdx.input.isKeyPressed(Input.Keys.I)) {
+		// this.debugMode = !this.debugMode;
+		// if (this.debugMode) {
+		// System.out.println("debug");
+		// this.player.setMoney(100000);
+		// } else {
+		// System.out.println("not debug");
+		// this.speed = 1f;
+		// }
+		// }
 		if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
 			this.game.getMenu().setPauseMenu();
 			this.game.setMode(TowerDefense.MODE_MENU);
