@@ -271,8 +271,6 @@ public class TowerDefense {
 		prefs.flush();
 	}
 
-	// }
-
 	public void resetScores() {
 		this.scores = new Scores(this);
 		this.maps = new ChooseLevel(this);
