@@ -143,8 +143,8 @@ public class Menu extends GameComponent {
 	}
 
 	public String getPlayerName() {
-		// return this.t.getText();
-		return "";
+		this.t.setDisabled(true);
+		return this.t.getText();
 	}
 
 	public void setLost(int score, String name) {
