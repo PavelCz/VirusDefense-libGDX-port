@@ -58,9 +58,12 @@ public abstract class GameComponent {
 		// GDX if left mouse button is down: Gdx.input.isButtonPressed(com.badlogic.gdx.Input.Buttons.LEFT)
 		// GDX if left mouse button is pressed and released in short succession: Gdx.input.justTouched()
 		if (Gdx.input.justTouched()) {
-			this.mouseWasClicked = true;
-			for (Clickable clickable : this.clickables) {
-				clickable.update(x, y);
+
+			if (Gdx.input.isButtonPressed(com.badlogic.gdx.Input.Buttons.LEFT)) {
+				this.mouseWasClicked = true;
+				for (Clickable clickable : this.clickables) {
+					clickable.update(x, y);
+				}
 			}
 
 		} else if (this.mouseWasClicked && !Gdx.input.isButtonPressed(com.badlogic.gdx.Input.Buttons.LEFT)) {
