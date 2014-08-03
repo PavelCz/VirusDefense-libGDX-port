@@ -161,7 +161,7 @@ public class TowerDefense {
 	public void initGameplay(Level level) {
 		this.gameplay = new Gameplay(this, level);
 		// try {
-		// this.gameplay.init(container);
+		this.gameplay.init();
 		// } catch (SlickException e) {
 		// // TODO Auto-generated catch block
 		// e.printStackTrace();
@@ -232,7 +232,7 @@ public class TowerDefense {
 				scores[0][1] = new Integer(score).toString();
 			}
 		}
-		// if (scores[0][0] != null) { // false when the file not exists
+		// if (scores[0][0] != null) { // false when the file not existing
 		// adding new score
 		if (scores.length == savedScores.length + 1) {
 			scores[savedScores.length][0] = name;
@@ -263,6 +263,7 @@ public class TowerDefense {
 
 	public void resetScores() {
 		this.scores = new Scores(this);
+		this.maps = new ChooseLevel(this);
 	}
 
 	public void reinitComponents() {
