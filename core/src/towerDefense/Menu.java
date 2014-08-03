@@ -1,7 +1,10 @@
 package towerDefense;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 
 import engine.GameComponent;
 import engine.graphics.Background;
@@ -13,7 +16,7 @@ import engine.gui.StaticText;
 
 public class Menu extends GameComponent {
 
-	// private TextField t;
+	private TextField t;
 	// private StaticText version = new StaticText(0, 0, 10, Color.white, "v0.6");
 	private StaticText lostWonMessage;
 	private StartClickable startButton;
@@ -77,6 +80,15 @@ public class Menu extends GameComponent {
 		e.setY(y);
 		y += this.startButton.getTextHeight() + 1;
 
+		this.t = new TextField("Player", new Skin(Gdx.files.internal("uiskin.json")));
+
+		this.t.setSize(100, 25);
+		float x = TowerDefense.getWidth() / 2 - this.t.getWidth() / 2;
+		System.out.println(this.t.getWidth() / 2);
+		this.t.setPosition(x, TowerDefense.getHeight() - y - this.t.getHeight());
+		this.t.setCursorPosition(6);
+		// this.t.initialize();
+
 		// this.t = new TextField(container, new TrueTypeFont(new Font("Verdana", Font.PLAIN, 15), true), 0, 0, 75, 25);
 		// this.t.setText("Player");
 		// this.t.setBorderColor(Color.gray);
@@ -102,6 +114,7 @@ public class Menu extends GameComponent {
 	public void render(SpriteBatch batch) {
 		super.render(batch);
 		super.renderGUI(batch);
+		this.t.draw(batch, 1f);
 		// this.t.render(container, graphics);
 
 		// this.version.draw();
