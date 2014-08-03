@@ -6,14 +6,18 @@ import java.util.Comparator;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
 
 import engine.GameComponent;
 import engine.Level;
 import engine.SoundHandler;
 
 public class TowerDefense {
-
+	private OrthographicCamera camera;
+	private Viewport viewport;
 	protected static SoundHandler soundHandler = new SoundHandler();
 	private SpriteBatch batch;
 	public static final int MODE_MENU = 0;
@@ -43,6 +47,11 @@ public class TowerDefense {
 
 	// @Override
 	public void init() {
+
+		this.camera = new OrthographicCamera(1024, 768);
+		this.camera.translate(1024 / 2, 768 / 2);
+		this.viewport = new ScreenViewport(this.camera);
+
 		this.batch = new SpriteBatch();
 		// container.setShowFPS(false);
 		long time = System.nanoTime();
@@ -90,6 +99,12 @@ public class TowerDefense {
 
 	// @Override
 	public void update(int delta) {
+
+		this.viewport.update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+		TowerDefense.WIDTH = Gdx.graphics.getWidth();
+		TowerDefense.HEIGHT = Gdx.graphics.getHeight();
+		System.out.println(Gdx.graphics.getWidth());
+
 		if (this.quitGame) {
 			Gdx.app.exit();
 		}
@@ -122,6 +137,8 @@ public class TowerDefense {
 
 	// @Override
 	public void render() {
+		this.batch.setProjectionMatrix(this.camera.projection);
+		this.batch.setTransformMatrix(this.camera.view);
 		this.batch.begin();
 		this.currentGameComponent.render(this.batch);
 		this.batch.end();
