@@ -3,8 +3,10 @@ package towerDefense;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
+import com.badlogic.gdx.scenes.scene2d.ui.TextField.TextFieldListener;
 
 import engine.GameComponent;
 import engine.graphics.Background;
@@ -81,12 +83,22 @@ public class Menu extends GameComponent {
 		y += this.startButton.getTextHeight() + 1;
 
 		this.t = new TextField("Player", new Skin(Gdx.files.internal("uiskin.json")));
-
+		this.t.setMessageText("Player");
 		this.t.setSize(100, 25);
 		float x = TowerDefense.getWidth() / 2 - this.t.getWidth() / 2;
 		System.out.println(this.t.getWidth() / 2);
 		this.t.setPosition(x, TowerDefense.getHeight() - y - this.t.getHeight());
 		this.t.setCursorPosition(6);
+
+		this.t.setTouchable(Touchable.enabled);
+		this.t.setTextFieldListener(new TextFieldListener() {
+
+			@Override
+			public void keyTyped(TextField textField, char c) {
+				textField.setText(textField.getText() + c);
+
+			}
+		});
 		// this.t.initialize();
 
 		// this.t = new TextField(container, new TrueTypeFont(new Font("Verdana", Font.PLAIN, 15), true), 0, 0, 75, 25);
