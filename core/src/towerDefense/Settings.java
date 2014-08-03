@@ -10,6 +10,7 @@ import com.badlogic.gdx.Graphics;
 import com.badlogic.gdx.Graphics.DisplayMode;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 
 import engine.GameComponent;
 import engine.gui.Clickable;
@@ -21,6 +22,8 @@ public class Settings extends GameComponent {
 
 	// private TextField widthField;
 	// private TextField heightField;
+
+	private Stage stage;
 	private ClickableText apply;
 	private StaticText warning;
 	private SetGameModeButton back;
@@ -296,6 +299,16 @@ public class Settings extends GameComponent {
 		});
 		return resolutionsArray;
 
+	}
+
+	public Stage getStage() {
+		return this.stage;
+	}
+
+	public void setStage(Stage stage) {
+		this.stage = stage;
+
+		// this.getStage().addActor(this.t);
 	}
 
 }
