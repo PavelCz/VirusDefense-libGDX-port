@@ -215,8 +215,6 @@ public class TowerDefense {
 	public static void writeSettingsToFile() {
 		Preferences prefs = Gdx.app.getPreferences("VirusDefense");
 		String resolution = "";
-		// PrintWriter writer;
-		// writer = new PrintWriter(Gdx.files.internal("data/files/settings.txt").writer(false, "UTF-8"));
 		resolution += TowerDefense.getWidth() + "\n";
 		resolution += TowerDefense.getHeight() + "\n";
 		if (TowerDefense.isFULLSCREEN()) {
@@ -225,6 +223,7 @@ public class TowerDefense {
 			resolution += "0";
 		}
 		prefs.putString("resolution", resolution);
+		prefs.flush();
 
 	}
 
