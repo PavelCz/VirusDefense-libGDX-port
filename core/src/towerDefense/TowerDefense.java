@@ -7,13 +7,14 @@ import java.util.Comparator;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 
 import engine.GameComponent;
 import engine.Level;
 import engine.SoundHandler;
 
 public class TowerDefense {
-
+	private Stage stage;
 	protected static SoundHandler soundHandler = new SoundHandler();
 	private SpriteBatch batch;
 	public static final int MODE_MENU = 0;
@@ -55,6 +56,7 @@ public class TowerDefense {
 		// e.printStackTrace();
 		// }
 		// }
+		this.stage = new Stage();
 		this.initSounds();
 		TowerDefense.updateDimensions();
 		// this.reinitMenu(container);
@@ -74,6 +76,9 @@ public class TowerDefense {
 		// TODO Auto-generated catch block
 		// e.printStackTrace();
 		// }
+
+		this.menu.setStage(this.stage);
+		// this.settings.setStage(stage);
 	}
 
 	private void initSounds() {
@@ -94,17 +99,23 @@ public class TowerDefense {
 			Gdx.app.exit();
 		}
 		if (this.mode == TowerDefense.MODE_GAME) {
+
+			Gdx.input.setInputProcessor(this.gameplay);
 			this.currentGameComponent = this.gameplay;
 		} else if (this.mode == TowerDefense.MODE_MAPS) {
 			this.currentGameComponent = this.maps;
 
 		} else if (this.mode == TowerDefense.MODE_SETTINGS) {
+
+			Gdx.input.setInputProcessor(this.stage);
 			if (this.currentGameComponent != this.settings) {
 				// this.settings.activate(container);
 				this.settings = new Settings(this);
 			}
 			this.currentGameComponent = this.settings;
 		} else if (this.mode == TowerDefense.MODE_MENU) {
+
+			Gdx.input.setInputProcessor(this.stage);
 			if (this.currentGameComponent != this.menu) {
 				// this.menu.activate(container);
 			}

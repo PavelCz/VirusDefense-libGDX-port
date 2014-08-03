@@ -34,8 +34,6 @@ public class Menu extends GameComponent {
 	public void init() {
 		super.init();
 
-		this.stage = new Stage();
-
 		this.background = new Background(1f, "viren.jpg", this.game.getGameplay());
 
 		this.pausedMessage.setPosition((TowerDefense.getWidth() - this.pausedMessage.getWidth()) / 2, TowerDefense.getHeight() / 4);
@@ -93,8 +91,6 @@ public class Menu extends GameComponent {
 		this.t.setCursorPosition(6);
 		this.t.setDisabled(false);
 
-		this.getStage().addActor(this.t);
-		Gdx.input.setInputProcessor(this.getStage());
 		// this.t.addListener(new TextFieldClickListener() {
 		//
 		// });
@@ -201,8 +197,10 @@ public class Menu extends GameComponent {
 		return this.stage;
 	}
 
-	// public void setStage(Stage stage) {
-	// this.stage = stage;
-	// }
+	public void setStage(Stage stage) {
+		this.stage = stage;
+
+		this.getStage().addActor(this.t);
+	}
 
 }
