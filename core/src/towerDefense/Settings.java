@@ -222,7 +222,7 @@ public class Settings extends GameComponent {
 				// AppGameContainer gameContainer = (AppGameContainer) container;
 				// gameContainer.setDisplayMode(newWidth, newHeight, TowerDefense.isFULLSCREEN());
 				TowerDefense.updateDimensions();
-				// TowerDefense.writeSettingsToFile();
+				TowerDefense.writeSettingsToFile();
 				this.back.setX(0);
 				this.back.setY(TowerDefense.getHeight() - this.back.getTextHeight() * 2);
 				this.game.reinitMenu();
