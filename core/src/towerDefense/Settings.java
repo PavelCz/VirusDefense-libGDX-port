@@ -10,6 +10,9 @@ import com.badlogic.gdx.Graphics;
 import com.badlogic.gdx.Graphics.DisplayMode;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 
 import engine.GameComponent;
 import engine.gui.Clickable;
@@ -19,8 +22,10 @@ import engine.gui.StaticText;
 
 public class Settings extends GameComponent {
 
-	// private TextField widthField;
-	// private TextField heightField;
+	private TextField widthField;
+	private TextField heightField;
+
+	private Stage stage;
 	private ClickableText apply;
 	private StaticText warning;
 	private SetGameModeButton back;
@@ -40,24 +45,26 @@ public class Settings extends GameComponent {
 		this.back.setX(0);
 		this.back.setY(TowerDefense.getHeight() - this.back.getTextHeight() * 2);
 
-		// TrueTypeFont ttt = new TrueTypeFont(new Font("Verdana", Font.PLAIN, 15), true);
 		int fieldsX = 0;
 		int fieldsY = 100;
 		int fieldWidth = 50;
-		// this.widthField = new TextField(container, ttt, fieldsX, fieldsY, fieldWidth, 25);
-		// this.widthField.setText(TowerDefense.getWidth() + "");
-		// this.widthField.setBorderColor(Color.gray);
-		// this.widthField.setBackgroundColor(Color.lightGray);
-		// this.widthField.setMaxLength(4);
-		// this.widthField.setCursorPos(this.widthField.getWidth());
+
+		this.widthField = new TextField(TowerDefense.getWidth() + "", new Skin(Gdx.files.internal("uiskin.json")));
+		this.widthField.setSize(fieldWidth, 25);
+		float x = TowerDefense.getWidth() / 2 - this.widthField.getWidth() / 2;
+		this.widthField.setPosition(fieldsX, TowerDefense.getHeight() - fieldsY - this.widthField.getHeight());
+		this.widthField.setCursorPosition(this.widthField.getText().getBytes().length);
+		this.widthField.setMaxLength(4);
+
 		fieldsX += fieldWidth;
 
-		// this.heightField = new TextField(container, ttt, fieldsX, fieldsY, fieldWidth, 25);
-		// this.heightField.setText(TowerDefense.getHeight() + "");
-		// this.heightField.setBorderColor(Color.gray);
-		// this.heightField.setBackgroundColor(Color.lightGray);
-		// this.heightField.setMaxLength(4);
-		// this.heightField.setCursorPos(this.heightField.getWidth());
+		this.heightField = new TextField(TowerDefense.getHeight() + "", new Skin(Gdx.files.internal("uiskin.json")));
+		this.heightField.setSize(fieldWidth, 25);
+		x = TowerDefense.getWidth() / 2 - this.widthField.getWidth() / 2;
+		this.heightField.setPosition(fieldsX, TowerDefense.getHeight() - fieldsY - this.heightField.getHeight());
+		this.heightField.setCursorPosition(this.heightField.getText().getBytes().length);
+		this.heightField.setMaxLength(4);
+
 		fieldsX += fieldWidth + 5;
 
 		this.apply = new ClickableText(fieldsX, fieldsY, "Apply", Gameplay.GLOBAL_GUI_SCALE, game.getGameplay(), false);
@@ -71,7 +78,7 @@ public class Settings extends GameComponent {
 		this.warning.setVisible(false);
 		this.guiElements.add(this.warning);
 		fieldsX = 0;
-		// fieldsY += this.widthField.getHeight();
+		fieldsY += this.widthField.getHeight();
 		this.fullscreen = new ClickableText(fieldsX, fieldsY, "Toggle fullscreen", Gameplay.GLOBAL_GUI_SCALE, game.getGameplay(),
 				false);
 		this.fullscreen.setColor(Color.BLACK);
@@ -124,11 +131,11 @@ public class Settings extends GameComponent {
 		super.render(batch);
 
 		super.renderGUI(batch);
-		// this.widthField.render(container, graphics);
-		// this.heightField.render(container, graphics);
-		// this.warning.draw();
-		// this.fullscreen.draw();
-		// this.supportedResolutions.draw();
+		this.widthField.draw(batch, 1f);
+		this.heightField.draw(batch, 1f);
+		this.warning.draw(batch);
+		this.fullscreen.draw(batch);
+		// this.supportedResolutions.draw(batch);
 	}
 
 	// @Override
@@ -137,12 +144,13 @@ public class Settings extends GameComponent {
 		float x = Gdx.input.getX();
 		float y = Gdx.input.getY();
 		super.updateHovering(x, y);
-		if (Gdx.input.isButtonPressed(com.badlogic.gdx.Input.Buttons.LEFT)) {
+		if (Gdx.input.justTouched()) {
+			if (Gdx.input.isButtonPressed(com.badlogic.gdx.Input.Buttons.LEFT)) {
+				this.mouseWasClicked = true;
 
-			this.mouseWasClicked = true;
-
-			for (Clickable clickable : this.clickables) {
-				clickable.update(x, y);
+				for (Clickable clickable : this.clickables) {
+					clickable.update(x, y);
+				}
 			}
 
 		} else if (this.mouseWasClicked && !Gdx.input.isButtonPressed(com.badlogic.gdx.Input.Buttons.LEFT)) {
@@ -201,39 +209,40 @@ public class Settings extends GameComponent {
 	public void updateApplyButton(int delta) {
 		// this.widthField.setFocus(false);
 		// this.heightField.setFocus(false);
-		// String newWidthString = this.widthField.getText();
-		// String newHeightString = this.heightField.getText();
-		// try {
-		// int newWidth = Integer.parseInt(newWidthString);
-		// int newHeight = Integer.parseInt(newHeightString);
-		// this.warning.setVisible(false);
-		// if (newWidth >= this.minWidth && newHeight >= this.minHeight) {
-		//
-		// try {
-		// AppGameContainer gameContainer = (AppGameContainer) container;
-		// gameContainer.setDisplayMode(newWidth, newHeight, TowerDefense.isFULLSCREEN());
-		// TowerDefense.updateDimensions(container);
-		// TowerDefense.writeSettingsToFile();
-		// this.back.setX(0);
-		// this.back.setY(TowerDefense.getHeight() - this.back.getTextHeight() * 2);
-		// this.game.reinitMenu(container);
-		// this.game.reinitChooseLevel(container);
-		// this.game.reinitComponents(gameContainer);
-		// this.updateResolutionsPosition();
-		// } catch (SlickException e) {
-		// this.warning.setText("Not a supported fullscreen resolution.");
-		// this.warning.setVisible(true);
-		// }
-		//
-		// } else {
-		// this.warning.setText("Minimum is " + this.minWidth + " x " + this.minHeight);
-		// this.warning.setVisible(true);
-		// }
-		//
-		// } catch (NumberFormatException nfe) {
-		// this.warning.setText("Please enter a number.");
-		// this.warning.setVisible(true);
-		// }
+		String newWidthString = this.widthField.getText();
+		String newHeightString = this.heightField.getText();
+		try {
+			int newWidth = Integer.parseInt(newWidthString);
+			int newHeight = Integer.parseInt(newHeightString);
+			this.warning.setVisible(false);
+			if (newWidth >= this.minWidth && newHeight >= this.minHeight) {
+
+				// try {
+				Gdx.graphics.setDisplayMode(newWidth, newHeight, TowerDefense.isFULLSCREEN());
+				// AppGameContainer gameContainer = (AppGameContainer) container;
+				// gameContainer.setDisplayMode(newWidth, newHeight, TowerDefense.isFULLSCREEN());
+				TowerDefense.updateDimensions();
+				TowerDefense.writeSettingsToFile();
+				this.back.setX(0);
+				this.back.setY(TowerDefense.getHeight() - this.back.getTextHeight() * 2);
+				this.game.reinitMenu();
+				this.game.reinitChooseLevel();
+				this.game.reinitComponents();
+				this.updateResolutionsPosition();
+				// } catch (SlickException e) {
+				// this.warning.setText("Not a supported fullscreen resolution.");
+				// this.warning.setVisible(true);
+				// }
+
+			} else {
+				this.warning.setText("Minimum is " + this.minWidth + " x " + this.minHeight);
+				this.warning.setVisible(true);
+			}
+
+		} catch (NumberFormatException nfe) {
+			this.warning.setText("Please enter a number.");
+			this.warning.setVisible(true);
+		}
 	}
 
 	public void deactivate() {
@@ -296,6 +305,18 @@ public class Settings extends GameComponent {
 		});
 		return resolutionsArray;
 
+	}
+
+	public Stage getStage() {
+		return this.stage;
+	}
+
+	public void setStage(Stage stage) {
+		this.stage = stage;
+
+		this.getStage().addActor(this.heightField);
+
+		this.getStage().addActor(this.widthField);
 	}
 
 }

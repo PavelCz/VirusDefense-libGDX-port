@@ -1,19 +1,19 @@
 package towerDefense;
 
-import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.Comparator;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 
 import engine.GameComponent;
 import engine.Level;
 import engine.SoundHandler;
 
 public class TowerDefense {
-
+	private Stage stage;
 	protected static SoundHandler soundHandler = new SoundHandler();
 	private SpriteBatch batch;
 	public static final int MODE_MENU = 0;
@@ -55,6 +55,7 @@ public class TowerDefense {
 		// e.printStackTrace();
 		// }
 		// }
+		this.stage = new Stage();
 		this.initSounds();
 		TowerDefense.updateDimensions();
 		// this.reinitMenu(container);
@@ -74,6 +75,8 @@ public class TowerDefense {
 		// TODO Auto-generated catch block
 		// e.printStackTrace();
 		// }
+
+		this.menu.setStage(this.stage);
 	}
 
 	private void initSounds() {
@@ -94,17 +97,25 @@ public class TowerDefense {
 			Gdx.app.exit();
 		}
 		if (this.mode == TowerDefense.MODE_GAME) {
+
+			Gdx.input.setInputProcessor(this.gameplay);
 			this.currentGameComponent = this.gameplay;
 		} else if (this.mode == TowerDefense.MODE_MAPS) {
 			this.currentGameComponent = this.maps;
 
 		} else if (this.mode == TowerDefense.MODE_SETTINGS) {
+
+			Gdx.input.setInputProcessor(this.stage);
 			if (this.currentGameComponent != this.settings) {
 				// this.settings.activate(container);
 				this.settings = new Settings(this);
+
+				this.settings.setStage(this.stage);
 			}
 			this.currentGameComponent = this.settings;
 		} else if (this.mode == TowerDefense.MODE_MENU) {
+
+			Gdx.input.setInputProcessor(this.stage);
 			if (this.currentGameComponent != this.menu) {
 				// this.menu.activate(container);
 			}
@@ -161,7 +172,7 @@ public class TowerDefense {
 	public void initGameplay(Level level) {
 		this.gameplay = new Gameplay(this, level);
 		// try {
-		// this.gameplay.init(container);
+		this.gameplay.init();
 		// } catch (SlickException e) {
 		// // TODO Auto-generated catch block
 		// e.printStackTrace();
@@ -202,16 +213,17 @@ public class TowerDefense {
 	}
 
 	public static void writeSettingsToFile() {
-		PrintWriter writer;
-		writer = new PrintWriter(Gdx.files.internal("data/files/settings.txt").writer(false, "UTF-8"));
-		writer.println(TowerDefense.getWidth());
-		writer.println(TowerDefense.getHeight());
+		Preferences prefs = Gdx.app.getPreferences("VirusDefense");
+		String resolution = "";
+		resolution += TowerDefense.getWidth() + "\n";
+		resolution += TowerDefense.getHeight() + "\n";
 		if (TowerDefense.isFULLSCREEN()) {
-			writer.println(1);
+			resolution += "1";
 		} else {
-			writer.println(0);
+			resolution += "0";
 		}
-		writer.close();
+		prefs.putString("resolution", resolution);
+		prefs.flush();
 
 	}
 
@@ -232,7 +244,7 @@ public class TowerDefense {
 				scores[0][1] = new Integer(score).toString();
 			}
 		}
-		// if (scores[0][0] != null) { // false when the file not exists
+		// if (scores[0][0] != null) { // false when the file not existing
 		// adding new score
 		if (scores.length == savedScores.length + 1) {
 			scores[savedScores.length][0] = name;
@@ -259,10 +271,9 @@ public class TowerDefense {
 		prefs.flush();
 	}
 
-	// }
-
 	public void resetScores() {
 		this.scores = new Scores(this);
+		this.maps = new ChooseLevel(this);
 	}
 
 	public void reinitComponents() {

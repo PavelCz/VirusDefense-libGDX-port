@@ -368,12 +368,10 @@ public class Gameplay extends GameComponent implements InputProcessor {
 		this.mouseEvents(delta);
 		this.keyboardEvents(delta);
 
+		// player dead
 		if (this.player.getLives() <= 0) {
-			TowerDefense.writeScoreToFile(this.game.getGameplay().getPlayer().getName(), this.game.getGameplay().getPlayer()
-					.getScore());
-			this.game.resetScores();
+			this.gameEndActions();
 			this.game.setLost(this.player.getScore(), this.player.getName());
-			this.game.setMode(TowerDefense.MODE_MENU);
 			this.game.getMenu().setStartMenu();
 		}
 
@@ -745,5 +743,15 @@ public class Gameplay extends GameComponent implements InputProcessor {
 			Gameplay.SIZE = (int) (Gameplay.DEFAULT_SIZE * Gameplay.CURRENT_GAME_SCALE);
 		}
 		return true;
+	}
+
+	public void gameEndActions() {
+		TowerDefense.writeScoreToFile(this.game.getGameplay().getPlayer().getName(), this.game.getGameplay().getPlayer().getScore());
+		this.game.resetScores();
+		this.game.getMenu().setDisableTextField(false);
+
+		this.game.setMode(TowerDefense.MODE_MENU);
+
+		Gdx.input.setInputProcessor(this.game.getMenu().getStage());
 	}
 }

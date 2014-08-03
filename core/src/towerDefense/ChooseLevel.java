@@ -89,10 +89,13 @@ public class ChooseLevel extends GameComponent {
 		float y = Gdx.input.getY();
 		super.updateHovering(x, y);
 		if (Gdx.input.justTouched()) {
-			this.mouseWasClicked = true;
 
-			for (Clickable clickable : this.clickables) {
-				clickable.update(x, y);
+			if (Gdx.input.isButtonPressed(com.badlogic.gdx.Input.Buttons.LEFT)) {
+				this.mouseWasClicked = true;
+
+				for (Clickable clickable : this.clickables) {
+					clickable.update(x, y);
+				}
 			}
 
 		} else if (this.mouseWasClicked && !Gdx.input.isButtonPressed(com.badlogic.gdx.Input.Buttons.LEFT)) {
@@ -118,6 +121,7 @@ public class ChooseLevel extends GameComponent {
 
 							this.game.initGameplay(this.currentLevel);
 							// this.game.setLevel(this.currentLevel);
+							this.game.getMenu().setDisableTextField(true);
 							this.game.getGameplay().setPlayerName(this.game.getPlayerName());
 							this.game.setMode(TowerDefense.MODE_GAME);
 						}

@@ -1,7 +1,11 @@
 package towerDefense;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 
 import engine.GameComponent;
 import engine.graphics.Background;
@@ -13,7 +17,8 @@ import engine.gui.StaticText;
 
 public class Menu extends GameComponent {
 
-	// private TextField t;
+	private TextField t;
+	private Stage stage;
 	// private StaticText version = new StaticText(0, 0, 10, Color.white, "v0.6");
 	private StaticText lostWonMessage;
 	private StartClickable startButton;
@@ -77,6 +82,30 @@ public class Menu extends GameComponent {
 		e.setY(y);
 		y += this.startButton.getTextHeight() + 1;
 
+		this.t = new TextField("Player", new Skin(Gdx.files.internal("uiskin.json")));
+		this.t.setMessageText("Player");
+		this.t.setSize(100, 25);
+		float x = TowerDefense.getWidth() / 2 - this.t.getWidth() / 2;
+		System.out.println(this.t.getWidth() / 2);
+		this.t.setPosition(x, TowerDefense.getHeight() - y - this.t.getHeight());
+		this.t.setCursorPosition(6);
+		this.t.setDisabled(false);
+
+		// this.t.addListener(new TextFieldClickListener() {
+		//
+		// });
+		//
+		// // this.t.setTouchable(Touchable.enabled);
+		// this.t.setTextFieldListener(new TextFieldListener() {
+		//
+		// @Override
+		// public void keyTyped(TextField textField, char c) {
+		// textField.setText(textField.getText() + c);
+		//
+		// }
+		// });
+		// this.t.initialize();
+
 		// this.t = new TextField(container, new TrueTypeFont(new Font("Verdana", Font.PLAIN, 15), true), 0, 0, 75, 25);
 		// this.t.setText("Player");
 		// this.t.setBorderColor(Color.gray);
@@ -91,6 +120,7 @@ public class Menu extends GameComponent {
 	@Override
 	public void update(int delta) {
 		super.update(delta);
+		this.t.act(delta);
 		// Input input = container.getInput();
 		// if (input.isKeyPressed(Input.KEY_ENTER)) {
 		// // this.t.deactivate();
@@ -102,14 +132,14 @@ public class Menu extends GameComponent {
 	public void render(SpriteBatch batch) {
 		super.render(batch);
 		super.renderGUI(batch);
+		this.t.draw(batch, 1f);
 		// this.t.render(container, graphics);
 
 		// this.version.draw();
 	}
 
 	public String getPlayerName() {
-		// return this.t.getText();
-		return "";
+		return this.t.getText();
 	}
 
 	public void setLost(int score, String name) {
@@ -140,6 +170,10 @@ public class Menu extends GameComponent {
 		this.lostWonMessage.setVisible(true);
 	}
 
+	public void setDisableTextField(boolean disabled) {
+		this.t.setDisabled(disabled);
+	}
+
 	// public void deactivate() {
 	// this.t.deactivate();
 	// }
@@ -157,6 +191,16 @@ public class Menu extends GameComponent {
 		this.lostWonMessage.setPosition((TowerDefense.getWidth() - this.lostWonMessage.getWidth()) / 2, 0);
 		this.lostWonMessage.setColor(Color.GREEN);
 
+	}
+
+	public Stage getStage() {
+		return this.stage;
+	}
+
+	public void setStage(Stage stage) {
+		this.stage = stage;
+
+		this.getStage().addActor(this.t);
 	}
 
 }
