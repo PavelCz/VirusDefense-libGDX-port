@@ -4,7 +4,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 import towerDefense.Gameplay;
-import towerDefense.TowerDefense;
 
 public class WaveHandler {
 	private LinkedList<Wave> waves;
@@ -73,12 +72,10 @@ public class WaveHandler {
 
 	public void update(int delta) {
 		this.delta -= delta;
+
 		// the player defeated all the waves
 		if (this.waves.isEmpty() && this.done) {
-			TowerDefense.writeScoreToFile(this.game.game.getGameplay().getPlayer().getName(), this.game.game.getGameplay().getPlayer()
-					.getScore());
-			this.game.game.resetScores();
-			this.game.game.setMode(TowerDefense.MODE_MENU);
+			this.game.gameEndActions();
 			this.game.game.setWon(this.game.getPlayer().getScore(), this.game.getPlayer().getName());
 		}
 		if (this.game != null && this.game.getEnemies().isEmpty() && this.index <= 0) {

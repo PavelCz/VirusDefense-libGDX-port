@@ -118,6 +118,7 @@ public class ChooseLevel extends GameComponent {
 
 							this.game.initGameplay(this.currentLevel);
 							// this.game.setLevel(this.currentLevel);
+							this.game.getMenu().setDisableTextField(true);
 							this.game.getGameplay().setPlayerName(this.game.getPlayerName());
 							this.game.setMode(TowerDefense.MODE_GAME);
 						}

@@ -143,7 +143,6 @@ public class Menu extends GameComponent {
 	}
 
 	public String getPlayerName() {
-		this.t.setDisabled(true);
 		return this.t.getText();
 	}
 
@@ -173,6 +172,10 @@ public class Menu extends GameComponent {
 		this.settings.activate();
 		this.settings.setColor(Color.WHITE);
 		this.lostWonMessage.setVisible(true);
+	}
+
+	public void setDisableTextField(boolean disabled) {
+		this.t.setDisabled(disabled);
 	}
 
 	// public void deactivate() {
