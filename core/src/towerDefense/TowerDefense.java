@@ -1,6 +1,5 @@
 package towerDefense;
 
-import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.Comparator;
 
@@ -214,16 +213,18 @@ public class TowerDefense {
 	}
 
 	public static void writeSettingsToFile() {
-		PrintWriter writer;
-		writer = new PrintWriter(Gdx.files.internal("data/files/settings.txt").writer(false, "UTF-8"));
-		writer.println(TowerDefense.getWidth());
-		writer.println(TowerDefense.getHeight());
+		Preferences prefs = Gdx.app.getPreferences("VirusDefense");
+		String resolution = "";
+		// PrintWriter writer;
+		// writer = new PrintWriter(Gdx.files.internal("data/files/settings.txt").writer(false, "UTF-8"));
+		resolution += TowerDefense.getWidth() + "\n";
+		resolution += TowerDefense.getHeight() + "\n";
 		if (TowerDefense.isFULLSCREEN()) {
-			writer.println(1);
+			resolution += "1";
 		} else {
-			writer.println(0);
+			resolution += "0";
 		}
-		writer.close();
+		prefs.putString("resolution", resolution);
 
 	}
 
