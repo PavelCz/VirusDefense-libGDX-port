@@ -93,8 +93,8 @@ public class Menu extends GameComponent {
 		this.t.setCursorPosition(6);
 		this.t.setDisabled(false);
 
-		this.stage.addActor(this.t);
-		Gdx.input.setInputProcessor(this.stage);
+		this.getStage().addActor(this.t);
+		Gdx.input.setInputProcessor(this.getStage());
 		// this.t.addListener(new TextFieldClickListener() {
 		//
 		// });
@@ -196,5 +196,13 @@ public class Menu extends GameComponent {
 		this.lostWonMessage.setColor(Color.GREEN);
 
 	}
+
+	public Stage getStage() {
+		return this.stage;
+	}
+
+	// public void setStage(Stage stage) {
+	// this.stage = stage;
+	// }
 
 }

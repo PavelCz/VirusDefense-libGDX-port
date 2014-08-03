@@ -751,5 +751,7 @@ public class Gameplay extends GameComponent implements InputProcessor {
 		this.game.getMenu().setDisableTextField(false);
 
 		this.game.setMode(TowerDefense.MODE_MENU);
+
+		Gdx.input.setInputProcessor(this.game.getMenu().getStage());
 	}
 }
