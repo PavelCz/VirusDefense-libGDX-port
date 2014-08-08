@@ -521,8 +521,8 @@ public class Gameplay extends GameComponent implements InputProcessor {
 	private void mouseEvents(int delta) {
 		if (this.mode == 0) {
 
-			float x = Gdx.input.getX();
-			float y = Gdx.input.getY();
+			float x = TowerDefense.getMouseX();
+			float y = TowerDefense.getMouseY();
 			if (Gdx.input.justTouched()) { // just touched also true for right mouse button...
 				if (Gdx.input.isButtonPressed(com.badlogic.gdx.Input.Buttons.LEFT)) { // ...therefore this if is needed
 					this.placeTower();
@@ -539,8 +539,8 @@ public class Gameplay extends GameComponent implements InputProcessor {
 	}
 
 	private void placeTower() {
-		float x = Gdx.input.getX() + Gameplay.getCameraX();
-		float y = Gdx.input.getY() + Gameplay.getCameraY();
+		float x = TowerDefense.getMouseX() + Gameplay.getCameraX();
+		float y = TowerDefense.getMouseY() + Gameplay.getCameraY();
 		int newX = (int) x / Gameplay.SIZE;
 		int newY = (int) y / Gameplay.SIZE;
 

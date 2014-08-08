@@ -52,8 +52,8 @@ public abstract class GameComponent {
 	}
 
 	private void updateClickables(int delta) {
-		float x = Gdx.input.getX();
-		float y = Gdx.input.getY();
+		float x = TowerDefense.getMouseX();
+		float y = TowerDefense.getMouseY();
 		this.updateHovering(x, y);
 		// GDX if left mouse button is down: Gdx.input.isButtonPressed(com.badlogic.gdx.Input.Buttons.LEFT)
 		// GDX if left mouse button is pressed and released in short succession: Gdx.input.justTouched()

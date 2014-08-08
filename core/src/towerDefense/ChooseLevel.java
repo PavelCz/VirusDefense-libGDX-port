@@ -85,8 +85,8 @@ public class ChooseLevel extends GameComponent {
 		// Input input = container.getInput();
 		// float x = input.getMouseX();
 		// float y = input.getMouseY();
-		float x = Gdx.input.getX();
-		float y = Gdx.input.getY();
+		float x = TowerDefense.getMouseX();
+		float y = TowerDefense.getMouseY();
 		super.updateHovering(x, y);
 		if (Gdx.input.justTouched()) {
 

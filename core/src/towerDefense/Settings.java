@@ -141,8 +141,8 @@ public class Settings extends GameComponent {
 	// @Override
 	@Override
 	public void update(int delta) {
-		float x = Gdx.input.getX();
-		float y = Gdx.input.getY();
+		float x = TowerDefense.getMouseX();
+		float y = TowerDefense.getMouseY();
 		super.updateHovering(x, y);
 		if (Gdx.input.justTouched()) {
 			if (Gdx.input.isButtonPressed(com.badlogic.gdx.Input.Buttons.LEFT)) {
