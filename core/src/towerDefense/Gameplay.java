@@ -402,8 +402,8 @@ public class Gameplay extends GameComponent implements InputProcessor {
 			// this.currentTower.getSprite().getWidth() / 2);
 			// this.towerShadowY = (int) (input.getMouseY() -
 			// this.currentTower.getSprite().getHeight() / 2);
-			int x = Gdx.input.getX() + Gameplay.getCameraX();
-			int y = Gdx.input.getY() + Gameplay.getCameraY();
+			int x = TowerDefense.getMouseX() + Gameplay.getCameraX();
+			int y = TowerDefense.getMouseY() + Gameplay.getCameraY();
 			int newX = (x) / Gameplay.SIZE;
 			int newY = (y) / Gameplay.SIZE;
 			this.towerShadowX = (int) (newX * Gameplay.SIZE - Gameplay.getCameraX());
