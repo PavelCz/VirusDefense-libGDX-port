@@ -448,11 +448,6 @@ public class Gameplay extends GameComponent implements InputProcessor {
 
 		float xOrigin = Gdx.graphics.getWidth() / 2;
 		float yOrigin = Gdx.graphics.getHeight() / 2;
-		if (this.gameCamera.position.x < xOrigin) {
-			this.gameCamera.position.x = xOrigin;
-		} else if (this.gameCamera.position.y < yOrigin) {
-			this.gameCamera.position.y = yOrigin;
-		}
 		// else if ((Gameplay.getCameraX() + cameraWidth) / Gameplay.CURRENT_GAME_SCALE > this.getHorizontalTiles()
 		// * Gameplay.DEFAULT_SIZE) {
 		// Gameplay.camera.setX((this.getHorizontalTiles() * Gameplay.DEFAULT_SIZE) * Gameplay.CURRENT_GAME_SCALE - cameraWidth);
@@ -467,7 +462,9 @@ public class Gameplay extends GameComponent implements InputProcessor {
 		float scrollDistance = scrollSpeed * delta;
 		if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
 			this.gameCamera.translate(-scrollDistance, 0);
-
+			if (this.gameCamera.position.x < xOrigin) {
+				this.gameCamera.position.x = xOrigin;
+			}
 		}
 
 		if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
@@ -480,7 +477,9 @@ public class Gameplay extends GameComponent implements InputProcessor {
 		}
 		if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
 			this.gameCamera.translate(0, -scrollDistance);
-
+			if (this.gameCamera.position.y < yOrigin) {
+				this.gameCamera.position.y = yOrigin;
+			}
 		}
 
 		if (this.debugMode) {
