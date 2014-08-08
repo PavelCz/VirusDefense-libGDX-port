@@ -26,7 +26,7 @@ public abstract class Clickable extends GUI {
 					if (this.gameComponent != null) {
 						this.gameComponent.releaseAllClickablesExcept(this);
 					}
-
+					System.out.println(this.y);
 					this.onClick();
 
 				}

@@ -33,8 +33,8 @@ public class Text extends RenderObject {
 			// this.bmfont.draw(batch, this.text, x, y);
 
 			for (String line : this.text.split("\n")) {
-				this.bmfont.draw(batch, line, x, y);
-				y += this.bmfont.getLineHeight();
+				this.bmfont.draw(batch, line, x, y + this.getTextHeight());
+				// y += this.bmfont.getLineHeight();
 			}
 		}
 
@@ -65,6 +65,7 @@ public class Text extends RenderObject {
 
 	public int getTextHeight() {
 		// return (int) this.bmfont.getLineHeight();
+		// System.out.println(this.bmfont.getBounds(this.text).height);
 		return (int) this.bmfont.getBounds(this.text).height;
 	}
 
