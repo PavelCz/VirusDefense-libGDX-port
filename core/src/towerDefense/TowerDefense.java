@@ -340,4 +340,11 @@ public class TowerDefense implements ApplicationListener {
 
 	}
 
+	public static int getMouseX() {
+		return Gdx.input.getX();
+	}
+
+	public static int getMouseY() {
+		return Gdx.input.getY();
+	}
 }
