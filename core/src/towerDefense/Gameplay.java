@@ -16,6 +16,7 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Matrix4;
 
 import engine.Enemy;
 import engine.EnemyTypeHandler;
@@ -217,6 +218,8 @@ public class Gameplay extends GameComponent implements InputProcessor {
 	@Override
 	public void render(SpriteBatch batch) {
 		this.gameCamera.update();
+		Matrix4 projectionBuffer = batch.getProjectionMatrix().cpy();
+		Matrix4 transformBuffer = batch.getTransformMatrix().cpy();
 		// super.render(batch);
 		batch.setProjectionMatrix(this.gameCamera.combined);
 		this.drawBackground(batch);
@@ -227,6 +230,8 @@ public class Gameplay extends GameComponent implements InputProcessor {
 
 		this.renderTowerShadow(batch);
 
+		batch.setProjectionMatrix(projectionBuffer);
+		batch.setTransformMatrix(transformBuffer);
 		this.renderGUI(batch);
 
 		for (Projectile projectiles : this.projectiles) {
