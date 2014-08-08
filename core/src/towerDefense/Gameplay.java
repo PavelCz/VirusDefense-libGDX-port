@@ -14,6 +14,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import engine.Enemy;
@@ -39,6 +40,7 @@ import engine.projectiles.Projectile;
  * @author Pavel
  */
 public class Gameplay extends GameComponent implements InputProcessor {
+	private OrthographicCamera gameCamera;
 	private SlickHealthbar h;
 	// private static Camera camera;
 	private float height, width;
@@ -91,6 +93,9 @@ public class Gameplay extends GameComponent implements InputProcessor {
 	@Override
 	public void init() {
 		super.init();
+		this.gameCamera = new OrthographicCamera(1024, 768);
+		this.gameCamera.translate(1024 / 2, 768 / 2);
+		// this.gameCamera.zoom = 2;
 		this.h = new SlickHealthbar(0, 0, 0, 30, 7);
 		this.currentLevel.setGame(this);
 		this.initDefaults();
@@ -211,7 +216,9 @@ public class Gameplay extends GameComponent implements InputProcessor {
 
 	@Override
 	public void render(SpriteBatch batch) {
-		super.render(batch);
+		this.gameCamera.update();
+		// super.render(batch);
+		batch.setProjectionMatrix(this.gameCamera.combined);
 		this.drawBackground(batch);
 		this.currentLevel.renderPath(batch);
 
@@ -727,20 +734,21 @@ public class Gameplay extends GameComponent implements InputProcessor {
 
 	@Override
 	public boolean scrolled(int amount) {
-		int mouseWheel = -amount;
-		if (mouseWheel > 0) { // mouse wheel up
-			Gameplay.CURRENT_GAME_SCALE *= 1.1f;
-			if (Gameplay.CURRENT_GAME_SCALE > 6) {
-				Gameplay.CURRENT_GAME_SCALE = 6f;
-			}
-			Gameplay.SIZE = (int) (Gameplay.DEFAULT_SIZE * Gameplay.CURRENT_GAME_SCALE);
-		} else if (mouseWheel < 0) {// mouse wheel down
-			Gameplay.CURRENT_GAME_SCALE *= 0.9f;
-			if (Gameplay.CURRENT_GAME_SCALE < Gameplay.MAX_GAME_SCALE) {
-				Gameplay.CURRENT_GAME_SCALE = Gameplay.MAX_GAME_SCALE;
-			}
-			Gameplay.SIZE = (int) (Gameplay.DEFAULT_SIZE * Gameplay.CURRENT_GAME_SCALE);
-		}
+		// int mouseWheel = -amount;
+		// if (mouseWheel > 0) { // mouse wheel up
+		// Gameplay.CURRENT_GAME_SCALE *= 1.1f;
+		// if (Gameplay.CURRENT_GAME_SCALE > 6) {
+		// Gameplay.CURRENT_GAME_SCALE = 6f;
+		// }
+		// Gameplay.SIZE = (int) (Gameplay.DEFAULT_SIZE * Gameplay.CURRENT_GAME_SCALE);
+		// } else if (mouseWheel < 0) {// mouse wheel down
+		// Gameplay.CURRENT_GAME_SCALE *= 0.9f;
+		// if (Gameplay.CURRENT_GAME_SCALE < Gameplay.MAX_GAME_SCALE) {
+		// Gameplay.CURRENT_GAME_SCALE = Gameplay.MAX_GAME_SCALE;
+		// }
+		// Gameplay.SIZE = (int) (Gameplay.DEFAULT_SIZE * Gameplay.CURRENT_GAME_SCALE);
+		// }
+
 		return true;
 	}
 
