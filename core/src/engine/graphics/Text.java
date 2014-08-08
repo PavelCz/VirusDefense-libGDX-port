@@ -16,6 +16,10 @@ public class Text extends RenderObject {
 
 	public Text(int height, String text, Color color, float globalScale) {
 		this.bmfont = new BitmapFont(Gdx.files.internal("arial.fnt"));
+		// Matrix4 mx4Font = new Matrix4();
+		// mx4Font.setToRotation(new Vector3(0, 0, 1), 180);
+		// this.bmfont.
+		this.bmfont.setScale(1, -1);
 		this.height = this.bmfont.getCapHeight();
 		this.setHeight(height);
 		this.text = text;

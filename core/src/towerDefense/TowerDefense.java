@@ -49,7 +49,8 @@ public class TowerDefense implements ApplicationListener {
 	// @Override
 	public void init() {
 		this.camera = new OrthographicCamera(1024, 768);
-		this.camera.translate(1024 / 2, 768 / 2);
+		this.camera.setToOrtho(true);
+		// this.camera.translate(1024 / 2, 768 / 2);
 		this.viewport = new ScreenViewport(this.camera);
 		this.batch = new SpriteBatch();
 		// container.setShowFPS(false);
