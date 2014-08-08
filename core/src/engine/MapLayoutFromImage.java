@@ -43,8 +43,8 @@ public class MapLayoutFromImage {
 				Color c = new Color();
 				// Color.rgba8888ToColor(c, pm.getPixel(x, y)); this also works
 				c.set(pm.getPixel(x, y));
-				this.colors[y][x] = c;
-				// this.colors[this.colors.length - y - 1][x] = c; // this flips the array, so origin is in bottom left
+				// this.colors[y][x] = c;
+				this.colors[this.colors.length - y - 1][x] = c; // this flips the array, so origin is in bottom left
 			}
 		}
 	}

@@ -95,8 +95,8 @@ public class Gameplay extends GameComponent implements InputProcessor {
 	public void init() {
 		super.init();
 		this.gameCamera = new OrthographicCamera(1024, 768);
-		this.gameCamera.setToOrtho(true);
-		// this.gameCamera.translate(-1024 / 2, -768 / 2);
+
+		this.gameCamera.translate(1024 / 2, 768 / 2);
 		// this.gameCamera.zoom = 2;
 		this.h = new SlickHealthbar(0, 0, 0, 30, 7);
 		this.currentLevel.setGame(this);
