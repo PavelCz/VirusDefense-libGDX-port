@@ -49,6 +49,7 @@ public class TowerDefense implements ApplicationListener {
 	// @Override
 	public void init() {
 		this.camera = new OrthographicCamera(1024, 768);
+		this.camera.translate(1024 / 2, 768 / 2);
 		this.viewport = new ScreenViewport(this.camera);
 		this.batch = new SpriteBatch();
 		// container.setShowFPS(false);
@@ -87,6 +88,8 @@ public class TowerDefense implements ApplicationListener {
 
 	// @Override
 	public void update(int delta) {
+
+		this.viewport.update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		if (this.quitGame) {
 			Gdx.app.exit();
 		}
@@ -128,6 +131,8 @@ public class TowerDefense implements ApplicationListener {
 	// @Override
 	@Override
 	public void render() {
+		this.batch.setProjectionMatrix(this.camera.projection);
+		this.batch.setTransformMatrix(this.camera.view);
 		this.camera.update();
 		// this.batch.set
 		this.batch.begin();
@@ -311,7 +316,8 @@ public class TowerDefense implements ApplicationListener {
 
 	@Override
 	public void resize(int width, int height) {
-		this.viewport.update(width, height);
+		// this.viewport.update(width, height);
+		this.viewport.update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
 	}
 
