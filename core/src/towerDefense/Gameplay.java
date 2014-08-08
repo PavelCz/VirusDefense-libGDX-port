@@ -456,25 +456,25 @@ public class Gameplay extends GameComponent implements InputProcessor {
 		//
 		// }
 		//
-		// float scrollSpeed = 0.5f;
-		// float scrollDistance = scrollSpeed * delta;
-		// if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-		// Gameplay.camera.addX(-scrollDistance);
-		//
-		// }
-		//
-		// if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-		// Gameplay.camera.addX(+scrollDistance);
-		//
-		// }
-		// if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
-		// Gameplay.camera.addY(-scrollDistance);
-		//
-		// }
-		// if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
-		// Gameplay.camera.addY(+scrollDistance);
-		//
-		// }
+		float scrollSpeed = 0.5f;
+		float scrollDistance = scrollSpeed * delta;
+		if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
+			this.gameCamera.translate(-scrollDistance, 0);
+
+		}
+
+		if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
+			this.gameCamera.translate(+scrollDistance, 0);
+
+		}
+		if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
+			this.gameCamera.translate(0, +scrollDistance);
+
+		}
+		if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
+			this.gameCamera.translate(0, -scrollDistance);
+
+		}
 
 		if (this.debugMode) {
 			this.debugKeyboardEvents(delta);
