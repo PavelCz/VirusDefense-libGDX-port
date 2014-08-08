@@ -31,12 +31,7 @@ public class OwnSprite extends RenderObject {
 
 	@Override
 	public void draw(float xCoordinate, float yCoordinate, float globalScale, SpriteBatch batch) {
-		// OrthographicCamera camera = new OrthographicCamera();
-		// camera.setToOrtho(false, TowerDefense.getWidth(), TowerDefense.getHeight());
-
-		// batch.setProjectionMatrix(camera.combined);
 		float scaling = this.defaultScale * globalScale;
-		// this.sprite.setScale(scaling);
 		this.sprite.setSize(this.img.getWidth() * scaling, this.img.getHeight() * scaling);
 		float x = xCoordinate;
 		float y = yCoordinate;
