@@ -1,7 +1,5 @@
 package engine.graphics;
 
-import towerDefense.TowerDefense;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -35,7 +33,7 @@ public class Text extends RenderObject {
 			// this.bmfont.draw(batch, this.text, x, y);
 
 			for (String line : this.text.split("\n")) {
-				this.bmfont.draw(batch, line, x, TowerDefense.getHeight() - y);
+				this.bmfont.draw(batch, line, x, y);
 				y += this.bmfont.getLineHeight();
 			}
 		}

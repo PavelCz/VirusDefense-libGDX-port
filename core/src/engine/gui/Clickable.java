@@ -1,8 +1,8 @@
 package engine.gui;
 
-import engine.GameComponent;
 import towerDefense.Gameplay;
 import towerDefense.TowerDefense;
+import engine.GameComponent;
 
 public abstract class Clickable extends GUI {
 	protected float collisionWidth, collisionHeight;
