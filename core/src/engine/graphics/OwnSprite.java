@@ -15,7 +15,6 @@ public class OwnSprite extends RenderObject {
 		this.img = new Texture("data/graphics/" + imagePath);
 
 		this.sprite = new Sprite(this.img);
-		this.sprite.flip(false, true);
 		this.defaultScale = 1f;
 
 	}

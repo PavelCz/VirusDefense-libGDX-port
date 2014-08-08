@@ -27,11 +27,11 @@ public class PathTiler {
 				if (path[y][x] == 5) {
 					boolean above = false, below = false, left = false, right = false;
 					if (y - 1 >= 0 && path[y - 1][x] == 5) {
-						above = true;
-					}
-					if (y + 1 < path.length && path[y + 1][x] == 5) {
-
 						below = true;
+					}
+					if (y + 1 < path.length && path[y + 1][x] == 5) { // flipped above and below, because origin is now in bottom left
+
+						above = true;
 					}
 					if (x - 1 >= 0 && path[y][x - 1] == 5) {
 						left = true;
