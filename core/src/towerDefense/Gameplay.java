@@ -95,6 +95,7 @@ public class Gameplay extends GameComponent implements InputProcessor {
 	public void init() {
 		super.init();
 		this.gameCamera = new OrthographicCamera(1024, 768);
+
 		this.gameCamera.translate(1024 / 2, 768 / 2);
 		// this.gameCamera.zoom = 2;
 		this.h = new SlickHealthbar(0, 0, 0, 30, 7);
@@ -444,9 +445,15 @@ public class Gameplay extends GameComponent implements InputProcessor {
 
 		float cameraWidth = Gameplay.INTERFACE_START_X;
 		float cameraHeight = TowerDefense.getHeight();
-		// if (Gameplay.getCameraX() < 0) {
-		// Gameplay.camera.setX(0);
-		// } else if ((Gameplay.getCameraX() + cameraWidth) / Gameplay.CURRENT_GAME_SCALE > this.getHorizontalTiles()
+
+		float xOrigin = Gdx.graphics.getWidth() / 2;
+		float yOrigin = Gdx.graphics.getHeight() / 2;
+		if (this.gameCamera.position.x < xOrigin) {
+			this.gameCamera.position.x = xOrigin;
+		} else if (this.gameCamera.position.y < yOrigin) {
+			this.gameCamera.position.y = yOrigin;
+		}
+		// else if ((Gameplay.getCameraX() + cameraWidth) / Gameplay.CURRENT_GAME_SCALE > this.getHorizontalTiles()
 		// * Gameplay.DEFAULT_SIZE) {
 		// Gameplay.camera.setX((this.getHorizontalTiles() * Gameplay.DEFAULT_SIZE) * Gameplay.CURRENT_GAME_SCALE - cameraWidth);
 		//
@@ -455,7 +462,7 @@ public class Gameplay extends GameComponent implements InputProcessor {
 		// Gameplay.camera.setY((this.getVerticalTiles() * Gameplay.DEFAULT_SIZE) * Gameplay.CURRENT_GAME_SCALE - cameraHeight);
 		//
 		// }
-		//
+
 		float scrollSpeed = 0.5f;
 		float scrollDistance = scrollSpeed * delta;
 		if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
