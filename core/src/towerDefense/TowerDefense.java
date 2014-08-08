@@ -48,13 +48,7 @@ public class TowerDefense {
 		long time = System.nanoTime();
 		// if (!container.isFullscreen()) {/* "./data/graphics/icons/icon24.png", (this may be necessary for other platforms(mac)) */
 		// String[] icons = { "./data/graphics/icons/icon16.png", "./data/graphics/icons/icon32.png" };
-		// try {
-		// container.setIcons(icons);
-		// } catch (SlickException e) {
-		// // TODO Auto-generated catch block
-		// e.printStackTrace();
-		// }
-		// }
+
 		this.stage = new Stage();
 		this.initSounds();
 		TowerDefense.updateDimensions();
@@ -64,17 +58,10 @@ public class TowerDefense {
 		this.currentGameComponent = this.menu;
 		long passedTime = System.nanoTime() - time;
 		// System.out.println(passedTime / 1000000000.0);
-		// AppGameContainer gameContainer = (AppGameContainer) container;
-		// try {
-		// gameContainer.setDisplayMode(TowerDefense.getWidth(), TowerDefense.getHeight(), TowerDefense.isFULLSCREEN());
 		this.reinitMenu();
 		this.reinitChooseLevel();
 		this.reinitComponents();
 		TowerDefense.updateDimensions();
-		// } catch (SlickException e) {
-		// TODO Auto-generated catch block
-		// e.printStackTrace();
-		// }
 
 		this.menu.setStage(this.stage);
 	}
