@@ -120,11 +120,6 @@ public class Menu extends GameComponent {
 	@Override
 	public void update(int delta) {
 		super.update(delta);
-		this.t.act(delta);
-		// Input input = container.getInput();
-		// if (input.isKeyPressed(Input.KEY_ENTER)) {
-		// // this.t.deactivate();
-		// }
 
 	}
 
@@ -173,18 +168,6 @@ public class Menu extends GameComponent {
 	public void setDisableTextField(boolean disabled) {
 		this.t.setDisabled(disabled);
 	}
-
-	// public void deactivate() {
-	// this.t.deactivate();
-	// }
-	//
-	// public void activate(GameContainer container) {
-	// this.t = new TextField(container, new TrueTypeFont(new Font("Verdana", Font.PLAIN, 15), true), 0, 100, 75, 25);
-	// this.t.setText("Player 1");
-	// this.t.setBorderColor(Color.gray);
-	// this.t.setBackgroundColor(Color.lightGray);
-	// this.t.setMaxLength(32);
-	// }
 
 	public void setWon(int score, String name) {
 		this.lostWonMessage.setText("You beat the level, " + name + "!\nYour Score was: " + score + " Points.");
