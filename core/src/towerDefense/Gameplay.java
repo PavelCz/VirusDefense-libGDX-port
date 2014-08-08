@@ -753,7 +753,13 @@ public class Gameplay extends GameComponent implements InputProcessor {
 		// }
 		// Gameplay.SIZE = (int) (Gameplay.DEFAULT_SIZE * Gameplay.CURRENT_GAME_SCALE);
 		// }
-		this.gameCamera.zoom += amount / 4.0;
+
+		this.gameCamera.zoom += amount / 8.0;
+		if (this.gameCamera.zoom < 0.2f) {
+			this.gameCamera.zoom = 0.2f;
+		} else if (this.gameCamera.zoom > 1f) {
+			this.gameCamera.zoom = 1f;
+		}
 
 		return true;
 	}
