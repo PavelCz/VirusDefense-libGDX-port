@@ -443,11 +443,6 @@ public class Gameplay extends GameComponent implements InputProcessor {
 			this.game.setMode(TowerDefense.MODE_MENU);
 		}
 
-		float cameraWidth = Gameplay.INTERFACE_START_X;
-		float cameraHeight = TowerDefense.getHeight();
-
-		float xOrigin = Gdx.graphics.getWidth() / 2;
-		float yOrigin = Gdx.graphics.getHeight() / 2;
 		// else if ((Gameplay.getCameraX() + cameraWidth) / Gameplay.CURRENT_GAME_SCALE > this.getHorizontalTiles()
 		// * Gameplay.DEFAULT_SIZE) {
 		// Gameplay.camera.setX((this.getHorizontalTiles() * Gameplay.DEFAULT_SIZE) * Gameplay.CURRENT_GAME_SCALE - cameraWidth);
@@ -457,7 +452,13 @@ public class Gameplay extends GameComponent implements InputProcessor {
 		// Gameplay.camera.setY((this.getVerticalTiles() * Gameplay.DEFAULT_SIZE) * Gameplay.CURRENT_GAME_SCALE - cameraHeight);
 		//
 		// }
-
+		// this.gameCamera.
+		float xOrigin = Gdx.graphics.getWidth() / 2;
+		float yOrigin = Gdx.graphics.getHeight() / 2;
+		float rightBoundary = xOrigin + Gdx.graphics.getWidth();
+		float topBoundary = yOrigin + Gdx.graphics.getHeight();
+		float cameraWidth = this.gameCamera.viewportWidth;
+		float cameraHeight = this.gameCamera.viewportHeight;
 		float scrollSpeed = 0.5f;
 		float scrollDistance = scrollSpeed * delta;
 		if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
@@ -466,14 +467,19 @@ public class Gameplay extends GameComponent implements InputProcessor {
 				this.gameCamera.position.x = xOrigin;
 			}
 		}
+		System.out.println(this.gameCamera.position.x);
 
 		if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
 			this.gameCamera.translate(+scrollDistance, 0);
-
+			if (this.gameCamera.position.x + cameraWidth > rightBoundary) {
+				this.gameCamera.position.x = rightBoundary - cameraWidth;
+			}
 		}
 		if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
 			this.gameCamera.translate(0, +scrollDistance);
-
+			if (this.gameCamera.position.y + cameraHeight > topBoundary) {
+				this.gameCamera.position.y = topBoundary - cameraHeight;
+			}
 		}
 		if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
 			this.gameCamera.translate(0, -scrollDistance);
