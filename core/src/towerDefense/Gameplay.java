@@ -16,7 +16,6 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-import engine.Camera;
 import engine.Enemy;
 import engine.EnemyTypeHandler;
 import engine.GameComponent;
@@ -41,7 +40,7 @@ import engine.projectiles.Projectile;
  */
 public class Gameplay extends GameComponent implements InputProcessor {
 	private SlickHealthbar h;
-	private static Camera camera;
+	// private static Camera camera;
 	private float height, width;
 	private ConcurrentLinkedQueue<Enemy> enemies;
 	private boolean debugMode;
@@ -95,7 +94,7 @@ public class Gameplay extends GameComponent implements InputProcessor {
 		this.h = new SlickHealthbar(0, 0, 0, 30, 7);
 		this.currentLevel.setGame(this);
 		this.initDefaults();
-		Gameplay.camera = new Camera(0, 0, this);
+		// Gameplay.camera = new Camera(0, 0, this);
 		this.currentTileLength = Gameplay.DEFAULT_SIZE;
 		this.height = Gameplay.DEFAULT_SIZE * this.getVerticalTiles();
 		this.width = Gameplay.DEFAULT_SIZE * this.getHorizontalTiles();
@@ -433,37 +432,37 @@ public class Gameplay extends GameComponent implements InputProcessor {
 
 		float cameraWidth = Gameplay.INTERFACE_START_X;
 		float cameraHeight = TowerDefense.getHeight();
-		if (Gameplay.getCameraX() < 0) {
-			Gameplay.camera.setX(0);
-		} else if ((Gameplay.getCameraX() + cameraWidth) / Gameplay.CURRENT_GAME_SCALE > this.getHorizontalTiles()
-				* Gameplay.DEFAULT_SIZE) {
-			Gameplay.camera.setX((this.getHorizontalTiles() * Gameplay.DEFAULT_SIZE) * Gameplay.CURRENT_GAME_SCALE - cameraWidth);
-
-		} else if ((Gameplay.getCameraY() + cameraHeight) / Gameplay.CURRENT_GAME_SCALE > this.getVerticalTiles()
-				* Gameplay.DEFAULT_SIZE) {
-			Gameplay.camera.setY((this.getVerticalTiles() * Gameplay.DEFAULT_SIZE) * Gameplay.CURRENT_GAME_SCALE - cameraHeight);
-
-		}
-
-		float scrollSpeed = 0.5f;
-		float scrollDistance = scrollSpeed * delta;
-		if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-			Gameplay.camera.addX(-scrollDistance);
-
-		}
-
-		if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-			Gameplay.camera.addX(+scrollDistance);
-
-		}
-		if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
-			Gameplay.camera.addY(-scrollDistance);
-
-		}
-		if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
-			Gameplay.camera.addY(+scrollDistance);
-
-		}
+		// if (Gameplay.getCameraX() < 0) {
+		// Gameplay.camera.setX(0);
+		// } else if ((Gameplay.getCameraX() + cameraWidth) / Gameplay.CURRENT_GAME_SCALE > this.getHorizontalTiles()
+		// * Gameplay.DEFAULT_SIZE) {
+		// Gameplay.camera.setX((this.getHorizontalTiles() * Gameplay.DEFAULT_SIZE) * Gameplay.CURRENT_GAME_SCALE - cameraWidth);
+		//
+		// } else if ((Gameplay.getCameraY() + cameraHeight) / Gameplay.CURRENT_GAME_SCALE > this.getVerticalTiles()
+		// * Gameplay.DEFAULT_SIZE) {
+		// Gameplay.camera.setY((this.getVerticalTiles() * Gameplay.DEFAULT_SIZE) * Gameplay.CURRENT_GAME_SCALE - cameraHeight);
+		//
+		// }
+		//
+		// float scrollSpeed = 0.5f;
+		// float scrollDistance = scrollSpeed * delta;
+		// if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
+		// Gameplay.camera.addX(-scrollDistance);
+		//
+		// }
+		//
+		// if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
+		// Gameplay.camera.addX(+scrollDistance);
+		//
+		// }
+		// if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
+		// Gameplay.camera.addY(-scrollDistance);
+		//
+		// }
+		// if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
+		// Gameplay.camera.addY(+scrollDistance);
+		//
+		// }
 
 		if (this.debugMode) {
 			this.debugKeyboardEvents(delta);
@@ -664,11 +663,11 @@ public class Gameplay extends GameComponent implements InputProcessor {
 	}
 
 	public static int getCameraX() {
-		return (int) Gameplay.camera.getX();
+		return 0;// (int) Gameplay.camera.getX();
 	}
 
 	public static int getCameraY() {
-		return (int) Gameplay.camera.getY();
+		return 0;// (int) Gameplay.camera.getY();
 	}
 
 	public StaticText getScore() {

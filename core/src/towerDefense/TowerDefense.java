@@ -131,9 +131,10 @@ public class TowerDefense implements ApplicationListener {
 	// @Override
 	@Override
 	public void render() {
-		this.batch.setProjectionMatrix(this.camera.projection);
-		this.batch.setTransformMatrix(this.camera.view);
+		this.batch.setProjectionMatrix(this.camera.combined);
+		// this.batch.setTransformMatrix(this.camera.view);
 		this.camera.update();
+		// this.camera
 		// this.batch.set
 		this.batch.begin();
 		this.currentGameComponent.render(this.batch);
