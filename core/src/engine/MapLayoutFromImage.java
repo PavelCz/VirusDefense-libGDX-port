@@ -75,9 +75,11 @@ public class MapLayoutFromImage {
 	}
 
 	private void setWaypoints() {
+		// Waypoint flippedStartingPoint = new Waypoint(this.startingPoint.getX(), this.path.length - this.startingPoint.getY());
+		// this.startingPoint = flippedStartingPoint;
 		int currentX = (int) this.startingPoint.getX();
 		int currentY = (int) this.startingPoint.getY();
-		int[][] path = this.path.clone();
+		int[][] path = this.getPath().clone();
 
 		int relativePositionOfNextPath = this.relativePositionOfNextCoordinate(path, currentX, currentY);
 		this.startingPoint.setDirection(relativePositionOfNextPath);
@@ -126,6 +128,10 @@ public class MapLayoutFromImage {
 	}
 
 	public int[][] getPath() {
+		// int[][] flippedPath = new int[this.path.length][this.path[0].length];
+		// for (int i = 0; i < this.path.length; ++i) {
+		// flippedPath[i] = this.path[this.path.length - i - 1];
+		// }
 		return this.path;
 	}
 
