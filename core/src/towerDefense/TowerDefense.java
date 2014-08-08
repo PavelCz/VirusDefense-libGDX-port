@@ -3,16 +3,21 @@ package towerDefense;
 import java.util.Arrays;
 import java.util.Comparator;
 
+import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 import engine.GameComponent;
 import engine.Level;
 import engine.SoundHandler;
 
-public class TowerDefense {
+public class TowerDefense implements ApplicationListener {
+	private ScreenViewport viewport;
+	private OrthographicCamera camera;
 	private Stage stage;
 	protected static SoundHandler soundHandler = new SoundHandler();
 	private SpriteBatch batch;
@@ -43,6 +48,8 @@ public class TowerDefense {
 
 	// @Override
 	public void init() {
+		this.camera = new OrthographicCamera(1024, 768);
+		this.viewport = new ScreenViewport(this.camera);
 		this.batch = new SpriteBatch();
 		// container.setShowFPS(false);
 		long time = System.nanoTime();
@@ -119,7 +126,10 @@ public class TowerDefense {
 	}
 
 	// @Override
+	@Override
 	public void render() {
+		this.camera.update();
+		// this.batch.set
 		this.batch.begin();
 		this.currentGameComponent.render(this.batch);
 		this.batch.end();
@@ -291,6 +301,36 @@ public class TowerDefense {
 
 	public static boolean isApplet() {
 		return applet;
+	}
+
+	@Override
+	public void create() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void resize(int width, int height) {
+		this.viewport.update(width, height);
+
+	}
+
+	@Override
+	public void pause() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void resume() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void dispose() {
+		// TODO Auto-generated method stub
+
 	}
 
 }
