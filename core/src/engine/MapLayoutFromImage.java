@@ -78,7 +78,7 @@ public class MapLayoutFromImage {
 	private void setWaypoints() {
 		int currentX = (int) this.startingPoint.getX();
 		int currentY = (int) this.startingPoint.getY();
-		int[][] path = this.getPath().clone();
+		int[][] path = this.path.clone();
 
 		int relativePositionOfNextPath = this.relativePositionOfNextCoordinate(path, currentX, currentY);
 		this.startingPoint.setDirection(relativePositionOfNextPath);

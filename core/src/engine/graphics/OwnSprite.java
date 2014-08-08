@@ -1,5 +1,7 @@
 package engine.graphics;
 
+import towerDefense.TowerDefense;
+
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -31,11 +33,11 @@ public class OwnSprite extends RenderObject {
 	public void draw(float xCoordinate, float yCoordinate, float globalScale, SpriteBatch batch) {
 		float scaling = this.defaultScale * globalScale;
 		this.sprite.setSize(this.img.getWidth() * scaling, this.img.getHeight() * scaling);
-		// float x = xCoordinate;
-		// float y = yCoordinate;
-		// y = TowerDefense.getHeight() - y; // sets coordinate System from up - right to down - right
-		// y = y - this.img.getHeight() * scaling; // sets picture anchor to top left corner instead of bottom left
-		this.sprite.setPosition(xCoordinate, yCoordinate);
+		float x = xCoordinate;
+		float y = yCoordinate;
+		y = TowerDefense.getHeight() - y; // sets coordinate System from up - right to down - right
+		y = y - this.img.getHeight() * scaling; // sets picture anchor to top left corner instead of bottom left
+		this.sprite.setPosition(x, y);
 		this.sprite.draw(batch);
 	}
 
