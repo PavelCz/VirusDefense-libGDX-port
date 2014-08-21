@@ -34,7 +34,7 @@ public class Menu extends GameComponent {
 	public void init() {
 		super.init();
 
-		this.background = new Background(1f, "viren.jpg", this.game.getGameplay());
+		this.background = new Background(1f, "viren.png", this.game.getGameplay());
 
 		this.pausedMessage.setPosition((TowerDefense.getWidth() - this.pausedMessage.getWidth()) / 2, TowerDefense.getHeight() / 4);
 		this.guiElements.add(this.pausedMessage);
