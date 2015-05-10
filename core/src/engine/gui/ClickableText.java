@@ -42,9 +42,8 @@ public class ClickableText extends Clickable {
 
 	}
 
-	@Override
 	public void draw(SpriteBatch batch) {
-		this.text.draw(this.x, this.y, 1f, batch);
+		super.draw(this.text, batch);
 
 	}
 
