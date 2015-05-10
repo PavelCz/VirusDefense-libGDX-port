@@ -16,6 +16,7 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Matrix4;
 
 import engine.Enemy;
@@ -406,8 +407,8 @@ public class Gameplay extends GameComponent implements InputProcessor {
 			int y = TowerDefense.getMouseY() + Gameplay.getCameraY();
 			int newX = (x) / Gameplay.SIZE;
 			int newY = (y) / Gameplay.SIZE;
-			this.towerShadowX = (int) (newX * Gameplay.SIZE - Gameplay.getCameraX());
-			this.towerShadowY = (int) (newY * Gameplay.SIZE - Gameplay.getCameraY());
+			this.towerShadowX = newX * Gameplay.SIZE - Gameplay.getCameraX();
+			this.towerShadowY = newY * Gameplay.SIZE - Gameplay.getCameraY();
 			int[][] path = this.currentLevel.getPath();
 			if (this.player.getMoney() < this.currentTower.getCost()) {
 				this.currentTowerPlaceable = false;
@@ -457,10 +458,15 @@ public class Gameplay extends GameComponent implements InputProcessor {
 		float yOrigin = Gdx.graphics.getHeight() / 2;
 		float rightBoundary = xOrigin + Gdx.graphics.getWidth();
 		float topBoundary = yOrigin + Gdx.graphics.getHeight();
-		float cameraWidth = this.gameCamera.viewportWidth;
-		float cameraHeight = this.gameCamera.viewportHeight;
+
+		float effectiveCameraWidth = this.gameCamera.viewportWidth * this.gameCamera.zoom;
+		float effectiveCameraHeight = this.gameCamera.viewportHeight * this.gameCamera.zoom;
+
+		float cameraWidth = effectiveCameraWidth / 2;
+		float cameraHeight = effectiveCameraHeight / 2;
 		float scrollSpeed = 0.5f;
 		float scrollDistance = scrollSpeed * delta;
+
 		if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
 			this.gameCamera.translate(-scrollDistance, 0);
 			if (this.gameCamera.position.x < xOrigin) {
@@ -491,6 +497,14 @@ public class Gameplay extends GameComponent implements InputProcessor {
 		if (this.debugMode) {
 			this.debugKeyboardEvents(delta);
 		}
+
+		this.gameCamera.position.x = MathUtils.clamp(this.gameCamera.position.x, effectiveCameraWidth / 2f,
+				100 - effectiveCameraWidth / 2f);
+		this.gameCamera.position.y = MathUtils.clamp(this.gameCamera.position.y, effectiveCameraHeight / 2f,
+				100 - effectiveCameraHeight / 2f);
+
+		System.out.println(cameraWidth);
+		System.out.println(this.gameCamera.position);
 
 	}
 

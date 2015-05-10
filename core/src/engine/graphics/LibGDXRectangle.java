@@ -1,7 +1,6 @@
 package engine.graphics;
 
 import towerDefense.Gameplay;
-import towerDefense.TowerDefense;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -9,9 +8,8 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 
 /**
- * @author Pavel A Rectangle based on my other Project JBreakout. This Rectangle
- *         is based on LWJGL. I tworked once, but now it doesn't seem to work
- *         anymore
+ * @author Pavel A Rectangle based on my other Project JBreakout. This Rectangle is based on LWJGL. I tworked once, but now it doesn't
+ *         seem to work anymore
  */
 public class LibGDXRectangle extends RenderObject {
 	protected Color color;
@@ -33,15 +31,14 @@ public class LibGDXRectangle extends RenderObject {
 		this.color = color;
 	}
 
-	protected void drawAux(float x, float y, float globalScale,
-			SpriteBatch batch, ShapeType shapeType) {
+	protected void drawAux(float x, float y, float globalScale, SpriteBatch batch, ShapeType shapeType) {
 		batch.end();
 
 		float scaling = globalScale;
 		// y = TowerDefense.getHeight() - y; // sets coordinate System from up -
 		// right to down - right
-		y = y - this.height * scaling; // sets picture anchor to top left corner
-										// instead of bottom left
+		// y = y - this.height * scaling; // sets picture anchor to top left corner
+		// // instead of bottom left
 		y = y + Gameplay.DEFAULT_SIZE * Gameplay.CURRENT_GAME_SCALE;
 		ShapeRenderer shapeRenderer = new ShapeRenderer();
 		shapeRenderer.begin(shapeType);
@@ -49,11 +46,11 @@ public class LibGDXRectangle extends RenderObject {
 																				// g
 																				// b
 																				// a
-		shapeRenderer.rect(x, y, this.width * globalScale, this.height
-				* globalScale);
+		shapeRenderer.rect(x, y, this.width * globalScale, this.height * globalScale);
 		shapeRenderer.end();
 		batch.begin();
 	}
+
 	@Override
 	public void draw(float x, float y, float globalScale, SpriteBatch batch) {
 
