@@ -40,7 +40,8 @@ public class Menu extends GameComponent {
 
 		this.background = new Background(1f, "viren.png", this.game.getGameplay());
 
-		this.pausedMessage.setPosition((TowerDefense.getWidth() - this.pausedMessage.getWidth()) / 2, TowerDefense.getHeight() / 4);
+		this.pausedMessage
+				.setPosition((TowerDefense.getWidth() - this.pausedMessage.getWidth()) / 2, TowerDefense.getHeight() * 0.75f);
 		this.guiElements.add(this.pausedMessage);
 
 		this.lostWonMessage = new StaticText(TowerDefense.getWidth() / 4, 0, 20, Color.RED, "");
@@ -49,9 +50,9 @@ public class Menu extends GameComponent {
 		this.resumeButton = new SetGameModeButton(0, 0, "Resume game", this.game, TowerDefense.MODE_GAME);
 		this.clickables.add(this.resumeButton);
 		this.guiElements.add(this.resumeButton);
-		int y = TowerDefense.getHeight() / 2 + TowerDefense.getHeight() / 8 - this.resumeButton.getTextHeight();
+		int y = TowerDefense.getHeight() / 2 + TowerDefense.getHeight() / 8 + this.resumeButton.getTextHeight();
 		this.resumeButton.setX(TowerDefense.getWidth() / 2 - this.resumeButton.getWidth() / 2);
-		this.resumeButton.setY(y - 1);
+		this.resumeButton.setY(y + 1);
 		this.resumeButton.setColor(Color.WHITE);
 		this.resumeButton.setVisible(false);
 		this.resumeButton.deactivate();
@@ -59,17 +60,17 @@ public class Menu extends GameComponent {
 		this.startButton = new StartClickable(0, 0, this.game);
 		this.clickables.add(this.startButton);
 		this.guiElements.add(this.startButton);
-		y += this.startButton.getTextHeight();
+		y -= this.startButton.getTextHeight();
 		this.startButton.setX(TowerDefense.getWidth() / 2 - this.startButton.getWidth() / 2);
 		this.startButton.setY(y);
-		y += this.startButton.getTextHeight() + 1;
+		y -= this.startButton.getTextHeight() + 1;
 
 		this.settings = new GoToSettingsButton(0, 0, "Settings", this.game);
 		this.clickables.add(this.settings);
 		this.guiElements.add(this.settings);
 		this.settings.setX(TowerDefense.getWidth() / 2 - this.settings.getWidth() / 2);
 		this.settings.setY(y);
-		y += this.startButton.getTextHeight() + 1;
+		y -= this.startButton.getTextHeight() + 1;
 
 		SetGameModeButton scores = new SetGameModeButton(0, 0, "Highscores", this.game, TowerDefense.MODE_SCORES);
 		scores.setColor(Color.WHITE);
@@ -77,14 +78,14 @@ public class Menu extends GameComponent {
 		this.guiElements.add(scores);
 		scores.setX(TowerDefense.getWidth() / 2 - scores.getWidth() / 2);
 		scores.setY(y);
-		y += this.startButton.getTextHeight() + 1;
+		y -= this.startButton.getTextHeight() + 1;
 
 		ExitClickable e = new ExitClickable(100, 121, this.game);
 		this.clickables.add(e);
 		this.guiElements.add(e);
 		e.setX(TowerDefense.getWidth() / 2 - e.getWidth() / 2);
 		e.setY(y);
-		y += this.startButton.getTextHeight() + 1;
+		y -= this.startButton.getTextHeight() + 1;
 
 		this.t = new TextField("Player", new Skin(Gdx.files.internal("uiskin.json")));
 		this.t.setMessageText("Player");
