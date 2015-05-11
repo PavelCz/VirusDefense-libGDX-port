@@ -478,29 +478,34 @@ public class Gameplay extends GameComponent implements InputProcessor {
 
 		if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
 			this.gameCamera.translate(-scrollDistance, 0);
-			if (this.gameCamera.position.x - cameraWidth < 0) {
-				this.gameCamera.position.x = cameraWidth;
-			}
+
 		}
 		System.out.println(this.gameCamera.position.x);
 
 		if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
 			this.gameCamera.translate(+scrollDistance, 0);
-			if (this.gameCamera.position.x + cameraWidth > rightBoundary) {
-				this.gameCamera.position.x = rightBoundary - cameraWidth;
-			}
+
 		}
 		if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
 			this.gameCamera.translate(0, +scrollDistance);
-			if (this.gameCamera.position.y + cameraHeight > topBoundary) {
-				this.gameCamera.position.y = topBoundary - cameraHeight;
-			}
+
 		}
 		if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
 			this.gameCamera.translate(0, -scrollDistance);
-			if (this.gameCamera.position.y - cameraHeight < 0) {
-				this.gameCamera.position.y = cameraHeight;
-			}
+
+		}
+
+		if (this.gameCamera.position.x - cameraWidth < 0) {
+			this.gameCamera.position.x = cameraWidth;
+		}
+		if (this.gameCamera.position.x + cameraWidth > rightBoundary) {
+			this.gameCamera.position.x = rightBoundary - cameraWidth;
+		}
+		if (this.gameCamera.position.y + cameraHeight > topBoundary) {
+			this.gameCamera.position.y = topBoundary - cameraHeight;
+		}
+		if (this.gameCamera.position.y - cameraHeight < 0) {
+			this.gameCamera.position.y = cameraHeight;
 		}
 
 		if (this.debugMode) {
