@@ -2,9 +2,12 @@ package towerDefense;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 
 import engine.GameComponent;
@@ -25,6 +28,7 @@ public class Menu extends GameComponent {
 	private SetGameModeButton resumeButton;
 	GoToSettingsButton settings;
 	private StaticText pausedMessage = new StaticText(0, 0, 50, Color.WHITE, "VIRUS DEFENSE");
+	TextButton tb;
 
 	public Menu(TowerDefense game) {
 		super(game);
@@ -91,6 +95,20 @@ public class Menu extends GameComponent {
 		this.t.setCursorPosition(6);
 		this.t.setDisabled(false);
 
+		Skin skin = new Skin(Gdx.files.internal("uiskin.json"));
+		//
+		TextButtonStyle textButtonStyle = new TextButtonStyle();
+		textButtonStyle.checkedFontColor = Color.GRAY;
+		textButtonStyle.downFontColor = Color.GRAY;
+		textButtonStyle.font = new BitmapFont(Gdx.files.internal("arial.fnt"));
+
+		// textButtonStyle = new TextButtonStyle();
+		// textButtonStyle.up = skin.getDrawable("default-round-up");
+		// textButtonStyle.down = skin.getDrawable("default-round-down");
+		// textButtonStyle.checked = skin.getDrawable("default-round-down");
+		this.tb = new TextButton("Player", textButtonStyle);
+		this.tb.setDisabled(false);
+
 		// this.t.addListener(new TextFieldClickListener() {
 		//
 		// });
@@ -128,6 +146,7 @@ public class Menu extends GameComponent {
 		super.render(batch);
 		super.renderGUI(batch);
 		this.t.draw(batch, 1f);
+		this.tb.draw(batch, 1f);
 		// this.t.render(container, graphics);
 
 		// this.version.draw();

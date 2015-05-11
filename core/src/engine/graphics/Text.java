@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 
 public class Text extends RenderObject {
 	private String text;
@@ -11,6 +12,7 @@ public class Text extends RenderObject {
 	private Color color;
 	private float height;
 	private boolean visible = true;
+	Label label;
 
 	public Text(int height, String text, Color color, float globalScale) {
 		this.bmfont = new BitmapFont(Gdx.files.internal("arial.fnt"));
@@ -18,6 +20,7 @@ public class Text extends RenderObject {
 		this.setHeight(height);
 		this.text = text;
 		this.color = color;
+		// this.label = new Label(this.text, new Skin(Gdx.files.internal("uiskin.json")), "arial", Color.WHITE);
 
 	}
 
