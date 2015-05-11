@@ -17,6 +17,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Matrix4;
+import com.badlogic.gdx.math.Vector3;
 
 import engine.Enemy;
 import engine.EnemyTypeHandler;
@@ -65,7 +66,7 @@ public class Gameplay extends GameComponent implements InputProcessor {
 	private StaticText towerInfo;
 	private StaticText towerName;
 	private boolean currentTowerPlaceable;
-	private int towerShadowX, towerShadowY;
+	private float towerShadowX, towerShadowY;
 	protected ConcurrentLinkedQueue<Projectile> projectiles;
 
 	public static float CURRENT_GAME_SCALE;
@@ -94,9 +95,8 @@ public class Gameplay extends GameComponent implements InputProcessor {
 	@Override
 	public void init() {
 		super.init();
-		this.gameCamera = new OrthographicCamera(1024, 768);
 
-		this.gameCamera.translate(1024 / 2, 768 / 2);
+		// this.gameCamera.translate(1024 / 2, 768 / 2);
 		// this.gameCamera.zoom = 2;
 		this.h = new SlickHealthbar(0, 0, 0, 30, 7);
 		this.currentLevel.setGame(this);
@@ -109,6 +109,9 @@ public class Gameplay extends GameComponent implements InputProcessor {
 		// Set Constants:
 
 		Gameplay.INTERFACE_START_X = TowerDefense.getWidth() - 3 * 64 * Gameplay.GLOBAL_GUI_SCALE;
+
+		this.gameCamera = new OrthographicCamera(1024, 768);
+
 		float scale1 = Gameplay.INTERFACE_START_X / this.width;
 		float scale2 = TowerDefense.getHeight() / this.height;
 		Gameplay.CURRENT_GAME_SCALE = Math.max(scale1, scale2);
@@ -396,18 +399,25 @@ public class Gameplay extends GameComponent implements InputProcessor {
 
 	private void updateTowerShadow() {
 		if (this.currentTower != null && this.getMode() == 0) {
+
+			Vector3 vec = new Vector3(TowerDefense.getMouseX(), TowerDefense.getMouseY(), 0);
+			this.gameCamera.unproject(vec);
+			this.towerShadowX = vec.x;
+			this.towerShadowY = vec.y;
 			// old version of shadow Coordinates, with pixel accurate
 			// coordinates
 			// this.towerShadowX = (int) (input.getMouseX() -
 			// this.currentTower.getSprite().getWidth() / 2);
 			// this.towerShadowY = (int) (input.getMouseY() -
 			// this.currentTower.getSprite().getHeight() / 2);
-			int x = TowerDefense.getMouseX() + Gameplay.getCameraX();
-			int y = TowerDefense.getMouseY() + Gameplay.getCameraY();
-			int newX = (x) / Gameplay.SIZE;
-			int newY = (y) / Gameplay.SIZE;
-			this.towerShadowX = newX * Gameplay.SIZE - Gameplay.getCameraX();
-			this.towerShadowY = newY * Gameplay.SIZE - Gameplay.getCameraY();
+
+			// this.towerShadowX = this.gameCamera.position.x - this.width / 2 * this.gameCamera.zoom + TowerDefense.getMouseX()
+			// * this.gameCamera.zoom;
+			// this.towerShadowY = TowerDefense.getMouseY() * this.gameCamera.zoom;
+			int newX = (int) (this.towerShadowX / Gameplay.SIZE);
+			int newY = (int) (this.towerShadowY / Gameplay.SIZE);
+			// this.towerShadowX = newX * Gameplay.SIZE - Gameplay.getCameraX();
+			// this.towerShadowY = newY * Gameplay.SIZE - Gameplay.getCameraY();
 			int[][] path = this.currentLevel.getPath();
 			if (this.player.getMoney() < this.currentTower.getCost()) {
 				this.currentTowerPlaceable = false;
@@ -552,8 +562,16 @@ public class Gameplay extends GameComponent implements InputProcessor {
 	}
 
 	private void placeTower() {
-		float x = TowerDefense.getMouseX() + Gameplay.getCameraX();
-		float y = TowerDefense.getMouseY() + Gameplay.getCameraY();
+		// Vector2 vec = new Vector2(TowerDefense.getMouseX(), TowerDefense.getMouseY());
+		// vec.mul(this.gameCamera.)
+		// Vector3 vec = this.gameCamera.unproject(new Vector3(TowerDefense.getMouseX(), TowerDefense.getMouseY(), 0), 0, 0,
+		// this.height,
+		// this.width);
+		// float x = vec.x;
+		// float y = vec.y;
+		float x = TowerDefense.getMouseX() / this.gameCamera.zoom;
+		float y = TowerDefense.getMouseY() / this.gameCamera.zoom;
+
 		int newX = (int) x / Gameplay.SIZE;
 		int newY = (int) y / Gameplay.SIZE;
 
