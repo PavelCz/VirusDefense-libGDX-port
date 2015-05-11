@@ -51,7 +51,7 @@ public class ChooseLevel extends GameComponent {
 
 		SetGameModeButton back = new SetGameModeButton(0, 0, "Back", this.game, TowerDefense.MODE_MENU);
 		back.setX(0);
-		back.setY(TowerDefense.getHeight() - back.getTextHeight() * 2);
+		back.setY(0 + back.getTextHeight() * 2);
 		this.clickables.add(back);
 		this.guiElements.add(back);
 
