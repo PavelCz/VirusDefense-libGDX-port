@@ -110,8 +110,9 @@ public class Gameplay extends GameComponent implements InputProcessor {
 
 		Gameplay.INTERFACE_START_X = TowerDefense.getWidth() - 3 * 64 * Gameplay.GLOBAL_GUI_SCALE;
 
-		this.gameCamera = new OrthographicCamera(1024, 768);
+		this.gameCamera = new OrthographicCamera(Gameplay.INTERFACE_START_X, 768);
 
+		this.game.viewport.setCamera(this.gameCamera);
 		float scale1 = Gameplay.INTERFACE_START_X / this.width;
 		float scale2 = TowerDefense.getHeight() / this.height;
 		Gameplay.CURRENT_GAME_SCALE = Math.max(scale1, scale2);

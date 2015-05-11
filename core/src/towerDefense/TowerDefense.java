@@ -16,7 +16,7 @@ import engine.Level;
 import engine.SoundHandler;
 
 public class TowerDefense implements ApplicationListener {
-	private ScreenViewport viewport;
+	public ScreenViewport viewport;
 	private OrthographicCamera camera;
 	private Stage stage;
 	protected static SoundHandler soundHandler = new SoundHandler();
