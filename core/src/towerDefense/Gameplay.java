@@ -400,10 +400,8 @@ public class Gameplay extends GameComponent implements InputProcessor {
 	private void updateTowerShadow() {
 		if (this.currentTower != null && this.getMode() == 0) {
 
-			Vector3 vec = new Vector3(TowerDefense.getMouseX(), TowerDefense.getMouseY(), 0);
-			this.gameCamera.unproject(vec);
-			this.towerShadowX = vec.x;
-			this.towerShadowY = vec.y;
+			float x = this.getMouseX();
+			float y = this.getMouseY();
 			// old version of shadow Coordinates, with pixel accurate
 			// coordinates
 			// this.towerShadowX = (int) (input.getMouseX() -
@@ -414,8 +412,10 @@ public class Gameplay extends GameComponent implements InputProcessor {
 			// this.towerShadowX = this.gameCamera.position.x - this.width / 2 * this.gameCamera.zoom + TowerDefense.getMouseX()
 			// * this.gameCamera.zoom;
 			// this.towerShadowY = TowerDefense.getMouseY() * this.gameCamera.zoom;
-			int newX = (int) (this.towerShadowX / Gameplay.SIZE);
-			int newY = (int) (this.towerShadowY / Gameplay.SIZE);
+			int newX = (int) (x / Gameplay.SIZE);
+			int newY = (int) (y / Gameplay.SIZE);
+			this.towerShadowX = newX * Gameplay.SIZE;
+			this.towerShadowY = newY * Gameplay.SIZE;
 			// this.towerShadowX = newX * Gameplay.SIZE - Gameplay.getCameraX();
 			// this.towerShadowY = newY * Gameplay.SIZE - Gameplay.getCameraY();
 			int[][] path = this.currentLevel.getPath();
@@ -544,8 +544,8 @@ public class Gameplay extends GameComponent implements InputProcessor {
 	private void mouseEvents(int delta) {
 		if (this.mode == 0) {
 
-			float x = TowerDefense.getMouseX();
-			float y = TowerDefense.getMouseY();
+			float x = this.getMouseX();
+			float y = this.getMouseY();
 			if (Gdx.input.justTouched()) { // just touched also true for right mouse button...
 				if (Gdx.input.isButtonPressed(com.badlogic.gdx.Input.Buttons.LEFT)) { // ...therefore this if is needed
 					this.placeTower();
@@ -569,8 +569,8 @@ public class Gameplay extends GameComponent implements InputProcessor {
 		// this.width);
 		// float x = vec.x;
 		// float y = vec.y;
-		float x = TowerDefense.getMouseX() / this.gameCamera.zoom;
-		float y = TowerDefense.getMouseY() / this.gameCamera.zoom;
+		float x = this.getMouseX();
+		float y = this.getMouseY();
 
 		int newX = (int) x / Gameplay.SIZE;
 		int newY = (int) y / Gameplay.SIZE;
@@ -815,5 +815,17 @@ public class Gameplay extends GameComponent implements InputProcessor {
 		this.game.setMode(TowerDefense.MODE_MENU);
 
 		Gdx.input.setInputProcessor(this.game.getMenu().getStage());
+	}
+
+	public float getMouseX() {
+		Vector3 vec = new Vector3(Gdx.input.getX(), Gdx.input.getX(), 0);
+		this.gameCamera.unproject(vec);
+		return vec.x;
+	}
+
+	public float getMouseY() {
+		Vector3 vec = new Vector3(Gdx.input.getY(), Gdx.input.getY(), 0);
+		this.gameCamera.unproject(vec);
+		return vec.y;
 	}
 }
