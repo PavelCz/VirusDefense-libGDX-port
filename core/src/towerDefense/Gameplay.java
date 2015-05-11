@@ -230,7 +230,7 @@ public class Gameplay extends GameComponent implements InputProcessor {
 		Matrix4 projectionBuffer = batch.getProjectionMatrix().cpy();
 		Matrix4 transformBuffer = batch.getTransformMatrix().cpy();
 		// super.render(batch);
-		Gdx.gl.glViewport(0, 0, (int) this.cameraWidth, (int) this.cameraHeight);
+		// Gdx.gl.glViewport(0, 0, (int) this.cameraWidth, (int) this.cameraHeight);
 		batch.setProjectionMatrix(this.gameCamera.combined);
 
 		this.drawBackground(batch);
@@ -244,7 +244,7 @@ public class Gameplay extends GameComponent implements InputProcessor {
 		batch.setProjectionMatrix(projectionBuffer);
 		batch.setTransformMatrix(transformBuffer);
 
-		Gdx.gl.glViewport(0, 0, Gdx.graphics.getWidth(), (int) this.cameraHeight);
+		// Gdx.gl.glViewport(0, 0, Gdx.graphics.getWidth(), (int) this.cameraHeight);
 		this.renderGUI(batch);
 
 		for (Projectile projectiles : this.projectiles) {
@@ -477,8 +477,8 @@ public class Gameplay extends GameComponent implements InputProcessor {
 		float rightBoundary = TowerDefense.getWidth();
 		float topBoundary = TowerDefense.getHeight();
 
-		float effectiveCameraWidth = this.cameraWidth * this.gameCamera.zoom;
-		float effectiveCameraHeight = this.cameraHeight * this.gameCamera.zoom;
+		float effectiveCameraWidth = this.gameCamera.viewportWidth / this.gameCamera.zoom;
+		float effectiveCameraHeight = this.gameCamera.viewportHeight / this.gameCamera.zoom;
 
 		float scrollSpeed = 0.5f;
 		float scrollDistance = scrollSpeed * delta;
