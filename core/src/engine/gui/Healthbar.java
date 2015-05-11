@@ -4,27 +4,27 @@ import towerDefense.Gameplay;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-import engine.graphics.SlickTwoColoredBar;
+import engine.graphics.TwoColoredBar;
 
 /**
  * @author Pavel see LWJGLRectangle
  */
-public class SlickHealthbar extends GUI {
+public class Healthbar extends GUI {
 	// protected MyVector2f coordinates;
 	private int maxHealth;
 	private float healthLeft;
 	private int length;
 	private int height;
-	private SlickTwoColoredBar bar;
+	private TwoColoredBar bar;
 
-	public SlickHealthbar(float x, float y, int maxHealth, int length, int height) {
+	public Healthbar(float x, float y, int maxHealth, int length, int height) {
 		super(x, y);
 		this.maxHealth = maxHealth;
 		this.healthLeft = maxHealth;
 		this.length = length;
 		this.height = height;
 
-		this.bar = new SlickTwoColoredBar(this.length, this.height);
+		this.bar = new TwoColoredBar(this.length, this.height);
 
 	}
 

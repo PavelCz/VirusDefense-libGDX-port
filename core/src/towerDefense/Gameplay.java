@@ -33,7 +33,7 @@ import engine.graphics.LibGDXUnfilledRectangle;
 import engine.graphics.OwnSprite;
 import engine.gui.Clickable;
 import engine.gui.InterfaceBackground;
-import engine.gui.SlickHealthbar;
+import engine.gui.Healthbar;
 import engine.gui.StaticText;
 import engine.gui.TowerButton;
 import engine.projectiles.Projectile;
@@ -43,7 +43,7 @@ import engine.projectiles.Projectile;
  */
 public class Gameplay extends GameComponent implements InputProcessor {
 	private OrthographicCamera gameCamera;
-	private SlickHealthbar h;
+	private Healthbar h;
 	// private static Camera camera;
 	private float height, width;
 	private ConcurrentLinkedQueue<Enemy> enemies;
@@ -98,7 +98,7 @@ public class Gameplay extends GameComponent implements InputProcessor {
 
 		// this.gameCamera.translate(1024 / 2, 768 / 2);
 		// this.gameCamera.zoom = 2;
-		this.h = new SlickHealthbar(0, 0, 0, 30, 7);
+		this.h = new Healthbar(0, 0, 0, 30, 7);
 		this.currentLevel.setGame(this);
 		this.initDefaults();
 		// Gameplay.camera = new Camera(0, 0, this);
