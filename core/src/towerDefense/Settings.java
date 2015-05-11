@@ -43,16 +43,16 @@ public class Settings extends GameComponent {
 		this.guiElements.add(this.back);
 
 		this.back.setX(0);
-		this.back.setY(TowerDefense.getHeight() - this.back.getTextHeight() * 2);
+		this.back.setY(this.back.getTextHeight() * 2);
 
 		int fieldsX = 0;
-		int fieldsY = 100;
+		int fieldsY = TowerDefense.getHeight() - 100;
 		int fieldWidth = 50;
 
 		this.widthField = new TextField(TowerDefense.getWidth() + "", new Skin(Gdx.files.internal("uiskin.json")));
 		this.widthField.setSize(fieldWidth, 25);
 		float x = TowerDefense.getWidth() / 2 - this.widthField.getWidth() / 2;
-		this.widthField.setPosition(fieldsX, TowerDefense.getHeight() - fieldsY - this.widthField.getHeight());
+		this.widthField.setPosition(fieldsX, fieldsY + this.widthField.getHeight());
 		this.widthField.setCursorPosition(this.widthField.getText().getBytes().length);
 		this.widthField.setMaxLength(4);
 
@@ -61,7 +61,7 @@ public class Settings extends GameComponent {
 		this.heightField = new TextField(TowerDefense.getHeight() + "", new Skin(Gdx.files.internal("uiskin.json")));
 		this.heightField.setSize(fieldWidth, 25);
 		x = TowerDefense.getWidth() / 2 - this.widthField.getWidth() / 2;
-		this.heightField.setPosition(fieldsX, TowerDefense.getHeight() - fieldsY - this.heightField.getHeight());
+		this.heightField.setPosition(fieldsX, fieldsY + this.heightField.getHeight());
 		this.heightField.setCursorPosition(this.heightField.getText().getBytes().length);
 		this.heightField.setMaxLength(4);
 
@@ -78,7 +78,7 @@ public class Settings extends GameComponent {
 		this.warning.setVisible(false);
 		this.guiElements.add(this.warning);
 		fieldsX = 0;
-		fieldsY += this.widthField.getHeight();
+		fieldsY -= this.widthField.getHeight();
 		this.fullscreen = new ClickableText(fieldsX, fieldsY, "Toggle fullscreen", Gameplay.GLOBAL_GUI_SCALE, game.getGameplay(),
 				false);
 		this.fullscreen.setColor(Color.BLACK);
@@ -87,7 +87,7 @@ public class Settings extends GameComponent {
 
 		Integer[][] supportedResolutions = new Integer[0][0];
 		supportedResolutions = this.getSupportedDisplayModes();
-		this.supportedResolutionsText = new StaticText(0, 0, (int) 15, Color.BLACK, "Supported Fullscreen\nResolutions:");
+		this.supportedResolutionsText = new StaticText(0, 0, 15, Color.BLACK, "Supported Fullscreen\nResolutions:");
 
 		this.guiElements.add(this.supportedResolutionsText);
 
@@ -113,12 +113,12 @@ public class Settings extends GameComponent {
 		textHeight = Math.min(textHeight, (TowerDefense.getHeight() - ((lines - 1) * inbetween)) / lines);
 		float textWidth = this.supportedResolutionsText.getWidth();
 		float x = TowerDefense.getWidth() - textWidth;
-		float y = 0;
+		float y = TowerDefense.getHeight() * 0.75f;
 		this.supportedResolutionsText.setPosition(x, y);
 		this.supportedResolutionsText.setHeight((int) textHeight);
-		y += textHeight + inbetween;
+		y -= textHeight + inbetween;
 		for (ClickableText clickable : this.resolutionClickables) {
-			y += textHeight + inbetween;
+			y -= textHeight + inbetween;
 			clickable.setX((int) x);
 			clickable.setY((int) y);
 			clickable.setHeight((int) textHeight);
