@@ -106,8 +106,10 @@ public class Menu extends GameComponent {
 		// textButtonStyle.up = skin.getDrawable("default-round-up");
 		// textButtonStyle.down = skin.getDrawable("default-round-down");
 		// textButtonStyle.checked = skin.getDrawable("default-round-down");
-		this.tb = new TextButton("Player", textButtonStyle);
-		this.tb.setDisabled(false);
+		// this.tb = new TextButton("Player", textButtonStyle);
+		// this.tb.setDisabled(false);
+		// this.tb.set
+		this.tb = new TextButton("test", skin);
 
 		// this.t.addListener(new TextFieldClickListener() {
 		//
@@ -203,6 +205,7 @@ public class Menu extends GameComponent {
 		this.stage = stage;
 
 		this.getStage().addActor(this.t);
+		this.getStage().addActor(this.tb);
 	}
 
 }
