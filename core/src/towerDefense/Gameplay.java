@@ -32,8 +32,8 @@ import engine.graphics.LibGDXUnfilledEllipse;
 import engine.graphics.LibGDXUnfilledRectangle;
 import engine.graphics.OwnSprite;
 import engine.gui.Clickable;
-import engine.gui.InterfaceBackground;
 import engine.gui.Healthbar;
+import engine.gui.InterfaceBackground;
 import engine.gui.StaticText;
 import engine.gui.TowerButton;
 import engine.projectiles.Projectile;
@@ -129,18 +129,18 @@ public class Gameplay extends GameComponent implements InputProcessor {
 		this.projectiles = new ConcurrentLinkedQueue<Projectile>();
 		int offset = 20;
 		// Buttons; this has nothing to do with the draw sequence
-		this.towerButton1 = new TowerButton(Gameplay.INTERFACE_START_X, 4 * 64 * Gameplay.GLOBAL_GUI_SCALE + offset,
-				"buttons/PSButton1.png", "buttons/PSButton1_click.png", new LongerShootingTower(0, 0, new OwnSprite(
-						"tower/Tower2.png", 0.5f), this, 400, 0.16f, 400/* , container.getGraphics() */), this);
-		this.towerButton2 = new TowerButton(Gameplay.INTERFACE_START_X, 5 * 64 * Gameplay.GLOBAL_GUI_SCALE + offset,
-				"buttons/PSButton1.png", "buttons/PSButton1_click.png", new BombTower(0, 0, new OwnSprite("tower/t1n.png", 0.5f),
-						this, 1500, 15f, 50), this);
-		this.towerButton3 = new TowerButton(Gameplay.INTERFACE_START_X, 6 * 64 * Gameplay.GLOBAL_GUI_SCALE + offset,
-				"buttons/PSButton1.png", "buttons/PSButton1_click.png", new RocketTower(0, 0, new OwnSprite("tower/t1.png", 0.5f),
-						this, 200, 15f, 50), this);
-		this.towerButton4 = new TowerButton(Gameplay.INTERFACE_START_X + 64 + 32, 4 * 64 * Gameplay.GLOBAL_GUI_SCALE + offset,
-				"buttons/PSButton1.png", "buttons/PSButton1_click.png", new RocketFastTower(0, 0, new OwnSprite(
-						"tower/roteBlutk_klein.png", 0.5f), this, 1000, 20f), this);
+		this.towerButton1 = new TowerButton(Gameplay.INTERFACE_START_X, TowerDefense.getHeight() - 4 * 64 * Gameplay.GLOBAL_GUI_SCALE
+				+ offset, "buttons/PSButton1.png", "buttons/PSButton1_click.png", new LongerShootingTower(0, 0, new OwnSprite(
+				"tower/Tower2.png", 0.5f), this, 400, 0.16f, 400/* , container.getGraphics() */), this);
+		this.towerButton2 = new TowerButton(Gameplay.INTERFACE_START_X, TowerDefense.getHeight() - 5 * 64 * Gameplay.GLOBAL_GUI_SCALE
+				+ offset, "buttons/PSButton1.png", "buttons/PSButton1_click.png", new BombTower(0, 0, new OwnSprite("tower/t1n.png",
+				0.5f), this, 1500, 15f, 50), this);
+		this.towerButton3 = new TowerButton(Gameplay.INTERFACE_START_X, TowerDefense.getHeight() - 6 * 64 * Gameplay.GLOBAL_GUI_SCALE
+				+ offset, "buttons/PSButton1.png", "buttons/PSButton1_click.png", new RocketTower(0, 0, new OwnSprite("tower/t1.png",
+				0.5f), this, 200, 15f, 50), this);
+		this.towerButton4 = new TowerButton(Gameplay.INTERFACE_START_X + 64 + 32, TowerDefense.getHeight() - 4 * 64
+				* Gameplay.GLOBAL_GUI_SCALE + offset, "buttons/PSButton1.png", "buttons/PSButton1_click.png", new RocketFastTower(0,
+				0, new OwnSprite("tower/roteBlutk_klein.png", 0.5f), this, 1000, 20f), this);
 		this.clickables.add(this.towerButton1);
 		this.clickables.add(this.towerButton2);
 		this.clickables.add(this.towerButton3);
@@ -174,29 +174,28 @@ public class Gameplay extends GameComponent implements InputProcessor {
 		float cursorY = cursorYStart;
 
 		this.playerName = new StaticText(cursorX, cursorY, defaultTextColor, "Player: " + this.player.getName());
-		cursorY += textHeight;
+		cursorY -= textHeight;
 
 		StaticText livesText = new StaticText(cursorX, cursorY, defaultTextColor, "Lives: ");
 		cursorX += livesText.getWidth();
 		this.numberLives = new StaticText(cursorX, cursorY, defaultTextColor, "" + this.player.getLives());
 		cursorX = cursorXStart;
-		cursorY += textHeight;
+		cursorY -= textHeight;
 
 		StaticText moneyText = new StaticText(cursorX, cursorY, defaultTextColor, "Money: ");
 		cursorX += moneyText.getWidth();
 		this.moneyAmount = new StaticText(cursorX, cursorY, defaultTextColor, "" + this.player.getMoney());
 		cursorX = cursorXStart;
-		cursorY += textHeight;
+		cursorY -= textHeight;
 
 		StaticText scoreText = new StaticText(cursorX, cursorY, defaultTextColor, "Score: ");
 		cursorX += scoreText.getWidth();
 		this.score = new StaticText(cursorX, cursorY, defaultTextColor, "" + this.player.getScore());
 
-		this.towerName = new StaticText(Gameplay.INTERFACE_START_X + guiTileSize, 10, defaultTextColor, "");
+		this.towerName = new StaticText(Gameplay.INTERFACE_START_X + guiTileSize, TowerDefense.getHeight() - 64, defaultTextColor, "");
 		this.towerInfo = new StaticText(Gameplay.INTERFACE_START_X, guiTileSize, defaultTextColor, "");
 
-		this.passedTime = new StaticText(Gameplay.INTERFACE_START_X + guiX, TowerDefense.getHeight() - textHeight, defaultTextColor,
-				this.passedTimeToString());
+		this.passedTime = new StaticText(Gameplay.INTERFACE_START_X + guiX, 0, defaultTextColor, this.passedTimeToString());
 
 		this.guiElements.add(this.interfaceBackground);
 
@@ -242,7 +241,7 @@ public class Gameplay extends GameComponent implements InputProcessor {
 			projectiles.draw(batch);
 		}
 		if (this.currentTower != null) {
-			this.currentTower.getSprite().draw(INTERFACE_START_X, 0, GLOBAL_GUI_SCALE, batch);
+			this.currentTower.getSprite().draw(INTERFACE_START_X, TowerDefense.getHeight() - 80, GLOBAL_GUI_SCALE, batch);
 			this.towerName.setText(this.currentTower.getName());
 			this.towerInfo.setText("Radius: " + this.currentTower.getRadius() + "\nKosten: " + this.currentTower.getCost()
 					+ "\nSchaden: " + this.currentTower.getDamage());
