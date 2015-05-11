@@ -26,9 +26,8 @@ public class StaticText extends GUI {
 		this.text.setVisible(visible);
 	}
 
-	@Override
 	public void draw(SpriteBatch batch) {
-		this.text.draw(this.x, this.y, Gameplay.GLOBAL_GUI_SCALE, batch);
+		super.draw(this.text, batch);
 
 	}
 

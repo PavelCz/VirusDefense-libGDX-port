@@ -3,7 +3,7 @@ package engine.graphics;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-public class SlickTwoColoredBar extends RenderObject {
+public class TwoColoredBar extends RenderObject {
 	private LibGDXRectangle base;
 	private LibGDXRectangle health;
 	LibGDXUnfilledRectangle border;
@@ -13,7 +13,7 @@ public class SlickTwoColoredBar extends RenderObject {
 
 	private boolean bordered = false;
 
-	public SlickTwoColoredBar(float length, float height) {
+	public TwoColoredBar(float length, float height) {
 		this.length = length;
 		this.height = height;
 		this.border = new LibGDXUnfilledRectangle(this.length, this.height, Color.BLACK);

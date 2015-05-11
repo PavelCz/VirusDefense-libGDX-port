@@ -17,6 +17,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Matrix4;
+import com.badlogic.gdx.math.Vector3;
 
 import engine.Enemy;
 import engine.EnemyTypeHandler;
@@ -31,8 +32,8 @@ import engine.graphics.LibGDXUnfilledEllipse;
 import engine.graphics.LibGDXUnfilledRectangle;
 import engine.graphics.OwnSprite;
 import engine.gui.Clickable;
+import engine.gui.Healthbar;
 import engine.gui.InterfaceBackground;
-import engine.gui.SlickHealthbar;
 import engine.gui.StaticText;
 import engine.gui.TowerButton;
 import engine.projectiles.Projectile;
@@ -42,7 +43,7 @@ import engine.projectiles.Projectile;
  */
 public class Gameplay extends GameComponent implements InputProcessor {
 	private OrthographicCamera gameCamera;
-	private SlickHealthbar h;
+	private Healthbar h;
 	// private static Camera camera;
 	private float height, width;
 	private ConcurrentLinkedQueue<Enemy> enemies;
@@ -65,7 +66,7 @@ public class Gameplay extends GameComponent implements InputProcessor {
 	private StaticText towerInfo;
 	private StaticText towerName;
 	private boolean currentTowerPlaceable;
-	private int towerShadowX, towerShadowY;
+	private float towerShadowX, towerShadowY;
 	protected ConcurrentLinkedQueue<Projectile> projectiles;
 
 	public static float CURRENT_GAME_SCALE;
@@ -94,11 +95,10 @@ public class Gameplay extends GameComponent implements InputProcessor {
 	@Override
 	public void init() {
 		super.init();
-		this.gameCamera = new OrthographicCamera(1024, 768);
 
-		this.gameCamera.translate(1024 / 2, 768 / 2);
+		// this.gameCamera.translate(1024 / 2, 768 / 2);
 		// this.gameCamera.zoom = 2;
-		this.h = new SlickHealthbar(0, 0, 0, 30, 7);
+		this.h = new Healthbar(0, 0, 0, 30, 7);
 		this.currentLevel.setGame(this);
 		this.initDefaults();
 		// Gameplay.camera = new Camera(0, 0, this);
@@ -109,6 +109,9 @@ public class Gameplay extends GameComponent implements InputProcessor {
 		// Set Constants:
 
 		Gameplay.INTERFACE_START_X = TowerDefense.getWidth() - 3 * 64 * Gameplay.GLOBAL_GUI_SCALE;
+
+		this.gameCamera = new OrthographicCamera(1024, 768);
+
 		float scale1 = Gameplay.INTERFACE_START_X / this.width;
 		float scale2 = TowerDefense.getHeight() / this.height;
 		Gameplay.CURRENT_GAME_SCALE = Math.max(scale1, scale2);
@@ -126,18 +129,18 @@ public class Gameplay extends GameComponent implements InputProcessor {
 		this.projectiles = new ConcurrentLinkedQueue<Projectile>();
 		int offset = 20;
 		// Buttons; this has nothing to do with the draw sequence
-		this.towerButton1 = new TowerButton(Gameplay.INTERFACE_START_X, 4 * 64 * Gameplay.GLOBAL_GUI_SCALE + offset,
-				"buttons/PSButton1.png", "buttons/PSButton1_click.png", new LongerShootingTower(0, 0, new OwnSprite(
-						"tower/Tower2.png", 0.5f), this, 400, 0.16f, 400/* , container.getGraphics() */), this);
-		this.towerButton2 = new TowerButton(Gameplay.INTERFACE_START_X, 5 * 64 * Gameplay.GLOBAL_GUI_SCALE + offset,
-				"buttons/PSButton1.png", "buttons/PSButton1_click.png", new BombTower(0, 0, new OwnSprite("tower/t1n.png", 0.5f),
-						this, 1500, 15f, 50), this);
-		this.towerButton3 = new TowerButton(Gameplay.INTERFACE_START_X, 6 * 64 * Gameplay.GLOBAL_GUI_SCALE + offset,
-				"buttons/PSButton1.png", "buttons/PSButton1_click.png", new RocketTower(0, 0, new OwnSprite("tower/t1.png", 0.5f),
-						this, 200, 15f, 50), this);
-		this.towerButton4 = new TowerButton(Gameplay.INTERFACE_START_X + 64 + 32, 4 * 64 * Gameplay.GLOBAL_GUI_SCALE + offset,
-				"buttons/PSButton1.png", "buttons/PSButton1_click.png", new RocketFastTower(0, 0, new OwnSprite(
-						"tower/roteBlutk_klein.png", 0.5f), this, 1000, 20f), this);
+		this.towerButton1 = new TowerButton(Gameplay.INTERFACE_START_X, TowerDefense.getHeight() - 4 * 64 * Gameplay.GLOBAL_GUI_SCALE
+				+ offset, "buttons/PSButton1.png", "buttons/PSButton1_click.png", new LongerShootingTower(0, 0, new OwnSprite(
+				"tower/Tower2.png", 0.5f), this, 400, 0.16f, 400/* , container.getGraphics() */), this);
+		this.towerButton2 = new TowerButton(Gameplay.INTERFACE_START_X, TowerDefense.getHeight() - 5 * 64 * Gameplay.GLOBAL_GUI_SCALE
+				+ offset, "buttons/PSButton1.png", "buttons/PSButton1_click.png", new BombTower(0, 0, new OwnSprite("tower/t1n.png",
+				0.5f), this, 1500, 15f, 50), this);
+		this.towerButton3 = new TowerButton(Gameplay.INTERFACE_START_X, TowerDefense.getHeight() - 6 * 64 * Gameplay.GLOBAL_GUI_SCALE
+				+ offset, "buttons/PSButton1.png", "buttons/PSButton1_click.png", new RocketTower(0, 0, new OwnSprite("tower/t1.png",
+				0.5f), this, 200, 15f, 50), this);
+		this.towerButton4 = new TowerButton(Gameplay.INTERFACE_START_X + 64 + 32, TowerDefense.getHeight() - 4 * 64
+				* Gameplay.GLOBAL_GUI_SCALE + offset, "buttons/PSButton1.png", "buttons/PSButton1_click.png", new RocketFastTower(0,
+				0, new OwnSprite("tower/roteBlutk_klein.png", 0.5f), this, 1000, 20f), this);
 		this.clickables.add(this.towerButton1);
 		this.clickables.add(this.towerButton2);
 		this.clickables.add(this.towerButton3);
@@ -171,29 +174,28 @@ public class Gameplay extends GameComponent implements InputProcessor {
 		float cursorY = cursorYStart;
 
 		this.playerName = new StaticText(cursorX, cursorY, defaultTextColor, "Player: " + this.player.getName());
-		cursorY += textHeight;
+		cursorY -= textHeight;
 
 		StaticText livesText = new StaticText(cursorX, cursorY, defaultTextColor, "Lives: ");
 		cursorX += livesText.getWidth();
 		this.numberLives = new StaticText(cursorX, cursorY, defaultTextColor, "" + this.player.getLives());
 		cursorX = cursorXStart;
-		cursorY += textHeight;
+		cursorY -= textHeight;
 
 		StaticText moneyText = new StaticText(cursorX, cursorY, defaultTextColor, "Money: ");
 		cursorX += moneyText.getWidth();
 		this.moneyAmount = new StaticText(cursorX, cursorY, defaultTextColor, "" + this.player.getMoney());
 		cursorX = cursorXStart;
-		cursorY += textHeight;
+		cursorY -= textHeight;
 
 		StaticText scoreText = new StaticText(cursorX, cursorY, defaultTextColor, "Score: ");
 		cursorX += scoreText.getWidth();
 		this.score = new StaticText(cursorX, cursorY, defaultTextColor, "" + this.player.getScore());
 
-		this.towerName = new StaticText(Gameplay.INTERFACE_START_X + guiTileSize, 10, defaultTextColor, "");
+		this.towerName = new StaticText(Gameplay.INTERFACE_START_X + guiTileSize, TowerDefense.getHeight() - 64, defaultTextColor, "");
 		this.towerInfo = new StaticText(Gameplay.INTERFACE_START_X, guiTileSize, defaultTextColor, "");
 
-		this.passedTime = new StaticText(Gameplay.INTERFACE_START_X + guiX, TowerDefense.getHeight() - textHeight, defaultTextColor,
-				this.passedTimeToString());
+		this.passedTime = new StaticText(Gameplay.INTERFACE_START_X + guiX, 0, defaultTextColor, this.passedTimeToString());
 
 		this.guiElements.add(this.interfaceBackground);
 
@@ -239,7 +241,7 @@ public class Gameplay extends GameComponent implements InputProcessor {
 			projectiles.draw(batch);
 		}
 		if (this.currentTower != null) {
-			this.currentTower.getSprite().draw(INTERFACE_START_X, 0, GLOBAL_GUI_SCALE, batch);
+			this.currentTower.getSprite().draw(INTERFACE_START_X, TowerDefense.getHeight() - 80, GLOBAL_GUI_SCALE, batch);
 			this.towerName.setText(this.currentTower.getName());
 			this.towerInfo.setText("Radius: " + this.currentTower.getRadius() + "\nKosten: " + this.currentTower.getCost()
 					+ "\nSchaden: " + this.currentTower.getDamage());
@@ -396,18 +398,25 @@ public class Gameplay extends GameComponent implements InputProcessor {
 
 	private void updateTowerShadow() {
 		if (this.currentTower != null && this.getMode() == 0) {
+
+			float x = this.getMouseX();
+			float y = this.getMouseY();
 			// old version of shadow Coordinates, with pixel accurate
 			// coordinates
 			// this.towerShadowX = (int) (input.getMouseX() -
 			// this.currentTower.getSprite().getWidth() / 2);
 			// this.towerShadowY = (int) (input.getMouseY() -
 			// this.currentTower.getSprite().getHeight() / 2);
-			int x = TowerDefense.getMouseX() + Gameplay.getCameraX();
-			int y = TowerDefense.getMouseY() + Gameplay.getCameraY();
-			int newX = (x) / Gameplay.SIZE;
-			int newY = (y) / Gameplay.SIZE;
-			this.towerShadowX = (int) (newX * Gameplay.SIZE - Gameplay.getCameraX());
-			this.towerShadowY = (int) (newY * Gameplay.SIZE - Gameplay.getCameraY());
+
+			// this.towerShadowX = this.gameCamera.position.x - this.width / 2 * this.gameCamera.zoom + TowerDefense.getMouseX()
+			// * this.gameCamera.zoom;
+			// this.towerShadowY = TowerDefense.getMouseY() * this.gameCamera.zoom;
+			int newX = (int) (x / Gameplay.SIZE);
+			int newY = (int) (y / Gameplay.SIZE);
+			this.towerShadowX = newX * Gameplay.SIZE;
+			this.towerShadowY = newY * Gameplay.SIZE;
+			// this.towerShadowX = newX * Gameplay.SIZE - Gameplay.getCameraX();
+			// this.towerShadowY = newY * Gameplay.SIZE - Gameplay.getCameraY();
 			int[][] path = this.currentLevel.getPath();
 			if (this.player.getMoney() < this.currentTower.getCost()) {
 				this.currentTowerPlaceable = false;
@@ -428,16 +437,16 @@ public class Gameplay extends GameComponent implements InputProcessor {
 	 */
 	private void keyboardEvents(int delta) {
 
-		// if (Gdx.input.isKeyPressed(Input.Keys.I)) {
-		// this.debugMode = !this.debugMode;
-		// if (this.debugMode) {
-		// System.out.println("debug");
-		// this.player.setMoney(100000);
-		// } else {
-		// System.out.println("not debug");
-		// this.speed = 1f;
-		// }
-		// }
+		if (Gdx.input.isKeyPressed(Input.Keys.I)) {
+			this.debugMode = !this.debugMode;
+			if (this.debugMode) {
+				System.out.println("debug");
+				this.player.setMoney(100000);
+			} else {
+				System.out.println("not debug");
+				this.speed = 1f;
+			}
+		}
 		if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
 			this.game.getMenu().setPauseMenu();
 			this.game.setMode(TowerDefense.MODE_MENU);
@@ -455,42 +464,60 @@ public class Gameplay extends GameComponent implements InputProcessor {
 		// this.gameCamera.
 		float xOrigin = Gdx.graphics.getWidth() / 2;
 		float yOrigin = Gdx.graphics.getHeight() / 2;
-		float rightBoundary = xOrigin + Gdx.graphics.getWidth();
-		float topBoundary = yOrigin + Gdx.graphics.getHeight();
-		float cameraWidth = this.gameCamera.viewportWidth;
-		float cameraHeight = this.gameCamera.viewportHeight;
+		float rightBoundary = TowerDefense.getWidth();
+		float topBoundary = TowerDefense.getHeight();
+
+		float effectiveCameraWidth = this.gameCamera.viewportWidth * this.gameCamera.zoom;
+		float effectiveCameraHeight = this.gameCamera.viewportHeight * this.gameCamera.zoom;
+
+		float cameraWidth = effectiveCameraWidth / 2;
+		float cameraHeight = effectiveCameraHeight / 2;
 		float scrollSpeed = 0.5f;
 		float scrollDistance = scrollSpeed * delta;
+
 		if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
 			this.gameCamera.translate(-scrollDistance, 0);
-			if (this.gameCamera.position.x < xOrigin) {
-				this.gameCamera.position.x = xOrigin;
-			}
+
 		}
 		System.out.println(this.gameCamera.position.x);
 
 		if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
 			this.gameCamera.translate(+scrollDistance, 0);
-			if (this.gameCamera.position.x + cameraWidth > rightBoundary) {
-				this.gameCamera.position.x = rightBoundary - cameraWidth;
-			}
+
 		}
 		if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
 			this.gameCamera.translate(0, +scrollDistance);
-			if (this.gameCamera.position.y + cameraHeight > topBoundary) {
-				this.gameCamera.position.y = topBoundary - cameraHeight;
-			}
+
 		}
 		if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
 			this.gameCamera.translate(0, -scrollDistance);
-			if (this.gameCamera.position.y < yOrigin) {
-				this.gameCamera.position.y = yOrigin;
-			}
+
+		}
+
+		if (this.gameCamera.position.x - cameraWidth < 0) {
+			this.gameCamera.position.x = cameraWidth;
+		}
+		if (this.gameCamera.position.x + cameraWidth > rightBoundary) {
+			this.gameCamera.position.x = rightBoundary - cameraWidth;
+		}
+		if (this.gameCamera.position.y + cameraHeight > topBoundary) {
+			this.gameCamera.position.y = topBoundary - cameraHeight;
+		}
+		if (this.gameCamera.position.y - cameraHeight < 0) {
+			this.gameCamera.position.y = cameraHeight;
 		}
 
 		if (this.debugMode) {
 			this.debugKeyboardEvents(delta);
 		}
+
+		// this.gameCamera.position.x = MathUtils.clamp(this.gameCamera.position.x, effectiveCameraWidth / 2f,
+		// 100 - effectiveCameraWidth / 2f);
+		// this.gameCamera.position.y = MathUtils.clamp(this.gameCamera.position.y, effectiveCameraHeight / 2f,
+		// 100 - effectiveCameraHeight / 2f);
+
+		System.out.println(cameraWidth);
+		System.out.println(this.gameCamera.position);
 
 	}
 
@@ -521,8 +548,8 @@ public class Gameplay extends GameComponent implements InputProcessor {
 	private void mouseEvents(int delta) {
 		if (this.mode == 0) {
 
-			float x = TowerDefense.getMouseX();
-			float y = TowerDefense.getMouseY();
+			float x = this.getMouseX();
+			float y = this.getMouseY();
 			if (Gdx.input.justTouched()) { // just touched also true for right mouse button...
 				if (Gdx.input.isButtonPressed(com.badlogic.gdx.Input.Buttons.LEFT)) { // ...therefore this if is needed
 					this.placeTower();
@@ -539,8 +566,16 @@ public class Gameplay extends GameComponent implements InputProcessor {
 	}
 
 	private void placeTower() {
-		float x = TowerDefense.getMouseX() + Gameplay.getCameraX();
-		float y = TowerDefense.getMouseY() + Gameplay.getCameraY();
+		// Vector2 vec = new Vector2(TowerDefense.getMouseX(), TowerDefense.getMouseY());
+		// vec.mul(this.gameCamera.)
+		// Vector3 vec = this.gameCamera.unproject(new Vector3(TowerDefense.getMouseX(), TowerDefense.getMouseY(), 0), 0, 0,
+		// this.height,
+		// this.width);
+		// float x = vec.x;
+		// float y = vec.y;
+		float x = this.getMouseX();
+		float y = this.getMouseY();
+
 		int newX = (int) x / Gameplay.SIZE;
 		int newY = (int) y / Gameplay.SIZE;
 
@@ -784,5 +819,17 @@ public class Gameplay extends GameComponent implements InputProcessor {
 		this.game.setMode(TowerDefense.MODE_MENU);
 
 		Gdx.input.setInputProcessor(this.game.getMenu().getStage());
+	}
+
+	public float getMouseX() {
+		Vector3 vec = new Vector3(Gdx.input.getX(), Gdx.input.getX(), 0);
+		this.gameCamera.unproject(vec);
+		return vec.x;
+	}
+
+	public float getMouseY() {
+		Vector3 vec = new Vector3(Gdx.input.getY(), Gdx.input.getY(), 0);
+		this.gameCamera.unproject(vec);
+		return vec.y;
 	}
 }

@@ -22,13 +22,13 @@ public class Button extends Clickable {
 		this.collisionHeight = this.unclickedButton.getHeight();
 	}
 
-	@Override
+	
 	public void draw(SpriteBatch batch) {
 		if (!this.clicked) {
-			this.unclickedButton.draw(this.x, this.y, Gameplay.GLOBAL_GUI_SCALE, batch);
+			super.draw(this.unclickedButton, batch);
 
 		} else {
-			this.clickedButton.draw(this.x, this.y, Gameplay.GLOBAL_GUI_SCALE, batch);
+			super.draw(this.clickedButton, batch);
 		}
 
 	}
