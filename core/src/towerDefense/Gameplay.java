@@ -282,8 +282,8 @@ public class Gameplay extends GameComponent implements InputProcessor {
 		for (Enemy enemy : this.enemies) {
 			int barLength = 30;
 			int barHeight = 7;
-			this.h.setX((enemy.getX() - barLength / 2) * Gameplay.CURRENT_GAME_SCALE - Gameplay.getCameraX());
-			this.h.setY((enemy.getY() - Gameplay.DEFAULT_SIZE / 2) * Gameplay.CURRENT_GAME_SCALE - Gameplay.getCameraY());
+			this.h.setX((enemy.getX() - barLength / 2) * Gameplay.CURRENT_GAME_SCALE);
+			this.h.setY((enemy.getY() - Gameplay.DEFAULT_SIZE / 2) * Gameplay.CURRENT_GAME_SCALE);
 			this.h.setMaxHealth(enemy.getMaxHealth());
 			this.h.setHealth(enemy.getHealth());
 			this.h.setBordered(true);
@@ -344,8 +344,8 @@ public class Gameplay extends GameComponent implements InputProcessor {
 		if (this.debugMode) {
 			for (Enemy enemy : this.enemies) {
 				new LibGDXUnfilledEllipse(enemy.getRadius() * 2, enemy.getRadius() * 2, Color.BLUE).draw((enemy.getX())
-						* Gameplay.CURRENT_GAME_SCALE - Gameplay.getCameraX(),
-						(enemy.getY()) * Gameplay.CURRENT_GAME_SCALE - Gameplay.getCameraY(), Gameplay.CURRENT_GAME_SCALE, batch);
+						* Gameplay.CURRENT_GAME_SCALE, (enemy.getY()) * Gameplay.CURRENT_GAME_SCALE, Gameplay.CURRENT_GAME_SCALE,
+						batch);
 			}
 
 			// create a black box that the FPS are visible
@@ -721,13 +721,13 @@ public class Gameplay extends GameComponent implements InputProcessor {
 		return this.currentTowerPlaceable;
 	}
 
-	public static int getCameraX() {
-		return 0;// (int) Gameplay.camera.getX();
-	}
-
-	public static int getCameraY() {
-		return 0;// (int) Gameplay.camera.getY();
-	}
+	// public static int getCameraX() {
+	// return 0;// (int) Gameplay.camera.getX();
+	// }
+	//
+	// public static int getCameraY() {
+	// return 0;// (int) Gameplay.camera.getY();
+	// }
 
 	public StaticText getScore() {
 		return this.score;

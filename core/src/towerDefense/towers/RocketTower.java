@@ -24,8 +24,7 @@ public class RocketTower extends Tower {
 
 	@Override
 	public void draw(SpriteBatch batch) {
-		this.sprite.draw(this.x * Gameplay.SIZE - Gameplay.getCameraX(), this.y * Gameplay.SIZE - Gameplay.getCameraY(),
-				Gameplay.CURRENT_GAME_SCALE, batch);
+		this.sprite.draw(this.x * Gameplay.SIZE, this.y * Gameplay.SIZE, Gameplay.CURRENT_GAME_SCALE, batch);
 
 	}
 
