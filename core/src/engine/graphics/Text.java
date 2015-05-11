@@ -15,7 +15,7 @@ public class Text extends RenderObject {
 	Label label;
 
 	public Text(int height, String text, Color color, float globalScale) {
-
+		this.text = text;
 		this.label = new Label(this.text, new Skin(Gdx.files.internal("uiskin.json"))/* , "arial.fnt", Color.WHITE */);
 		this.label.setHeight(height);
 		// this.bmfont = new BitmapFont(Gdx.files.internal("arial.fnt"));
@@ -29,6 +29,7 @@ public class Text extends RenderObject {
 
 	public void setText(String text) {
 		this.text = text;
+		this.label.pack();
 	}
 
 	@Override
@@ -64,7 +65,7 @@ public class Text extends RenderObject {
 		// }
 		// }
 		// return maxWidth;
-		System.out.println("width: " + this.label.getWidth());
+		System.out.println("width: " + this.label.getPrefWidth());
 		return (int) this.label.getPrefWidth();
 
 	}
