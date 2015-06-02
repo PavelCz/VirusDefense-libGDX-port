@@ -16,7 +16,6 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
 
@@ -477,8 +476,11 @@ public class Gameplay extends GameComponent implements InputProcessor {
 		float rightBoundary = TowerDefense.getWidth();
 		float topBoundary = TowerDefense.getHeight();
 
-		float effectiveCameraWidth = this.gameCamera.viewportWidth / this.gameCamera.zoom;
-		float effectiveCameraHeight = this.gameCamera.viewportHeight / this.gameCamera.zoom;
+		float effectiveCameraWidth = this.gameCamera.viewportWidth * this.gameCamera.zoom;
+		float effectiveCameraHeight = this.gameCamera.viewportHeight * this.gameCamera.zoom;
+
+		float cameraWidth = effectiveCameraWidth / 2;
+		float cameraHeight = effectiveCameraHeight / 2;
 
 		float scrollSpeed = 0.5f;
 		float scrollDistance = scrollSpeed * delta;
@@ -502,28 +504,28 @@ public class Gameplay extends GameComponent implements InputProcessor {
 
 		}
 
-		// if (this.gameCamera.position.x - cameraWidth < 0) {
-		// this.gameCamera.position.x = cameraWidth;
-		// }
-		// if (this.gameCamera.position.x + cameraWidth > rightBoundary) {
-		// this.gameCamera.position.x = rightBoundary - cameraWidth;
-		// }
-		// if (this.gameCamera.position.y + cameraHeight > topBoundary) {
-		// this.gameCamera.position.y = topBoundary - cameraHeight;
-		// }
-		// if (this.gameCamera.position.y - cameraHeight < 0) {
-		// this.gameCamera.position.y = cameraHeight;
-		// }
+		if (this.gameCamera.position.x - cameraWidth < 0) {
+			this.gameCamera.position.x = cameraWidth;
+		}
+		if (this.gameCamera.position.x + cameraWidth > rightBoundary) {
+			this.gameCamera.position.x = rightBoundary - cameraWidth;
+		}
+		if (this.gameCamera.position.y + cameraHeight > topBoundary) {
+			this.gameCamera.position.y = topBoundary - cameraHeight;
+		}
+		if (this.gameCamera.position.y - cameraHeight < 0) {
+			this.gameCamera.position.y = cameraHeight;
+		}
 
 		if (this.debugMode) {
 			this.debugKeyboardEvents(delta);
 		}
 		System.out.println("a" + this.gameCamera.viewportWidth);
 
-		this.gameCamera.position.x = MathUtils.clamp(this.gameCamera.position.x, effectiveCameraWidth / 2f,
-				this.gameCamera.viewportWidth - effectiveCameraWidth / 2f);
-		this.gameCamera.position.y = MathUtils.clamp(this.gameCamera.position.y, effectiveCameraHeight / 2f,
-				this.gameCamera.viewportHeight - effectiveCameraHeight / 2f);
+		// this.gameCamera.position.x = MathUtils.clamp(this.gameCamera.position.x, effectiveCameraWidth / 2f,
+		// this.gameCamera.viewportWidth - effectiveCameraWidth / 2f);
+		// this.gameCamera.position.y = MathUtils.clamp(this.gameCamera.position.y, effectiveCameraHeight / 2f,
+		// this.gameCamera.viewportHeight - effectiveCameraHeight / 2f);
 
 		// System.out.println("a:" + cameraWidth);
 		// System.out.println(this.gameCamera.position);
