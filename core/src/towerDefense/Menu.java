@@ -99,8 +99,8 @@ public class Menu extends GameComponent {
 
 		this.startButton.addListener(new StartAction(this.game));
 
+		// sets Click event of button "Settings" to go to Settings
 		this.settingsButton.addListener(new ChangeListener() {
-
 			@Override
 			public void changed(ChangeEvent event, Actor actor) {
 				Menu.this.game.setMode(TowerDefense.MODE_SETTINGS);
