@@ -366,6 +366,7 @@ public class Gameplay extends GameComponent implements InputProcessor {
 	public void update(int originalDelta) {
 		// System.out.println(originalDelta);
 		// if (originalDelta < 100) {
+		System.out.println("test"); // <---- game doesn't get this far, terminates before this
 		this.passedMilliseconds += originalDelta;
 		this.passedTime.setText(this.passedTimeToString());
 		this.moneyAmount.setText("" + this.player.getMoney());

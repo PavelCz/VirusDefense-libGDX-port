@@ -130,8 +130,11 @@ public class TowerDefense implements ApplicationListener {
 		this.mode = mode;
 
 		if (this.mode == TowerDefense.MODE_GAME) {
-			Gdx.input.setInputProcessor(this.gameplay.getStage());
+
+			Gdx.input.setInputProcessor(this.gameplay);
+
 			this.currentGameComponent = this.gameplay;
+
 		} else if (this.mode == TowerDefense.MODE_MAPS) {
 			this.currentGameComponent = this.maps;
 
