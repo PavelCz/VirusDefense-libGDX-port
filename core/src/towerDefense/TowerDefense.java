@@ -85,7 +85,7 @@ public class TowerDefense implements ApplicationListener {
 		this.reinitComponents();
 		TowerDefense.updateDimensions();
 		this.setMode(TowerDefense.MODE_MENU);
-		this.menu.setStage(this.stage);
+		this.menu.initStage();
 	}
 
 	private void initSounds() {
@@ -142,7 +142,7 @@ public class TowerDefense implements ApplicationListener {
 				// this.settings.activate(container);
 				// this.settings = new Settings(this);
 
-				this.settings.setStage(this.stage);
+				this.settings.initStage();
 			}
 			this.currentGameComponent = this.settings;
 		} else if (this.mode == TowerDefense.MODE_MENU) {
