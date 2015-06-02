@@ -14,7 +14,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 
 import engine.GameComponent;
 import engine.graphics.Background;
-import engine.gui.ExitClickable;
 import engine.gui.GoToSettingsButton;
 import engine.gui.SetGameModeButton;
 import engine.gui.StartClickable;
@@ -93,12 +92,16 @@ public class Menu extends GameComponent {
 		scores.setY(y);
 		y -= this.startButton.getTextHeight() + 1;
 
-		ExitClickable e = new ExitClickable(100, 121, this.game);
-		this.clickables.add(e);
-		this.guiElements.add(e);
-		e.setX(TowerDefense.getWidth() / 2 - e.getWidth() / 2);
-		e.setY(y);
-		y -= this.startButton.getTextHeight() + 1;
+		this.tb = new TextButton("Exit Game", textButtonStyle);
+		this.tb.setX(TowerDefense.getWidth() / 2 - this.tb.getWidth() / 2);
+		this.tb.setY(y);
+
+		// ExitClickable e = new ExitClickable(100, 121, this.game);
+		// this.clickables.add(e);
+		// this.guiElements.add(e);
+		// e.setX(TowerDefense.getWidth() / 2 - e.getWidth() / 2);
+		// e.setY(y);
+		// y -= this.startButton.getTextHeight() + 1;
 
 		this.t = new TextField("Player", new Skin(Gdx.files.internal("uiskin.json")));
 		this.t.setMessageText("Player");
@@ -109,7 +112,7 @@ public class Menu extends GameComponent {
 		this.t.setCursorPosition(6);
 		this.t.setDisabled(false);
 
-		this.tb = new TextButton("test", textButtonStyle);
+		// sets Click event of button "Exit Game" to close game
 		this.tb.addListener(new ChangeListener() {
 			@Override
 			public void changed(ChangeEvent event, Actor actor) {
