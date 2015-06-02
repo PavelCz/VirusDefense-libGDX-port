@@ -96,6 +96,10 @@ public class Menu extends GameComponent {
 		this.t.setCursorPosition(6);
 		this.t.setDisabled(false);
 
+		
+		
+		
+		
 		Skin skin = new Skin(Gdx.files.internal("uiskin.json"));
 		BitmapFont font = new BitmapFont(Gdx.files.internal("arial.fnt"));
 		font.setScale(0.5f);
@@ -147,7 +151,7 @@ public class Menu extends GameComponent {
 	public void update(int delta) {
 		super.update(delta);
 		// this.stage.
-
+		this.stage.act(delta);
 	}
 
 	@Override
