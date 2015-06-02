@@ -21,7 +21,6 @@ import engine.gui.StaticText;
 public class Menu extends GameComponent {
 
 	private TextField t;
-	private Stage stage;
 	private StaticText version = new StaticText(0, 0, 10, Color.WHITE, "v0.6");
 	private StaticText lostWonMessage;
 	private TextButton startButton;

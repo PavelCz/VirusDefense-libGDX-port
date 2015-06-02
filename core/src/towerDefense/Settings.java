@@ -25,7 +25,6 @@ public class Settings extends GameComponent {
 	private TextField widthField;
 	private TextField heightField;
 
-	private Stage stage;
 	private ClickableText apply;
 	private StaticText warning;
 	private SetGameModeButton back;

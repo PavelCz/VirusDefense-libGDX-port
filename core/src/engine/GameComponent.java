@@ -8,6 +8,7 @@ import towerDefense.TowerDefense;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 
 import engine.graphics.Background;
 import engine.gui.Clickable;
@@ -18,6 +19,8 @@ public abstract class GameComponent {
 	protected List<GUI> guiElements;
 	protected List<Clickable> clickables;
 	protected boolean mouseWasClicked;
+
+	protected Stage stage;
 
 	protected TowerDefense game;
 	private Clickable wasClicked;
