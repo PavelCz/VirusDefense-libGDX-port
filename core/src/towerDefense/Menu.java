@@ -97,12 +97,14 @@ public class Menu extends GameComponent {
 		this.t.setDisabled(false);
 
 		Skin skin = new Skin(Gdx.files.internal("uiskin.json"));
-		//
+		BitmapFont font = new BitmapFont(Gdx.files.internal("arial.fnt"));
+		font.setScale(0.5f);
 		TextButtonStyle textButtonStyle = new TextButtonStyle();
-		textButtonStyle.checkedFontColor = Color.GRAY;
-		textButtonStyle.downFontColor = Color.GRAY;
-		textButtonStyle.font = new BitmapFont(Gdx.files.internal("arial.fnt"));
-
+		textButtonStyle.font = font;
+		textButtonStyle.fontColor = Color.WHITE;
+		textButtonStyle.downFontColor = Color.BLACK;
+		textButtonStyle.overFontColor = Color.GRAY;
+		textButtonStyle.checkedOverFontColor = Color.GRAY;
 		// textButtonStyle = new TextButtonStyle();
 		// textButtonStyle.up = skin.getDrawable("default-round-up");
 		// textButtonStyle.down = skin.getDrawable("default-round-down");
@@ -110,7 +112,9 @@ public class Menu extends GameComponent {
 		// this.tb = new TextButton("Player", textButtonStyle);
 		// this.tb.setDisabled(false);
 		// this.tb.set
-		this.tb = new TextButton("test", skin);
+		this.tb = new TextButton("test", textButtonStyle);
+		// this.tb.setHeight(15);
+		// this.tb.
 
 		// this.t.addListener(new TextFieldClickListener() {
 		//
