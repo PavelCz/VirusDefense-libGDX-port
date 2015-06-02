@@ -39,10 +39,7 @@ public class Menu extends GameComponent {
 	public void init() {
 		super.init();
 
-		Skin skin = new Skin(Gdx.files.internal("uiskin.json"));
 		BitmapFont font = new BitmapFont(Gdx.files.internal("default.fnt"));
-		// font.setScale(0.5f);
-		// font = skin.getFont("default-fnt");
 		TextButtonStyle textButtonStyle = new TextButtonStyle();
 		textButtonStyle.font = font;
 		textButtonStyle.fontColor = Color.WHITE;
