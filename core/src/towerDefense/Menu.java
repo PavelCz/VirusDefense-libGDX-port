@@ -14,7 +14,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 
 import engine.GameComponent;
 import engine.graphics.Background;
-import engine.gui.GoToSettingsButton;
 import engine.gui.SetGameModeButton;
 import engine.gui.StartAction;
 import engine.gui.StaticText;
@@ -27,7 +26,7 @@ public class Menu extends GameComponent {
 	private StaticText lostWonMessage;
 	private TextButton startButton;
 	private SetGameModeButton resumeButton;
-	GoToSettingsButton settings;
+	private TextButton settingsButton;
 	private StaticText pausedMessage = new StaticText(0, 0, 50, Color.WHITE, "VIRUS DEFENSE");
 	TextButton exitGameButton;
 
@@ -72,11 +71,9 @@ public class Menu extends GameComponent {
 		this.startButton.setY(y);
 		y -= this.startButton.getHeight() + 1;
 
-		this.settings = new GoToSettingsButton(0, 0, "Settings", this.game);
-		this.clickables.add(this.settings);
-		this.guiElements.add(this.settings);
-		this.settings.setX(TowerDefense.getWidth() / 2 - this.settings.getWidth() / 2);
-		this.settings.setY(y);
+		this.settingsButton = new TextButton("Settings", textButtonStyle);
+		this.settingsButton.setX(TowerDefense.getWidth() / 2 - this.settingsButton.getWidth() / 2);
+		this.settingsButton.setY(y);
 		y -= this.startButton.getHeight() + 1;
 
 		SetGameModeButton scores = new SetGameModeButton(0, 0, "Highscores", this.game, TowerDefense.MODE_SCORES);
@@ -101,6 +98,15 @@ public class Menu extends GameComponent {
 		this.t.setDisabled(false);
 
 		this.startButton.addListener(new StartAction(this.game));
+
+		this.settingsButton.addListener(new ChangeListener() {
+
+			@Override
+			public void changed(ChangeEvent event, Actor actor) {
+				Menu.this.game.setMode(TowerDefense.MODE_SETTINGS);
+				Menu.this.game.deactivateMenu();
+			}
+		});
 
 		// sets Click event of button "Exit Game" to close game
 		this.exitGameButton.addListener(new ChangeListener() {
@@ -143,8 +149,8 @@ public class Menu extends GameComponent {
 		this.pausedMessage.setText("GAME PAUSED");
 		this.pausedMessage.setHeight(30);
 		this.pausedMessage.setPosition((TowerDefense.getWidth() - this.pausedMessage.getWidth()) / 2, TowerDefense.getHeight() / 4);
-		this.settings.deactivate();
-		this.settings.setColor(Color.LIGHT_GRAY);
+		this.settingsButton.setDisabled(true);
+		this.settingsButton.setColor(Color.LIGHT_GRAY);
 		this.lostWonMessage.setVisible(false);
 	}
 
@@ -154,8 +160,8 @@ public class Menu extends GameComponent {
 		this.pausedMessage.setText("VIRUS DEFENSE");
 		this.pausedMessage.setHeight(50);
 		this.pausedMessage.setPosition((TowerDefense.getWidth() - this.pausedMessage.getWidth()) / 2, TowerDefense.getHeight() / 4);
-		this.settings.activate();
-		this.settings.setColor(Color.WHITE);
+		this.settingsButton.setDisabled(false);
+		this.settingsButton.setColor(Color.WHITE);
 		this.lostWonMessage.setVisible(true);
 	}
 
@@ -180,6 +186,7 @@ public class Menu extends GameComponent {
 		this.getStage().addActor(this.t);
 		this.getStage().addActor(this.exitGameButton);
 		this.stage.addActor(this.startButton);
+		this.stage.addActor(this.settingsButton);
 	}
 
 }
