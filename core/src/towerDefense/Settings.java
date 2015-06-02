@@ -31,7 +31,7 @@ public class Settings extends GameComponent {
 	private TextButton apply;
 	private StaticText warning;
 	private TextButton back;
-	private ClickableText fullscreen;
+	private TextButton fullscreen;
 	private StaticText supportedResolutionsText;
 	private ClickableText[] resolutionClickables;
 	private Integer[][] resolutions;
@@ -78,13 +78,13 @@ public class Settings extends GameComponent {
 		this.warning = new StaticText(fieldsX, fieldsY, Color.RED, "Please enter a number.");
 		this.warning.setVisible(false);
 		this.guiElements.add(this.warning);
+
 		fieldsX = 0;
 		fieldsY -= this.widthField.getHeight();
-		this.fullscreen = new ClickableText(fieldsX, fieldsY, "Toggle fullscreen", Gameplay.GLOBAL_GUI_SCALE, game.getGameplay(),
-				false);
-		this.fullscreen.setColor(Color.BLACK);
-		this.clickables.add(this.fullscreen);
-		this.guiElements.add(this.fullscreen);
+
+		this.fullscreen = new TextButton("Toggle Fullscreen", textButtonStyle);
+		// this.fullscreen.setColor(Color.BLACK);
+		this.fullscreen.setPosition(fieldsX, fieldsY);
 
 		Integer[][] supportedResolutions = new Integer[0][0];
 		supportedResolutions = this.getSupportedDisplayModes();
@@ -114,10 +114,18 @@ public class Settings extends GameComponent {
 			}
 		});
 
+		this.fullscreen.addListener(new ChangeListener() {
+			@Override
+			public void changed(ChangeEvent event, Actor actor) {
+				Settings.this.updateFullscreenButton();
+			}
+		});
+
 		this.getStage().addActor(this.heightField);
 		this.getStage().addActor(this.widthField);
 		this.getStage().addActor(this.back);
 		this.stage.addActor(this.apply);
+		this.stage.addActor(this.fullscreen);
 
 		this.updateResolutionsPosition();
 
@@ -149,7 +157,7 @@ public class Settings extends GameComponent {
 
 		super.renderGUI(batch);
 		this.warning.draw(batch);
-		this.fullscreen.draw(batch);
+		// this.fullscreen.draw(batch);
 		this.stage.draw();
 		// this.supportedResolutions.draw(batch);
 	}
@@ -179,9 +187,9 @@ public class Settings extends GameComponent {
 						/*
 						 * if (clickable == this.apply) { this.updateApplyButton(); } else
 						 */
-						if (clickable == this.fullscreen) {
-							this.updateFullscreenButton(delta);
-						}
+						/*
+						 * if (clickable == this.fullscreen) { this.updateFullscreenButton(); }
+						 */
 						for (int i = 0; i < this.resolutions.length; ++i) {
 							if (this.resolutionClickables[i] == clickable) {
 								// this.widthField.setText(this.resolutions[i][0].toString());
@@ -205,7 +213,7 @@ public class Settings extends GameComponent {
 
 	}
 
-	public void updateFullscreenButton(int delta) {
+	public void updateFullscreenButton() {
 		// this.widthField.setFocus(false);
 		// this.heightField.setFocus(false);
 		if (TowerDefense.isFULLSCREEN()) {
