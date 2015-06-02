@@ -26,6 +26,7 @@ public abstract class GameComponent {
 	private Clickable wasClicked;
 
 	public GameComponent(TowerDefense game) {
+		this.stage = new Stage();
 		this.game = game;
 		this.background = new Background(1.1f, "defaultBackground.jpg", this.game.getGameplay());
 
@@ -106,4 +107,7 @@ public abstract class GameComponent {
 		}
 	}
 
+	public Stage getStage() {
+		return this.stage;
+	}
 }

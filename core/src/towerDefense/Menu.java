@@ -168,12 +168,7 @@ public class Menu extends GameComponent {
 
 	}
 
-	public Stage getStage() {
-		return this.stage;
-	}
-
 	public void setStage(Stage stage) {
-		this.stage = stage;
 
 		this.getStage().addActor(this.t);
 		this.getStage().addActor(this.exitGameButton);

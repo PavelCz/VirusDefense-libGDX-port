@@ -76,7 +76,7 @@ public class TowerDefense implements ApplicationListener {
 		TowerDefense.updateDimensions();
 		// this.reinitMenu(container);
 		// this.reinitChooseLevel(container);
-		this.setMode(TowerDefense.MODE_MENU);
+
 		this.currentGameComponent = this.menu;
 		long passedTime = System.nanoTime() - time;
 		// System.out.println(passedTime / 1000000000.0);
@@ -84,7 +84,7 @@ public class TowerDefense implements ApplicationListener {
 		this.reinitChooseLevel();
 		this.reinitComponents();
 		TowerDefense.updateDimensions();
-
+		this.setMode(TowerDefense.MODE_MENU);
 		this.menu.setStage(this.stage);
 	}
 
@@ -130,29 +130,30 @@ public class TowerDefense implements ApplicationListener {
 		this.mode = mode;
 
 		if (this.mode == TowerDefense.MODE_GAME) {
-			Gdx.input.setInputProcessor(this.gameplay);
+			Gdx.input.setInputProcessor(this.gameplay.getStage());
 			this.currentGameComponent = this.gameplay;
 		} else if (this.mode == TowerDefense.MODE_MAPS) {
 			this.currentGameComponent = this.maps;
 
 		} else if (this.mode == TowerDefense.MODE_SETTINGS) {
 
-			Gdx.input.setInputProcessor(this.stage);
+			Gdx.input.setInputProcessor(this.settings.getStage());
 			if (this.currentGameComponent != this.settings) {
 				// this.settings.activate(container);
-				this.settings = new Settings(this);
+				// this.settings = new Settings(this);
 
 				this.settings.setStage(this.stage);
 			}
 			this.currentGameComponent = this.settings;
 		} else if (this.mode == TowerDefense.MODE_MENU) {
 
-			Gdx.input.setInputProcessor(this.stage);
+			Gdx.input.setInputProcessor(this.menu.getStage());
 			if (this.currentGameComponent != this.menu) {
 				// this.menu.activate(container);
 			}
 			this.currentGameComponent = this.menu;
 		} else if (this.mode == TowerDefense.MODE_SCORES) {
+			Gdx.input.setInputProcessor(this.scores.getStage());
 			if (this.currentGameComponent != this.scores) {
 				this.scores = new Scores(this);
 			}
@@ -300,7 +301,8 @@ public class TowerDefense implements ApplicationListener {
 		// this.gameplay = new Gameplay(this);
 		this.reinitMenu();
 		this.reinitChooseLevel();
-		// this.settings = new Settings(this, container);
+		this.settings = new Settings(this);
+		this.settings.init();
 		this.currentGameComponent = this.menu;
 		this.scores = new Scores(this);
 	}
