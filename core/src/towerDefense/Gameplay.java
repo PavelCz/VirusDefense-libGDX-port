@@ -507,16 +507,16 @@ public class Gameplay extends GameComponent implements InputProcessor {
 
 		}
 
-		if (this.gameCamera.position.x - (cameraWidth + zoomedInterfaceWidth) < 0) {
+		if (this.gameCamera.position.x - (cameraWidth + zoomedInterfaceWidth) < 0) { // limit camera left
 			this.gameCamera.position.x = cameraWidth + zoomedInterfaceWidth;
 		}
-		if (this.gameCamera.position.x + cameraWidth >= rightBoundary) {
+		if (this.gameCamera.position.x + cameraWidth >= rightBoundary) { // limit camera right
 			this.gameCamera.position.x = rightBoundary - cameraWidth;
 		}
-		if (this.gameCamera.position.y + cameraHeight > topBoundary) {
+		if (this.gameCamera.position.y + cameraHeight > topBoundary) { // limit camera bottom
 			this.gameCamera.position.y = topBoundary - cameraHeight;
 		}
-		if (this.gameCamera.position.y - cameraHeight < 0) {
+		if (this.gameCamera.position.y - cameraHeight < 0) { // limit camera top
 			this.gameCamera.position.y = cameraHeight;
 		}
 
