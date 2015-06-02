@@ -473,13 +473,14 @@ public class Gameplay extends GameComponent implements InputProcessor {
 		// this.gameCamera.
 		float xOrigin = Gdx.graphics.getWidth() / 2;
 		float yOrigin = Gdx.graphics.getHeight() / 2;
-		float rightBoundary = TowerDefense.getWidth();
+		float rightBoundary = INTERFACE_START_X;
 		float topBoundary = TowerDefense.getHeight();
+		float interfaceWidth = TowerDefense.getWidth() - INTERFACE_START_X;
 
-		float effectiveCameraWidth = this.gameCamera.viewportWidth * this.gameCamera.zoom;
+		float effectiveCameraWidth = (this.gameCamera.viewportWidth) * this.gameCamera.zoom;
 		float effectiveCameraHeight = this.gameCamera.viewportHeight * this.gameCamera.zoom;
 
-		float cameraWidth = effectiveCameraWidth / 2;
+		float cameraWidth = effectiveCameraWidth / 2 - interfaceWidth * this.gameCamera.zoom;
 		float cameraHeight = effectiveCameraHeight / 2;
 
 		float scrollSpeed = 0.5f;
@@ -504,10 +505,10 @@ public class Gameplay extends GameComponent implements InputProcessor {
 
 		}
 
-		if (this.gameCamera.position.x - cameraWidth < 0) {
-			this.gameCamera.position.x = cameraWidth;
+		if (this.gameCamera.position.x - cameraWidth - interfaceWidth * this.gameCamera.zoom < 0) {
+			this.gameCamera.position.x = cameraWidth + interfaceWidth * this.gameCamera.zoom;
 		}
-		if (this.gameCamera.position.x + cameraWidth > rightBoundary) {
+		if (this.gameCamera.position.x + cameraWidth >= rightBoundary) {
 			this.gameCamera.position.x = rightBoundary - cameraWidth;
 		}
 		if (this.gameCamera.position.y + cameraHeight > topBoundary) {
