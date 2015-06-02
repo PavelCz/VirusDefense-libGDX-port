@@ -492,7 +492,6 @@ public class Gameplay extends GameComponent implements InputProcessor {
 			this.gameCamera.translate(-scrollDistance, 0);
 
 		}
-		System.out.println(this.gameCamera.position.x);
 
 		if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
 			this.gameCamera.translate(+scrollDistance, 0);
@@ -523,15 +522,10 @@ public class Gameplay extends GameComponent implements InputProcessor {
 		if (this.debugMode) {
 			this.debugKeyboardEvents(delta);
 		}
-		System.out.println("a" + this.gameCamera.viewportWidth);
-
 		// this.gameCamera.position.x = MathUtils.clamp(this.gameCamera.position.x, effectiveCameraWidth / 2f,
 		// this.gameCamera.viewportWidth - effectiveCameraWidth / 2f);
 		// this.gameCamera.position.y = MathUtils.clamp(this.gameCamera.position.y, effectiveCameraHeight / 2f,
 		// this.gameCamera.viewportHeight - effectiveCameraHeight / 2f);
-
-		// System.out.println("a:" + cameraWidth);
-		// System.out.println(this.gameCamera.position);
 
 	}
 
