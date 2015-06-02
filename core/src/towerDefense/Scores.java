@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import engine.GameComponent;
-import engine.gui.SetGameModeButton;
+import engine.gui.SetGameModeAction;
 import engine.gui.StaticText;
 
 public class Scores extends GameComponent {
@@ -14,7 +14,7 @@ public class Scores extends GameComponent {
 	public Scores(TowerDefense game) {
 		super(game);
 
-		SetGameModeButton back = new SetGameModeButton(0, 20, "Back", this.game, TowerDefense.MODE_MENU);
+		SetGameModeAction back = new SetGameModeAction(0, 20, "Back", this.game, TowerDefense.MODE_MENU);
 		back.setColor(Color.BLACK);
 		this.clickables.add(back);
 		this.guiElements.add(back);

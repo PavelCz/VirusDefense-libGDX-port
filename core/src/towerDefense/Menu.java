@@ -14,7 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 
 import engine.GameComponent;
 import engine.graphics.Background;
-import engine.gui.SetGameModeButton;
+import engine.gui.SetGameModeAction;
 import engine.gui.StartAction;
 import engine.gui.StaticText;
 
@@ -25,8 +25,10 @@ public class Menu extends GameComponent {
 	private StaticText version = new StaticText(0, 0, 10, Color.WHITE, "v0.6");
 	private StaticText lostWonMessage;
 	private TextButton startButton;
-	private SetGameModeButton resumeButton;
+	private SetGameModeAction resumeButton;
 	private TextButton settingsButton;
+	private TextButton highscoresButton;
+
 	private StaticText pausedMessage = new StaticText(0, 0, 50, Color.WHITE, "VIRUS DEFENSE");
 	TextButton exitGameButton;
 
@@ -55,7 +57,7 @@ public class Menu extends GameComponent {
 		this.lostWonMessage = new StaticText(TowerDefense.getWidth() / 4, 0, 20, Color.RED, "");
 		this.guiElements.add(this.lostWonMessage);
 
-		this.resumeButton = new SetGameModeButton(0, 0, "Resume game", this.game, TowerDefense.MODE_GAME);
+		this.resumeButton = new SetGameModeAction(0, 0, "Resume game", this.game, TowerDefense.MODE_GAME);
 		this.clickables.add(this.resumeButton);
 		this.guiElements.add(this.resumeButton);
 		int y = TowerDefense.getHeight() / 2 + TowerDefense.getHeight() / 8 + this.resumeButton.getTextHeight();
@@ -76,12 +78,9 @@ public class Menu extends GameComponent {
 		this.settingsButton.setY(y);
 		y -= this.startButton.getHeight() + 1;
 
-		SetGameModeButton scores = new SetGameModeButton(0, 0, "Highscores", this.game, TowerDefense.MODE_SCORES);
-		scores.setColor(Color.WHITE);
-		this.clickables.add(scores);
-		this.guiElements.add(scores);
-		scores.setX(TowerDefense.getWidth() / 2 - scores.getWidth() / 2);
-		scores.setY(y);
+		this.highscoresButton = new TextButton("Highscores", textButtonStyle);
+		this.highscoresButton.setX(TowerDefense.getWidth() / 2 - this.highscoresButton.getWidth() / 2);
+		this.highscoresButton.setY(y);
 		y -= this.startButton.getHeight() + 1;
 
 		this.exitGameButton = new TextButton("Exit Game", textButtonStyle);
@@ -107,6 +106,8 @@ public class Menu extends GameComponent {
 				Menu.this.game.deactivateMenu();
 			}
 		});
+
+		this.highscoresButton.addListener(new SetGameModeAction(this.game, TowerDefense.MODE_SCORES));
 
 		// sets Click event of button "Exit Game" to close game
 		this.exitGameButton.addListener(new ChangeListener() {
@@ -187,6 +188,7 @@ public class Menu extends GameComponent {
 		this.getStage().addActor(this.exitGameButton);
 		this.stage.addActor(this.startButton);
 		this.stage.addActor(this.settingsButton);
+		this.stage.addActor(this.highscoresButton);
 	}
 
 }
