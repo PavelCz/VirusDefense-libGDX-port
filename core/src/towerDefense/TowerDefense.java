@@ -348,4 +348,5 @@ public class TowerDefense implements ApplicationListener {
 	public static int getMouseY() {
 		return Gdx.graphics.getHeight() - Gdx.input.getY();
 	}
+
 }
