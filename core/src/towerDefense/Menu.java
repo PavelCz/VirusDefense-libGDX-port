@@ -23,13 +23,13 @@ public class Menu extends GameComponent {
 
 	private TextField t;
 	private Stage stage;
-	// private StaticText version = new StaticText(0, 0, 10, Color.white, "v0.6");
+	private StaticText version = new StaticText(0, 0, 10, Color.WHITE, "v0.6");
 	private StaticText lostWonMessage;
 	private StartClickable startButton;
 	private SetGameModeButton resumeButton;
 	GoToSettingsButton settings;
 	private StaticText pausedMessage = new StaticText(0, 0, 50, Color.WHITE, "VIRUS DEFENSE");
-	TextButton tb;
+	TextButton exitGameButton;
 
 	public Menu(TowerDefense game) {
 		super(game);
@@ -89,16 +89,9 @@ public class Menu extends GameComponent {
 		scores.setY(y);
 		y -= this.startButton.getTextHeight() + 1;
 
-		this.tb = new TextButton("Exit Game", textButtonStyle);
-		this.tb.setX(TowerDefense.getWidth() / 2 - this.tb.getWidth() / 2);
-		this.tb.setY(y);
-
-		// ExitClickable e = new ExitClickable(100, 121, this.game);
-		// this.clickables.add(e);
-		// this.guiElements.add(e);
-		// e.setX(TowerDefense.getWidth() / 2 - e.getWidth() / 2);
-		// e.setY(y);
-		// y -= this.startButton.getTextHeight() + 1;
+		this.exitGameButton = new TextButton("Exit Game", textButtonStyle);
+		this.exitGameButton.setX(TowerDefense.getWidth() / 2 - this.exitGameButton.getWidth() / 2);
+		this.exitGameButton.setY(y);
 
 		this.t = new TextField("Player", new Skin(Gdx.files.internal("uiskin.json")));
 		this.t.setMessageText("Player");
@@ -110,7 +103,7 @@ public class Menu extends GameComponent {
 		this.t.setDisabled(false);
 
 		// sets Click event of button "Exit Game" to close game
-		this.tb.addListener(new ChangeListener() {
+		this.exitGameButton.addListener(new ChangeListener() {
 			@Override
 			public void changed(ChangeEvent event, Actor actor) {
 				Gdx.app.exit();
@@ -122,7 +115,6 @@ public class Menu extends GameComponent {
 	@Override
 	public void update(int delta) {
 		super.update(delta);
-		// this.stage.
 		this.stage.act(delta);
 	}
 
@@ -130,10 +122,7 @@ public class Menu extends GameComponent {
 	public void render(SpriteBatch batch) {
 		super.render(batch);
 		super.renderGUI(batch);
-		// this.t.draw(batch, 1f);
-		// this.tb.draw(batch, 1f);
 		this.stage.draw();
-		// this.t.render(container, graphics);
 
 		// this.version.draw();
 	}
@@ -189,7 +178,7 @@ public class Menu extends GameComponent {
 		this.stage = stage;
 
 		this.getStage().addActor(this.t);
-		this.getStage().addActor(this.tb);
+		this.getStage().addActor(this.exitGameButton);
 	}
 
 }
