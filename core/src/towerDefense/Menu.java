@@ -58,12 +58,12 @@ public class Menu extends GameComponent {
 		this.guiElements.add(this.lostWonMessage);
 
 		this.resumeButton = new TextButton("Resume game", textButtonStyle);
-		int y = TowerDefense.getHeight() / 2 + TowerDefense.getHeight() / 8 + this.resumeButton.getTextHeight();
+		int y = (int) (TowerDefense.getHeight() / 2 + TowerDefense.getHeight() / 8 + this.resumeButton.getHeight());
 		this.resumeButton.setX(TowerDefense.getWidth() / 2 - this.resumeButton.getWidth() / 2);
 		this.resumeButton.setY(y + 1);
-		this.resumeButton.setColor(Color.WHITE);
+		// this.resumeButton.setColor(Color.WHITE);
 		this.resumeButton.setVisible(false);
-		this.resumeButton.deactivate();
+		this.resumeButton.setDisabled(true);
 
 		this.startButton = new TextButton("Start game", textButtonStyle);
 		y -= this.startButton.getHeight();
@@ -143,7 +143,7 @@ public class Menu extends GameComponent {
 	}
 
 	public void setPauseMenu() {
-		this.resumeButton.activate();
+		this.resumeButton.setDisabled(false);
 		this.resumeButton.setVisible(true);
 		this.pausedMessage.setText("GAME PAUSED");
 		this.pausedMessage.setHeight(30);
@@ -154,7 +154,7 @@ public class Menu extends GameComponent {
 	}
 
 	public void setStartMenu() {
-		this.resumeButton.deactivate();
+		this.resumeButton.setDisabled(true);
 		this.resumeButton.setVisible(false);
 		this.pausedMessage.setText("VIRUS DEFENSE");
 		this.pausedMessage.setHeight(50);
