@@ -16,7 +16,7 @@ import engine.GameComponent;
 import engine.graphics.Background;
 import engine.gui.GoToSettingsButton;
 import engine.gui.SetGameModeButton;
-import engine.gui.StartClickable;
+import engine.gui.StartAction;
 import engine.gui.StaticText;
 
 public class Menu extends GameComponent {
@@ -25,7 +25,7 @@ public class Menu extends GameComponent {
 	private Stage stage;
 	private StaticText version = new StaticText(0, 0, 10, Color.WHITE, "v0.6");
 	private StaticText lostWonMessage;
-	private StartClickable startButton;
+	private StartAction startButton;
 	private SetGameModeButton resumeButton;
 	GoToSettingsButton settings;
 	private StaticText pausedMessage = new StaticText(0, 0, 50, Color.WHITE, "VIRUS DEFENSE");
@@ -66,7 +66,7 @@ public class Menu extends GameComponent {
 		this.resumeButton.setVisible(false);
 		this.resumeButton.deactivate();
 
-		this.startButton = new StartClickable(0, 0, this.game);
+		this.startButton = new StartAction(0, 0, this.game);
 		this.clickables.add(this.startButton);
 		this.guiElements.add(this.startButton);
 		y -= this.startButton.getTextHeight();
