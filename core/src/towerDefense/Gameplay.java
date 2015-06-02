@@ -43,6 +43,7 @@ import engine.projectiles.Projectile;
  */
 public class Gameplay extends GameComponent implements InputProcessor {
 	private OrthographicCamera gameCamera;
+	private float cameraWidth, cameraHeight;
 	private Healthbar h;
 	// private static Camera camera;
 	private float height, width;
@@ -109,10 +110,13 @@ public class Gameplay extends GameComponent implements InputProcessor {
 		// Set Constants:
 
 		Gameplay.INTERFACE_START_X = TowerDefense.getWidth() - 3 * 64 * Gameplay.GLOBAL_GUI_SCALE;
+		this.cameraWidth = Gameplay.INTERFACE_START_X; // (832)
+		this.cameraHeight = 768;
 
-		this.gameCamera = new OrthographicCamera(Gameplay.INTERFACE_START_X, 768);
-
+		this.gameCamera = new OrthographicCamera(this.cameraWidth, this.cameraHeight);
+		// this.game.viewport = new ScreenViewport(this.gameCamera);
 		this.game.viewport.setCamera(this.gameCamera);
+		// this.game.viewport.setWorldWidth(Gameplay.INTERFACE_START_X);
 		float scale1 = Gameplay.INTERFACE_START_X / this.width;
 		float scale2 = TowerDefense.getHeight() / this.height;
 		Gameplay.CURRENT_GAME_SCALE = Math.max(scale1, scale2);
@@ -225,7 +229,9 @@ public class Gameplay extends GameComponent implements InputProcessor {
 		Matrix4 projectionBuffer = batch.getProjectionMatrix().cpy();
 		Matrix4 transformBuffer = batch.getTransformMatrix().cpy();
 		// super.render(batch);
+		// Gdx.gl.glViewport(0, 0, (int) this.cameraWidth, (int) this.cameraHeight);
 		batch.setProjectionMatrix(this.gameCamera.combined);
+
 		this.drawBackground(batch);
 		this.currentLevel.renderPath(batch);
 
@@ -236,6 +242,8 @@ public class Gameplay extends GameComponent implements InputProcessor {
 
 		batch.setProjectionMatrix(projectionBuffer);
 		batch.setTransformMatrix(transformBuffer);
+
+		// Gdx.gl.glViewport(0, 0, Gdx.graphics.getWidth(), (int) this.cameraHeight);
 		this.renderGUI(batch);
 
 		for (Projectile projectiles : this.projectiles) {
@@ -462,17 +470,20 @@ public class Gameplay extends GameComponent implements InputProcessor {
 		// Gameplay.camera.setY((this.getVerticalTiles() * Gameplay.DEFAULT_SIZE) * Gameplay.CURRENT_GAME_SCALE - cameraHeight);
 		//
 		// }
-		// this.gameCamera.
 		float xOrigin = Gdx.graphics.getWidth() / 2;
 		float yOrigin = Gdx.graphics.getHeight() / 2;
-		float rightBoundary = TowerDefense.getWidth();
+		float rightBoundary = INTERFACE_START_X;
 		float topBoundary = TowerDefense.getHeight();
 
-		float effectiveCameraWidth = this.gameCamera.viewportWidth * this.gameCamera.zoom;
+		float interfaceWidth = TowerDefense.getWidth() - INTERFACE_START_X;
+		float zoomedInterfaceWidth = interfaceWidth * this.gameCamera.zoom;
+
+		float effectiveCameraWidth = (this.gameCamera.viewportWidth) * this.gameCamera.zoom;
 		float effectiveCameraHeight = this.gameCamera.viewportHeight * this.gameCamera.zoom;
 
-		float cameraWidth = effectiveCameraWidth / 2;
+		float cameraWidth = effectiveCameraWidth / 2 - zoomedInterfaceWidth;
 		float cameraHeight = effectiveCameraHeight / 2;
+
 		float scrollSpeed = 0.5f;
 		float scrollDistance = scrollSpeed * delta;
 
@@ -480,7 +491,6 @@ public class Gameplay extends GameComponent implements InputProcessor {
 			this.gameCamera.translate(-scrollDistance, 0);
 
 		}
-		System.out.println(this.gameCamera.position.x);
 
 		if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
 			this.gameCamera.translate(+scrollDistance, 0);
@@ -495,30 +505,26 @@ public class Gameplay extends GameComponent implements InputProcessor {
 
 		}
 
-		if (this.gameCamera.position.x - cameraWidth < 0) {
-			this.gameCamera.position.x = cameraWidth;
+		if (this.gameCamera.position.x - (cameraWidth + zoomedInterfaceWidth) < 0) { // limit camera left
+			this.gameCamera.position.x = cameraWidth + zoomedInterfaceWidth;
 		}
-		if (this.gameCamera.position.x + cameraWidth > rightBoundary) {
+		if (this.gameCamera.position.x + cameraWidth >= rightBoundary) { // limit camera right
 			this.gameCamera.position.x = rightBoundary - cameraWidth;
 		}
-		if (this.gameCamera.position.y + cameraHeight > topBoundary) {
+		if (this.gameCamera.position.y + cameraHeight > topBoundary) { // limit camera bottom
 			this.gameCamera.position.y = topBoundary - cameraHeight;
 		}
-		if (this.gameCamera.position.y - cameraHeight < 0) {
+		if (this.gameCamera.position.y - cameraHeight < 0) { // limit camera top
 			this.gameCamera.position.y = cameraHeight;
 		}
 
 		if (this.debugMode) {
 			this.debugKeyboardEvents(delta);
 		}
-
 		// this.gameCamera.position.x = MathUtils.clamp(this.gameCamera.position.x, effectiveCameraWidth / 2f,
-		// 100 - effectiveCameraWidth / 2f);
+		// this.gameCamera.viewportWidth - effectiveCameraWidth / 2f);
 		// this.gameCamera.position.y = MathUtils.clamp(this.gameCamera.position.y, effectiveCameraHeight / 2f,
-		// 100 - effectiveCameraHeight / 2f);
-
-		System.out.println(cameraWidth);
-		System.out.println(this.gameCamera.position);
+		// this.gameCamera.viewportHeight - effectiveCameraHeight / 2f);
 
 	}
 
@@ -721,14 +727,6 @@ public class Gameplay extends GameComponent implements InputProcessor {
 	public boolean currentTowerPlaceable() {
 		return this.currentTowerPlaceable;
 	}
-
-	// public static int getCameraX() {
-	// return 0;// (int) Gameplay.camera.getX();
-	// }
-	//
-	// public static int getCameraY() {
-	// return 0;// (int) Gameplay.camera.getY();
-	// }
 
 	public StaticText getScore() {
 		return this.score;
