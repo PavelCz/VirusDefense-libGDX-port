@@ -100,7 +100,6 @@ public class TowerDefense implements ApplicationListener {
 		TowerDefense.soundHandler.addWav("shotT2");
 	}
 
-	// @Override
 	public void update(int delta) {
 
 		this.viewport.update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
@@ -110,12 +109,10 @@ public class TowerDefense implements ApplicationListener {
 
 		}
 
-		// System.out.println(delta);
 		this.currentGameComponent.update(delta);
 
 	}
 
-	// @Override
 	@Override
 	public void render() {
 		this.batch.setProjectionMatrix(this.camera.combined);
