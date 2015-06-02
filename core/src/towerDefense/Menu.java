@@ -113,6 +113,7 @@ public class Menu extends GameComponent {
 		// this.tb.setDisabled(false);
 		// this.tb.set
 		this.tb = new TextButton("test", textButtonStyle);
+		// this.tb.
 		// this.tb.setHeight(15);
 		// this.tb.
 
@@ -145,6 +146,7 @@ public class Menu extends GameComponent {
 	@Override
 	public void update(int delta) {
 		super.update(delta);
+		// this.stage.
 
 	}
 
@@ -152,8 +154,9 @@ public class Menu extends GameComponent {
 	public void render(SpriteBatch batch) {
 		super.render(batch);
 		super.renderGUI(batch);
-		this.t.draw(batch, 1f);
-		this.tb.draw(batch, 1f);
+		// this.t.draw(batch, 1f);
+		// this.tb.draw(batch, 1f);
+		this.stage.draw();
 		// this.t.render(container, graphics);
 
 		// this.version.draw();
