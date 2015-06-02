@@ -10,10 +10,12 @@ import com.badlogic.gdx.Graphics;
 import com.badlogic.gdx.Graphics.DisplayMode;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 
 import engine.GameComponent;
 import engine.gui.Clickable;
@@ -26,7 +28,7 @@ public class Settings extends GameComponent {
 	private TextField widthField;
 	private TextField heightField;
 
-	private ClickableText apply;
+	private TextButton apply;
 	private StaticText warning;
 	private TextButton back;
 	private ClickableText fullscreen;
@@ -67,10 +69,9 @@ public class Settings extends GameComponent {
 
 		fieldsX += fieldWidth + 5;
 
-		this.apply = new ClickableText(fieldsX, fieldsY, "Apply", Gameplay.GLOBAL_GUI_SCALE, game.getGameplay(), false);
-		this.apply.setColor(Color.BLACK);
-		this.clickables.add(this.apply);
-		this.guiElements.add(this.apply);
+		this.apply = new TextButton("Apply", textButtonStyle);
+		// this.apply.setColor(Color.BLACK);
+		this.apply.setPosition(fieldsX, fieldsY);
 
 		fieldsX += this.apply.getWidth() + 10;
 
@@ -102,7 +103,21 @@ public class Settings extends GameComponent {
 
 		}
 		// set Listeners for button click functionality
+
+		// back button brings user back to start menu
 		this.back.addListener(new SetGameModeAction(this.game, TowerDefense.MODE_MENU));
+
+		this.apply.addListener(new ChangeListener() {
+			@Override
+			public void changed(ChangeEvent event, Actor actor) {
+				Settings.this.updateApplyButton();
+			}
+		});
+
+		this.getStage().addActor(this.heightField);
+		this.getStage().addActor(this.widthField);
+		this.getStage().addActor(this.back);
+		this.stage.addActor(this.apply);
 
 		this.updateResolutionsPosition();
 
@@ -139,7 +154,6 @@ public class Settings extends GameComponent {
 		// this.supportedResolutions.draw(batch);
 	}
 
-	// @Override
 	@Override
 	public void update(int delta) {
 
@@ -162,9 +176,10 @@ public class Settings extends GameComponent {
 				if (!clickable.isStayClicked()) {
 					if (clickable.isClicked() && clickable.collides((int) x, (int) y, Gameplay.GLOBAL_GUI_SCALE)) {
 						clickable.onRelease();
-						if (clickable == this.apply) {
-							this.updateApplyButton(delta);
-						} else if (clickable == this.fullscreen) {
+						/*
+						 * if (clickable == this.apply) { this.updateApplyButton(); } else
+						 */
+						if (clickable == this.fullscreen) {
 							this.updateFullscreenButton(delta);
 						}
 						for (int i = 0; i < this.resolutions.length; ++i) {
@@ -209,7 +224,7 @@ public class Settings extends GameComponent {
 		TowerDefense.writeSettingsToFile();
 	}
 
-	public void updateApplyButton(int delta) {
+	public void updateApplyButton() {
 		// this.widthField.setFocus(false);
 		// this.heightField.setFocus(false);
 		String newWidthString = this.widthField.getText();
@@ -312,11 +327,6 @@ public class Settings extends GameComponent {
 
 	public void initStage() {
 
-		this.getStage().addActor(this.heightField);
-
-		this.getStage().addActor(this.widthField);
-
-		this.getStage().addActor(this.back);
 	}
 
 }
