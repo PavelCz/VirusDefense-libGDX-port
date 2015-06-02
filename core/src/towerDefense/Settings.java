@@ -164,14 +164,12 @@ public class Settings extends GameComponent {
 		super.renderGUI(batch);
 		this.warning.draw(batch);
 		// this.fullscreen.draw(batch);
-		this.stage.draw();
 		// this.supportedResolutions.draw(batch);
 	}
 
 	@Override
 	public void update(int delta) {
-
-		this.stage.act(delta);
+		super.update(delta);
 		float x = TowerDefense.getMouseX();
 		float y = TowerDefense.getMouseY();
 		super.updateHovering(x, y);

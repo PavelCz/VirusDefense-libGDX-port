@@ -112,14 +112,13 @@ public class Menu extends GameComponent {
 	@Override
 	public void update(int delta) {
 		super.update(delta);
-		this.stage.act(delta);
+
 	}
 
 	@Override
 	public void render(SpriteBatch batch) {
 		super.render(batch);
 		super.renderGUI(batch);
-		this.stage.draw();
 
 		// this.version.draw();
 	}

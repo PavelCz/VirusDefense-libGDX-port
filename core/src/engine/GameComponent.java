@@ -45,13 +45,16 @@ public abstract class GameComponent {
 	}
 
 	public void update(int delta) {
+		this.stage.act(delta);
 		this.updateClickables(delta);
+
 	}
 
 	public void render(SpriteBatch batch) {
 		if (this.background != null) {
 			this.background.draw(batch);
 		}
+		this.stage.draw();
 		// this.renderGUI(batch); for some reason if I include this the backgound isn't shown
 	}
 

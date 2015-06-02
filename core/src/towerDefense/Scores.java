@@ -4,9 +4,11 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 
 import engine.GameComponent;
-import engine.gui.SetGameModeButton;
+import engine.gui.SetGameModeAction;
 import engine.gui.StaticText;
 
 public class Scores extends GameComponent {
@@ -14,10 +16,13 @@ public class Scores extends GameComponent {
 	public Scores(TowerDefense game) {
 		super(game);
 
-		SetGameModeButton back = new SetGameModeButton(0, 20, "Back", this.game, TowerDefense.MODE_MENU);
-		back.setColor(Color.BLACK);
-		this.clickables.add(back);
-		this.guiElements.add(back);
+		TextButtonStyle textButtonStyle = this.game.getTextButtonStyle();
+
+		TextButton back = new TextButton("Back", textButtonStyle);
+		// back.setColor(Color.BLACK);
+
+		back.addListener(new SetGameModeAction(this.game, TowerDefense.MODE_MENU));
+		this.stage.addActor(back);
 
 		String scoreString = "Highscores:\n";
 
@@ -49,4 +54,9 @@ public class Scores extends GameComponent {
 		super.render(batch);
 		super.renderGUI(batch);
 	}
+
+	// @Override
+	// public void update(int delta) {
+	// super.update(delta);
+	// }
 }

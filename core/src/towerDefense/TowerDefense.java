@@ -159,9 +159,10 @@ public class TowerDefense implements ApplicationListener {
 			}
 			this.currentGameComponent = this.menu;
 		} else if (this.mode == TowerDefense.MODE_SCORES) {
-			Gdx.input.setInputProcessor(this.scores.getStage());
+
 			if (this.currentGameComponent != this.scores) {
 				this.scores = new Scores(this);
+				Gdx.input.setInputProcessor(this.scores.getStage());
 			}
 			this.currentGameComponent = this.scores;
 		}

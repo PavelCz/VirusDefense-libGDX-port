@@ -75,7 +75,7 @@ public class ChooseLevel extends GameComponent {
 
 	@Override
 	public void update(int delta) {
-
+		super.update(delta);
 		this.mouseEvents(delta);
 		this.button.setUnclickedButton(this.currentLevel.getPreviewPicture());
 		this.button.setClickedButton(this.currentLevel.getPreviewPicture());
