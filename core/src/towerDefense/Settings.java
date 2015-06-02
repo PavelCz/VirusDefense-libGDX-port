@@ -19,7 +19,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 
 import engine.GameComponent;
 import engine.gui.Clickable;
-import engine.gui.ClickableText;
 import engine.gui.SetGameModeAction;
 import engine.gui.StaticText;
 
@@ -33,7 +32,7 @@ public class Settings extends GameComponent {
 	private TextButton back;
 	private TextButton fullscreen;
 	private StaticText supportedResolutionsText;
-	private ClickableText[] resolutionClickables;
+	private TextButton[] resolutionClickables;
 	private Integer[][] resolutions;
 	private final int minWidth = 600, minHeight = 480;
 
@@ -92,14 +91,21 @@ public class Settings extends GameComponent {
 
 		this.guiElements.add(this.supportedResolutionsText);
 
-		this.resolutionClickables = new ClickableText[supportedResolutions.length];
+		this.resolutionClickables = new TextButton[supportedResolutions.length];
 		this.resolutions = supportedResolutions;
 		for (int i = 0; i < this.resolutionClickables.length; ++i) {
-			this.resolutionClickables[i] = new ClickableText(0, 0, supportedResolutions[i][0] + " x " + supportedResolutions[i][1],
-					Gameplay.GLOBAL_GUI_SCALE, game.getGameplay(), false);
-			this.resolutionClickables[i].setColor(Color.BLACK);
-			this.clickables.add(this.resolutionClickables[i]);
-			this.guiElements.add(this.resolutionClickables[i]);
+			this.resolutionClickables[i] = new TextButton(supportedResolutions[i][0] + " x " + supportedResolutions[i][1],
+					textButtonStyle);
+
+			// this.resolutionClickables[i].setColor(Color.BLACK);
+			this.resolutionClickables[i].addListener(new ChangeListener() {
+				@Override
+				public void changed(ChangeEvent event, Actor actor) {
+					// Settings.this.widthField.setText(Settings.this.resolutions[i][0].toString());
+					// Settings.this.heightField.setText(Settings.this.resolutions[i][1].toString());
+				}
+			});
+			this.stage.addActor(this.resolutionClickables[i]);
 
 		}
 		// set Listeners for button click functionality
@@ -142,7 +148,7 @@ public class Settings extends GameComponent {
 		this.supportedResolutionsText.setPosition(x, y);
 		this.supportedResolutionsText.setHeight((int) textHeight);
 		y -= textHeight + inbetween;
-		for (ClickableText clickable : this.resolutionClickables) {
+		for (TextButton clickable : this.resolutionClickables) {
 			y -= textHeight + inbetween;
 			clickable.setX((int) x);
 			clickable.setY((int) y);
@@ -190,12 +196,11 @@ public class Settings extends GameComponent {
 						/*
 						 * if (clickable == this.fullscreen) { this.updateFullscreenButton(); }
 						 */
-						for (int i = 0; i < this.resolutions.length; ++i) {
-							if (this.resolutionClickables[i] == clickable) {
-								// this.widthField.setText(this.resolutions[i][0].toString());
-								// this.heightField.setText(this.resolutions[i][1].toString());
-							}
-						}
+						/*
+						 * for (int i = 0; i < this.resolutions.length; ++i) { if (this.resolutionClickables[i] == clickable) { //
+						 * this.widthField.setText(this.resolutions[i][0].toString()); //
+						 * this.heightField.setText(this.resolutions[i][1].toString()); } }
+						 */
 
 					} else if (clickable.isClicked()) {
 						clickable.setClicked(false);
