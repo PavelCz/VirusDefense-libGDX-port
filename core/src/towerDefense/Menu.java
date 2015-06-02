@@ -25,7 +25,7 @@ public class Menu extends GameComponent {
 	private StaticText version = new StaticText(0, 0, 10, Color.WHITE, "v0.6");
 	private StaticText lostWonMessage;
 	private TextButton startButton;
-	private SetGameModeAction resumeButton;
+	private TextButton resumeButton;
 	private TextButton settingsButton;
 	private TextButton highscoresButton;
 
@@ -57,9 +57,7 @@ public class Menu extends GameComponent {
 		this.lostWonMessage = new StaticText(TowerDefense.getWidth() / 4, 0, 20, Color.RED, "");
 		this.guiElements.add(this.lostWonMessage);
 
-		this.resumeButton = new SetGameModeAction(0, 0, "Resume game", this.game, TowerDefense.MODE_GAME);
-		this.clickables.add(this.resumeButton);
-		this.guiElements.add(this.resumeButton);
+		this.resumeButton = new TextButton("Resume game", textButtonStyle);
 		int y = TowerDefense.getHeight() / 2 + TowerDefense.getHeight() / 8 + this.resumeButton.getTextHeight();
 		this.resumeButton.setX(TowerDefense.getWidth() / 2 - this.resumeButton.getWidth() / 2);
 		this.resumeButton.setY(y + 1);
@@ -83,7 +81,7 @@ public class Menu extends GameComponent {
 		this.highscoresButton.setY(y);
 		y -= this.startButton.getHeight() + 1;
 
-		this.exitGameButton = new TextButton("Exit Game", textButtonStyle);
+		this.exitGameButton = new TextButton("Exit game", textButtonStyle);
 		this.exitGameButton.setX(TowerDefense.getWidth() / 2 - this.exitGameButton.getWidth() / 2);
 		this.exitGameButton.setY(y);
 

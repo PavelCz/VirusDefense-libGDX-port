@@ -17,7 +17,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import engine.GameComponent;
 import engine.gui.Clickable;
 import engine.gui.ClickableText;
-import engine.gui.SetGameModeAction;
+import engine.gui.SetGameModeButton;
 import engine.gui.StaticText;
 
 public class Settings extends GameComponent {
@@ -28,7 +28,7 @@ public class Settings extends GameComponent {
 	private Stage stage;
 	private ClickableText apply;
 	private StaticText warning;
-	private SetGameModeAction back;
+	private SetGameModeButton back;
 	private ClickableText fullscreen;
 	private StaticText supportedResolutionsText;
 	private ClickableText[] resolutionClickables;
@@ -38,7 +38,7 @@ public class Settings extends GameComponent {
 	public Settings(TowerDefense game) {
 		super(game);
 
-		this.back = new SetGameModeAction(0, 0, "Back", this.game, TowerDefense.MODE_MENU);
+		this.back = new SetGameModeButton(0, 0, "Back", this.game, TowerDefense.MODE_MENU);
 		this.clickables.add(this.back);
 		this.guiElements.add(this.back);
 
