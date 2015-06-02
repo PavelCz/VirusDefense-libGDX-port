@@ -25,7 +25,7 @@ public class Menu extends GameComponent {
 	private Stage stage;
 	private StaticText version = new StaticText(0, 0, 10, Color.WHITE, "v0.6");
 	private StaticText lostWonMessage;
-	private StartAction startButton;
+	private TextButton startButton;
 	private SetGameModeButton resumeButton;
 	GoToSettingsButton settings;
 	private StaticText pausedMessage = new StaticText(0, 0, 50, Color.WHITE, "VIRUS DEFENSE");
@@ -66,20 +66,18 @@ public class Menu extends GameComponent {
 		this.resumeButton.setVisible(false);
 		this.resumeButton.deactivate();
 
-		this.startButton = new StartAction(0, 0, this.game);
-		this.clickables.add(this.startButton);
-		this.guiElements.add(this.startButton);
-		y -= this.startButton.getTextHeight();
+		this.startButton = new TextButton("Start game", textButtonStyle);
+		y -= this.startButton.getHeight();
 		this.startButton.setX(TowerDefense.getWidth() / 2 - this.startButton.getWidth() / 2);
 		this.startButton.setY(y);
-		y -= this.startButton.getTextHeight() + 1;
+		y -= this.startButton.getHeight() + 1;
 
 		this.settings = new GoToSettingsButton(0, 0, "Settings", this.game);
 		this.clickables.add(this.settings);
 		this.guiElements.add(this.settings);
 		this.settings.setX(TowerDefense.getWidth() / 2 - this.settings.getWidth() / 2);
 		this.settings.setY(y);
-		y -= this.startButton.getTextHeight() + 1;
+		y -= this.startButton.getHeight() + 1;
 
 		SetGameModeButton scores = new SetGameModeButton(0, 0, "Highscores", this.game, TowerDefense.MODE_SCORES);
 		scores.setColor(Color.WHITE);
@@ -87,7 +85,7 @@ public class Menu extends GameComponent {
 		this.guiElements.add(scores);
 		scores.setX(TowerDefense.getWidth() / 2 - scores.getWidth() / 2);
 		scores.setY(y);
-		y -= this.startButton.getTextHeight() + 1;
+		y -= this.startButton.getHeight() + 1;
 
 		this.exitGameButton = new TextButton("Exit Game", textButtonStyle);
 		this.exitGameButton.setX(TowerDefense.getWidth() / 2 - this.exitGameButton.getWidth() / 2);
@@ -101,6 +99,8 @@ public class Menu extends GameComponent {
 		this.t.setPosition(x, TowerDefense.getHeight() - y - this.t.getHeight());
 		this.t.setCursorPosition(6);
 		this.t.setDisabled(false);
+
+		this.startButton.addListener(new StartAction(this.game));
 
 		// sets Click event of button "Exit Game" to close game
 		this.exitGameButton.addListener(new ChangeListener() {
@@ -179,6 +179,7 @@ public class Menu extends GameComponent {
 
 		this.getStage().addActor(this.t);
 		this.getStage().addActor(this.exitGameButton);
+		this.stage.addActor(this.startButton);
 	}
 
 }
