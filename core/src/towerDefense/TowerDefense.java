@@ -105,7 +105,9 @@ public class TowerDefense implements ApplicationListener {
 
 		this.viewport.update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		if (this.quitGame) {
+			System.out.println("game ended 1");
 			Gdx.app.exit();
+
 		}
 
 		// System.out.println(delta);
@@ -137,6 +139,7 @@ public class TowerDefense implements ApplicationListener {
 
 		} else if (this.mode == TowerDefense.MODE_MAPS) {
 			this.currentGameComponent = this.maps;
+			Gdx.input.setInputProcessor(this.maps.getStage());
 
 		} else if (this.mode == TowerDefense.MODE_SETTINGS) {
 
