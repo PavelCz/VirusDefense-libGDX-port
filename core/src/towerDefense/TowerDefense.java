@@ -6,9 +6,12 @@ import java.util.Comparator;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 import engine.GameComponent;
@@ -30,6 +33,8 @@ public class TowerDefense implements ApplicationListener {
 	private static int HEIGHT;
 	private static int WIDTH;
 
+	private TextButtonStyle textButtonStyle;
+
 	private Gameplay gameplay;
 	private Menu menu;
 	private ChooseLevel maps;
@@ -48,6 +53,15 @@ public class TowerDefense implements ApplicationListener {
 
 	// @Override
 	public void init() {
+
+		BitmapFont font = new BitmapFont(Gdx.files.internal("default.fnt"));
+		this.textButtonStyle = new TextButtonStyle();
+		this.textButtonStyle.font = font;
+		this.textButtonStyle.fontColor = Color.WHITE;
+		this.textButtonStyle.downFontColor = Color.BLACK;
+		this.textButtonStyle.overFontColor = Color.GRAY;
+		this.textButtonStyle.checkedOverFontColor = Color.GRAY;
+
 		this.camera = new OrthographicCamera(1024, 768);
 		this.camera.translate(1024 / 2, 768 / 2);
 		this.viewport = new ScreenViewport(this.camera);
@@ -349,6 +363,10 @@ public class TowerDefense implements ApplicationListener {
 
 	public static int getMouseY() {
 		return Gdx.graphics.getHeight() - Gdx.input.getY();
+	}
+
+	public TextButtonStyle getTextButtonStyle() {
+		return this.textButtonStyle;
 	}
 
 }

@@ -2,7 +2,6 @@ package towerDefense;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -39,14 +38,7 @@ public class Menu extends GameComponent {
 	public void init() {
 		super.init();
 
-		BitmapFont font = new BitmapFont(Gdx.files.internal("default.fnt"));
-		TextButtonStyle textButtonStyle = new TextButtonStyle();
-		textButtonStyle.font = font;
-		textButtonStyle.fontColor = Color.WHITE;
-		textButtonStyle.downFontColor = Color.BLACK;
-		textButtonStyle.overFontColor = Color.GRAY;
-		textButtonStyle.checkedOverFontColor = Color.GRAY;
-
+		TextButtonStyle textButtonStyle = this.game.getTextButtonStyle();
 		this.background = new Background(1f, "viren.png", this.game.getGameplay());
 
 		this.pausedMessage
