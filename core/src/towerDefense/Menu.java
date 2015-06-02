@@ -94,6 +94,8 @@ public class Menu extends GameComponent {
 		this.t.setCursorPosition(6);
 		this.t.setDisabled(false);
 
+		// set Listeners for button click functionality
+
 		this.startButton.addListener(new StartAction(this.game));
 
 		// sets Click event of button "Settings" to go to Settings

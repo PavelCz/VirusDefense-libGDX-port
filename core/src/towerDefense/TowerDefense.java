@@ -62,7 +62,7 @@ public class TowerDefense implements ApplicationListener {
 		TowerDefense.updateDimensions();
 		// this.reinitMenu(container);
 		// this.reinitChooseLevel(container);
-		this.mode = TowerDefense.MODE_MENU;
+		this.setMode(TowerDefense.MODE_MENU);
 		this.currentGameComponent = this.menu;
 		long passedTime = System.nanoTime() - time;
 		// System.out.println(passedTime / 1000000000.0);
@@ -93,8 +93,29 @@ public class TowerDefense implements ApplicationListener {
 		if (this.quitGame) {
 			Gdx.app.exit();
 		}
-		if (this.mode == TowerDefense.MODE_GAME) {
 
+		// System.out.println(delta);
+		this.currentGameComponent.update(delta);
+
+	}
+
+	// @Override
+	@Override
+	public void render() {
+		this.batch.setProjectionMatrix(this.camera.combined);
+		// this.batch.setTransformMatrix(this.camera.view);
+		this.camera.update();
+		// this.camera
+		// this.batch.set
+		this.batch.begin();
+		this.currentGameComponent.render(this.batch);
+		this.batch.end();
+	}
+
+	public void setMode(int mode) {
+		this.mode = mode;
+
+		if (this.mode == TowerDefense.MODE_GAME) {
 			Gdx.input.setInputProcessor(this.gameplay);
 			this.currentGameComponent = this.gameplay;
 		} else if (this.mode == TowerDefense.MODE_MAPS) {
@@ -123,26 +144,7 @@ public class TowerDefense implements ApplicationListener {
 			}
 			this.currentGameComponent = this.scores;
 		}
-		// System.out.println(delta);
-		this.currentGameComponent.update(delta);
 
-	}
-
-	// @Override
-	@Override
-	public void render() {
-		this.batch.setProjectionMatrix(this.camera.combined);
-		// this.batch.setTransformMatrix(this.camera.view);
-		this.camera.update();
-		// this.camera
-		// this.batch.set
-		this.batch.begin();
-		this.currentGameComponent.render(this.batch);
-		this.batch.end();
-	}
-
-	public void setMode(int mode) {
-		this.mode = mode;
 	}
 
 	public void quitGame() {
