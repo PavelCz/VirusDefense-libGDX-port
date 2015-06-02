@@ -117,32 +117,8 @@ public class Menu extends GameComponent {
 			}
 		});
 
-		// this.t.addListener(new TextFieldClickListener() {
-		//
-		// });
-		//
-		// // this.t.setTouchable(Touchable.enabled);
-		// this.t.setTextFieldListener(new TextFieldListener() {
-		//
-		// @Override
-		// public void keyTyped(TextField textField, char c) {
-		// textField.setText(textField.getText() + c);
-		//
-		// }
-		// });
-		// this.t.initialize();
-
-		// this.t = new TextField(container, new TrueTypeFont(new Font("Verdana", Font.PLAIN, 15), true), 0, 0, 75, 25);
-		// this.t.setText("Player");
-		// this.t.setBorderColor(Color.gray);
-		// this.t.setBackgroundColor(Color.lightGray);
-		// this.t.setMaxLength(32);
-		// this.t.setLocation(TowerDefense.getWidth() / 2 - this.t.getWidth() / 2, y);
-		// this.t.setCursorPos(6);
-
 	}
 
-	// @Override
 	@Override
 	public void update(int delta) {
 		super.update(delta);
