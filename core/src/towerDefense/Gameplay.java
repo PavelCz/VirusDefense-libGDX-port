@@ -470,7 +470,6 @@ public class Gameplay extends GameComponent implements InputProcessor {
 		// Gameplay.camera.setY((this.getVerticalTiles() * Gameplay.DEFAULT_SIZE) * Gameplay.CURRENT_GAME_SCALE - cameraHeight);
 		//
 		// }
-		// this.gameCamera.
 		float xOrigin = Gdx.graphics.getWidth() / 2;
 		float yOrigin = Gdx.graphics.getHeight() / 2;
 		float rightBoundary = INTERFACE_START_X;
@@ -728,14 +727,6 @@ public class Gameplay extends GameComponent implements InputProcessor {
 	public boolean currentTowerPlaceable() {
 		return this.currentTowerPlaceable;
 	}
-
-	// public static int getCameraX() {
-	// return 0;// (int) Gameplay.camera.getX();
-	// }
-	//
-	// public static int getCameraY() {
-	// return 0;// (int) Gameplay.camera.getY();
-	// }
 
 	public StaticText getScore() {
 		return this.score;
