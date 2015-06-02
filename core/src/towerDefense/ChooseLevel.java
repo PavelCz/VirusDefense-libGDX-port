@@ -3,6 +3,8 @@ package towerDefense;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 
 import engine.GameComponent;
 import engine.Level;
@@ -10,7 +12,7 @@ import engine.LevelHandler;
 import engine.graphics.OwnSprite;
 import engine.gui.Button;
 import engine.gui.Clickable;
-import engine.gui.SetGameModeButton;
+import engine.gui.SetGameModeAction;
 import engine.gui.StaticText;
 
 public class ChooseLevel extends GameComponent {
@@ -49,11 +51,13 @@ public class ChooseLevel extends GameComponent {
 		this.left = new Button(leftX, leftY, leftSprite, new OwnSprite("leftClicked.png", 0.065f), game.getGameplay(), false);
 		this.right = new Button(rightX, rightY, rightSprite, new OwnSprite("rightClicked.png", 0.065f), game.getGameplay(), false);
 
-		SetGameModeButton back = new SetGameModeButton(0, 0, "Back", this.game, TowerDefense.MODE_MENU);
+		TextButtonStyle textButtonStyle = this.game.getTextButtonStyle();
+
+		TextButton back = new TextButton("Back", textButtonStyle);
 		back.setX(0);
-		back.setY(0 + back.getTextHeight() * 2);
-		this.clickables.add(back);
-		this.guiElements.add(back);
+		back.setY(0 + back.getHeight() * 2);
+		back.addListener(new SetGameModeAction(this.game, TowerDefense.MODE_MENU));
+		this.stage.addActor(back);
 
 		this.clickables.add(this.button);
 		this.clickables.add(this.left);
