@@ -3,10 +3,14 @@ package towerDefense;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Event;
+import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import engine.GameComponent;
@@ -31,7 +35,7 @@ public class ChooseLevel extends GameComponent {
 
 	private LevelHandler levelHandler = new LevelHandler();
 
-	public ChooseLevel(TowerDefense game) {
+	public ChooseLevel(final TowerDefense game) {
 		super(game);
 		this.title.setPosition((TowerDefense.getWidth() - this.title.getWidth()) / 2, TowerDefense.getHeight() / 4);
 		this.guiElements.add(this.title);
@@ -62,6 +66,17 @@ public class ChooseLevel extends GameComponent {
 		this.levelSelectButton = new ImageButton(drawable);
 		this.levelSelectButton.setX(buttonX);
 		this.levelSelectButton.setY(buttonY);
+		final Level currentLevel = this.currentLevel; // this is only needed for the listener
+		this.levelSelectButton.addListener(new ChangeListener() {
+			@Override
+			public void changed(ChangeEvent event, Actor actor) {
+				game.initGameplay(currentLevel);
+				// this.game.setLevel(this.currentLevel);
+				game.getMenu().setDisableTextField(true);
+				game.getGameplay().setPlayerName(game.getPlayerName());
+				game.setMode(TowerDefense.MODE_GAME);
+			}
+		});
 		this.stage.addActor(this.levelSelectButton);
 
 		TextButtonStyle textButtonStyle = this.game.getTextButtonStyle();
