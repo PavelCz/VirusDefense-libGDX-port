@@ -66,4 +66,13 @@ public class OwnSprite extends RenderObject {
 		return new OwnSprite(this.imagePath, this.defaultScale);
 	}
 
+	public String getImagePath() {
+		return imagePath;
+	}
+
+	public Sprite getGDXSprite() {
+		return this.sprite;
+	}
+
+
 }

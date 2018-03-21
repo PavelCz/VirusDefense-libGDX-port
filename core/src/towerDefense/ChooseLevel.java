@@ -3,9 +3,12 @@ package towerDefense;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import engine.GameComponent;
 import engine.Level;
 import engine.LevelHandler;
@@ -15,8 +18,11 @@ import engine.gui.Clickable;
 import engine.gui.SetGameModeAction;
 import engine.gui.StaticText;
 
+import static com.badlogic.gdx.graphics.g3d.particles.ParticleChannels.TextureRegion;
+
 public class ChooseLevel extends GameComponent {
 
+	private ImageButton levelSelectButton;
 	private Button button, left, right;
 	private int page, lastPage;
 	private StaticText title = new StaticText(0, 0, 20, Color.BLACK, "Choose a level");
@@ -48,8 +54,15 @@ public class ChooseLevel extends GameComponent {
 		float buttonY = TowerDefense.getHeight() / 2 - currentPreviewPicture.getHeight() / 2;
 
 		this.button = new Button(buttonX, buttonY, currentPreviewPicture, currentPreviewPicture, game.getGameplay(), false);
+
 		this.left = new Button(leftX, leftY, leftSprite, new OwnSprite("leftClicked.png", 0.065f), game.getGameplay(), false);
 		this.right = new Button(rightX, rightY, rightSprite, new OwnSprite("rightClicked.png", 0.065f), game.getGameplay(), false);
+
+		Drawable drawable = new TextureRegionDrawable(currentPreviewPicture.getGDXSprite());
+		this.levelSelectButton = new ImageButton(drawable);
+		this.levelSelectButton.setX(buttonX);
+		this.levelSelectButton.setY(buttonY);
+		this.stage.addActor(this.levelSelectButton);
 
 		TextButtonStyle textButtonStyle = this.game.getTextButtonStyle();
 
@@ -59,12 +72,13 @@ public class ChooseLevel extends GameComponent {
 		back.addListener(new SetGameModeAction(this.game, TowerDefense.MODE_MENU));
 		this.stage.addActor(back);
 
+		/*
 		this.clickables.add(this.button);
 		this.clickables.add(this.left);
 		this.clickables.add(this.right);
 		this.guiElements.add(this.button);
 		this.guiElements.add(this.left);
-		this.guiElements.add(this.right);
+		this.guiElements.add(this.right);*/
 		this.lastPage = this.levelHandler.getLength() - 1;
 
 		this.lastPage = this.levelHandler.getLength() - 1;
