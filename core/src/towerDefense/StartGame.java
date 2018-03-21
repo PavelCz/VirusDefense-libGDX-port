@@ -11,19 +11,20 @@ public class StartGame extends ApplicationAdapter {
 	@Override
 	public void create() {
 
-		Preferences prefs = Gdx.app.getPreferences("VirusDefense");
-		String resolution = prefs.getString("resolution");
-		String[] parts = resolution.split("\n");
-		int width = Integer.parseInt(parts[0]);
-		int height = Integer.parseInt(parts[1]);
-		boolean fullscreen;
+		//Preferences prefs = Gdx.app.getPreferences("VirusDefense");
+		//String resolution = prefs.getString("resolution");
+		//String[] parts = resolution.split("\n");
+		//int width = Integer.parseInt(parts[0]);
+		//int height = Integer.parseInt(parts[1]);
+		//boolean fullscreen;
+        /*
 		if (Integer.parseInt(parts[2]) == 1) {
 
 			fullscreen = true;
 		} else {
 			fullscreen = false;
-		}
-		Gdx.graphics.setDisplayMode(width, height, fullscreen);
+		}*/
+		//Gdx.graphics.setDisplayMode(width, height, fullscreen);
 		// List<String> settings = TextFileToString.getLines("settings.txt");
 		// int width = Integer.parseInt(settings.get(0));
 		// int height = Integer.parseInt(settings.get(1));

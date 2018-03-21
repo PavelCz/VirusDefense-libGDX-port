@@ -247,7 +247,7 @@ public class Settings extends GameComponent {
 			if (newWidth >= this.minWidth && newHeight >= this.minHeight) {
 
 				// try {
-				Gdx.graphics.setDisplayMode(newWidth, newHeight, TowerDefense.isFULLSCREEN());
+				//Gdx.graphics.setDisplayMode(newWidth, newHeight, TowerDefense.isFULLSCREEN());
 				// AppGameContainer gameContainer = (AppGameContainer) container;
 				// gameContainer.setDisplayMode(newWidth, newHeight, TowerDefense.isFULLSCREEN());
 				TowerDefense.updateDimensions();
