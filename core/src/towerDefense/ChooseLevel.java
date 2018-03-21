@@ -1,6 +1,8 @@
 package towerDefense;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -43,13 +45,8 @@ public class ChooseLevel extends GameComponent {
     }
 
     private void initializeButtons(final TowerDefense game) {
-        OwnSprite leftSprite = new OwnSprite("left.png", 0.07f);
-        OwnSprite rightSprite = new OwnSprite("right.png", 0.07f);
-
-        float leftX = TowerDefense.getWidth() / 4 - leftSprite.getWidth() / 2;
-        float leftY = TowerDefense.getHeight() / 2 - leftSprite.getHeight() / 2;
-        float rightX = TowerDefense.getWidth() - leftX;
-        float rightY = leftY;
+        //OwnSprite leftSprite = new OwnSprite("left.png", 0.07f);
+        //OwnSprite rightSprite = new OwnSprite("right.png", 0.07f);
 
         float scale = 0.065f;
 
@@ -68,12 +65,18 @@ public class ChooseLevel extends GameComponent {
             }
         });
         this.stage.addActor(this.levelSelectButton);
-
-        ImageButton leftButton = new ImageButton(new TextureRegionDrawable(leftSprite.getGDXSprite()), new TextureRegionDrawable(new OwnSprite("leftClicked.png", 0.065f).getGDXSprite()));
-        leftButton.setX(leftX);
-        leftButton.setY(leftY);
+        String imagePath = "data/graphics/";
+        ImageButton leftButton = new ImageButton(new TextureRegionDrawable(new TextureRegion(new Texture(imagePath + "left.png"))), new TextureRegionDrawable(new TextureRegion(new Texture(imagePath + "leftClicked.png"))));
         leftButton.setScale(scale);
         leftButton.getImage().setScale(scale);
+        float leftX = TowerDefense.getWidth() / 4 - leftButton.getImage().getWidth() / 2;
+        float leftY = TowerDefense.getHeight() / 2 - leftButton.getImage().getHeight() / 2;
+        System.out.println("JO: " + leftX);
+        System.out.println("2: " + TowerDefense.getWidth());
+        System.out.println("JO: " + leftY);
+        System.out.println("2: " + leftButton.getHeight());
+        leftButton.setX(leftX);
+        leftButton.setY(leftY);
         leftButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
@@ -82,7 +85,9 @@ public class ChooseLevel extends GameComponent {
         });
         this.stage.addActor(leftButton);
 
-        ImageButton rightButton = new ImageButton(new TextureRegionDrawable(rightSprite.getGDXSprite()), new TextureRegionDrawable(new OwnSprite("rightClicked.png", 0.065f).getGDXSprite()));
+        ImageButton rightButton = new ImageButton(new TextureRegionDrawable(new TextureRegion(new Texture(imagePath + "right.png"))), new TextureRegionDrawable(new TextureRegion(new Texture(imagePath + "rightClicked.png"))));
+        float rightX = TowerDefense.getWidth() - leftX;
+        float rightY = leftY;
         rightButton.setX(rightX);
         rightButton.setY(rightY);
         rightButton.setScale(scale);
@@ -106,9 +111,9 @@ public class ChooseLevel extends GameComponent {
 
     private void changeLevelSelection(int amount) {
         this.pageNumber += amount;
-        if(this.pageNumber < 0) {
+        if (this.pageNumber < 0) {
             this.pageNumber = this.lastPageNumber;
-        } else if(this.pageNumber > this.lastPageNumber) {
+        } else if (this.pageNumber > this.lastPageNumber) {
             this.pageNumber = 0;
         }
         this.currentLevel = this.levelHandler.get(this.pageNumber);
