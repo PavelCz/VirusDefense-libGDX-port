@@ -17,17 +17,12 @@ import engine.GameComponent;
 import engine.Level;
 import engine.LevelHandler;
 import engine.graphics.OwnSprite;
-import engine.gui.Button;
-import engine.gui.Clickable;
 import engine.gui.SetGameModeAction;
 import engine.gui.StaticText;
-
-import static com.badlogic.gdx.graphics.g3d.particles.ParticleChannels.TextureRegion;
 
 public class ChooseLevel extends GameComponent {
 
     private ImageButton levelSelectButton;
-    private Button left, right;
     private int page, lastPage;
     private StaticText title = new StaticText(0, 0, 20, Color.BLACK, "Choose a level");
 
@@ -57,10 +52,6 @@ public class ChooseLevel extends GameComponent {
         float buttonX = TowerDefense.getWidth() / 2 - currentPreviewPicture.getWidth() / 2;
         float buttonY = TowerDefense.getHeight() / 2 - currentPreviewPicture.getHeight() / 2;
 
-
-        this.left = new Button(leftX, leftY, leftSprite, new OwnSprite("leftClicked.png", 0.065f), game.getGameplay(), false);
-        this.right = new Button(rightX, rightY, rightSprite, new OwnSprite("rightClicked.png", 0.065f), game.getGameplay(), false);
-
         float scale = 0.065f;
 
         Drawable drawable = new TextureRegionDrawable(currentPreviewPicture.getGDXSprite());
@@ -71,7 +62,6 @@ public class ChooseLevel extends GameComponent {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 game.initGameplay(getCurrentLevel());
-                //game.setLevel(this.currentLevel);
                 game.getMenu().setDisableTextField(true);
                 game.getGameplay().setPlayerName(game.getPlayerName());
                 game.setMode(TowerDefense.MODE_GAME);
@@ -84,7 +74,6 @@ public class ChooseLevel extends GameComponent {
         leftButton.setY(leftY);
         leftButton.setScale(scale);
         leftButton.getImage().setScale(scale);
-        //leftButton.scaleBy(scale);
         leftButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
@@ -114,28 +103,7 @@ public class ChooseLevel extends GameComponent {
         back.addListener(new SetGameModeAction(this.game, TowerDefense.MODE_MENU));
         this.stage.addActor(back);
 
-		/*
-		this.clickables.add(this.left);
-		this.clickables.add(this.right);
-		this.guiElements.add(this.button);
-		this.guiElements.add(this.left);
-		this.guiElements.add(this.right);*/
         this.lastPage = this.levelHandler.getLength() - 1;
-
-        this.lastPage = this.levelHandler.getLength() - 1;
-    }
-
-    @Override
-    public void render(SpriteBatch batch) {
-        super.render(batch);
-
-        super.renderGUI(batch);
-    }
-
-    @Override
-    public void update(int delta) {
-        super.update(delta);
-        this.mouseEvents(delta);
     }
 
     private void changeLevelSelection(int amount) {
@@ -151,15 +119,6 @@ public class ChooseLevel extends GameComponent {
         OwnSprite currentPreviewPicture = this.currentLevel.getPreviewPicture();
         // Change the image of the button
         this.levelSelectButton.getStyle().imageUp = new TextureRegionDrawable(currentPreviewPicture.getGDXSprite());
-    }
-
-    private void mouseEvents(int delta) {
-        // Input input = container.getInput();
-        // float x = input.getMouseX();
-        // float y = input.getMouseY();
-        float x = TowerDefense.getMouseX();
-        float y = TowerDefense.getMouseY();
-        super.updateHovering(x, y);
     }
 
     private Level getCurrentLevel() {
