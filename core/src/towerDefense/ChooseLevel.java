@@ -147,6 +147,11 @@ public class ChooseLevel extends GameComponent {
             this.page = 0;
         }
         this.currentLevel = this.levelHandler.get(this.page);
+
+        // Update the preview picture shown on the level select button
+        OwnSprite currentPreviewPicture = this.currentLevel.getPreviewPicture();
+        // Change the image of the button
+        this.levelSelectButton.getStyle().imageUp = new TextureRegionDrawable(currentPreviewPicture.getGDXSprite());
     }
 
     private void mouseEvents(int delta) {
