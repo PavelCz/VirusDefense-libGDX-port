@@ -89,10 +89,23 @@ public class ChooseLevel extends GameComponent {
         leftButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                leftAction();
+                changeLevelSelection(-1);
             }
         });
         this.stage.addActor(leftButton);
+
+        ImageButton rightButton = new ImageButton(new TextureRegionDrawable(rightSprite.getGDXSprite()), new TextureRegionDrawable(new OwnSprite("rightClicked.png", 0.065f).getGDXSprite()));
+        rightButton.setX(rightX);
+        rightButton.setY(rightY);
+        rightButton.setScale(scale);
+        rightButton.getImage().setScale(scale);
+        rightButton.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                changeLevelSelection(1);
+            }
+        });
+        this.stage.addActor(rightButton);
 
         TextButtonStyle textButtonStyle = this.game.getTextButtonStyle();
 
@@ -126,12 +139,13 @@ public class ChooseLevel extends GameComponent {
         this.mouseEvents(delta);
     }
 
-    private void leftAction() {
-        --this.page;
-        if (this.page < 0) {
+    private void changeLevelSelection(int amount) {
+        this.page += amount;
+        if(this.page < 0) {
             this.page = this.lastPage;
+        } else if(this.page > this.lastPage) {
+            this.page = 0;
         }
-        this.currentLevel = this.levelHandler.get(this.page);
         this.currentLevel = this.levelHandler.get(this.page);
     }
 
