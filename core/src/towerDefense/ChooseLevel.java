@@ -67,11 +67,10 @@ public class ChooseLevel extends GameComponent {
         this.levelSelectButton = new ImageButton(drawable);
         this.levelSelectButton.setX(buttonX);
         this.levelSelectButton.setY(buttonY);
-        final Level currentLevel = this.currentLevel; // this is only needed for the listener
         this.levelSelectButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                game.initGameplay(currentLevel);
+                game.initGameplay(getCurrentLevel());
                 //game.setLevel(this.currentLevel);
                 game.getMenu().setDisableTextField(true);
                 game.getGameplay().setPlayerName(game.getPlayerName());
@@ -161,6 +160,10 @@ public class ChooseLevel extends GameComponent {
         float x = TowerDefense.getMouseX();
         float y = TowerDefense.getMouseY();
         super.updateHovering(x, y);
+    }
+
+    private Level getCurrentLevel() {
+        return this.currentLevel;
     }
 
 }
