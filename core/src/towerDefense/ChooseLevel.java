@@ -26,65 +26,81 @@ import static com.badlogic.gdx.graphics.g3d.particles.ParticleChannels.TextureRe
 
 public class ChooseLevel extends GameComponent {
 
-	private ImageButton levelSelectButton;
-	private Button left, right;
-	private int page, lastPage;
-	private StaticText title = new StaticText(0, 0, 20, Color.BLACK, "Choose a level");
+    private ImageButton levelSelectButton;
+    private Button left, right;
+    private int page, lastPage;
+    private StaticText title = new StaticText(0, 0, 20, Color.BLACK, "Choose a level");
 
-	private Level currentLevel;
+    private Level currentLevel;
 
-	private LevelHandler levelHandler = new LevelHandler();
+    private LevelHandler levelHandler = new LevelHandler();
 
-	public ChooseLevel(final TowerDefense game) {
-		super(game);
-		this.title.setPosition((TowerDefense.getWidth() - this.title.getWidth()) / 2, TowerDefense.getHeight() / 4);
-		this.guiElements.add(this.title);
-		this.page = 0;
-		this.levelHandler.add("level1.txt", game.getGameplay());
-		this.levelHandler.add("level4.txt", game.getGameplay());
-		this.levelHandler.add("level2.txt", game.getGameplay());
-		// this.levelHandler.add("level3.txt", game.getGameplay());
+    public ChooseLevel(final TowerDefense game) {
+        super(game);
+        this.title.setPosition((TowerDefense.getWidth() - this.title.getWidth()) / 2, TowerDefense.getHeight() / 4);
+        this.guiElements.add(this.title);
+        this.page = 0;
+        this.levelHandler.add("level1.txt", game.getGameplay());
+        this.levelHandler.add("level4.txt", game.getGameplay());
+        this.levelHandler.add("level2.txt", game.getGameplay());
+        // this.levelHandler.add("level3.txt", game.getGameplay());
 
-		this.currentLevel = this.levelHandler.get(this.page);
-		OwnSprite currentPreviewPicture = this.currentLevel.getPreviewPicture();
-		OwnSprite leftSprite = new OwnSprite("left.png", 0.07f);
-		OwnSprite rightSprite = new OwnSprite("right.png", 0.07f);
+        this.currentLevel = this.levelHandler.get(this.page);
+        OwnSprite currentPreviewPicture = this.currentLevel.getPreviewPicture();
+        OwnSprite leftSprite = new OwnSprite("left.png", 0.07f);
+        OwnSprite rightSprite = new OwnSprite("right.png", 0.07f);
 
-		float leftX = TowerDefense.getWidth() / 4 - leftSprite.getWidth() / 2;
-		float leftY = TowerDefense.getHeight() / 2 - leftSprite.getHeight() / 2;
-		float rightX = TowerDefense.getWidth() - leftX;
-		float rightY = leftY;
-		float buttonX = TowerDefense.getWidth() / 2 - currentPreviewPicture.getWidth() / 2;
-		float buttonY = TowerDefense.getHeight() / 2 - currentPreviewPicture.getHeight() / 2;
+        float leftX = TowerDefense.getWidth() / 4 - leftSprite.getWidth() / 2;
+        float leftY = TowerDefense.getHeight() / 2 - leftSprite.getHeight() / 2;
+        float rightX = TowerDefense.getWidth() - leftX;
+        float rightY = leftY;
+        float buttonX = TowerDefense.getWidth() / 2 - currentPreviewPicture.getWidth() / 2;
+        float buttonY = TowerDefense.getHeight() / 2 - currentPreviewPicture.getHeight() / 2;
 
 
-		this.left = new Button(leftX, leftY, leftSprite, new OwnSprite("leftClicked.png", 0.065f), game.getGameplay(), false);
-		this.right = new Button(rightX, rightY, rightSprite, new OwnSprite("rightClicked.png", 0.065f), game.getGameplay(), false);
+        this.left = new Button(leftX, leftY, leftSprite, new OwnSprite("leftClicked.png", 0.065f), game.getGameplay(), false);
+        this.right = new Button(rightX, rightY, rightSprite, new OwnSprite("rightClicked.png", 0.065f), game.getGameplay(), false);
 
-		Drawable drawable = new TextureRegionDrawable(currentPreviewPicture.getGDXSprite());
-		this.levelSelectButton = new ImageButton(drawable);
-		this.levelSelectButton.setX(buttonX);
-		this.levelSelectButton.setY(buttonY);
-		final Level currentLevel = this.currentLevel; // this is only needed for the listener
-		this.levelSelectButton.addListener(new ChangeListener() {
-			@Override
-			public void changed(ChangeEvent event, Actor actor) {
-				game.initGameplay(currentLevel);
-				//game.setLevel(this.currentLevel);
-				game.getMenu().setDisableTextField(true);
-				game.getGameplay().setPlayerName(game.getPlayerName());
-				game.setMode(TowerDefense.MODE_GAME);
-			}
-		});
-		this.stage.addActor(this.levelSelectButton);
+        float scale = 0.065f;
 
-		TextButtonStyle textButtonStyle = this.game.getTextButtonStyle();
+        Drawable drawable = new TextureRegionDrawable(currentPreviewPicture.getGDXSprite());
+        this.levelSelectButton = new ImageButton(drawable);
+        this.levelSelectButton.setX(buttonX);
+        this.levelSelectButton.setY(buttonY);
+        final Level currentLevel = this.currentLevel; // this is only needed for the listener
+        this.levelSelectButton.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                game.initGameplay(currentLevel);
+                //game.setLevel(this.currentLevel);
+                game.getMenu().setDisableTextField(true);
+                game.getGameplay().setPlayerName(game.getPlayerName());
+                game.setMode(TowerDefense.MODE_GAME);
+            }
+        });
+        this.stage.addActor(this.levelSelectButton);
 
-		TextButton back = new TextButton("Back", textButtonStyle);
-		back.setX(0);
-		back.setY(0 + back.getHeight() * 2);
-		back.addListener(new SetGameModeAction(this.game, TowerDefense.MODE_MENU));
-		this.stage.addActor(back);
+        ImageButton leftButton = new ImageButton(new TextureRegionDrawable(leftSprite.getGDXSprite()), new TextureRegionDrawable(new OwnSprite("leftClicked.png", 0.065f).getGDXSprite()));
+        leftButton.setX(leftX);
+        leftButton.setY(leftY);
+        leftButton.setScale(scale);
+        leftButton.getImage().setScale(scale);
+        //leftButton.scaleBy(scale);
+        leftButton.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                leftAction();
+            }
+        });
+        this.stage.addActor(leftButton);
+
+        TextButtonStyle textButtonStyle = this.game.getTextButtonStyle();
+
+        TextButton back = new TextButton("Back", textButtonStyle);
+        back.setX(0);
+        back.setY(0 + back.getHeight() * 2);
+        back.addListener(new SetGameModeAction(this.game, TowerDefense.MODE_MENU));
+        this.stage.addActor(back);
 
 		/*
 		this.clickables.add(this.left);
@@ -92,67 +108,76 @@ public class ChooseLevel extends GameComponent {
 		this.guiElements.add(this.button);
 		this.guiElements.add(this.left);
 		this.guiElements.add(this.right);*/
-		this.lastPage = this.levelHandler.getLength() - 1;
+        this.lastPage = this.levelHandler.getLength() - 1;
 
-		this.lastPage = this.levelHandler.getLength() - 1;
-	}
+        this.lastPage = this.levelHandler.getLength() - 1;
+    }
 
-	@Override
-	public void render(SpriteBatch batch) {
-		super.render(batch);
+    @Override
+    public void render(SpriteBatch batch) {
+        super.render(batch);
 
-		super.renderGUI(batch);
-	}
+        super.renderGUI(batch);
+    }
 
-	@Override
-	public void update(int delta) {
-		super.update(delta);
-		this.mouseEvents(delta);
-	}
+    @Override
+    public void update(int delta) {
+        super.update(delta);
+        this.mouseEvents(delta);
+    }
 
-	private void mouseEvents(int delta) {
-		// Input input = container.getInput();
-		// float x = input.getMouseX();
-		// float y = input.getMouseY();
-		float x = TowerDefense.getMouseX();
-		float y = TowerDefense.getMouseY();
-		super.updateHovering(x, y);
-		if (Gdx.input.justTouched()) {
+    private void leftAction() {
+        --this.page;
+        if (this.page < 0) {
+            this.page = this.lastPage;
+        }
+        this.currentLevel = this.levelHandler.get(this.page);
+        this.currentLevel = this.levelHandler.get(this.page);
+    }
 
-			if (Gdx.input.isButtonPressed(com.badlogic.gdx.Input.Buttons.LEFT)) {
-				this.mouseWasClicked = true;
+    private void mouseEvents(int delta) {
+        // Input input = container.getInput();
+        // float x = input.getMouseX();
+        // float y = input.getMouseY();
+        float x = TowerDefense.getMouseX();
+        float y = TowerDefense.getMouseY();
+        super.updateHovering(x, y);
+        if (Gdx.input.justTouched()) {
 
-				for (Clickable clickable : this.clickables) {
-					clickable.update(x, y);
-				}
-			}
+            if (Gdx.input.isButtonPressed(com.badlogic.gdx.Input.Buttons.LEFT)) {
+                this.mouseWasClicked = true;
 
-		} else if (this.mouseWasClicked && !Gdx.input.isButtonPressed(com.badlogic.gdx.Input.Buttons.LEFT)) {
-			this.mouseWasClicked = false;
-			for (Clickable clickable : this.clickables) {
-				if (!clickable.isStayClicked()) {
-					if (clickable.isClicked() && clickable.collides((int) x, (int) y, Gameplay.GLOBAL_GUI_SCALE)) {
-						clickable.onRelease();
-						if (clickable == this.left) {
-							--this.page;
-							if (this.page < 0) {
-								this.page = this.lastPage;
-							}
-							this.currentLevel = this.levelHandler.get(this.page);
-							this.currentLevel = this.levelHandler.get(this.page);
-						} else if (clickable == this.right) {
-							this.page += 1;
-							if (this.page > this.lastPage) {
-								this.page = 0;
-							}
-							this.currentLevel = this.levelHandler.get(this.page);
-						}
-					} else if (clickable.isClicked()) {
-						clickable.setClicked(false);
-					}
-				}
-			}
-		}
-	}
+                for (Clickable clickable : this.clickables) {
+                    clickable.update(x, y);
+                }
+            }
+
+        } else if (this.mouseWasClicked && !Gdx.input.isButtonPressed(com.badlogic.gdx.Input.Buttons.LEFT)) {
+            this.mouseWasClicked = false;
+            for (Clickable clickable : this.clickables) {
+                if (!clickable.isStayClicked()) {
+                    if (clickable.isClicked() && clickable.collides((int) x, (int) y, Gameplay.GLOBAL_GUI_SCALE)) {
+                        clickable.onRelease();
+                        if (clickable == this.left) {
+                            --this.page;
+                            if (this.page < 0) {
+                                this.page = this.lastPage;
+                            }
+                            this.currentLevel = this.levelHandler.get(this.page);
+                            this.currentLevel = this.levelHandler.get(this.page);
+                        } else if (clickable == this.right) {
+                            this.page += 1;
+                            if (this.page > this.lastPage) {
+                                this.page = 0;
+                            }
+                            this.currentLevel = this.levelHandler.get(this.page);
+                        }
+                    } else if (clickable.isClicked()) {
+                        clickable.setClicked(false);
+                    }
+                }
+            }
+        }
+    }
 
 }
