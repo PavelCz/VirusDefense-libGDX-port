@@ -5,10 +5,10 @@ import java.util.List;
 import towerDefense.Gameplay;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 
 import engine.graphics.Background;
 import engine.graphics.BackgroundTiles;
-import engine.graphics.OwnSprite;
 
 public class Level {
 	private MapLayout map;
@@ -35,8 +35,8 @@ public class Level {
 		this.enemies.setGame(game);
 	}
 
-	public OwnSprite getPreviewPicture() {
-		return this.map.getPicture();
+	public Drawable getPreviewPictureDrawable() {
+		return this.map.getPreviewPictureDrawable();
 	}
 
 	public void renderPath(SpriteBatch batch) {

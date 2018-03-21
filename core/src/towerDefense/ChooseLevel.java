@@ -7,7 +7,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import engine.GameComponent;
 import engine.Level;
@@ -44,7 +43,6 @@ public class ChooseLevel extends GameComponent {
     }
 
     private void initializeButtons(final TowerDefense game) {
-        OwnSprite currentPreviewPicture = this.currentLevel.getPreviewPicture();
         OwnSprite leftSprite = new OwnSprite("left.png", 0.07f);
         OwnSprite rightSprite = new OwnSprite("right.png", 0.07f);
 
@@ -52,13 +50,12 @@ public class ChooseLevel extends GameComponent {
         float leftY = TowerDefense.getHeight() / 2 - leftSprite.getHeight() / 2;
         float rightX = TowerDefense.getWidth() - leftX;
         float rightY = leftY;
-        float buttonX = TowerDefense.getWidth() / 2 - currentPreviewPicture.getWidth() / 2;
-        float buttonY = TowerDefense.getHeight() / 2 - currentPreviewPicture.getHeight() / 2;
 
         float scale = 0.065f;
 
-        Drawable drawable = new TextureRegionDrawable(currentPreviewPicture.getGDXSprite());
-        this.levelSelectButton = new ImageButton(drawable);
+        this.levelSelectButton = new ImageButton(this.currentLevel.getPreviewPictureDrawable());
+        float buttonX = TowerDefense.getWidth() / 2 - levelSelectButton.getWidth() / 2;
+        float buttonY = TowerDefense.getHeight() / 2 - levelSelectButton.getHeight() / 2;
         this.levelSelectButton.setX(buttonX);
         this.levelSelectButton.setY(buttonY);
         this.levelSelectButton.addListener(new ChangeListener() {
@@ -116,10 +113,9 @@ public class ChooseLevel extends GameComponent {
         }
         this.currentLevel = this.levelHandler.get(this.pageNumber);
 
-        // Update the preview picture shown on the level select button
-        OwnSprite currentPreviewPicture = this.currentLevel.getPreviewPicture();
+        // Update the preview picture shown on the level select button;
         // Change the image of the button
-        this.levelSelectButton.getStyle().imageUp = new TextureRegionDrawable(currentPreviewPicture.getGDXSprite());
+        this.levelSelectButton.getStyle().imageUp = this.currentLevel.getPreviewPictureDrawable();
     }
 
     private Level getCurrentLevel() {
