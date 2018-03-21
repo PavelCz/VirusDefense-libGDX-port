@@ -27,7 +27,7 @@ import static com.badlogic.gdx.graphics.g3d.particles.ParticleChannels.TextureRe
 public class ChooseLevel extends GameComponent {
 
 	private ImageButton levelSelectButton;
-	private Button button, left, right;
+	private Button left, right;
 	private int page, lastPage;
 	private StaticText title = new StaticText(0, 0, 20, Color.BLACK, "Choose a level");
 
@@ -57,7 +57,6 @@ public class ChooseLevel extends GameComponent {
 		float buttonX = TowerDefense.getWidth() / 2 - currentPreviewPicture.getWidth() / 2;
 		float buttonY = TowerDefense.getHeight() / 2 - currentPreviewPicture.getHeight() / 2;
 
-		this.button = new Button(buttonX, buttonY, currentPreviewPicture, currentPreviewPicture, game.getGameplay(), false);
 
 		this.left = new Button(leftX, leftY, leftSprite, new OwnSprite("leftClicked.png", 0.065f), game.getGameplay(), false);
 		this.right = new Button(rightX, rightY, rightSprite, new OwnSprite("rightClicked.png", 0.065f), game.getGameplay(), false);
@@ -71,7 +70,7 @@ public class ChooseLevel extends GameComponent {
 			@Override
 			public void changed(ChangeEvent event, Actor actor) {
 				game.initGameplay(currentLevel);
-				// this.game.setLevel(this.currentLevel);
+				//game.setLevel(this.currentLevel);
 				game.getMenu().setDisableTextField(true);
 				game.getGameplay().setPlayerName(game.getPlayerName());
 				game.setMode(TowerDefense.MODE_GAME);
@@ -88,7 +87,6 @@ public class ChooseLevel extends GameComponent {
 		this.stage.addActor(back);
 
 		/*
-		this.clickables.add(this.button);
 		this.clickables.add(this.left);
 		this.clickables.add(this.right);
 		this.guiElements.add(this.button);
@@ -110,8 +108,6 @@ public class ChooseLevel extends GameComponent {
 	public void update(int delta) {
 		super.update(delta);
 		this.mouseEvents(delta);
-		this.button.setUnclickedButton(this.currentLevel.getPreviewPicture());
-		this.button.setClickedButton(this.currentLevel.getPreviewPicture());
 	}
 
 	private void mouseEvents(int delta) {
@@ -150,13 +146,6 @@ public class ChooseLevel extends GameComponent {
 								this.page = 0;
 							}
 							this.currentLevel = this.levelHandler.get(this.page);
-						} else if (clickable == this.button) {
-
-							this.game.initGameplay(this.currentLevel);
-							// this.game.setLevel(this.currentLevel);
-							this.game.getMenu().setDisableTextField(true);
-							this.game.getGameplay().setPlayerName(this.game.getPlayerName());
-							this.game.setMode(TowerDefense.MODE_GAME);
 						}
 					} else if (clickable.isClicked()) {
 						clickable.setClicked(false);
