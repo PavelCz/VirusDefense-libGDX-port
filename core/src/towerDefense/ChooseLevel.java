@@ -1,11 +1,7 @@
 package towerDefense;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.Event;
-import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
@@ -23,7 +19,7 @@ import engine.gui.StaticText;
 public class ChooseLevel extends GameComponent {
 
     private ImageButton levelSelectButton;
-    private int page, lastPage;
+    private int pageNumber, lastPageNumber;
     private StaticText title = new StaticText(0, 0, 20, Color.BLACK, "Choose a level");
 
     private Level currentLevel;
@@ -34,13 +30,20 @@ public class ChooseLevel extends GameComponent {
         super(game);
         this.title.setPosition((TowerDefense.getWidth() - this.title.getWidth()) / 2, TowerDefense.getHeight() / 4);
         this.guiElements.add(this.title);
-        this.page = 0;
+        this.pageNumber = 0;
         this.levelHandler.add("level1.txt", game.getGameplay());
         this.levelHandler.add("level4.txt", game.getGameplay());
         this.levelHandler.add("level2.txt", game.getGameplay());
         // this.levelHandler.add("level3.txt", game.getGameplay());
 
-        this.currentLevel = this.levelHandler.get(this.page);
+        this.currentLevel = this.levelHandler.get(this.pageNumber);
+
+        initializeButtons(game);
+
+        this.lastPageNumber = this.levelHandler.getLength() - 1;
+    }
+
+    private void initializeButtons(final TowerDefense game) {
         OwnSprite currentPreviewPicture = this.currentLevel.getPreviewPicture();
         OwnSprite leftSprite = new OwnSprite("left.png", 0.07f);
         OwnSprite rightSprite = new OwnSprite("right.png", 0.07f);
@@ -102,18 +105,16 @@ public class ChooseLevel extends GameComponent {
         back.setY(0 + back.getHeight() * 2);
         back.addListener(new SetGameModeAction(this.game, TowerDefense.MODE_MENU));
         this.stage.addActor(back);
-
-        this.lastPage = this.levelHandler.getLength() - 1;
     }
 
     private void changeLevelSelection(int amount) {
-        this.page += amount;
-        if(this.page < 0) {
-            this.page = this.lastPage;
-        } else if(this.page > this.lastPage) {
-            this.page = 0;
+        this.pageNumber += amount;
+        if(this.pageNumber < 0) {
+            this.pageNumber = this.lastPageNumber;
+        } else if(this.pageNumber > this.lastPageNumber) {
+            this.pageNumber = 0;
         }
-        this.currentLevel = this.levelHandler.get(this.page);
+        this.currentLevel = this.levelHandler.get(this.pageNumber);
 
         // Update the preview picture shown on the level select button
         OwnSprite currentPreviewPicture = this.currentLevel.getPreviewPicture();
