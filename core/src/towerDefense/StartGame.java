@@ -42,7 +42,7 @@ public class StartGame extends ApplicationAdapter {
 	@Override
 	public void render() {
 		Gdx.graphics.setTitle("" + Gdx.graphics.getFramesPerSecond());
-		Gdx.gl.glClearColor(1, 0, 0, 1);
+		Gdx.gl.glClearColor(0.5f, 0.7f, 0.95f, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		//
 		this.game.update((int) (Gdx.graphics.getDeltaTime() * 1000));

@@ -28,6 +28,7 @@ public class ChooseLevel extends GameComponent {
 
     public ChooseLevel(final TowerDefense game) {
         super(game);
+
         this.title = new Label("Choose a level", this.game.getLabelStyle());
         this.title.setPosition((TowerDefense.getWidth() - this.title.getWidth()) / 2, TowerDefense.getHeight() / 4);
         this.stage.addActor(this.title);
