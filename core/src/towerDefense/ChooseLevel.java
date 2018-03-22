@@ -13,7 +13,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import engine.GameComponent;
 import engine.Level;
 import engine.LevelHandler;
-import engine.graphics.OwnSprite;
 import engine.gui.SetGameModeAction;
 import engine.gui.StaticText;
 
@@ -45,9 +44,6 @@ public class ChooseLevel extends GameComponent {
     }
 
     private void initializeButtons(final TowerDefense game) {
-        //OwnSprite leftSprite = new OwnSprite("left.png", 0.07f);
-        //OwnSprite rightSprite = new OwnSprite("right.png", 0.07f);
-
         float scale = 0.065f;
 
         this.levelSelectButton = new ImageButton(this.currentLevel.getPreviewPictureDrawable());
