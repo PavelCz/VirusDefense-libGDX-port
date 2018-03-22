@@ -11,6 +11,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
@@ -34,6 +35,7 @@ public class TowerDefense implements ApplicationListener {
 	private static int WIDTH;
 
 	private TextButtonStyle textButtonStyle;
+	private LabelStyle labelStyle;
 
 	private Gameplay gameplay;
 	private Menu menu;
@@ -61,6 +63,11 @@ public class TowerDefense implements ApplicationListener {
 		this.textButtonStyle.downFontColor = Color.BLACK;
 		this.textButtonStyle.overFontColor = Color.GRAY;
 		this.textButtonStyle.checkedOverFontColor = Color.GRAY;
+		this.labelStyle = new LabelStyle();
+		this.labelStyle.font = font;
+		this.labelStyle.fontColor = Color.WHITE;
+
+
 
 		this.camera = new OrthographicCamera(1024, 768);
 		this.camera.translate(1024 / 2, 768 / 2);
@@ -373,6 +380,10 @@ public class TowerDefense implements ApplicationListener {
 
 	public TextButtonStyle getTextButtonStyle() {
 		return this.textButtonStyle;
+	}
+
+	public LabelStyle getLabelStyle() {
+		return this.labelStyle;
 	}
 
 }

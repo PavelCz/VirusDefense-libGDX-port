@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 
@@ -14,13 +15,12 @@ import engine.GameComponent;
 import engine.Level;
 import engine.LevelHandler;
 import engine.gui.SetGameModeAction;
-import engine.gui.StaticText;
 
 public class ChooseLevel extends GameComponent {
 
     private ImageButton levelSelectButton;
     private int pageNumber, lastPageNumber;
-    private StaticText title = new StaticText(0, 0, 20, Color.BLACK, "Choose a level");
+    private Label title;
 
     private Level currentLevel;
 
@@ -28,8 +28,9 @@ public class ChooseLevel extends GameComponent {
 
     public ChooseLevel(final TowerDefense game) {
         super(game);
+        this.title = new Label("Choose a level", this.game.getLabelStyle());
         this.title.setPosition((TowerDefense.getWidth() - this.title.getWidth()) / 2, TowerDefense.getHeight() / 4);
-        this.guiElements.add(this.title);
+        this.stage.addActor(this.title);
         this.pageNumber = 0;
         this.levelHandler.add("level1.txt", game.getGameplay());
         this.levelHandler.add("level4.txt", game.getGameplay());
