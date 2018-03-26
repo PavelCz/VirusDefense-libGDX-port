@@ -69,10 +69,6 @@ public class ChooseLevel extends GameComponent {
         leftButton.getImage().setScale(scale);
         float leftX = TowerDefense.getWidth() / 4 - leftButton.getImage().getWidth() / 2;
         float leftY = TowerDefense.getHeight() / 2 - leftButton.getImage().getHeight() / 2;
-        System.out.println("JO: " + leftX);
-        System.out.println("2: " + TowerDefense.getWidth());
-        System.out.println("JO: " + leftY);
-        System.out.println("2: " + leftButton.getHeight());
         leftButton.setX(leftX);
         leftButton.setY(leftY);
         leftButton.addListener(new ChangeListener() {
