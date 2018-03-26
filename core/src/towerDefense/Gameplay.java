@@ -6,7 +6,10 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import towerDefense.towers.BombTower;
 import towerDefense.towers.LongerShootingTower;
@@ -148,12 +151,27 @@ public class Gameplay extends GameComponent implements InputProcessor {
 		int offset = 20;
 
 		String imagePath = "data/graphics/";
-		ImageButton buyTowerButton0 = new ImageButton(new TextureRegionDrawable(new TextureRegion(new Texture(imagePath + "tower/Tower2.png"))));
-		buyTowerButton0.setSkin(this.game.getSkin());
+		ImageButton.ImageButtonStyle imageButtonStyle = this.game.getSkin().get( "default", ImageButton.ImageButtonStyle.class );
+		imageButtonStyle.imageUp = new TextureRegionDrawable(new TextureRegion(new Texture(imagePath + "tower/Tower2.png")));
+		imageButtonStyle.imageDown = imageButtonStyle.imageUp;
+
+		ImageButton buyTowerButton0 = new ImageButton(imageButtonStyle);
+		//ImageButton buyTowerButton0 = new ImageButton(new TextureRegionDrawable(new TextureRegion(new Texture(imagePath + "tower/Tower2.png"))));
+		//TextButton buyTowerButton0 = new TextButton("Test", this.game.getSkin(), "default");
+		buyTowerButton0.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture(imagePath + "tower/Tower2.png"))));
+		buyTowerButton0.setWidth(64);
+		buyTowerButton0.setHeight(64);
+		//buyTowerButton0.setSkin(this.game.getSkin());
+		//ImageButton.ImageButtonStyle = new ImageButton.ImageButtonStyle();
 		buyTowerButton0.setX(Gameplay.INTERFACE_START_X);
 		buyTowerButton0.setY(TowerDefense.getHeight() - 4 * 64 * Gameplay.GLOBAL_GUI_SCALE + offset);
+		buyTowerButton0.addListener(new ChangeListener() {
+			@Override
+			public void changed(ChangeEvent event, Actor actor) {
+				System.out.println("Click");
+			}
+		});
 		this.stage.addActor(buyTowerButton0);
-		buyTowerButton0.setZIndex(30000);
 		// Buttons; this has nothing to do with the draw sequence
 		//this.towerButton1 = new TowerButton(Gameplay.INTERFACE_START_X, TowerDefense.getHeight() - 4 * 64 * Gameplay.GLOBAL_GUI_SCALE
 		//		+ offset, "buttons/PSButton1.png", "buttons/PSButton1_click.png", new LongerShootingTower(0, 0, new OwnSprite(
