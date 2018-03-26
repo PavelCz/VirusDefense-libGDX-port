@@ -156,13 +156,9 @@ public class Gameplay extends GameComponent implements InputProcessor {
 		imageButtonStyle.imageDown = imageButtonStyle.imageUp;
 
 		ImageButton buyTowerButton0 = new ImageButton(imageButtonStyle);
-		//ImageButton buyTowerButton0 = new ImageButton(new TextureRegionDrawable(new TextureRegion(new Texture(imagePath + "tower/Tower2.png"))));
-		//TextButton buyTowerButton0 = new TextButton("Test", this.game.getSkin(), "default");
 		buyTowerButton0.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture(imagePath + "tower/Tower2.png"))));
 		buyTowerButton0.setWidth(64);
 		buyTowerButton0.setHeight(64);
-		//buyTowerButton0.setSkin(this.game.getSkin());
-		//ImageButton.ImageButtonStyle = new ImageButton.ImageButtonStyle();
 		buyTowerButton0.setX(Gameplay.INTERFACE_START_X);
 		buyTowerButton0.setY(TowerDefense.getHeight() - 4 * 64 * Gameplay.GLOBAL_GUI_SCALE + offset);
 		buyTowerButton0.addListener(new ChangeListener() {
