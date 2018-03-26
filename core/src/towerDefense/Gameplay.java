@@ -151,7 +151,7 @@ public class Gameplay extends GameComponent implements InputProcessor {
 		int offset = 20;
 
 		String imagePath = "data/graphics/";
-		ImageButton.ImageButtonStyle imageButtonStyle = this.game.getSkin().get( "default", ImageButton.ImageButtonStyle.class );
+		ImageButton.ImageButtonStyle imageButtonStyle = this.game.getSkin().get( "toggle", ImageButton.ImageButtonStyle.class );
 		imageButtonStyle.imageUp = new TextureRegionDrawable(new TextureRegion(new Texture(imagePath + "tower/Tower2.png")));
 		imageButtonStyle.imageDown = imageButtonStyle.imageUp;
 
