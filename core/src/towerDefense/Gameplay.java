@@ -132,6 +132,15 @@ public class Gameplay extends GameComponent implements InputProcessor {
 		// entities
 
 		this.projectiles = new ConcurrentLinkedQueue<Projectile>();
+		
+		initButtons();
+
+		//
+		this.initGUI();
+
+	}
+
+	private void initButtons() {
 		int offset = 20;
 		// Buttons; this has nothing to do with the draw sequence
 		this.towerButton1 = new TowerButton(Gameplay.INTERFACE_START_X, TowerDefense.getHeight() - 4 * 64 * Gameplay.GLOBAL_GUI_SCALE
@@ -150,10 +159,6 @@ public class Gameplay extends GameComponent implements InputProcessor {
 		this.clickables.add(this.towerButton2);
 		this.clickables.add(this.towerButton3);
 		this.clickables.add(this.towerButton4);
-
-		//
-		this.initGUI();
-
 	}
 
 	private void initDefaults() {
