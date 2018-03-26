@@ -12,6 +12,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
@@ -36,6 +37,7 @@ public class TowerDefense implements ApplicationListener {
 
 	private TextButtonStyle textButtonStyle;
 	private LabelStyle labelStyle;
+	private Skin skin;
 
 	private Gameplay gameplay;
 	private Menu menu;
@@ -67,7 +69,8 @@ public class TowerDefense implements ApplicationListener {
 		this.labelStyle.font = font;
 		this.labelStyle.fontColor = Color.WHITE;
 
-
+		// set the skin file
+		skin = new Skin(Gdx.files.internal("uiskin.json"));
 
 		this.camera = new OrthographicCamera(1024, 768);
 		this.camera.translate(1024 / 2, 768 / 2);
@@ -370,7 +373,6 @@ public class TowerDefense implements ApplicationListener {
 	}
 
 	public static int getMouseX() {
-
 		return Gdx.input.getX();
 	}
 
@@ -384,6 +386,10 @@ public class TowerDefense implements ApplicationListener {
 
 	public LabelStyle getLabelStyle() {
 		return this.labelStyle;
+	}
+
+	public Skin getSkin() {
+		return this.skin;
 	}
 
 }
