@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import towerDefense.towers.BombTower;
 import towerDefense.towers.LongerShootingTower;
 import towerDefense.towers.RocketFastTower;
@@ -54,7 +58,7 @@ public class Gameplay extends GameComponent implements InputProcessor {
 	private Level currentLevel;
 	private int currentTileLength;
 	private Tower[][] towers;
-	private TowerButton towerButton1;
+	//private TowerButton towerButton1;
 	private TowerButton towerButton2;
 	private TowerButton towerButton3;
 	private TowerButton towerButton4;
@@ -88,7 +92,7 @@ public class Gameplay extends GameComponent implements InputProcessor {
 	//
 	public Gameplay(TowerDefense game, Level level) {
 		super(game);
-		Gdx.input.setInputProcessor(this);
+		//Gdx.input.setInputProcessor(this);
 		this.currentLevel = level;
 		this.init();
 	}
@@ -132,8 +136,8 @@ public class Gameplay extends GameComponent implements InputProcessor {
 		// entities
 
 		this.projectiles = new ConcurrentLinkedQueue<Projectile>();
-		
-		initButtons();
+
+		this.initButtons();
 
 		//
 		this.initGUI();
@@ -142,10 +146,18 @@ public class Gameplay extends GameComponent implements InputProcessor {
 
 	private void initButtons() {
 		int offset = 20;
+
+		String imagePath = "data/graphics/";
+		ImageButton buyTowerButton0 = new ImageButton(new TextureRegionDrawable(new TextureRegion(new Texture(imagePath + "tower/Tower2.png"))));
+		buyTowerButton0.setSkin(this.game.getSkin());
+		buyTowerButton0.setX(Gameplay.INTERFACE_START_X);
+		buyTowerButton0.setY(TowerDefense.getHeight() - 4 * 64 * Gameplay.GLOBAL_GUI_SCALE + offset);
+		this.stage.addActor(buyTowerButton0);
+		buyTowerButton0.setZIndex(30000);
 		// Buttons; this has nothing to do with the draw sequence
-		this.towerButton1 = new TowerButton(Gameplay.INTERFACE_START_X, TowerDefense.getHeight() - 4 * 64 * Gameplay.GLOBAL_GUI_SCALE
-				+ offset, "buttons/PSButton1.png", "buttons/PSButton1_click.png", new LongerShootingTower(0, 0, new OwnSprite(
-				"tower/Tower2.png", 0.5f), this, 400, 0.16f, 400/* , container.getGraphics() */), this);
+		//this.towerButton1 = new TowerButton(Gameplay.INTERFACE_START_X, TowerDefense.getHeight() - 4 * 64 * Gameplay.GLOBAL_GUI_SCALE
+		//		+ offset, "buttons/PSButton1.png", "buttons/PSButton1_click.png", new LongerShootingTower(0, 0, new OwnSprite(
+		//		"tower/Tower2.png", 0.5f), this, 400, 0.16f, 400/* , container.getGraphics() */), this);
 		this.towerButton2 = new TowerButton(Gameplay.INTERFACE_START_X, TowerDefense.getHeight() - 5 * 64 * Gameplay.GLOBAL_GUI_SCALE
 				+ offset, "buttons/PSButton1.png", "buttons/PSButton1_click.png", new BombTower(0, 0, new OwnSprite("tower/t1n.png",
 				0.5f), this, 1500, 15f, 50), this);
@@ -155,7 +167,7 @@ public class Gameplay extends GameComponent implements InputProcessor {
 		this.towerButton4 = new TowerButton(Gameplay.INTERFACE_START_X + 64 + 32, TowerDefense.getHeight() - 4 * 64
 				* Gameplay.GLOBAL_GUI_SCALE + offset, "buttons/PSButton1.png", "buttons/PSButton1_click.png", new RocketFastTower(0,
 				0, new OwnSprite("tower/roteBlutk_klein.png", 0.5f), this, 1000, 20f), this);
-		this.clickables.add(this.towerButton1);
+		//this.clickables.add(this.towerButton1);
 		this.clickables.add(this.towerButton2);
 		this.clickables.add(this.towerButton3);
 		this.clickables.add(this.towerButton4);
@@ -217,7 +229,7 @@ public class Gameplay extends GameComponent implements InputProcessor {
 		this.guiElements.add(this.numberLives);
 		this.guiElements.add(moneyText);
 		this.guiElements.add(this.score);
-		this.guiElements.add(this.towerButton1);
+		//this.guiElements.add(this.towerButton1);
 		this.guiElements.add(this.towerButton2);
 		this.guiElements.add(this.towerButton3);
 		this.guiElements.add(this.towerButton4);
@@ -263,6 +275,8 @@ public class Gameplay extends GameComponent implements InputProcessor {
 			this.towerInfo.setText("");
 			this.towerName.setText("");
 		}
+
+		this.stage.draw();
 
 	}
 

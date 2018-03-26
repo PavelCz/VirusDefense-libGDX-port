@@ -337,7 +337,7 @@ public class Settings extends GameComponent {
 	}
 
 	public void initStage() {
-
+		// TODO: remove? seems not needed anymore
 	}
 
 }
