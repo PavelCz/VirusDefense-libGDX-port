@@ -31,6 +31,7 @@ import engine.Level;
 import engine.MyVector2f;
 import engine.Player;
 import engine.Waypoint;
+import engine.graphics.Background;
 import engine.graphics.LibGDXRectangle;
 import engine.graphics.LibGDXUnfilledEllipse;
 import engine.graphics.LibGDXUnfilledRectangle;
@@ -730,6 +731,14 @@ public class Gameplay extends GameComponent {
 
     public int getHorizontalTiles() {
         return this.currentLevel.getNumberTilesWidth();
+    }
+
+    public void drawBackground(SpriteBatch batch) {
+        this.getMapBackground().draw(batch);
+    }
+
+    public Background getMapBackground() {
+        return this.currentLevel.getMapBackground();
     }
 
     public int getVerticalTiles() {
