@@ -11,6 +11,7 @@ import com.badlogic.gdx.Graphics.DisplayMode;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
@@ -27,10 +28,10 @@ public class Settings extends GameComponent {
 	private TextField heightField;
 
 	private TextButton apply;
-	private StaticText warning;
+	private Label warning;
 	private TextButton back;
 	private TextButton fullscreen;
-	private StaticText supportedResolutionsText;
+	private Label supportedResolutionsText;
 	private TextButton[] resolutionClickables;
 	private Integer[][] resolutions;
 	private final int minWidth = 600, minHeight = 480;
@@ -73,9 +74,11 @@ public class Settings extends GameComponent {
 
 		fieldsX += this.apply.getWidth() + 10;
 
-		this.warning = new StaticText(fieldsX, fieldsY, Color.RED, "Please enter a number.");
+		this.warning = new Label("Please enter a number.", this.game.getLabelStyle());
+		this.warning.setColor( Color.RED);
+		this.warning.setPosition(fieldsX, fieldsY);
+		this.addActor(this.warning);
 		this.warning.setVisible(false);
-		this.guiElements.add(this.warning);
 
 		fieldsX = 0;
 		fieldsY -= this.widthField.getHeight();
@@ -86,9 +89,10 @@ public class Settings extends GameComponent {
 
 		Integer[][] supportedResolutions = new Integer[0][0];
 		supportedResolutions = this.getSupportedDisplayModes();
-		this.supportedResolutionsText = new StaticText(0, 0, 15, Color.BLACK, "Supported Fullscreen\nResolutions:");
-
-		this.guiElements.add(this.supportedResolutionsText);
+		this.supportedResolutionsText = new Label("Supported Fullscreen\nResolutions:", this.game.getLabelStyle());
+		this.supportedResolutionsText.setHeight(15);
+		this.supportedResolutionsText.setColor(Color.BLACK);
+		this.addActor(this.supportedResolutionsText);
 
 		this.resolutionClickables = new TextButton[supportedResolutions.length];
 		this.resolutions = supportedResolutions;
@@ -161,7 +165,6 @@ public class Settings extends GameComponent {
 		super.render(batch);
 
 		super.renderGUI(batch);
-		this.warning.draw(batch);
 		// this.fullscreen.draw(batch);
 		// this.supportedResolutions.draw(batch);
 	}
