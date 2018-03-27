@@ -1,21 +1,14 @@
 package engine;
 
-import java.util.ArrayList;
-import java.util.List;
 
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import towerDefense.Gameplay;
 import towerDefense.TowerDefense;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 
 import engine.graphics.Background;
-import engine.gui.GUI;
-
 public abstract class GameComponent extends Stage {
 	protected Background background;
 	protected boolean mouseWasClicked;
