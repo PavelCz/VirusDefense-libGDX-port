@@ -176,32 +176,6 @@ public class Gameplay extends GameComponent implements InputProcessor {
         buyTowerButton3.setY(TowerDefense.getHeight() - 4 * 64 * Gameplay.GLOBAL_GUI_SCALE + offset);
         this.stage.addActor(buyTowerButton3);
 
-
-        // Buttons; this has nothing to do with the draw sequence
-        //this.towerButton1 = new TowerButton(Gameplay.INTERFACE_START_X, TowerDefense.getHeight() - 4 * 64 *
-        // Gameplay.GLOBAL_GUI_SCALE
-        //		+ offset, "buttons/PSButton1.png", "buttons/PSButton1_click.png", new LongerShootingTower(0, 0, new
-        // OwnSprite(
-        //		"tower/Tower2.png", 0.5f), this, 400, 0.16f, 400/* , container.getGraphics() */), this);
-        //this.towerButton2 = new TowerButton(Gameplay.INTERFACE_START_X, TowerDefense.getHeight() - 5 * 64 *
-        // Gameplay.GLOBAL_GUI_SCALE
-        //		+ offset, "buttons/PSButton1.png", "buttons/PSButton1_click.png", new BombTower(0, 0, new OwnSprite
-        // ("tower/t1n.png",
-        //		0.5f), this, 1500, 15f, 50), this);
-        //this.towerButton3 = new TowerButton(Gameplay.INTERFACE_START_X, TowerDefense.getHeight() - 6 * 64 *
-        // Gameplay.GLOBAL_GUI_SCALE
-        //		+ offset, "buttons/PSButton1.png", "buttons/PSButton1_click.png", new RocketTower(0, 0, new OwnSprite
-        // ("tower/t1.png",
-        //		0.5f), this, 200, 15f, 50), this);
-        //this.towerButton4 = new TowerButton(Gameplay.INTERFACE_START_X + 64 + 32, TowerDefense.getHeight() - 4 * 64
-        //		* Gameplay.GLOBAL_GUI_SCALE + offset, "buttons/PSButton1.png", "buttons/PSButton1_click.png", new
-        // RocketFastTower(0,
-        //		0, new OwnSprite("tower/roteBlutk_klein.png", 0.5f), this, 1000, 20f), this);
-        //this.clickables.add(this.towerButton1);
-        //this.clickables.add(this.towerButton2);
-        //this.clickables.add(this.towerButton3);
-        //this.clickables.add(this.towerButton4);
-
         // Put all tower buying buttons in one button group
         ButtonGroup<ImageButton> buttonGroup = new ButtonGroup<ImageButton>();
         // radio button- like functionality, pressing a tower button releases all others
@@ -293,10 +267,6 @@ public class Gameplay extends GameComponent implements InputProcessor {
         this.guiElements.add(this.numberLives);
         this.guiElements.add(moneyText);
         this.guiElements.add(this.score);
-        //this.guiElements.add(this.towerButton1);
-        //this.guiElements.add(this.towerButton2);
-        //this.guiElements.add(this.towerButton3);
-        //this.guiElements.add(this.towerButton4);
 
         this.guiElements.add(this.passedTime);
 

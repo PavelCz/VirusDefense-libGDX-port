@@ -7,13 +7,9 @@ import towerDefense.Gameplay;
 import towerDefense.towers.Tower;
 
 public class TowerButton extends ImageButton {
-	private Tower tower;
-	private Gameplay game;
 
 	public TowerButton(final Tower tower, final Gameplay game, ImageButtonStyle style) {
 		super(style);
-		this.tower = tower;
-		this.game = game;
 
 		this.addListener(new ChangeListener() {
 			@Override
