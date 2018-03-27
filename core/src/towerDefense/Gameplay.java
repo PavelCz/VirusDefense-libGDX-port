@@ -223,69 +223,43 @@ public class Gameplay extends GameComponent {
         this.playerName = new Label("Player: " + this.player.getName(), ls);
         this.playerName.setPosition(cursorX, cursorY);
         this.addActor(this.playerName);
-        //this.playerName = new StaticText(cursorX, cursorY, defaultTextColor, "Player: " + this.player.getName());
         cursorY -= textHeight;
         Label livesText = new Label("Lives: ", ls);
         livesText.setPosition(cursorX, cursorY);
         this.addActor(livesText);
-        //StaticText livesText = new StaticText(cursorX, cursorY, defaultTextColor, "Lives: ");
         cursorX += livesText.getWidth();
         this.numberLives = new Label("" + this.player.getLives(), ls);
         this.numberLives.setPosition(cursorX, cursorY);
         this.addActor(numberLives);
-        //this.numberLives = new StaticText(cursorX, cursorY, defaultTextColor, "" + this.player.getLives());
         cursorX = cursorXStart;
         cursorY -= textHeight;
         Label moneyText = new Label("Money: ",ls);
         moneyText.setPosition(cursorX,cursorY);
         this.addActor(moneyText);
-        //StaticText moneyText = new StaticText(cursorX, cursorY, defaultTextColor, "Money: ");
         cursorX += moneyText.getWidth();
         this.moneyAmount = new Label("" + this.player.getMoney(), ls);
         this.moneyAmount.setPosition(cursorX, cursorY);
         this.addActor(this.moneyAmount);
-        //this.moneyAmount = new StaticText(cursorX, cursorY, defaultTextColor, "" + this.player.getMoney());
         cursorX = cursorXStart;
         cursorY -= textHeight;
         Label scoreText = new Label ("Score: ", ls);
         scoreText.setPosition(cursorX, cursorY);
         this.addActor(scoreText);
-        //StaticText scoreText = new StaticText(cursorX, cursorY, defaultTextColor, "Score: ");
         cursorX += scoreText.getWidth();
         this.score = new Label("" + this.player.getScore(), ls);
         this.score.setPosition(cursorX, cursorY);
         this.addActor(this.score);
-        //this.score = new StaticText(cursorX, cursorY, defaultTextColor, "" + this.player.getScore());
         this.towerName = new Label("", ls);
         this.towerName.setPosition(Gameplay.INTERFACE_START_X + guiTileSize, TowerDefense.getHeight() - 64);
         this.addActor(this.towerName);
-        //this.towerName = new StaticText(Gameplay.INTERFACE_START_X + guiTileSize, TowerDefense.getHeight() - 64,
-        //        defaultTextColor, "");
         this.towerInfo = new Label("", ls);
         this.towerInfo.setPosition(Gameplay.INTERFACE_START_X, guiTileSize);
         this.addActor(this.towerInfo);
-        //this.towerInfo = new StaticText(Gameplay.INTERFACE_START_X, guiTileSize, defaultTextColor, "");
         this.passedTime = new Label(this.passedTimeToString(), ls);
         this.passedTime.setPosition(Gameplay.INTERFACE_START_X + guiX, 0);
         this.addActor(this.passedTime);
-        //this.passedTime = new StaticText(Gameplay.INTERFACE_START_X + guiX, 0, defaultTextColor, this
-        //        .passedTimeToString());
 
         this.guiElements.add(this.interfaceBackground);
-
-        //this.guiElements.add(scoreText);
-
-        //this.guiElements.add(livesText);
-        //this.guiElements.add(this.moneyAmount);
-        //this.guiElements.add(this.playerName);
-        //this.guiElements.add(this.numberLives);
-        //this.guiElements.add(moneyText);
-        //this.guiElements.add(this.score);
-
-        //this.guiElements.add(this.passedTime);
-
-        //this.guiElements.add(this.towerName);
-        //this.guiElements.add(this.towerInfo);
     }
 
     @Override
