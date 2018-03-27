@@ -150,16 +150,9 @@ public class Gameplay extends GameComponent implements InputProcessor {
 
 	private void initButtons() {
 		int offset = 20;
+        String imagePath = "data/graphics/";
 
-		String imagePath = "data/graphics/";
-		ImageButton.ImageButtonStyle imageButtonStyle = this.game.getSkin().get( "toggle", ImageButton.ImageButtonStyle.class );
-		imageButtonStyle.imageUp = new TextureRegionDrawable(new TextureRegion(new Texture(imagePath + "tower/Tower2.png")));
-		imageButtonStyle.imageDown = imageButtonStyle.imageUp;
-
-		ImageButton buyTowerButton0 = new ImageButton(imageButtonStyle);
-		//buyTowerButton0.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture(imagePath + "tower/Tower2.png"))));
-		buyTowerButton0.setWidth(64);
-		buyTowerButton0.setHeight(64);
+		ImageButton buyTowerButton0 = createNewTowerButton("tower/Tower2.png");
 		buyTowerButton0.setX(Gameplay.INTERFACE_START_X);
 		buyTowerButton0.setY(TowerDefense.getHeight() - 4 * 64 * Gameplay.GLOBAL_GUI_SCALE + offset);
 		buyTowerButton0.addListener(new ChangeListener() {
@@ -170,18 +163,7 @@ public class Gameplay extends GameComponent implements InputProcessor {
 		});
 		this.stage.addActor(buyTowerButton0);
 
-		ImageButton.ImageButtonStyle imageButtonStyle2 = new ImageButton.ImageButtonStyle();
-		//ImageButton.ImageButtonStyle imageButtonStyle2 = imageButtonStyle;
-		imageButtonStyle2.checked = imageButtonStyle.down;
-		imageButtonStyle2.up = imageButtonStyle.up;
-		imageButtonStyle2.down = imageButtonStyle.down;
-		imageButtonStyle2.imageUp = new TextureRegionDrawable(new TextureRegion(new Texture(imagePath + "tower/t1n.png")));
-		imageButtonStyle2.imageDown = imageButtonStyle2.imageUp;
-
-		ImageButton buyTowerButton1 = new ImageButton(imageButtonStyle2);
-		//buyTowerButton1.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture(imagePath + "tower/Tower2.png"))));
-		buyTowerButton1.setWidth(64);
-		buyTowerButton1.setHeight(64);
+		ImageButton buyTowerButton1 = createNewTowerButton( "tower/t1n.png");
 		buyTowerButton1.setX(Gameplay.INTERFACE_START_X);
 		buyTowerButton1.setY(TowerDefense.getHeight() - 5 * 64 * Gameplay.GLOBAL_GUI_SCALE + offset);
 		buyTowerButton1.addListener(new ChangeListener() {
@@ -217,6 +199,28 @@ public class Gameplay extends GameComponent implements InputProcessor {
 		//this.clickables.add(this.towerButton2);
 		this.clickables.add(this.towerButton3);
 		this.clickables.add(this.towerButton4);
+	}
+
+	private ImageButton createNewTowerButton(String imagePath) {
+		String folderPath = "data/graphics/";
+		// Get the default skin for a "toggle" ImageButton
+		ImageButton.ImageButtonStyle defaultStyle = this.game.getSkin().get( "toggle", ImageButton.ImageButtonStyle.class );
+
+		ImageButton towerButton = new ImageButton(defaultStyle);
+		// The way libGDX Image buttons work, they have either a style or an image, with a few changes in the uiskin.json
+		// they can have both, now however, the image is shared by all instances of a button with the same style
+		// That is why I create a new style that copies the attributes from the default style except for the image
+		ImageButton.ImageButtonStyle buttonStyle = new ImageButton.ImageButtonStyle();
+		buttonStyle.checked = defaultStyle.down;
+		buttonStyle.up = defaultStyle.up;
+		buttonStyle.down = defaultStyle.down;
+		buttonStyle.imageUp = new TextureRegionDrawable(new TextureRegion(new Texture(folderPath + imagePath)));
+		buttonStyle.imageDown = buttonStyle.imageUp;
+
+		ImageButton newTowerButton = new ImageButton(buttonStyle);
+		newTowerButton.setWidth(64);
+		newTowerButton.setHeight(64);
+		return newTowerButton;
 	}
 
 	private void initDefaults() {
