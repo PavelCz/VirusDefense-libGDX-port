@@ -13,17 +13,17 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import engine.graphics.Background;
 import engine.gui.GUI;
 
-public abstract class GameComponent extends Stage {
+public abstract class GameComponent {
 	protected Background background;
 	protected List<GUI> guiElements;
 	protected boolean mouseWasClicked;
 
-	//protected Stage stage;
+	protected Stage stage;
 
 	protected TowerDefense game;
 
 	public GameComponent(TowerDefense game) {
-		//this.stage = new Stage();
+		this.stage = new Stage();
 		this.game = game;
 		this.background = new Background(1.1f, "defaultBackground.jpg", this.game.getGameplay());
 
@@ -41,7 +41,7 @@ public abstract class GameComponent extends Stage {
 	}
 
 	public void update(int delta) {
-		this.act(delta);
+		this.stage.act(delta);
 
 	}
 
@@ -49,7 +49,7 @@ public abstract class GameComponent extends Stage {
 		if (this.background != null) {
 			this.background.draw(batch);
 		}
-		this.draw();
+		this.stage.draw();
 		// this.renderGUI(batch); for some reason if I include this the backgound isn't shown
 	}
 
@@ -58,6 +58,6 @@ public abstract class GameComponent extends Stage {
 	}
 
 	public Stage getStage() {
-		return this;
+		return this.stage;
 	}
 }

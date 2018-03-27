@@ -30,7 +30,7 @@ public class ChooseLevel extends GameComponent {
 
         this.text = new Label("Choose a level", this.game.getLabelStyle());
         this.text.setPosition((TowerDefense.getWidth() - this.text.getWidth()) / 2, TowerDefense.getHeight() / 4);
-        this.addActor(this.text);
+        this.stage.addActor(this.text);
         this.pageNumber = 0;
         this.levelHandler.add("level1.txt", game.getGameplay());
         this.levelHandler.add("level4.txt", game.getGameplay());
@@ -61,7 +61,7 @@ public class ChooseLevel extends GameComponent {
                 game.setMode(TowerDefense.MODE_GAME);
             }
         });
-        this.addActor(this.levelSelectButton);
+        this.stage.addActor(this.levelSelectButton);
         String imagePath = "data/graphics/";
         ImageButton leftButton = new ImageButton(new TextureRegionDrawable(new TextureRegion(new Texture(imagePath + "left.png"))), new TextureRegionDrawable(new TextureRegion(new Texture(imagePath + "leftClicked.png"))));
         leftButton.setScale(scale);
@@ -76,7 +76,7 @@ public class ChooseLevel extends GameComponent {
                 changeLevelSelection(-1);
             }
         });
-        this.addActor(leftButton);
+        this.stage.addActor(leftButton);
 
         ImageButton rightButton = new ImageButton(new TextureRegionDrawable(new TextureRegion(new Texture(imagePath + "right.png"))), new TextureRegionDrawable(new TextureRegion(new Texture(imagePath + "rightClicked.png"))));
         float rightX = TowerDefense.getWidth() - leftX;
@@ -91,7 +91,7 @@ public class ChooseLevel extends GameComponent {
                 changeLevelSelection(1);
             }
         });
-        this.addActor(rightButton);
+        this.stage.addActor(rightButton);
 
         TextButtonStyle textButtonStyle = this.game.getTextButtonStyle();
 
@@ -99,7 +99,7 @@ public class ChooseLevel extends GameComponent {
         back.setX(0);
         back.setY(0 + back.getHeight() * 2);
         back.addListener(new SetGameModeAction(this.game, TowerDefense.MODE_MENU));
-        this.addActor(back);
+        this.stage.addActor(back);
     }
 
     private void changeLevelSelection(int amount) {

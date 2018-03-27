@@ -43,7 +43,7 @@ import engine.projectiles.Projectile;
 /**
  * @author Pavel
  */
-public class Gameplay extends GameComponent {
+public class Gameplay extends GameComponent implements InputProcessor {
     private OrthographicCamera gameCamera;
     private float cameraWidth, cameraHeight;
     private Healthbar h;
@@ -147,25 +147,25 @@ public class Gameplay extends GameComponent {
                 ("tower/Tower2.png", 0.5f), this, 400, 0.16f, 400));
         buyTowerButton0.setX(Gameplay.INTERFACE_START_X);
         buyTowerButton0.setY(TowerDefense.getHeight() - 4 * 64 * Gameplay.GLOBAL_GUI_SCALE + offset);
-        this.addActor(buyTowerButton0);
+        this.stage.addActor(buyTowerButton0);
 
         ImageButton buyTowerButton1 = createNewTowerButton(new BombTower(0, 0, new OwnSprite("tower/t1n.png", 0.5f),
                 this, 1500, 15f, 50));
         buyTowerButton1.setX(Gameplay.INTERFACE_START_X);
         buyTowerButton1.setY(TowerDefense.getHeight() - 5 * 64 * Gameplay.GLOBAL_GUI_SCALE + offset);
-        this.addActor(buyTowerButton1);
+        this.stage.addActor(buyTowerButton1);
 
         ImageButton buyTowerButton2 = createNewTowerButton(new RocketTower(0, 0, new OwnSprite("tower/t1.png", 0.5f),
                 this, 200, 15f, 50));
         buyTowerButton2.setX(Gameplay.INTERFACE_START_X);
         buyTowerButton2.setY(TowerDefense.getHeight() - 6 * 64 * Gameplay.GLOBAL_GUI_SCALE + offset);
-        this.addActor(buyTowerButton2);
+        this.stage.addActor(buyTowerButton2);
 
         ImageButton buyTowerButton3 = createNewTowerButton(new RocketFastTower(0, 0, new OwnSprite
                 ("tower/roteBlutk_klein.png", 0.5f), this, 1000, 20f));
         buyTowerButton3.setX(Gameplay.INTERFACE_START_X + 64);
         buyTowerButton3.setY(TowerDefense.getHeight() - 4 * 64 * Gameplay.GLOBAL_GUI_SCALE + offset);
-        this.addActor(buyTowerButton3);
+        this.stage.addActor(buyTowerButton3);
 
         // Put all tower buying buttons in one button group
         this.towerButtonGroup =  new ButtonGroup<ImageButton>();
@@ -302,7 +302,7 @@ public class Gameplay extends GameComponent {
             this.towerName.setText("");
         }
 
-        this.draw();
+        this.stage.draw();
 
     }
 
@@ -451,7 +451,7 @@ public class Gameplay extends GameComponent {
         for (Projectile projectiles : this.projectiles) {
             projectiles.update(delta);
         }
-        super.update(originalDelta);
+
         // }
     }
 
@@ -781,8 +781,49 @@ public class Gameplay extends GameComponent {
     }
 
     @Override
+    public boolean keyDown(int keycode) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public boolean keyUp(int keycode) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public boolean keyTyped(char character) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public boolean touchDragged(int screenX, int screenY, int pointer) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public boolean mouseMoved(int screenX, int screenY) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
     public boolean scrolled(int amount) {
-        super.scrolled(amount);
         // int mouseWheel = -amount;
         // if (mouseWheel > 0) { // mouse wheel up
         // Gameplay.CURRENT_GAME_SCALE *= 1.1f;
