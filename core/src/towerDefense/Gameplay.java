@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.ui.ButtonGroup;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
@@ -35,7 +37,6 @@ import engine.graphics.LibGDXUnfilledEllipse;
 import engine.graphics.LibGDXUnfilledRectangle;
 import engine.graphics.OwnSprite;
 import engine.gui.Healthbar;
-import engine.gui.InterfaceBackground;
 import engine.gui.TowerButton;
 import engine.projectiles.Projectile;
 
@@ -73,7 +74,6 @@ public class Gameplay extends GameComponent {
     public static float GLOBAL_GUI_SCALE = 1f;
 
     private Label passedTime;
-    private InterfaceBackground interfaceBackground;
     // Constants:
     public static float INTERFACE_START_X;
     public static int STANDARD_TEXT_SCALE = 15;
@@ -121,8 +121,10 @@ public class Gameplay extends GameComponent {
         Gameplay.MAX_GAME_SCALE = Gameplay.CURRENT_GAME_SCALE;
         Gameplay.SIZE = (int) (64 * Gameplay.CURRENT_GAME_SCALE);
 
-        //
-        this.interfaceBackground = new InterfaceBackground("Interface1.png");
+        // The grey HUD field on the right side of the screen containing the buttons
+        Image interfaceBackground = new Image(new Texture("data/graphics/Interface1.png"));
+        interfaceBackground.setPosition(Gameplay.INTERFACE_START_X, 0);
+        this.addActor(interfaceBackground);
 
         this.towers = new Tower[this.getVerticalTiles()][this.getHorizontalTiles()];
 
@@ -210,7 +212,6 @@ public class Gameplay extends GameComponent {
     }
 
     private void initGUI() {
-        Color defaultTextColor = Color.WHITE;
         float guiTileSize = 64 * Gameplay.GLOBAL_GUI_SCALE;
         float textHeight = 20 * Gameplay.GLOBAL_GUI_SCALE;
         float guiX = 3 * Gameplay.GLOBAL_GUI_SCALE;
@@ -258,8 +259,6 @@ public class Gameplay extends GameComponent {
         this.passedTime = new Label(this.passedTimeToString(), ls);
         this.passedTime.setPosition(Gameplay.INTERFACE_START_X + guiX, 0);
         this.addActor(this.passedTime);
-
-        this.guiElements.add(this.interfaceBackground);
     }
 
     @Override
