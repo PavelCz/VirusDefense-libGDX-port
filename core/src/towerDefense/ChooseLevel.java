@@ -1,6 +1,5 @@
 package towerDefense;
 
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -20,7 +19,7 @@ public class ChooseLevel extends GameComponent {
 
     private ImageButton levelSelectButton;
     private int pageNumber, lastPageNumber;
-    private Label title;
+    private Label text;
 
     private Level currentLevel;
 
@@ -29,9 +28,9 @@ public class ChooseLevel extends GameComponent {
     public ChooseLevel(final TowerDefense game) {
         super(game);
 
-        this.title = new Label("Choose a level", this.game.getLabelStyle());
-        this.title.setPosition((TowerDefense.getWidth() - this.title.getWidth()) / 2, TowerDefense.getHeight() / 4);
-        this.stage.addActor(this.title);
+        this.text = new Label("Choose a level", this.game.getLabelStyle());
+        this.text.setPosition((TowerDefense.getWidth() - this.text.getWidth()) / 2, TowerDefense.getHeight() / 4);
+        this.stage.addActor(this.text);
         this.pageNumber = 0;
         this.levelHandler.add("level1.txt", game.getGameplay());
         this.levelHandler.add("level4.txt", game.getGameplay());
