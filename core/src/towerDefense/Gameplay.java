@@ -11,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.ButtonGroup;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import towerDefense.towers.BombTower;
 import towerDefense.towers.LongerShootingTower;
@@ -62,10 +63,7 @@ public class Gameplay extends GameComponent implements InputProcessor {
     private Level currentLevel;
     private int currentTileLength;
     private Tower[][] towers;
-    //private TowerButton towerButton1;
-    //private TowerButton towerButton2;
-    //private TowerButton towerButton3;
-    //private TowerButton towerButton4;
+    private ButtonGroup<ImageButton> towerButtonGroup;
     private Tower currentTower;
     private Player player;
     private StaticText playerName;
@@ -153,42 +151,41 @@ public class Gameplay extends GameComponent implements InputProcessor {
         String imagePath = "data/graphics/";
 
         ImageButton buyTowerButton0 = createNewTowerButton(new LongerShootingTower(0, 0, new OwnSprite
-                ("tower/Tower2.png", 0.5f), this, 400, 0.16f, 400), "tower/Tower2.png");
+                ("tower/Tower2.png", 0.5f), this, 400, 0.16f, 400));
         buyTowerButton0.setX(Gameplay.INTERFACE_START_X);
         buyTowerButton0.setY(TowerDefense.getHeight() - 4 * 64 * Gameplay.GLOBAL_GUI_SCALE + offset);
         this.stage.addActor(buyTowerButton0);
 
         ImageButton buyTowerButton1 = createNewTowerButton(new BombTower(0, 0, new OwnSprite("tower/t1n.png", 0.5f),
-                this, 1500, 15f, 50), "tower/t1n.png");
+                this, 1500, 15f, 50));
         buyTowerButton1.setX(Gameplay.INTERFACE_START_X);
         buyTowerButton1.setY(TowerDefense.getHeight() - 5 * 64 * Gameplay.GLOBAL_GUI_SCALE + offset);
         this.stage.addActor(buyTowerButton1);
 
         ImageButton buyTowerButton2 = createNewTowerButton(new RocketTower(0, 0, new OwnSprite("tower/t1.png", 0.5f),
-                this, 200, 15f, 50), "tower/t1.png");
+                this, 200, 15f, 50));
         buyTowerButton2.setX(Gameplay.INTERFACE_START_X);
         buyTowerButton2.setY(TowerDefense.getHeight() - 6 * 64 * Gameplay.GLOBAL_GUI_SCALE + offset);
         this.stage.addActor(buyTowerButton2);
 
         ImageButton buyTowerButton3 = createNewTowerButton(new RocketFastTower(0, 0, new OwnSprite
-                ("tower/roteBlutk_klein.png", 0.5f), this, 1000, 20f), "tower/t1.png");
+                ("tower/roteBlutk_klein.png", 0.5f), this, 1000, 20f));
         buyTowerButton3.setX(Gameplay.INTERFACE_START_X + 64);
         buyTowerButton3.setY(TowerDefense.getHeight() - 4 * 64 * Gameplay.GLOBAL_GUI_SCALE + offset);
         this.stage.addActor(buyTowerButton3);
 
         // Put all tower buying buttons in one button group
-        ButtonGroup<ImageButton> buttonGroup = new ButtonGroup<ImageButton>();
+        this.towerButtonGroup =  new ButtonGroup<ImageButton>();
         // radio button- like functionality, pressing a tower button releases all others
-        buttonGroup.setMaxCheckCount(1);
-        buttonGroup.setMinCheckCount(0);
-        buttonGroup.add(buyTowerButton0);
-        buttonGroup.add(buyTowerButton1);
-        buttonGroup.add(buyTowerButton2);
-        buttonGroup.add(buyTowerButton3);
+        this.towerButtonGroup.setMaxCheckCount(1);
+        this.towerButtonGroup.setMinCheckCount(0);
+        this.towerButtonGroup.add(buyTowerButton0);
+        this.towerButtonGroup.add(buyTowerButton1);
+        this.towerButtonGroup.add(buyTowerButton2);
+        this.towerButtonGroup.add(buyTowerButton3);
     }
 
-    private ImageButton createNewTowerButton(Tower tower, String imagePath) {
-        String folderPath = "data/graphics/";
+    private ImageButton createNewTowerButton(Tower tower) {
         // Get the default skin for a "toggle" ImageButton
         ImageButton.ImageButtonStyle defaultStyle = this.game.getSkin().get("toggle", ImageButton.ImageButtonStyle
                 .class);
@@ -200,7 +197,7 @@ public class Gameplay extends GameComponent implements InputProcessor {
         buttonStyle.checked = defaultStyle.down;
         buttonStyle.up = defaultStyle.up;
         buttonStyle.down = defaultStyle.down;
-        buttonStyle.imageUp = new TextureRegionDrawable(new TextureRegion(new Texture(folderPath + imagePath)));
+        buttonStyle.imageUp = new SpriteDrawable(tower.getSprite().getGDXSprite());
         buttonStyle.imageDown = buttonStyle.imageUp;
 
         ImageButton newTowerButton = new TowerButton(tower, this, buttonStyle);
@@ -328,6 +325,7 @@ public class Gameplay extends GameComponent implements InputProcessor {
         } else if (this.mode == -1) {
             new OwnSprite("Game Over.png").draw(0, 0, Gameplay.CURRENT_GAME_SCALE, batch);
         }
+        // TODO: re-implement showing tower radius
         // for (int i = 0; i < this.towers.length; ++i) {
         // for (int j = 0; j < this.towers[0].length; ++j) {
         // if (this.towers[i][j] != null) {
@@ -628,7 +626,7 @@ public class Gameplay extends GameComponent implements InputProcessor {
                 }
 
             } else if (Gdx.input.isButtonPressed(com.badlogic.gdx.Input.Buttons.RIGHT)) {
-                this.releaseAllClickables();
+                this.towerButtonGroup.uncheckAll();
 
             }
         }
@@ -661,8 +659,7 @@ public class Gameplay extends GameComponent implements InputProcessor {
                 this.game.getSoundHandler().play("place");
 
                 // if this is included buttons are unpressed after each tower placement
-                this.currentTower = null;
-                this.releaseAllClickables();
+                this.towerButtonGroup.uncheckAll();
 
             } else {
                 boolean mouseCollidesButton = false;
@@ -676,12 +673,6 @@ public class Gameplay extends GameComponent implements InputProcessor {
                 }
             }
 
-        }
-    }
-
-    private void releaseAllClickables() {
-        for (Clickable clickable : this.clickables) {
-            clickable.onRelease();
         }
     }
 

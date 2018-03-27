@@ -3,6 +3,8 @@ package engine.gui;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
+import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import towerDefense.Gameplay;
 import towerDefense.towers.Tower;
 
@@ -17,6 +19,7 @@ public class TowerButton extends ImageButton {
 				if(TowerButton.super.isChecked()) {
 					game.setCurrentTower(tower);
 					game.getCurrentTower().getSprite().setAlpha(0.5f);
+					game.getSoundHandler().play("press");
 				} else {
 					game.setCurrentTower(null);
 				}
