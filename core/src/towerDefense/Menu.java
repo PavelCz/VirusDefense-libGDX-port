@@ -170,9 +170,9 @@ public class Menu extends GameComponent {
 
 		this.getStage().addActor(this.t);
 		this.getStage().addActor(this.exitGameButton);
-		this.stage.addActor(this.startButton);
-		this.stage.addActor(this.settingsButton);
-		this.stage.addActor(this.highscoresButton);
+		this.addActor(this.startButton);
+		this.addActor(this.settingsButton);
+		this.addActor(this.highscoresButton);
 	}
 
 }

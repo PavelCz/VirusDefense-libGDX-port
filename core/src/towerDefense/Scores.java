@@ -22,7 +22,7 @@ public class Scores extends GameComponent {
 		// back.setColor(Color.BLACK);
 
 		back.addListener(new SetGameModeAction(this.game, TowerDefense.MODE_MENU));
-		this.stage.addActor(back);
+		this.addActor(back);
 
 		String scoreString = "Highscores:\n";
 

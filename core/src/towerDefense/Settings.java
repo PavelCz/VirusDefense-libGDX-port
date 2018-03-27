@@ -104,7 +104,7 @@ public class Settings extends GameComponent {
 					// Settings.this.heightField.setText(Settings.this.resolutions[i][1].toString());
 				}
 			});
-			this.stage.addActor(this.resolutionClickables[i]);
+			this.addActor(this.resolutionClickables[i]);
 
 		}
 		// set Listeners for button click functionality
@@ -129,8 +129,8 @@ public class Settings extends GameComponent {
 		this.getStage().addActor(this.heightField);
 		this.getStage().addActor(this.widthField);
 		this.getStage().addActor(this.back);
-		this.stage.addActor(this.apply);
-		this.stage.addActor(this.fullscreen);
+		this.addActor(this.apply);
+		this.addActor(this.fullscreen);
 
 		this.updateResolutionsPosition();
 
