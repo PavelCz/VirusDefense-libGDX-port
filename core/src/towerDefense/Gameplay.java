@@ -121,7 +121,6 @@ public class Gameplay extends GameComponent {
         Image interfaceBackground = new Image(new Texture("data/graphics/Interface1.png"));
         interfaceBackground.setPosition(Gameplay.INTERFACE_START_X, 0);
         this.addActor(interfaceBackground);
-
         this.towers = new Tower[this.getVerticalTiles()][this.getHorizontalTiles()];
 
         // add all objects that need to be drawn to the respectable arrays
@@ -328,6 +327,8 @@ public class Gameplay extends GameComponent {
         for (Enemy enemy : this.enemies) {
             int barLength = 30;
             int barHeight = 7;
+            float barX = (enemy.getX() - barLength / 2);
+            float barY = (enemy.getY() - Gameplay.DEFAULT_SIZE / 2);
             this.h.setX((enemy.getX() - barLength / 2) * Gameplay.CURRENT_GAME_SCALE);
             this.h.setY((enemy.getY() - Gameplay.DEFAULT_SIZE / 2) * Gameplay.CURRENT_GAME_SCALE);
             this.h.setMaxHealth(enemy.getMaxHealth());
