@@ -171,40 +171,13 @@ public class Settings extends GameComponent {
 		super.update(delta);
 		float x = TowerDefense.getMouseX();
 		float y = TowerDefense.getMouseY();
-		//super.updateHovering(x, y);
 		if (Gdx.input.justTouched()) {
 			if (Gdx.input.isButtonPressed(com.badlogic.gdx.Input.Buttons.LEFT)) {
 				this.mouseWasClicked = true;
-
-				/*for (Clickable clickable : this.clickables) {
-					clickable.update(x, y);
-				}*/
 			}
 
 		} else if (this.mouseWasClicked && !Gdx.input.isButtonPressed(com.badlogic.gdx.Input.Buttons.LEFT)) {
 			this.mouseWasClicked = false;
-//			for (Clickable clickable : this.clickables) {
-//				if (!clickable.isStayClicked()) {
-//					if (clickable.isClicked() && clickable.collides((int) x, (int) y, Gameplay.GLOBAL_GUI_SCALE)) {
-//						clickable.onRelease();
-//						/*
-//						 * if (clickable == this.apply) { this.updateApplyButton(); } else
-//						 */
-//						/*
-//						 * if (clickable == this.fullscreen) { this.updateFullscreenButton(); }
-//						 */
-//						/*
-//						 * for (int i = 0; i < this.resolutions.length; ++i) { if (this.resolutionClickables[i] == clickable) { //
-//						 * this.widthField.setText(this.resolutions[i][0].toString()); //
-//						 * this.heightField.setText(this.resolutions[i][1].toString()); } }
-//						 */
-//
-//					} else if (clickable.isClicked()) {
-//						clickable.setClicked(false);
-//					}
-//				}
-//
-//			}
 		}
 		// if (input.isKeyPressed(Input.KEY_TAB)) {
 		// // if (this.widthField.hasFocus()) {

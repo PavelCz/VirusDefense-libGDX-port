@@ -613,9 +613,6 @@ public class Gameplay extends GameComponent implements InputProcessor {
             if (Gdx.input.justTouched()) { // just touched also true for right mouse button...
                 if (Gdx.input.isButtonPressed(com.badlogic.gdx.Input.Buttons.LEFT)) { // ...therefore this if is needed
                     this.placeTower();
-                    //for (Clickable clickable : this.clickables) {
-                     //   clickable.update(x, y);
-                    //}
                 }
 
             } else if (Gdx.input.isButtonPressed(com.badlogic.gdx.Input.Buttons.RIGHT)) {
@@ -656,11 +653,6 @@ public class Gameplay extends GameComponent implements InputProcessor {
 
             } else {
                 boolean mouseCollidesButton = false;
-                /*for (Clickable clickable : this.clickables) {
-                    if (clickable.collides((int) x, (int) y, Gameplay.GLOBAL_GUI_SCALE)) {
-                        mouseCollidesButton = true;
-                    }
-                }*/
                 if (!mouseCollidesButton) {
                     this.game.getSoundHandler().play("bad");
                 }
