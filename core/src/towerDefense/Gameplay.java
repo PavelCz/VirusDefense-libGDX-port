@@ -10,6 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
+import engine.graphics.*;
 import towerDefense.towers.BombTower;
 import towerDefense.towers.LongerShootingTower;
 import towerDefense.towers.RocketFastTower;
@@ -31,11 +32,6 @@ import engine.Level;
 import engine.MyVector2f;
 import engine.Player;
 import engine.Waypoint;
-import engine.graphics.Background;
-import engine.graphics.LibGDXRectangle;
-import engine.graphics.LibGDXUnfilledEllipse;
-import engine.graphics.LibGDXUnfilledRectangle;
-import engine.graphics.OwnSprite;
 import engine.gui.Healthbar;
 import engine.gui.TowerButton;
 import engine.projectiles.Projectile;
@@ -737,7 +733,7 @@ public class Gameplay extends GameComponent {
         this.getMapBackground().draw(batch);
     }
 
-    public Background getMapBackground() {
+    public BackgroundTiles getMapBackground() {
         return this.currentLevel.getMapBackground();
     }
 

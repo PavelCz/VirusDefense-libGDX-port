@@ -63,7 +63,7 @@ public class Level {
 		return this.waves;
 	}
 
-	public Background getMapBackground() {
+	public BackgroundTiles getMapBackground() {
 		return this.mapBackgound;
 	}
 
