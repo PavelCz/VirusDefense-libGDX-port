@@ -64,8 +64,8 @@ public class Gameplay extends GameComponent implements InputProcessor {
 	private Tower[][] towers;
 	//private TowerButton towerButton1;
 	//private TowerButton towerButton2;
-	private TowerButton towerButton3;
-	private TowerButton towerButton4;
+	//private TowerButton towerButton3;
+	//private TowerButton towerButton4;
 	private Tower currentTower;
 	private Player player;
 	private StaticText playerName;
@@ -152,28 +152,48 @@ public class Gameplay extends GameComponent implements InputProcessor {
 		int offset = 20;
         String imagePath = "data/graphics/";
 
-		ImageButton buyTowerButton0 = createNewTowerButton("tower/Tower2.png");
+		ImageButton buyTowerButton0 = createNewTowerButton(new LongerShootingTower(0, 0, new OwnSprite("tower/Tower2.png", 0.5f), this, 400, 0.16f, 400), "tower/Tower2.png");
 		buyTowerButton0.setX(Gameplay.INTERFACE_START_X);
 		buyTowerButton0.setY(TowerDefense.getHeight() - 4 * 64 * Gameplay.GLOBAL_GUI_SCALE + offset);
-		buyTowerButton0.addListener(new ChangeListener() {
+		/*buyTowerButton0.addListener(new ChangeListener() {
 			@Override
 			public void changed(ChangeEvent event, Actor actor) {
-				System.out.println("Click");
+				this.game.setCurrentTower(this.tower);
+				this.game.getCurrentTower().getSprite().setAlpha(0.5f);
 			}
-		});
+		});*/
 		this.stage.addActor(buyTowerButton0);
 
-		ImageButton buyTowerButton1 = createNewTowerButton( "tower/t1n.png");
+		ImageButton buyTowerButton1 = createNewTowerButton(new BombTower(0, 0, new OwnSprite("tower/t1n.png",0.5f), this, 1500, 15f, 50),  "tower/t1n.png");
 		buyTowerButton1.setX(Gameplay.INTERFACE_START_X);
 		buyTowerButton1.setY(TowerDefense.getHeight() - 5 * 64 * Gameplay.GLOBAL_GUI_SCALE + offset);
-		buyTowerButton1.addListener(new ChangeListener() {
+		/*buyTowerButton1.addListener(new ChangeListener() {
 			@Override
 			public void changed(ChangeEvent event, Actor actor) {
 				System.out.println("Click2");
 			}
-		});
-		buyTowerButton1.getStyle().imageUp = new TextureRegionDrawable(new TextureRegion(new Texture(imagePath + "tower/t1n.png")));
+		});*/
+		//buyTowerButton1.getStyle().imageUp = new TextureRegionDrawable(new TextureRegion(new Texture(imagePath + "tower/t1n.png")));
 		this.stage.addActor(buyTowerButton1);
+
+
+		// Buttons; this has nothing to do with the draw sequence
+		//this.towerButton1 = new TowerButton(Gameplay.INTERFACE_START_X, TowerDefense.getHeight() - 4 * 64 * Gameplay.GLOBAL_GUI_SCALE
+		//		+ offset, "buttons/PSButton1.png", "buttons/PSButton1_click.png", new LongerShootingTower(0, 0, new OwnSprite(
+		//		"tower/Tower2.png", 0.5f), this, 400, 0.16f, 400/* , container.getGraphics() */), this);
+		//this.towerButton2 = new TowerButton(Gameplay.INTERFACE_START_X, TowerDefense.getHeight() - 5 * 64 * Gameplay.GLOBAL_GUI_SCALE
+		//		+ offset, "buttons/PSButton1.png", "buttons/PSButton1_click.png", new BombTower(0, 0, new OwnSprite("tower/t1n.png",
+		//		0.5f), this, 1500, 15f, 50), this);
+		//this.towerButton3 = new TowerButton(Gameplay.INTERFACE_START_X, TowerDefense.getHeight() - 6 * 64 * Gameplay.GLOBAL_GUI_SCALE
+		//		+ offset, "buttons/PSButton1.png", "buttons/PSButton1_click.png", new RocketTower(0, 0, new OwnSprite("tower/t1.png",
+		//		0.5f), this, 200, 15f, 50), this);
+		//this.towerButton4 = new TowerButton(Gameplay.INTERFACE_START_X + 64 + 32, TowerDefense.getHeight() - 4 * 64
+		//		* Gameplay.GLOBAL_GUI_SCALE + offset, "buttons/PSButton1.png", "buttons/PSButton1_click.png", new RocketFastTower(0,
+		//		0, new OwnSprite("tower/roteBlutk_klein.png", 0.5f), this, 1000, 20f), this);
+		//this.clickables.add(this.towerButton1);
+		//this.clickables.add(this.towerButton2);
+		//this.clickables.add(this.towerButton3);
+		//this.clickables.add(this.towerButton4);
 
 		// Put all tower buying buttons in one button group
 		ButtonGroup<ImageButton> buttonGroup = new ButtonGroup<ImageButton>();
@@ -182,26 +202,9 @@ public class Gameplay extends GameComponent implements InputProcessor {
 		buttonGroup.setMinCheckCount(0);
 		buttonGroup.add(buyTowerButton0);
 		buttonGroup.add(buyTowerButton1);
-		// Buttons; this has nothing to do with the draw sequence
-		//this.towerButton1 = new TowerButton(Gameplay.INTERFACE_START_X, TowerDefense.getHeight() - 4 * 64 * Gameplay.GLOBAL_GUI_SCALE
-		//		+ offset, "buttons/PSButton1.png", "buttons/PSButton1_click.png", new LongerShootingTower(0, 0, new OwnSprite(
-		//		"tower/Tower2.png", 0.5f), this, 400, 0.16f, 400/* , container.getGraphics() */), this);
-		//this.towerButton2 = new TowerButton(Gameplay.INTERFACE_START_X, TowerDefense.getHeight() - 5 * 64 * Gameplay.GLOBAL_GUI_SCALE
-		//		+ offset, "buttons/PSButton1.png", "buttons/PSButton1_click.png", new BombTower(0, 0, new OwnSprite("tower/t1n.png",
-		//		0.5f), this, 1500, 15f, 50), this);
-		this.towerButton3 = new TowerButton(Gameplay.INTERFACE_START_X, TowerDefense.getHeight() - 6 * 64 * Gameplay.GLOBAL_GUI_SCALE
-				+ offset, "buttons/PSButton1.png", "buttons/PSButton1_click.png", new RocketTower(0, 0, new OwnSprite("tower/t1.png",
-				0.5f), this, 200, 15f, 50), this);
-		this.towerButton4 = new TowerButton(Gameplay.INTERFACE_START_X + 64 + 32, TowerDefense.getHeight() - 4 * 64
-				* Gameplay.GLOBAL_GUI_SCALE + offset, "buttons/PSButton1.png", "buttons/PSButton1_click.png", new RocketFastTower(0,
-				0, new OwnSprite("tower/roteBlutk_klein.png", 0.5f), this, 1000, 20f), this);
-		//this.clickables.add(this.towerButton1);
-		//this.clickables.add(this.towerButton2);
-		this.clickables.add(this.towerButton3);
-		this.clickables.add(this.towerButton4);
 	}
 
-	private ImageButton createNewTowerButton(String imagePath) {
+	private ImageButton createNewTowerButton(Tower tower, String imagePath) {
 		String folderPath = "data/graphics/";
 		// Get the default skin for a "toggle" ImageButton
 		ImageButton.ImageButtonStyle defaultStyle = this.game.getSkin().get( "toggle", ImageButton.ImageButtonStyle.class );
@@ -217,7 +220,7 @@ public class Gameplay extends GameComponent implements InputProcessor {
 		buttonStyle.imageUp = new TextureRegionDrawable(new TextureRegion(new Texture(folderPath + imagePath)));
 		buttonStyle.imageDown = buttonStyle.imageUp;
 
-		ImageButton newTowerButton = new ImageButton(buttonStyle);
+		ImageButton newTowerButton = new TowerButton(tower, this, buttonStyle);
 		newTowerButton.setWidth(64);
 		newTowerButton.setHeight(64);
 		return newTowerButton;
@@ -281,8 +284,8 @@ public class Gameplay extends GameComponent implements InputProcessor {
 		this.guiElements.add(this.score);
 		//this.guiElements.add(this.towerButton1);
 		//this.guiElements.add(this.towerButton2);
-		this.guiElements.add(this.towerButton3);
-		this.guiElements.add(this.towerButton4);
+		//this.guiElements.add(this.towerButton3);
+		//this.guiElements.add(this.towerButton4);
 
 		this.guiElements.add(this.passedTime);
 

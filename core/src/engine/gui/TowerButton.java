@@ -1,5 +1,8 @@
 package engine.gui;
 
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import towerDefense.Gameplay;
 import towerDefense.towers.Tower;
 
@@ -7,17 +10,28 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import engine.graphics.OwnSprite;
 
-public class TowerButton extends Button {
+public class TowerButton extends ImageButton {
 	private Tower tower;
 	private Gameplay game;
 
-	public TowerButton(float x, float y, String unclickedButtonPath, String clickedButtonPath, Tower tower, Gameplay game) {
-		super(x, y, unclickedButtonPath, clickedButtonPath, game, true);
+	public TowerButton(final Tower tower, final Gameplay game, ImageButtonStyle style) {
+		super(style);
 		this.tower = tower;
-		this.stayClicked = false;
 		this.game = game;
-	}
 
+		this.addListener(new ChangeListener() {
+			@Override
+			public void changed(ChangeEvent event, Actor actor) {
+				if(TowerButton.super.isChecked()) {
+					game.setCurrentTower(tower);
+					game.getCurrentTower().getSprite().setAlpha(0.5f);
+				} else {
+					game.setCurrentTower(null);
+				}
+			}
+		});
+	}
+	/*
 	@Override
 	public void draw(SpriteBatch batch) {
 		super.draw(batch);
@@ -29,8 +43,8 @@ public class TowerButton extends Button {
 				batch);
 		// temporary
 		// s.draw(0, 0, scale * Gameplay.GLOBAL_GUI_SCALE, batch);
-	}
-
+	}*/
+	/*
 	@Override
 	public void onClick() {
 		super.onClick();
@@ -48,6 +62,6 @@ public class TowerButton extends Button {
 
 	public Tower getTower() {
 		return this.tower;
-	}
+	}*/
 
 }
