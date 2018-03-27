@@ -6,6 +6,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 
 import com.badlogic.gdx.scenes.scene2d.ui.ButtonGroup;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import towerDefense.towers.BombTower;
 import towerDefense.towers.LongerShootingTower;
@@ -15,7 +16,6 @@ import towerDefense.towers.Tower;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -36,7 +36,6 @@ import engine.graphics.LibGDXUnfilledRectangle;
 import engine.graphics.OwnSprite;
 import engine.gui.Healthbar;
 import engine.gui.InterfaceBackground;
-import engine.gui.StaticText;
 import engine.gui.TowerButton;
 import engine.projectiles.Projectile;
 
@@ -59,12 +58,12 @@ public class Gameplay extends GameComponent {
     private ButtonGroup<ImageButton> towerButtonGroup;
     private Tower currentTower;
     private Player player;
-    private StaticText playerName;
-    private StaticText numberLives;
-    private StaticText moneyAmount;
-    private StaticText score;
-    private StaticText towerInfo;
-    private StaticText towerName;
+    private Label playerName;
+    private Label numberLives;
+    private Label moneyAmount;
+    private Label score;
+    private Label towerInfo;
+    private Label towerName;
     private boolean currentTowerPlaceable;
     private float towerShadowX, towerShadowY;
     protected ConcurrentLinkedQueue<Projectile> projectiles;
@@ -73,7 +72,7 @@ public class Gameplay extends GameComponent {
     public static float MAX_GAME_SCALE;
     public static float GLOBAL_GUI_SCALE = 1f;
 
-    private StaticText passedTime;
+    private Label passedTime;
     private InterfaceBackground interfaceBackground;
     // Constants:
     public static float INTERFACE_START_X;
@@ -168,7 +167,7 @@ public class Gameplay extends GameComponent {
         this.addActor(buyTowerButton3);
 
         // Put all tower buying buttons in one button group
-        this.towerButtonGroup =  new ButtonGroup<ImageButton>();
+        this.towerButtonGroup = new ButtonGroup<ImageButton>();
         // radio button- like functionality, pressing a tower button releases all others
         this.towerButtonGroup.setMaxCheckCount(1);
         this.towerButtonGroup.setMinCheckCount(0);
@@ -220,48 +219,73 @@ public class Gameplay extends GameComponent {
         float cursorYStart = 3 * guiTileSize;
         float cursorX = cursorXStart;
         float cursorY = cursorYStart;
-
-        this.playerName = new StaticText(cursorX, cursorY, defaultTextColor, "Player: " + this.player.getName());
+        Label.LabelStyle ls = this.game.getLabelStyle();
+        this.playerName = new Label("Player: " + this.player.getName(), ls);
+        this.playerName.setPosition(cursorX, cursorY);
+        this.addActor(this.playerName);
+        //this.playerName = new StaticText(cursorX, cursorY, defaultTextColor, "Player: " + this.player.getName());
         cursorY -= textHeight;
-
-        StaticText livesText = new StaticText(cursorX, cursorY, defaultTextColor, "Lives: ");
+        Label livesText = new Label("Lives: ", ls);
+        livesText.setPosition(cursorX, cursorY);
+        this.addActor(livesText);
+        //StaticText livesText = new StaticText(cursorX, cursorY, defaultTextColor, "Lives: ");
         cursorX += livesText.getWidth();
-        this.numberLives = new StaticText(cursorX, cursorY, defaultTextColor, "" + this.player.getLives());
+        this.numberLives = new Label("" + this.player.getLives(), ls);
+        this.numberLives.setPosition(cursorX, cursorY);
+        this.addActor(numberLives);
+        //this.numberLives = new StaticText(cursorX, cursorY, defaultTextColor, "" + this.player.getLives());
         cursorX = cursorXStart;
         cursorY -= textHeight;
-
-        StaticText moneyText = new StaticText(cursorX, cursorY, defaultTextColor, "Money: ");
+        Label moneyText = new Label("Money: ",ls);
+        moneyText.setPosition(cursorX,cursorY);
+        this.addActor(moneyText);
+        //StaticText moneyText = new StaticText(cursorX, cursorY, defaultTextColor, "Money: ");
         cursorX += moneyText.getWidth();
-        this.moneyAmount = new StaticText(cursorX, cursorY, defaultTextColor, "" + this.player.getMoney());
+        this.moneyAmount = new Label("" + this.player.getMoney(), ls);
+        this.moneyAmount.setPosition(cursorX, cursorY);
+        this.addActor(this.moneyAmount);
+        //this.moneyAmount = new StaticText(cursorX, cursorY, defaultTextColor, "" + this.player.getMoney());
         cursorX = cursorXStart;
         cursorY -= textHeight;
-
-        StaticText scoreText = new StaticText(cursorX, cursorY, defaultTextColor, "Score: ");
+        Label scoreText = new Label ("Score: ", ls);
+        scoreText.setPosition(cursorX, cursorY);
+        this.addActor(scoreText);
+        //StaticText scoreText = new StaticText(cursorX, cursorY, defaultTextColor, "Score: ");
         cursorX += scoreText.getWidth();
-        this.score = new StaticText(cursorX, cursorY, defaultTextColor, "" + this.player.getScore());
-
-        this.towerName = new StaticText(Gameplay.INTERFACE_START_X + guiTileSize, TowerDefense.getHeight() - 64,
-                defaultTextColor, "");
-        this.towerInfo = new StaticText(Gameplay.INTERFACE_START_X, guiTileSize, defaultTextColor, "");
-
-        this.passedTime = new StaticText(Gameplay.INTERFACE_START_X + guiX, 0, defaultTextColor, this
-                .passedTimeToString());
+        this.score = new Label("" + this.player.getScore(), ls);
+        this.score.setPosition(cursorX, cursorY);
+        this.addActor(this.score);
+        //this.score = new StaticText(cursorX, cursorY, defaultTextColor, "" + this.player.getScore());
+        this.towerName = new Label("", ls);
+        this.towerName.setPosition(Gameplay.INTERFACE_START_X + guiTileSize, TowerDefense.getHeight() - 64);
+        this.addActor(this.towerName);
+        //this.towerName = new StaticText(Gameplay.INTERFACE_START_X + guiTileSize, TowerDefense.getHeight() - 64,
+        //        defaultTextColor, "");
+        this.towerInfo = new Label("", ls);
+        this.towerInfo.setPosition(Gameplay.INTERFACE_START_X, guiTileSize);
+        this.addActor(this.towerInfo);
+        //this.towerInfo = new StaticText(Gameplay.INTERFACE_START_X, guiTileSize, defaultTextColor, "");
+        this.passedTime = new Label(this.passedTimeToString(), ls);
+        this.passedTime.setPosition(Gameplay.INTERFACE_START_X + guiX, 0);
+        this.addActor(this.passedTime);
+        //this.passedTime = new StaticText(Gameplay.INTERFACE_START_X + guiX, 0, defaultTextColor, this
+        //        .passedTimeToString());
 
         this.guiElements.add(this.interfaceBackground);
 
-        this.guiElements.add(scoreText);
+        //this.guiElements.add(scoreText);
 
-        this.guiElements.add(livesText);
-        this.guiElements.add(this.moneyAmount);
-        this.guiElements.add(this.playerName);
-        this.guiElements.add(this.numberLives);
-        this.guiElements.add(moneyText);
-        this.guiElements.add(this.score);
+        //this.guiElements.add(livesText);
+        //this.guiElements.add(this.moneyAmount);
+        //this.guiElements.add(this.playerName);
+        //this.guiElements.add(this.numberLives);
+        //this.guiElements.add(moneyText);
+        //this.guiElements.add(this.score);
 
-        this.guiElements.add(this.passedTime);
+        //this.guiElements.add(this.passedTime);
 
-        this.guiElements.add(this.towerName);
-        this.guiElements.add(this.towerInfo);
+        //this.guiElements.add(this.towerName);
+        //this.guiElements.add(this.towerInfo);
     }
 
     @Override
@@ -767,13 +791,13 @@ public class Gameplay extends GameComponent {
         return this.currentTowerPlaceable;
     }
 
-    public StaticText getScore() {
+    /*public StaticText getScore() {
         return this.score;
-    }
+    }*/
 
-    public void setScore(StaticText score) {
+    /*public void setScore(StaticText score) {
         this.score = score;
-    }
+    }*/
 
     public void setPlayerName(String playerName) {
         this.player.setName(playerName);
