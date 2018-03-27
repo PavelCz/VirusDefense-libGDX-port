@@ -7,7 +7,6 @@ import towerDefense.Gameplay;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 
-import engine.graphics.Background;
 import engine.graphics.BackgroundTiles;
 
 public class Level {
