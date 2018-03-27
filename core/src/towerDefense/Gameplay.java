@@ -4,15 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.ButtonGroup;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import towerDefense.towers.BombTower;
 import towerDefense.towers.LongerShootingTower;
 import towerDefense.towers.RocketFastTower;
@@ -40,7 +34,6 @@ import engine.graphics.LibGDXRectangle;
 import engine.graphics.LibGDXUnfilledEllipse;
 import engine.graphics.LibGDXUnfilledRectangle;
 import engine.graphics.OwnSprite;
-import engine.gui.Clickable;
 import engine.gui.Healthbar;
 import engine.gui.InterfaceBackground;
 import engine.gui.StaticText;
@@ -620,9 +613,9 @@ public class Gameplay extends GameComponent implements InputProcessor {
             if (Gdx.input.justTouched()) { // just touched also true for right mouse button...
                 if (Gdx.input.isButtonPressed(com.badlogic.gdx.Input.Buttons.LEFT)) { // ...therefore this if is needed
                     this.placeTower();
-                    for (Clickable clickable : this.clickables) {
-                        clickable.update(x, y);
-                    }
+                    //for (Clickable clickable : this.clickables) {
+                     //   clickable.update(x, y);
+                    //}
                 }
 
             } else if (Gdx.input.isButtonPressed(com.badlogic.gdx.Input.Buttons.RIGHT)) {
@@ -663,11 +656,11 @@ public class Gameplay extends GameComponent implements InputProcessor {
 
             } else {
                 boolean mouseCollidesButton = false;
-                for (Clickable clickable : this.clickables) {
+                /*for (Clickable clickable : this.clickables) {
                     if (clickable.collides((int) x, (int) y, Gameplay.GLOBAL_GUI_SCALE)) {
                         mouseCollidesButton = true;
                     }
-                }
+                }*/
                 if (!mouseCollidesButton) {
                     this.game.getSoundHandler().play("bad");
                 }
