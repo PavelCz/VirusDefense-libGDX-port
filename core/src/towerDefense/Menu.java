@@ -126,7 +126,6 @@ public class Menu extends GameComponent {
     @Override
     public void render(SpriteBatch batch) {
         super.render(batch);
-        super.renderGUI(batch);
 
         // this.version.draw();
     }

@@ -15,7 +15,6 @@ import engine.gui.GUI;
 
 public abstract class GameComponent extends Stage {
 	protected Background background;
-	protected List<GUI> guiElements;
 	protected boolean mouseWasClicked;
 
 	//protected Stage stage;
@@ -26,15 +25,6 @@ public abstract class GameComponent extends Stage {
 		//this.stage = new Stage();
 		this.game = game;
 		this.background = new Background(1.1f, "defaultBackground.jpg", this.game.getGameplay());
-
-		this.guiElements = new ArrayList<GUI>();
-	}
-
-	protected void renderGUI(SpriteBatch batch) {
-		for (GUI guiElement : this.guiElements) {
-			guiElement.draw(batch);
-		}
-
 	}
 
 	public void init() {
@@ -50,7 +40,6 @@ public abstract class GameComponent extends Stage {
 			this.background.draw(batch);
 		}
 		this.draw();
-		// this.renderGUI(batch); for some reason if I include this the backgound isn't shown
 	}
 
 	public SoundHandler getSoundHandler() {

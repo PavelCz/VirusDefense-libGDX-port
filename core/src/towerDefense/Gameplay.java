@@ -303,10 +303,7 @@ public class Gameplay extends GameComponent {
 
     }
 
-    @Override
     protected void renderGUI(SpriteBatch batch) {
-
-        super.renderGUI(batch);
         this.renderHealthBars(batch);
         this.renderDebug(batch);
 

@@ -163,7 +163,6 @@ public class Settings extends GameComponent {
 	public void render(SpriteBatch batch) {
 		super.render(batch);
 
-		super.renderGUI(batch);
 		// this.fullscreen.draw(batch);
 		// this.supportedResolutions.draw(batch);
 	}
