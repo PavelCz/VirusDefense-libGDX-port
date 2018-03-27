@@ -8,9 +8,7 @@ import towerDefense.TowerDefense;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 
-import engine.graphics.Background;
 public abstract class GameComponent extends Stage {
-	protected Background background;
 	protected boolean mouseWasClicked;
 	Image i = new Image(new Texture("data/graphics/defaultBackground.jpg"));
 	//protected Stage stage;
