@@ -2,13 +2,11 @@ package towerDefense;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
-import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 
 import engine.GameComponent;
@@ -43,7 +41,9 @@ public class Menu extends GameComponent {
         this.addActor(pausedMessage);
 
         TextButtonStyle textButtonStyle = this.game.getTextButtonStyle();
-        this.background = new Background(1f, "viren.png", this.game.getGameplay());
+        Image background = new Image(new Texture("data/graphics/viren.png"));
+        this.addActor(background);
+        //this.background = new Background(1f, "viren.png", this.game.getGameplay());
 
         this.pausedMessage
                 .setPosition((TowerDefense.getWidth() - this.pausedMessage.getWidth()) / 2, TowerDefense.getHeight()

@@ -3,6 +3,9 @@ package engine;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import towerDefense.Gameplay;
 import towerDefense.TowerDefense;
 
@@ -16,7 +19,7 @@ import engine.gui.GUI;
 public abstract class GameComponent extends Stage {
 	protected Background background;
 	protected boolean mouseWasClicked;
-
+	Image i = new Image(new Texture("data/graphics/defaultBackground.jpg"));
 	//protected Stage stage;
 
 	protected TowerDefense game;
@@ -24,7 +27,10 @@ public abstract class GameComponent extends Stage {
 	public GameComponent(TowerDefense game) {
 		//this.stage = new Stage();
 		this.game = game;
-		this.background = new Background(1.1f, "defaultBackground.jpg", this.game.getGameplay());
+		//this.background = new Background(1.1f, "defaultBackground.jpg", this.game.getGameplay());
+		//Image i = new Image(new Texture("data/graphics/defaultBackground.jpg"));
+		//i.scaleBy(1.1f);
+		//this.addActor(i);
 	}
 
 	public void init() {
@@ -36,9 +42,10 @@ public abstract class GameComponent extends Stage {
 	}
 
 	public void render(SpriteBatch batch) {
-		if (this.background != null) {
-			this.background.draw(batch);
-		}
+		//if (this.background != null) {
+			//batch.draw(new Texture("data/graphics/defaultBackground.jpg"), 0f, 0f);
+			//i.draw(batch);
+		//}
 		this.draw();
 	}
 
