@@ -7,6 +7,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.ui.ButtonGroup;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
@@ -169,13 +170,13 @@ public class Gameplay extends GameComponent implements InputProcessor {
 		});
 		this.stage.addActor(buyTowerButton0);
 
-		//ImageButton.ImageButtonStyle imageButtonStyle2 = new ImageButton.ImageButtonStyle();
-		ImageButton.ImageButtonStyle imageButtonStyle2 = imageButtonStyle;
+		ImageButton.ImageButtonStyle imageButtonStyle2 = new ImageButton.ImageButtonStyle();
+		//ImageButton.ImageButtonStyle imageButtonStyle2 = imageButtonStyle;
 		imageButtonStyle2.checked = imageButtonStyle.down;
 		imageButtonStyle2.up = imageButtonStyle.up;
 		imageButtonStyle2.down = imageButtonStyle.down;
-		//imageButtonStyle2.imageUp = new TextureRegionDrawable(new TextureRegion(new Texture(imagePath + "tower/t1n.png")));
-		//imageButtonStyle2.imageDown = imageButtonStyle2.imageUp;
+		imageButtonStyle2.imageUp = new TextureRegionDrawable(new TextureRegion(new Texture(imagePath + "tower/t1n.png")));
+		imageButtonStyle2.imageDown = imageButtonStyle2.imageUp;
 
 		ImageButton buyTowerButton1 = new ImageButton(imageButtonStyle2);
 		//buyTowerButton1.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture(imagePath + "tower/Tower2.png"))));
@@ -191,6 +192,14 @@ public class Gameplay extends GameComponent implements InputProcessor {
 		});
 		buyTowerButton1.getStyle().imageUp = new TextureRegionDrawable(new TextureRegion(new Texture(imagePath + "tower/t1n.png")));
 		this.stage.addActor(buyTowerButton1);
+
+		// Put all tower buying buttons in one button group
+		ButtonGroup<ImageButton> buttonGroup = new ButtonGroup<ImageButton>();
+		// radio button- like functionality, pressing a tower button releases all others
+		buttonGroup.setMaxCheckCount(1);
+		buttonGroup.setMinCheckCount(0);
+		buttonGroup.add(buyTowerButton0);
+		buttonGroup.add(buyTowerButton1);
 		// Buttons; this has nothing to do with the draw sequence
 		//this.towerButton1 = new TowerButton(Gameplay.INTERFACE_START_X, TowerDefense.getHeight() - 4 * 64 * Gameplay.GLOBAL_GUI_SCALE
 		//		+ offset, "buttons/PSButton1.png", "buttons/PSButton1_click.png", new LongerShootingTower(0, 0, new OwnSprite(
