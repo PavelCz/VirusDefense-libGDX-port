@@ -208,8 +208,6 @@ public class Gameplay extends GameComponent implements InputProcessor {
 		String folderPath = "data/graphics/";
 		// Get the default skin for a "toggle" ImageButton
 		ImageButton.ImageButtonStyle defaultStyle = this.game.getSkin().get( "toggle", ImageButton.ImageButtonStyle.class );
-
-		ImageButton towerButton = new ImageButton(defaultStyle);
 		// The way libGDX Image buttons work, they have either a style or an image, with a few changes in the uiskin.json
 		// they can have both, now however, the image is shared by all instances of a button with the same style
 		// That is why I create a new style that copies the attributes from the default style except for the image
