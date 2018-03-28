@@ -67,7 +67,6 @@ public class Gameplay extends GameComponent {
     protected ConcurrentLinkedQueue<Projectile> projectiles;
 
     public static float MAX_GAME_SCALE;
-    public static float GLOBAL_GUI_SCALE = 1f;
 
     private Label passedTime;
     // Constants:
@@ -103,7 +102,7 @@ public class Gameplay extends GameComponent {
 
         // Set Constants:
 
-        Gameplay.INTERFACE_START_X = TowerDefense.getWidth() - 3 * 64 * Gameplay.GLOBAL_GUI_SCALE;
+        Gameplay.INTERFACE_START_X = TowerDefense.getWidth() - 3 * 64;
         this.cameraWidth = Gameplay.INTERFACE_START_X; // (832)
         this.cameraHeight = 768;
 
@@ -141,25 +140,25 @@ public class Gameplay extends GameComponent {
         ImageButton buyTowerButton0 = createNewTowerButton(new LongerShootingTower(0, 0, new OwnSprite
                 ("tower/Tower2.png", 0.5f), this, 400, 0.16f, 400));
         buyTowerButton0.setX(Gameplay.INTERFACE_START_X);
-        buyTowerButton0.setY(TowerDefense.getHeight() - 4 * 64 * Gameplay.GLOBAL_GUI_SCALE + offset);
+        buyTowerButton0.setY(TowerDefense.getHeight() - 4 * 64  + offset);
         this.addActor(buyTowerButton0);
 
         ImageButton buyTowerButton1 = createNewTowerButton(new BombTower(0, 0, new OwnSprite("tower/t1n.png", 0.5f),
                 this, 1500, 15f, 50));
         buyTowerButton1.setX(Gameplay.INTERFACE_START_X);
-        buyTowerButton1.setY(TowerDefense.getHeight() - 5 * 64 * Gameplay.GLOBAL_GUI_SCALE + offset);
+        buyTowerButton1.setY(TowerDefense.getHeight() - 5 * 64 + offset);
         this.addActor(buyTowerButton1);
 
         ImageButton buyTowerButton2 = createNewTowerButton(new RocketTower(0, 0, new OwnSprite("tower/t1.png", 0.5f),
                 this, 200, 15f, 50));
         buyTowerButton2.setX(Gameplay.INTERFACE_START_X);
-        buyTowerButton2.setY(TowerDefense.getHeight() - 6 * 64 * Gameplay.GLOBAL_GUI_SCALE + offset);
+        buyTowerButton2.setY(TowerDefense.getHeight() - 6 * 64  + offset);
         this.addActor(buyTowerButton2);
 
         ImageButton buyTowerButton3 = createNewTowerButton(new RocketFastTower(0, 0, new OwnSprite
                 ("tower/roteBlutk_klein.png", 0.5f), this, 1000, 20f));
         buyTowerButton3.setX(Gameplay.INTERFACE_START_X + 64);
-        buyTowerButton3.setY(TowerDefense.getHeight() - 4 * 64 * Gameplay.GLOBAL_GUI_SCALE + offset);
+        buyTowerButton3.setY(TowerDefense.getHeight() - 4 * 64  + offset);
         this.addActor(buyTowerButton3);
 
         // Put all tower buying buttons in one button group
@@ -206,9 +205,9 @@ public class Gameplay extends GameComponent {
     }
 
     private void initGUI() {
-        float guiTileSize = 64 * Gameplay.GLOBAL_GUI_SCALE;
-        float textHeight = 20 * Gameplay.GLOBAL_GUI_SCALE;
-        float guiX = 3 * Gameplay.GLOBAL_GUI_SCALE;
+        float guiTileSize = 64;
+        float textHeight = 20;
+        float guiX = 3 ;
 
         float cursorXStart = Gameplay.INTERFACE_START_X + guiX;
         float cursorYStart = 3 * guiTileSize;
