@@ -518,14 +518,7 @@ public class Gameplay extends GameComponent {
         float rightBoundary = INTERFACE_START_X;
         float topBoundary = TowerDefense.getHeight();
 
-        float interfaceWidth = TowerDefense.getWidth() - INTERFACE_START_X;
-        float zoomedInterfaceWidth = interfaceWidth * this.gameCamera.zoom;
 
-        float effectiveCameraWidth = (this.gameCamera.viewportWidth) * this.gameCamera.zoom;
-        float effectiveCameraHeight = this.gameCamera.viewportHeight * this.gameCamera.zoom;
-
-        float cameraWidth = effectiveCameraWidth / 2 - zoomedInterfaceWidth;
-        float cameraHeight = effectiveCameraHeight / 2;
 
         float scrollSpeed = 0.5f;
         float scrollDistance = scrollSpeed * delta;
@@ -548,6 +541,28 @@ public class Gameplay extends GameComponent {
 
         }
 
+        ensureCameraBounds();
+
+        if (this.debugMode) {
+            this.debugKeyboardEvents(delta);
+        }
+        // this.gameCamera.position.x = MathUtils.clamp(this.gameCamera.position.x, effectiveCameraWidth / 2f,
+        // this.gameCamera.viewportWidth - effectiveCameraWidth / 2f);
+        // this.gameCamera.position.y = MathUtils.clamp(this.gameCamera.position.y, effectiveCameraHeight / 2f,
+        // this.gameCamera.viewportHeight - effectiveCameraHeight / 2f);
+
+    }
+
+    private void ensureCameraBounds() {
+        float interfaceWidth = TowerDefense.getWidth() - INTERFACE_START_X;
+        float zoomedInterfaceWidth = interfaceWidth * this.gameCamera.zoom;
+
+        float effectiveCameraWidth = (this.gameCamera.viewportWidth) * this.gameCamera.zoom;
+        float effectiveCameraHeight = this.gameCamera.viewportHeight * this.gameCamera.zoom;
+
+        float cameraWidth = effectiveCameraWidth / 2 - zoomedInterfaceWidth;
+        float cameraHeight = effectiveCameraHeight / 2;
+
         if (effectiveCameraWidth > levelWidth || effectiveCameraHeight > levelHeight) {
             this.gameCamera.position.x = this.levelWidth / 2 + zoomedInterfaceWidth / 2;
             this.gameCamera.position.y = this.levelHeight / 2;
@@ -569,15 +584,6 @@ public class Gameplay extends GameComponent {
                 System.out.println("TOP");
             }
         }
-
-        if (this.debugMode) {
-            this.debugKeyboardEvents(delta);
-        }
-        // this.gameCamera.position.x = MathUtils.clamp(this.gameCamera.position.x, effectiveCameraWidth / 2f,
-        // this.gameCamera.viewportWidth - effectiveCameraWidth / 2f);
-        // this.gameCamera.position.y = MathUtils.clamp(this.gameCamera.position.y, effectiveCameraHeight / 2f,
-        // this.gameCamera.viewportHeight - effectiveCameraHeight / 2f);
-
     }
 
     /**
