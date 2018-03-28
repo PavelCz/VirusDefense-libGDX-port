@@ -22,7 +22,6 @@ public class OwnSprite extends RenderObject {
 	public OwnSprite(String imagePath, float scale) {
 
 		this(imagePath);
-
 		this.defaultScale = scale;
 
 	}

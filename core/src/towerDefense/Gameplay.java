@@ -114,8 +114,8 @@ public class Gameplay extends GameComponent {
         // this.game.viewport.setWorldWidth(Gameplay.INTERFACE_START_X);
         float scale1 = Gameplay.INTERFACE_START_X / this.width;
         float scale2 = TowerDefense.getHeight() / this.height;
-        Gameplay.CURRENT_GAME_SCALE = Math.max(scale1, scale2);
-        Gameplay.MAX_GAME_SCALE = Gameplay.CURRENT_GAME_SCALE;
+        Gameplay.CURRENT_GAME_SCALE = 1f;
+        Gameplay.MAX_GAME_SCALE = Math.max(scale1, scale2);
         Gameplay.SIZE = (int) (64 * Gameplay.CURRENT_GAME_SCALE);
 
         // The grey HUD field on the right side of the screen containing the buttons
