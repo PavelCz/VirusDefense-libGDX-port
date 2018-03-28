@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.ui.ButtonGroup;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
@@ -392,7 +393,9 @@ public class Gameplay extends GameComponent {
     private void renderDebug(SpriteBatch batch) {
         if (this.debugMode) {
             for (Enemy enemy : this.enemies) {
-                new LibGDXUnfilledEllipse(enemy.getRadius() * 2, enemy.getRadius() * 2, Color.BLUE).draw((enemy.getX())
+                new LibGDXEllipse(enemy.getRadius() * 2, enemy.getRadius() * 2, Color.BLUE, ShapeRenderer
+                        .ShapeType.Line).draw((enemy
+                                .getX())
                                 * Gameplay.CURRENT_GAME_SCALE, (enemy.getY()) * Gameplay.CURRENT_GAME_SCALE, Gameplay
                                 .CURRENT_GAME_SCALE,
                         batch);

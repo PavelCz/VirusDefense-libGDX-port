@@ -16,19 +16,9 @@ public class LibGDXEllipse extends LibGDXRectangle {
 	// Set this to ShapeType.Line for unfilled ellipses and to ShapeType.Filled for filled ones
 	protected ShapeType shapeType;
 
-	public LibGDXEllipse(float width, float height, Color color) {
+	public LibGDXEllipse(float width, float height, Color color, ShapeType shapeType) {
 		super(width, height, color);
-		this.shapeType = ShapeType.Filled;
-	}
-
-	public LibGDXEllipse(float width, float height) {
-		super(width, height);
-		this.shapeType = ShapeType.Filled;
-	}
-
-	public LibGDXEllipse(float width, float height, float r, float g, float b) {
-		super(width, height, r, g, b);
-		this.shapeType = ShapeType.Filled;
+		this.shapeType = shapeType;
 	}
 
 	@Override
