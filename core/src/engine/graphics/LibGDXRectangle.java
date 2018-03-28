@@ -15,23 +15,18 @@ public class LibGDXRectangle extends RenderObject {
 	protected Color color;
 	protected float width;
 	protected float height;
+	// Set this to ShapeType.Line for unfilled primitives and to ShapeType.Filled for filled ones
+	protected ShapeType shapeType;
 
-	public LibGDXRectangle(float width, float height) {
-		this(width, height, Color.PINK);
-	}
-
-	public LibGDXRectangle(float width, float height, float r, float g, float b) {
-		this(width, height, new Color(r, g, b, 1));
-
-	}
-
-	public LibGDXRectangle(float width, float height, Color color) {
+	public LibGDXRectangle(float width, float height, Color color, ShapeType shapeType) {
 		this.width = width;
 		this.height = height;
 		this.color = color;
+		this.shapeType = shapeType;
 	}
 
-	protected void drawAux(float x, float y, float globalScale, SpriteBatch batch, ShapeType shapeType) {
+	@Override
+	public void draw(float x, float y, float globalScale, SpriteBatch batch) {
 		batch.end();
 
 		//float scaling = globalScale;
@@ -42,20 +37,11 @@ public class LibGDXRectangle extends RenderObject {
 		//y = y + Gameplay.DEFAULT_SIZE * Gameplay.CURRENT_GAME_SCALE;
 		ShapeRenderer shapeRenderer = new ShapeRenderer();
 		shapeRenderer.setProjectionMatrix(batch.getProjectionMatrix());
-		shapeRenderer.begin(shapeType);
-		shapeRenderer.setColor(this.color.r, this.color.g, this.color.b, 1); // r
-																				// g
-																				// b
-																				// a
+		shapeRenderer.begin(this.shapeType);
+		shapeRenderer.setColor(this.color.r, this.color.g, this.color.b, 1); // r g b a
 		shapeRenderer.rect(x, y, this.width * globalScale, this.height * globalScale);
 		shapeRenderer.end();
 		batch.begin();
-	}
-
-	@Override
-	public void draw(float x, float y, float globalScale, SpriteBatch batch) {
-
-		this.drawAux(x, y, globalScale, batch, ShapeType.Filled);
 	}
 
 	public void setWidth(float width) {

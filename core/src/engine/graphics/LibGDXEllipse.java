@@ -13,12 +13,9 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
  *         seem to work anymore
  */
 public class LibGDXEllipse extends LibGDXRectangle {
-	// Set this to ShapeType.Line for unfilled ellipses and to ShapeType.Filled for filled ones
-	protected ShapeType shapeType;
 
 	public LibGDXEllipse(float width, float height, Color color, ShapeType shapeType) {
-		super(width, height, color);
-		this.shapeType = shapeType;
+		super(width, height, color, shapeType);
 	}
 
 	@Override

@@ -368,12 +368,12 @@ public class Gameplay extends GameComponent {
             OwnSprite sprite = this.currentTower.getSprite().clone();
 
             if (this.currentTowerPlaceable) {
-                new LibGDXUnfilledRectangle(SIZE / Gameplay.CURRENT_GAME_SCALE, SIZE / Gameplay.CURRENT_GAME_SCALE,
-                        Color.GREEN).draw(
+                new LibGDXRectangle(SIZE / Gameplay.CURRENT_GAME_SCALE, SIZE / Gameplay.CURRENT_GAME_SCALE,
+                        Color.GREEN, ShapeRenderer.ShapeType.Line).draw(
                         this.towerShadowX, this.towerShadowY, Gameplay.CURRENT_GAME_SCALE, batch);
             } else {
-                new LibGDXUnfilledRectangle(SIZE / Gameplay.CURRENT_GAME_SCALE, SIZE / Gameplay.CURRENT_GAME_SCALE,
-                        Color.RED).draw(
+                new LibGDXRectangle(SIZE / Gameplay.CURRENT_GAME_SCALE, SIZE / Gameplay.CURRENT_GAME_SCALE,
+                        Color.RED, ShapeRenderer.ShapeType.Line).draw(
                         this.towerShadowX, this.towerShadowY, Gameplay.CURRENT_GAME_SCALE, batch);
                 sprite.setAlpha(0.1f);
                 sprite.setColor(1f, 0, 0);
@@ -402,7 +402,7 @@ public class Gameplay extends GameComponent {
             }
 
             // create a black box that the FPS are visible
-            new LibGDXRectangle(100, 20, Color.BLACK).draw(5, 10, 1f, batch);
+            new LibGDXRectangle(100, 20, Color.BLACK, ShapeRenderer.ShapeType.Filled).draw(5, 10, 1f, batch);
         }
     }
 

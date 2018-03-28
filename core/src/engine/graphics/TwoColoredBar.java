@@ -2,11 +2,12 @@ package engine.graphics;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 public class TwoColoredBar extends RenderObject {
 	private LibGDXRectangle base;
 	private LibGDXRectangle health;
-	LibGDXUnfilledRectangle border;
+	private LibGDXRectangle border;
 	private float length;
 	private float height;
 	private float length2;
@@ -16,9 +17,9 @@ public class TwoColoredBar extends RenderObject {
 	public TwoColoredBar(float length, float height) {
 		this.length = length;
 		this.height = height;
-		this.border = new LibGDXUnfilledRectangle(this.length, this.height, Color.BLACK);
-		this.base = new LibGDXRectangle((int) this.length, (int) this.height, Color.RED);
-		this.health = new LibGDXRectangle((int) this.length, (int) this.height, Color.GREEN);
+		this.border = new LibGDXRectangle(this.length, this.height, Color.BLACK, ShapeRenderer.ShapeType.Line);
+		this.base = new LibGDXRectangle((int) this.length, (int) this.height, Color.RED, ShapeRenderer.ShapeType.Filled);
+		this.health = new LibGDXRectangle((int) this.length, (int) this.height, Color.GREEN, ShapeRenderer.ShapeType.Filled);
 
 		this.length2 = length;
 	}
