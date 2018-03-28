@@ -35,13 +35,14 @@ public class Menu extends GameComponent {
     public void init() {
         super.init();
 
+        Image background = new Image(new Texture("data/graphics/viren.png"));
+        this.addActor(background);
+        
         this.pausedMessage = new Label("VIRUS DEFENSE", this.game.getLabelStyle());
         this.pausedMessage.setHeight(50);
         this.addActor(pausedMessage);
 
         TextButtonStyle textButtonStyle = this.game.getTextButtonStyle();
-        Image background = new Image(new Texture("data/graphics/viren.png"));
-        this.addActor(background);
         //this.background = new Background(1f, "viren.png", this.game.getGameplay());
 
         this.pausedMessage
