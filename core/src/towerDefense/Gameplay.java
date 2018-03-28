@@ -66,8 +66,6 @@ public class Gameplay extends GameComponent {
     private float towerShadowX, towerShadowY;
     protected ConcurrentLinkedQueue<Projectile> projectiles;
 
-    public static float MAX_GAME_SCALE;
-
     private Label passedTime;
     // Constants:
     public static float INTERFACE_START_X;
@@ -112,7 +110,6 @@ public class Gameplay extends GameComponent {
         // this.game.viewport.setWorldWidth(Gameplay.INTERFACE_START_X);
         float scale1 = Gameplay.INTERFACE_START_X / this.width;
         float scale2 = TowerDefense.getHeight() / this.height;
-        Gameplay.MAX_GAME_SCALE = Math.max(scale1, scale2);
         Gameplay.SIZE = (int) (64);
 
         // The grey HUD field on the right side of the screen containing the buttons
