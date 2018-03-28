@@ -102,14 +102,12 @@ public class Gameplay extends GameComponent {
 
         Gameplay.INTERFACE_START_X = TowerDefense.getWidth() - 3 * 64;
         this.cameraWidth = Gameplay.INTERFACE_START_X; // (832)
-        this.cameraHeight = 768;
+        this.cameraHeight = TowerDefense.getHeight();
 
         this.gameCamera = new OrthographicCamera(this.cameraWidth, this.cameraHeight);
         // this.game.viewport = new ScreenViewport(this.gameCamera);
         this.game.viewport.setCamera(this.gameCamera);
         // this.game.viewport.setWorldWidth(Gameplay.INTERFACE_START_X);
-        float scale1 = Gameplay.INTERFACE_START_X / this.width;
-        float scale2 = TowerDefense.getHeight() / this.height;
         Gameplay.SIZE = (int) (64);
 
         // The grey HUD field on the right side of the screen containing the buttons
