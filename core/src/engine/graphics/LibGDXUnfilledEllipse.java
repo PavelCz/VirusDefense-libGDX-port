@@ -25,13 +25,14 @@ public class LibGDXUnfilledEllipse extends LibGDXEllipse {
 	@Override
 	public void draw(float x, float y, float globalScale, SpriteBatch batch) {
 		batch.end();
-		OrthographicCamera camera = new OrthographicCamera();
-		camera.setToOrtho(false, TowerDefense.getWidth(), TowerDefense.getHeight());
+		//OrthographicCamera camera = new OrthographicCamera();
+		//camera.setToOrtho(false, TowerDefense.getWidth(), TowerDefense.getHeight());
 		ShapeRenderer shapeRenderer = new ShapeRenderer();
-		shapeRenderer.setProjectionMatrix(camera.combined);
+		//shapeRenderer.setProjectionMatrix(camera.combined);
+		shapeRenderer.setProjectionMatrix(batch.getProjectionMatrix());
 		shapeRenderer.begin(ShapeType.Line);
 		shapeRenderer.setColor(this.color.r, this.color.g, this.color.b, 1); // r g b a
-		shapeRenderer.circle(x, TowerDefense.getHeight() - y, this.width / 2 * globalScale);
+		shapeRenderer.circle(x, y, this.width / 2 * globalScale);
 		shapeRenderer.end();
 		batch.begin();
 	}
