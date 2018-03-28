@@ -306,18 +306,17 @@ public class Gameplay extends GameComponent {
             new OwnSprite("Game Over.png").draw(0, 0, batch);
         }
         // TODO: re-implement showing tower radius
-        // for (int i = 0; i < this.towers.length; ++i) {
-        // for (int j = 0; j < this.towers[0].length; ++j) {
-        // if (this.towers[i][j] != null) {
-        // Tower currentTower = this.towers[i][j];
-        // new SlickUnfilledEllipse(graphics, currentTower.getRadius() * 2, currentTower.getRadius() * 2, Color
-        // .white).draw(
-        // (currentTower.getX() * this.currentTileLength + Gameplay.DEFAULT_SIZE / 2) * Gameplay.CURRENT_GAME_SCALE
-        // - Gameplay.getCameraX(), (currentTower.getY() * this.currentTileLength + DEFAULT_SIZE / 2)
-        // * Gameplay.CURRENT_GAME_SCALE - Gameplay.getCameraY(), Gameplay.CURRENT_GAME_SCALE);
-        // }
-        // }
-        // }
+        for (int i = 0; i < this.towers.length; ++i) {
+            for (int j = 0; j < this.towers[0].length; ++j) {
+                if (this.towers[i][j] != null) {
+                    Tower currentTower = this.towers[i][j];
+                    new LibGDXEllipse(currentTower.getRadius() * 2, currentTower.getRadius() * 2, Color.WHITE,
+                            ShapeRenderer.ShapeType.Line).draw(currentTower.getX() * this.currentTileLength +
+                            Gameplay.DEFAULT_SIZE / 2, (currentTower.getY() * this.currentTileLength + DEFAULT_SIZE /
+                            2), batch);
+                }
+            }
+        }
     }
 
     private void renderHealthBars(SpriteBatch batch) {
