@@ -26,9 +26,9 @@ public class OwnSprite extends RenderObject {
 
 	}
 
-	@Override
-	public void draw(float xCoordinate, float yCoordinate, float globalScale, SpriteBatch batch) {
-		float scaling = this.defaultScale * globalScale;
+	//@Override
+	public void draw(float xCoordinate, float yCoordinate, SpriteBatch batch) {
+		float scaling = this.defaultScale;
 		this.sprite.setSize(this.img.getWidth() * scaling, this.img.getHeight() * scaling);
 		// float x = xCoordinate;
 		// float y = yCoordinate;

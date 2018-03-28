@@ -29,9 +29,9 @@ public class BackgroundTiles implements Drawable {
 		for (int i = 0; i < this.horizontalTiles + 1; ++i) {
 			for (int j = 0; j < this.verticalTiles + 1; ++j) {
 				if (i < this.horizontalTiles && j < this.verticalTiles) {
-					this.picture.draw(i * Gameplay.SIZE, j * Gameplay.SIZE, Gameplay.CURRENT_GAME_SCALE, batch);
+					this.picture.draw(i * Gameplay.SIZE, j * Gameplay.SIZE, batch);
 				} else {
-					this.pictureOutOfBounds.draw(i * Gameplay.SIZE, j * Gameplay.SIZE, Gameplay.CURRENT_GAME_SCALE, batch);
+					this.pictureOutOfBounds.draw(i * Gameplay.SIZE, j * Gameplay.SIZE, batch);
 				}
 			}
 			// }

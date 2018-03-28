@@ -116,7 +116,7 @@ public class Gameplay extends GameComponent {
         float scale2 = TowerDefense.getHeight() / this.height;
         Gameplay.CURRENT_GAME_SCALE = 1f;
         Gameplay.MAX_GAME_SCALE = Math.max(scale1, scale2);
-        Gameplay.SIZE = (int) (64 * Gameplay.CURRENT_GAME_SCALE);
+        Gameplay.SIZE = (int) (64);
 
         // The grey HUD field on the right side of the screen containing the buttons
         Image interfaceBackground = new Image(new Texture("data/graphics/Interface1.png"));
@@ -284,7 +284,7 @@ public class Gameplay extends GameComponent {
             projectiles.draw(batch);
         }
         if (this.currentTower != null) {
-            this.currentTower.getSprite().draw(INTERFACE_START_X, TowerDefense.getHeight() - 80, GLOBAL_GUI_SCALE,
+            this.currentTower.getSprite().draw(INTERFACE_START_X, TowerDefense.getHeight() - 80,
                     batch);
             this.towerName.setText(this.currentTower.getName());
             this.towerInfo.setText("Radius: " + this.currentTower.getRadius() + "\nKosten: " + this.currentTower
@@ -304,9 +304,9 @@ public class Gameplay extends GameComponent {
         this.renderDebug(batch);
 
         if (this.mode == 1) {
-            new OwnSprite("You Win.png").draw(0, 0, Gameplay.CURRENT_GAME_SCALE, batch);
+            new OwnSprite("You Win.png").draw(0, 0,  batch);
         } else if (this.mode == -1) {
-            new OwnSprite("Game Over.png").draw(0, 0, Gameplay.CURRENT_GAME_SCALE, batch);
+            new OwnSprite("Game Over.png").draw(0, 0,  batch);
         }
         // TODO: re-implement showing tower radius
         // for (int i = 0; i < this.towers.length; ++i) {
@@ -330,8 +330,8 @@ public class Gameplay extends GameComponent {
             int barHeight = 7;
             float barX = (enemy.getX() - barLength / 2);
             float barY = (enemy.getY() - Gameplay.DEFAULT_SIZE / 2);
-            this.h.setX((enemy.getX() - barLength / 2) * Gameplay.CURRENT_GAME_SCALE);
-            this.h.setY((enemy.getY() - Gameplay.DEFAULT_SIZE / 2) * Gameplay.CURRENT_GAME_SCALE);
+            this.h.setX((enemy.getX() - barLength / 2));
+            this.h.setY((enemy.getY() - Gameplay.DEFAULT_SIZE / 2) );
             this.h.setMaxHealth(enemy.getMaxHealth());
             this.h.setHealth(enemy.getHealth());
             this.h.setBordered(true);
@@ -368,19 +368,19 @@ public class Gameplay extends GameComponent {
             OwnSprite sprite = this.currentTower.getSprite().clone();
 
             if (this.currentTowerPlaceable) {
-                new LibGDXRectangle(SIZE / Gameplay.CURRENT_GAME_SCALE, SIZE / Gameplay.CURRENT_GAME_SCALE,
+                new LibGDXRectangle(SIZE , SIZE ,
                         Color.GREEN, ShapeRenderer.ShapeType.Line).draw(
-                        this.towerShadowX, this.towerShadowY, Gameplay.CURRENT_GAME_SCALE, batch);
+                        this.towerShadowX, this.towerShadowY, batch);
             } else {
-                new LibGDXRectangle(SIZE / Gameplay.CURRENT_GAME_SCALE, SIZE / Gameplay.CURRENT_GAME_SCALE,
+                new LibGDXRectangle(SIZE , SIZE ,
                         Color.RED, ShapeRenderer.ShapeType.Line).draw(
-                        this.towerShadowX, this.towerShadowY, Gameplay.CURRENT_GAME_SCALE, batch);
+                        this.towerShadowX, this.towerShadowY, batch);
                 sprite.setAlpha(0.1f);
                 sprite.setColor(1f, 0, 0);
 
             }
 
-            sprite.draw(this.towerShadowX, this.towerShadowY, Gameplay.CURRENT_GAME_SCALE, batch);
+            sprite.draw(this.towerShadowX, this.towerShadowY,  batch);
         }
     }
 
@@ -396,13 +396,12 @@ public class Gameplay extends GameComponent {
                 new LibGDXEllipse(enemy.getRadius() * 2, enemy.getRadius() * 2, Color.BLUE, ShapeRenderer
                         .ShapeType.Line).draw((enemy
                                 .getX())
-                                * Gameplay.CURRENT_GAME_SCALE, (enemy.getY()) * Gameplay.CURRENT_GAME_SCALE, Gameplay
-                                .CURRENT_GAME_SCALE,
+                                , (enemy.getY()) ,
                         batch);
             }
 
             // create a black box that the FPS are visible
-            new LibGDXRectangle(100, 20, Color.BLACK, ShapeRenderer.ShapeType.Filled).draw(5, 10, 1f, batch);
+            new LibGDXRectangle(100, 20, Color.BLACK, ShapeRenderer.ShapeType.Filled).draw(5, 10, batch);
         }
     }
 

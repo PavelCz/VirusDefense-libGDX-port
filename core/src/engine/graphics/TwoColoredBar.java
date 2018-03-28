@@ -25,12 +25,12 @@ public class TwoColoredBar extends RenderObject {
 	}
 
 	@Override
-	public void draw(float x, float y, float globalScale, SpriteBatch batch) {
-		this.base.draw(x, y, globalScale, batch);
+	public void draw(float x, float y,  SpriteBatch batch) {
+		this.base.draw(x, y,  batch);
 		this.health.setWidth(this.length2);
-		this.health.draw(x, y, globalScale, batch);
+		this.health.draw(x, y,  batch);
 		if (this.bordered) {
-			this.border.draw(x, y, globalScale, batch);
+			this.border.draw(x, y,  batch);
 
 		}
 

@@ -35,8 +35,8 @@ public class AnimatedSprite extends RenderObject {
 	}
 
 	@Override
-	public void draw(float x, float y, float globalScale, SpriteBatch batch) {
-		this.currentSprite.draw(x, y, globalScale, batch);
+	public void draw(float x, float y, SpriteBatch batch) {
+		this.currentSprite.draw(x, y, batch);
 
 	}
 

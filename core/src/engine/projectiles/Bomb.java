@@ -64,9 +64,8 @@ public class Bomb extends Projectile implements Drawable {
 
 	@Override
 	public void draw(SpriteBatch batch) {
-		this.animatedSprite.draw((this.x - this.animatedSprite.getCurrentSprite().getWidth() / 2) * Gameplay.CURRENT_GAME_SCALE,
-				(this.y - this.animatedSprite.getCurrentSprite().getWidth() / 2) * Gameplay.CURRENT_GAME_SCALE,
-				Gameplay.CURRENT_GAME_SCALE, batch);
+		this.animatedSprite.draw((this.x - this.animatedSprite.getCurrentSprite().getWidth() / 2) ,
+				(this.y - this.animatedSprite.getCurrentSprite().getWidth() / 2) , batch);
 	}
 
 	public void fire() {

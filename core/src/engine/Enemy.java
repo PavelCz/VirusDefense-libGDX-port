@@ -107,9 +107,10 @@ public class Enemy extends Entity implements Drawable {
 			if (this.wobble) {
 				float scale = (float) this.wobbleFactor;
 				float size = (Gameplay.DEFAULT_SIZE - this.sprite.getWidth() * scale) / 2;
-				this.sprite.draw((this.x + size), (this.y + size), scale, batch);
+				//this.sprite.draw((this.x + size), (this.y + size), scale, batch);
+				this.sprite.draw((this.x + size), (this.y + size), batch);
 			} else {
-				this.sprite.draw((this.x), (this.y), Gameplay.CURRENT_GAME_SCALE, batch);
+				this.sprite.draw((this.x), (this.y), batch);
 			}
 		}
 	}

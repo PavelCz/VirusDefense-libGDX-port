@@ -23,13 +23,13 @@ public class LibGDXRectangle extends RenderObject {
 	}
 
 	@Override
-	public void draw(float x, float y, float globalScale, SpriteBatch batch) {
+	public void draw(float x, float y,  SpriteBatch batch) {
 		batch.end(); // pause batch drawing and start shape drawing
 		ShapeRenderer shapeRenderer = new ShapeRenderer();
 		shapeRenderer.setProjectionMatrix(batch.getProjectionMatrix());
 		shapeRenderer.begin(this.shapeType);
 		shapeRenderer.setColor(this.color);
-		shapeRenderer.rect(x, y, this.width * globalScale, this.height * globalScale);
+		shapeRenderer.rect(x, y, this.width, this.height);
 		shapeRenderer.end();
 		batch.begin(); // restart batch drawing
 	}
