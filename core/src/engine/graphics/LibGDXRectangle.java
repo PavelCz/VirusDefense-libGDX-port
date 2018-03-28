@@ -28,7 +28,7 @@ public class LibGDXRectangle extends RenderObject {
 		ShapeRenderer shapeRenderer = new ShapeRenderer();
 		shapeRenderer.setProjectionMatrix(batch.getProjectionMatrix());
 		shapeRenderer.begin(this.shapeType);
-		shapeRenderer.setColor(this.color.r, this.color.g, this.color.b, 1); // r g b a
+		shapeRenderer.setColor(this.color);
 		shapeRenderer.rect(x, y, this.width * globalScale, this.height * globalScale);
 		shapeRenderer.end();
 		batch.begin(); // restart batch drawing

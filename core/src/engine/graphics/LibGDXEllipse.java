@@ -20,7 +20,7 @@ public class LibGDXEllipse extends LibGDXRectangle {
 		ShapeRenderer shapeRenderer = new ShapeRenderer();
 		shapeRenderer.setProjectionMatrix(batch.getProjectionMatrix());
 		shapeRenderer.begin(this.shapeType);
-		shapeRenderer.setColor(this.color.r, this.color.g, this.color.b, 1); // r g b a
+		shapeRenderer.setColor(this.color);
 		shapeRenderer.circle(x, y, this.width / 2 * globalScale);
 		shapeRenderer.end();
 		batch.begin();
