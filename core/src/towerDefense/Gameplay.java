@@ -67,13 +67,15 @@ public class Gameplay extends GameComponent {
     protected ConcurrentLinkedQueue<Projectile> projectiles;
 
     private Label passedTime;
+
+    int levelHeight;
+    int levelWidth;
     // Constants:
     public static float INTERFACE_START_X;
     public static int STANDARD_TEXT_SCALE = 15;
     public static int SIZE;
     public static int DEFAULT_SIZE = 64;
     private float speed;
-
     // Tests:
 
     //
@@ -109,6 +111,9 @@ public class Gameplay extends GameComponent {
         this.game.viewport.setCamera(this.gameCamera);
         // this.game.viewport.setWorldWidth(Gameplay.INTERFACE_START_X);
         Gameplay.SIZE = (int) (64);
+
+        this.levelHeight = this.currentLevel.getNumberTilesHeight() * Gameplay.SIZE;
+        this.levelWidth = this.currentLevel.getNumberTilesWidth() * Gameplay.SIZE;
 
         // The grey HUD field on the right side of the screen containing the buttons
         Image interfaceBackground = new Image(new Texture("data/graphics/Interface1.png"));
@@ -542,20 +547,26 @@ public class Gameplay extends GameComponent {
             this.gameCamera.translate(0, -scrollDistance);
 
         }
-
         if(this.gameCamera.zoom <= 1f) {
         if (this.gameCamera.position.x - (cameraWidth + zoomedInterfaceWidth) < 0) { // limit camera left
             this.gameCamera.position.x = cameraWidth + zoomedInterfaceWidth;
+            System.out.println("LEFT");
         }
-        if (this.gameCamera.position.x + cameraWidth >= rightBoundary) { // limit camera right
-            this.gameCamera.position.x = rightBoundary - cameraWidth;
+        if (this.gameCamera.position.x + cameraWidth >= levelWidth) { // limit camera right
+            this.gameCamera.position.x = levelWidth -  cameraWidth;
+            System.out.println("RIGHT");
         }
-        if (this.gameCamera.position.y + cameraHeight > topBoundary) { // limit camera bottom
-            this.gameCamera.position.y = topBoundary - cameraHeight;
-        }
-        if (this.gameCamera.position.y - cameraHeight < 0) { // limit camera top
+        if (this.gameCamera.position.y - cameraHeight < 0) { // limit camera bottom
             this.gameCamera.position.y = cameraHeight;
-        }}
+            System.out.println("BOTTOM");
+        }
+        if (this.gameCamera.position.y + cameraHeight > levelHeight) { // limit camera top
+            this.gameCamera.position.y = levelHeight -cameraHeight;
+            System.out.println("TOP");
+        }} else {
+            this.gameCamera.position.x = this.levelWidth/2 + zoomedInterfaceWidth/2;
+            this.gameCamera.position.y = this.levelHeight/2 ;
+        }
 
         if (this.debugMode) {
             this.debugKeyboardEvents(delta);
