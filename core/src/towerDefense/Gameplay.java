@@ -140,7 +140,7 @@ public class Gameplay extends GameComponent {
         ImageButton buyTowerButton0 = createNewTowerButton(new LongerShootingTower(0, 0, new OwnSprite
                 ("tower/Tower2.png", 0.5f), this, 400, 0.16f, 400));
         buyTowerButton0.setX(Gameplay.INTERFACE_START_X);
-        buyTowerButton0.setY(TowerDefense.getHeight() - 4 * 64  + offset);
+        buyTowerButton0.setY(TowerDefense.getHeight() - 4 * 64 + offset);
         this.addActor(buyTowerButton0);
 
         ImageButton buyTowerButton1 = createNewTowerButton(new BombTower(0, 0, new OwnSprite("tower/t1n.png", 0.5f),
@@ -152,13 +152,13 @@ public class Gameplay extends GameComponent {
         ImageButton buyTowerButton2 = createNewTowerButton(new RocketTower(0, 0, new OwnSprite("tower/t1.png", 0.5f),
                 this, 200, 15f, 50));
         buyTowerButton2.setX(Gameplay.INTERFACE_START_X);
-        buyTowerButton2.setY(TowerDefense.getHeight() - 6 * 64  + offset);
+        buyTowerButton2.setY(TowerDefense.getHeight() - 6 * 64 + offset);
         this.addActor(buyTowerButton2);
 
         ImageButton buyTowerButton3 = createNewTowerButton(new RocketFastTower(0, 0, new OwnSprite
                 ("tower/roteBlutk_klein.png", 0.5f), this, 1000, 20f));
         buyTowerButton3.setX(Gameplay.INTERFACE_START_X + 64);
-        buyTowerButton3.setY(TowerDefense.getHeight() - 4 * 64  + offset);
+        buyTowerButton3.setY(TowerDefense.getHeight() - 4 * 64 + offset);
         this.addActor(buyTowerButton3);
 
         // Put all tower buying buttons in one button group
@@ -207,7 +207,7 @@ public class Gameplay extends GameComponent {
     private void initGUI() {
         float guiTileSize = 64;
         float textHeight = 20;
-        float guiX = 3 ;
+        float guiX = 3;
 
         float cursorXStart = Gameplay.INTERFACE_START_X + guiX;
         float cursorYStart = 3 * guiTileSize;
@@ -227,8 +227,8 @@ public class Gameplay extends GameComponent {
         this.addActor(numberLives);
         cursorX = cursorXStart;
         cursorY -= textHeight;
-        Label moneyText = new Label("Money: ",ls);
-        moneyText.setPosition(cursorX,cursorY);
+        Label moneyText = new Label("Money: ", ls);
+        moneyText.setPosition(cursorX, cursorY);
         this.addActor(moneyText);
         cursorX += moneyText.getWidth();
         this.moneyAmount = new Label("" + this.player.getMoney(), ls);
@@ -236,7 +236,7 @@ public class Gameplay extends GameComponent {
         this.addActor(this.moneyAmount);
         cursorX = cursorXStart;
         cursorY -= textHeight;
-        Label scoreText = new Label ("Score: ", ls);
+        Label scoreText = new Label("Score: ", ls);
         scoreText.setPosition(cursorX, cursorY);
         this.addActor(scoreText);
         cursorX += scoreText.getWidth();
@@ -301,9 +301,9 @@ public class Gameplay extends GameComponent {
         this.renderDebug(batch);
 
         if (this.mode == 1) {
-            new OwnSprite("You Win.png").draw(0, 0,  batch);
+            new OwnSprite("You Win.png").draw(0, 0, batch);
         } else if (this.mode == -1) {
-            new OwnSprite("Game Over.png").draw(0, 0,  batch);
+            new OwnSprite("Game Over.png").draw(0, 0, batch);
         }
         // TODO: re-implement showing tower radius
         // for (int i = 0; i < this.towers.length; ++i) {
@@ -328,7 +328,7 @@ public class Gameplay extends GameComponent {
             float barX = (enemy.getX() - barLength / 2);
             float barY = (enemy.getY() - Gameplay.DEFAULT_SIZE / 2);
             this.h.setX((enemy.getX() - barLength / 2));
-            this.h.setY((enemy.getY() - Gameplay.DEFAULT_SIZE / 2) );
+            this.h.setY((enemy.getY() - Gameplay.DEFAULT_SIZE / 2));
             this.h.setMaxHealth(enemy.getMaxHealth());
             this.h.setHealth(enemy.getHealth());
             this.h.setBordered(true);
@@ -365,11 +365,11 @@ public class Gameplay extends GameComponent {
             OwnSprite sprite = this.currentTower.getSprite().clone();
 
             if (this.currentTowerPlaceable) {
-                new LibGDXRectangle(SIZE , SIZE ,
+                new LibGDXRectangle(SIZE, SIZE,
                         Color.GREEN, ShapeRenderer.ShapeType.Line).draw(
                         this.towerShadowX, this.towerShadowY, batch);
             } else {
-                new LibGDXRectangle(SIZE , SIZE ,
+                new LibGDXRectangle(SIZE, SIZE,
                         Color.RED, ShapeRenderer.ShapeType.Line).draw(
                         this.towerShadowX, this.towerShadowY, batch);
                 sprite.setAlpha(0.1f);
@@ -377,7 +377,7 @@ public class Gameplay extends GameComponent {
 
             }
 
-            sprite.draw(this.towerShadowX, this.towerShadowY,  batch);
+            sprite.draw(this.towerShadowX, this.towerShadowY, batch);
         }
     }
 
@@ -393,7 +393,7 @@ public class Gameplay extends GameComponent {
                 new LibGDXEllipse(enemy.getRadius() * 2, enemy.getRadius() * 2, Color.BLUE, ShapeRenderer
                         .ShapeType.Line).draw((enemy
                                 .getX())
-                                , (enemy.getY()) ,
+                        , (enemy.getY()),
                         batch);
             }
 
@@ -547,25 +547,27 @@ public class Gameplay extends GameComponent {
             this.gameCamera.translate(0, -scrollDistance);
 
         }
-        if(this.gameCamera.zoom <= 1f) {
-        if (this.gameCamera.position.x - (cameraWidth + zoomedInterfaceWidth) < 0) { // limit camera left
-            this.gameCamera.position.x = cameraWidth + zoomedInterfaceWidth;
-            System.out.println("LEFT");
-        }
-        if (this.gameCamera.position.x + cameraWidth >= levelWidth) { // limit camera right
-            this.gameCamera.position.x = levelWidth -  cameraWidth;
-            System.out.println("RIGHT");
-        }
-        if (this.gameCamera.position.y - cameraHeight < 0) { // limit camera bottom
-            this.gameCamera.position.y = cameraHeight;
-            System.out.println("BOTTOM");
-        }
-        if (this.gameCamera.position.y + cameraHeight > levelHeight) { // limit camera top
-            this.gameCamera.position.y = levelHeight -cameraHeight;
-            System.out.println("TOP");
-        }} else {
-            this.gameCamera.position.x = this.levelWidth/2 + zoomedInterfaceWidth/2;
-            this.gameCamera.position.y = this.levelHeight/2 ;
+
+        if (effectiveCameraWidth > levelWidth || effectiveCameraHeight > levelHeight) {
+            this.gameCamera.position.x = this.levelWidth / 2 + zoomedInterfaceWidth / 2;
+            this.gameCamera.position.y = this.levelHeight / 2;
+        } else {
+            if (this.gameCamera.position.x - (cameraWidth + zoomedInterfaceWidth) < 0) { // limit camera left
+                this.gameCamera.position.x = cameraWidth + zoomedInterfaceWidth;
+                System.out.println("LEFT");
+            }
+            if (this.gameCamera.position.x + cameraWidth >= levelWidth) { // limit camera right
+                this.gameCamera.position.x = levelWidth - cameraWidth;
+                System.out.println("RIGHT");
+            }
+            if (this.gameCamera.position.y - cameraHeight < 0) { // limit camera bottom
+                this.gameCamera.position.y = cameraHeight;
+                System.out.println("BOTTOM");
+            }
+            if (this.gameCamera.position.y + cameraHeight > levelHeight) { // limit camera top
+                this.gameCamera.position.y = levelHeight - cameraHeight;
+                System.out.println("TOP");
+            }
         }
 
         if (this.debugMode) {
