@@ -1,169 +1,123 @@
 package towerDefense;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.Event;
-import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import engine.GameComponent;
 import engine.Level;
 import engine.LevelHandler;
-import engine.graphics.OwnSprite;
-import engine.gui.Button;
-import engine.gui.Clickable;
 import engine.gui.SetGameModeAction;
-import engine.gui.StaticText;
-
-import static com.badlogic.gdx.graphics.g3d.particles.ParticleChannels.TextureRegion;
 
 public class ChooseLevel extends GameComponent {
 
-	private ImageButton levelSelectButton;
-	private Button button, left, right;
-	private int page, lastPage;
-	private StaticText title = new StaticText(0, 0, 20, Color.BLACK, "Choose a level");
+    private ImageButton levelSelectButton;
+    private int pageNumber, lastPageNumber;
+    private Label text;
 
-	private Level currentLevel;
+    private Level currentLevel;
 
-	private LevelHandler levelHandler = new LevelHandler();
+    private LevelHandler levelHandler = new LevelHandler();
 
-	public ChooseLevel(final TowerDefense game) {
-		super(game);
-		this.title.setPosition((TowerDefense.getWidth() - this.title.getWidth()) / 2, TowerDefense.getHeight() / 4);
-		this.guiElements.add(this.title);
-		this.page = 0;
-		this.levelHandler.add("level1.txt", game.getGameplay());
-		this.levelHandler.add("level4.txt", game.getGameplay());
-		this.levelHandler.add("level2.txt", game.getGameplay());
-		// this.levelHandler.add("level3.txt", game.getGameplay());
+    public ChooseLevel(final TowerDefense game) {
+        super(game);
 
-		this.currentLevel = this.levelHandler.get(this.page);
-		OwnSprite currentPreviewPicture = this.currentLevel.getPreviewPicture();
-		OwnSprite leftSprite = new OwnSprite("left.png", 0.07f);
-		OwnSprite rightSprite = new OwnSprite("right.png", 0.07f);
+        this.text = new Label("Choose a level", this.game.getLabelStyle());
+        this.text.setPosition((TowerDefense.getWidth() - this.text.getWidth()) / 2, TowerDefense.getHeight() / 4);
+        this.addActor(this.text);
+        this.pageNumber = 0;
+        this.levelHandler.add("level1.txt", game.getGameplay());
+        this.levelHandler.add("level4.txt", game.getGameplay());
+        this.levelHandler.add("level2.txt", game.getGameplay());
+        // this.levelHandler.add("level3.txt", game.getGameplay());
 
-		float leftX = TowerDefense.getWidth() / 4 - leftSprite.getWidth() / 2;
-		float leftY = TowerDefense.getHeight() / 2 - leftSprite.getHeight() / 2;
-		float rightX = TowerDefense.getWidth() - leftX;
-		float rightY = leftY;
-		float buttonX = TowerDefense.getWidth() / 2 - currentPreviewPicture.getWidth() / 2;
-		float buttonY = TowerDefense.getHeight() / 2 - currentPreviewPicture.getHeight() / 2;
+        this.currentLevel = this.levelHandler.get(this.pageNumber);
 
-		this.button = new Button(buttonX, buttonY, currentPreviewPicture, currentPreviewPicture, game.getGameplay(), false);
+        initializeButtons(game);
 
-		this.left = new Button(leftX, leftY, leftSprite, new OwnSprite("leftClicked.png", 0.065f), game.getGameplay(), false);
-		this.right = new Button(rightX, rightY, rightSprite, new OwnSprite("rightClicked.png", 0.065f), game.getGameplay(), false);
+        this.lastPageNumber = this.levelHandler.getLength() - 1;
+    }
 
-		Drawable drawable = new TextureRegionDrawable(currentPreviewPicture.getGDXSprite());
-		this.levelSelectButton = new ImageButton(drawable);
-		this.levelSelectButton.setX(buttonX);
-		this.levelSelectButton.setY(buttonY);
-		final Level currentLevel = this.currentLevel; // this is only needed for the listener
-		this.levelSelectButton.addListener(new ChangeListener() {
-			@Override
-			public void changed(ChangeEvent event, Actor actor) {
-				game.initGameplay(currentLevel);
-				// this.game.setLevel(this.currentLevel);
-				game.getMenu().setDisableTextField(true);
-				game.getGameplay().setPlayerName(game.getPlayerName());
-				game.setMode(TowerDefense.MODE_GAME);
-			}
-		});
-		this.stage.addActor(this.levelSelectButton);
+    private void initializeButtons(final TowerDefense game) {
+        float scale = 0.065f;
 
-		TextButtonStyle textButtonStyle = this.game.getTextButtonStyle();
+        this.levelSelectButton = new ImageButton(this.currentLevel.getPreviewPictureDrawable());
+        float buttonX = TowerDefense.getWidth() / 2 - levelSelectButton.getWidth() / 2;
+        float buttonY = TowerDefense.getHeight() / 2 - levelSelectButton.getHeight() / 2;
+        this.levelSelectButton.setX(buttonX);
+        this.levelSelectButton.setY(buttonY);
+        this.levelSelectButton.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                game.initGameplay(getCurrentLevel());
+                game.getMenu().setDisableTextField(true);
+                game.getGameplay().setPlayerName(game.getPlayerName());
+                game.setMode(TowerDefense.MODE_GAME);
+            }
+        });
+        this.addActor(this.levelSelectButton);
+        String imagePath = "data/graphics/";
+        ImageButton leftButton = new ImageButton(new TextureRegionDrawable(new TextureRegion(new Texture(imagePath + "left.png"))), new TextureRegionDrawable(new TextureRegion(new Texture(imagePath + "leftClicked.png"))));
+        leftButton.setScale(scale);
+        leftButton.getImage().setScale(scale);
+        float leftX = TowerDefense.getWidth() / 4 - leftButton.getImage().getWidth() / 2;
+        float leftY = TowerDefense.getHeight() / 2 - leftButton.getImage().getHeight() / 2;
+        leftButton.setX(leftX);
+        leftButton.setY(leftY);
+        leftButton.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                changeLevelSelection(-1);
+            }
+        });
+        this.addActor(leftButton);
 
-		TextButton back = new TextButton("Back", textButtonStyle);
-		back.setX(0);
-		back.setY(0 + back.getHeight() * 2);
-		back.addListener(new SetGameModeAction(this.game, TowerDefense.MODE_MENU));
-		this.stage.addActor(back);
+        ImageButton rightButton = new ImageButton(new TextureRegionDrawable(new TextureRegion(new Texture(imagePath + "right.png"))), new TextureRegionDrawable(new TextureRegion(new Texture(imagePath + "rightClicked.png"))));
+        float rightX = TowerDefense.getWidth() - leftX;
+        float rightY = leftY;
+        rightButton.setX(rightX);
+        rightButton.setY(rightY);
+        rightButton.setScale(scale);
+        rightButton.getImage().setScale(scale);
+        rightButton.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                changeLevelSelection(1);
+            }
+        });
+        this.addActor(rightButton);
 
-		/*
-		this.clickables.add(this.button);
-		this.clickables.add(this.left);
-		this.clickables.add(this.right);
-		this.guiElements.add(this.button);
-		this.guiElements.add(this.left);
-		this.guiElements.add(this.right);*/
-		this.lastPage = this.levelHandler.getLength() - 1;
+        TextButtonStyle textButtonStyle = this.game.getTextButtonStyle();
 
-		this.lastPage = this.levelHandler.getLength() - 1;
-	}
+        TextButton back = new TextButton("Back", textButtonStyle);
+        back.setX(0);
+        back.setY(0 + back.getHeight() * 2);
+        back.addListener(new SetGameModeAction(this.game, TowerDefense.MODE_MENU));
+        this.addActor(back);
+    }
 
-	@Override
-	public void render(SpriteBatch batch) {
-		super.render(batch);
+    private void changeLevelSelection(int amount) {
+        this.pageNumber += amount;
+        if (this.pageNumber < 0) {
+            this.pageNumber = this.lastPageNumber;
+        } else if (this.pageNumber > this.lastPageNumber) {
+            this.pageNumber = 0;
+        }
+        this.currentLevel = this.levelHandler.get(this.pageNumber);
 
-		super.renderGUI(batch);
-	}
+        // Update the preview picture shown on the level select button;
+        // Change the image of the button
+        this.levelSelectButton.getStyle().imageUp = this.currentLevel.getPreviewPictureDrawable();
+    }
 
-	@Override
-	public void update(int delta) {
-		super.update(delta);
-		this.mouseEvents(delta);
-		this.button.setUnclickedButton(this.currentLevel.getPreviewPicture());
-		this.button.setClickedButton(this.currentLevel.getPreviewPicture());
-	}
-
-	private void mouseEvents(int delta) {
-		// Input input = container.getInput();
-		// float x = input.getMouseX();
-		// float y = input.getMouseY();
-		float x = TowerDefense.getMouseX();
-		float y = TowerDefense.getMouseY();
-		super.updateHovering(x, y);
-		if (Gdx.input.justTouched()) {
-
-			if (Gdx.input.isButtonPressed(com.badlogic.gdx.Input.Buttons.LEFT)) {
-				this.mouseWasClicked = true;
-
-				for (Clickable clickable : this.clickables) {
-					clickable.update(x, y);
-				}
-			}
-
-		} else if (this.mouseWasClicked && !Gdx.input.isButtonPressed(com.badlogic.gdx.Input.Buttons.LEFT)) {
-			this.mouseWasClicked = false;
-			for (Clickable clickable : this.clickables) {
-				if (!clickable.isStayClicked()) {
-					if (clickable.isClicked() && clickable.collides((int) x, (int) y, Gameplay.GLOBAL_GUI_SCALE)) {
-						clickable.onRelease();
-						if (clickable == this.left) {
-							--this.page;
-							if (this.page < 0) {
-								this.page = this.lastPage;
-							}
-							this.currentLevel = this.levelHandler.get(this.page);
-							this.currentLevel = this.levelHandler.get(this.page);
-						} else if (clickable == this.right) {
-							this.page += 1;
-							if (this.page > this.lastPage) {
-								this.page = 0;
-							}
-							this.currentLevel = this.levelHandler.get(this.page);
-						} else if (clickable == this.button) {
-
-							this.game.initGameplay(this.currentLevel);
-							// this.game.setLevel(this.currentLevel);
-							this.game.getMenu().setDisableTextField(true);
-							this.game.getGameplay().setPlayerName(this.game.getPlayerName());
-							this.game.setMode(TowerDefense.MODE_GAME);
-						}
-					} else if (clickable.isClicked()) {
-						clickable.setClicked(false);
-					}
-				}
-			}
-		}
-	}
+    private Level getCurrentLevel() {
+        return this.currentLevel;
+    }
 
 }

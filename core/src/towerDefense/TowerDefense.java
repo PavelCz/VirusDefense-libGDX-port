@@ -11,6 +11,8 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
@@ -34,6 +36,8 @@ public class TowerDefense implements ApplicationListener {
 	private static int WIDTH;
 
 	private TextButtonStyle textButtonStyle;
+	private LabelStyle labelStyle;
+	private Skin skin;
 
 	private Gameplay gameplay;
 	private Menu menu;
@@ -61,6 +65,12 @@ public class TowerDefense implements ApplicationListener {
 		this.textButtonStyle.downFontColor = Color.BLACK;
 		this.textButtonStyle.overFontColor = Color.GRAY;
 		this.textButtonStyle.checkedOverFontColor = Color.GRAY;
+		this.labelStyle = new LabelStyle();
+		this.labelStyle.font = font;
+		this.labelStyle.fontColor = Color.WHITE;
+
+		// set the skin file
+		skin = new Skin(Gdx.files.internal("uiskin.json"));
 
 		this.camera = new OrthographicCamera(1024, 768);
 		this.camera.translate(1024 / 2, 768 / 2);
@@ -129,8 +139,8 @@ public class TowerDefense implements ApplicationListener {
 		this.mode = mode;
 
 		if (this.mode == TowerDefense.MODE_GAME) {
-
-			Gdx.input.setInputProcessor(this.gameplay);
+			// TODO: decide whether this should be gameplay or gameplay.getStage()
+			Gdx.input.setInputProcessor(this.gameplay.getStage());
 
 			this.currentGameComponent = this.gameplay;
 
@@ -363,7 +373,6 @@ public class TowerDefense implements ApplicationListener {
 	}
 
 	public static int getMouseX() {
-
 		return Gdx.input.getX();
 	}
 
@@ -373,6 +382,14 @@ public class TowerDefense implements ApplicationListener {
 
 	public TextButtonStyle getTextButtonStyle() {
 		return this.textButtonStyle;
+	}
+
+	public LabelStyle getLabelStyle() {
+		return this.labelStyle;
+	}
+
+	public Skin getSkin() {
+		return this.skin;
 	}
 
 }

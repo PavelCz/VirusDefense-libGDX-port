@@ -20,7 +20,8 @@ public class SoundHandler {
 
 	public void play(String name) {
 		if (this.sounds.containsKey(name)) {
-			this.sounds.get(name).play();
+			float volume = 0.5f;
+			this.sounds.get(name).play(volume);
 		}
 	}
 

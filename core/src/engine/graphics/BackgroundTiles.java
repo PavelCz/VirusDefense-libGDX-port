@@ -1,15 +1,19 @@
 package engine.graphics;
 
+import engine.Drawable;
 import towerDefense.Gameplay;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-public class BackgroundTiles extends Background {
+public class BackgroundTiles implements Drawable {
 	private int horizontalTiles, verticalTiles;
 	private OwnSprite pictureOutOfBounds;
+	protected OwnSprite picture;
+	protected Gameplay game;
 
 	public BackgroundTiles(float scale, String backgroundPath, int horizontalTiles, int verticalTiles, Gameplay game) {
-		super(scale, backgroundPath, game);
+		this.picture = new OwnSprite(backgroundPath, scale);
+		this.game = game;
 		this.horizontalTiles = horizontalTiles;
 		this.verticalTiles = verticalTiles;
 		this.pictureOutOfBounds = new OwnSprite(backgroundPath);
@@ -25,9 +29,9 @@ public class BackgroundTiles extends Background {
 		for (int i = 0; i < this.horizontalTiles + 1; ++i) {
 			for (int j = 0; j < this.verticalTiles + 1; ++j) {
 				if (i < this.horizontalTiles && j < this.verticalTiles) {
-					this.picture.draw(i * Gameplay.SIZE, j * Gameplay.SIZE, Gameplay.CURRENT_GAME_SCALE, batch);
+					this.picture.draw(i * Gameplay.SIZE, j * Gameplay.SIZE, batch);
 				} else {
-					this.pictureOutOfBounds.draw(i * Gameplay.SIZE, j * Gameplay.SIZE, Gameplay.CURRENT_GAME_SCALE, batch);
+					this.pictureOutOfBounds.draw(i * Gameplay.SIZE, j * Gameplay.SIZE, batch);
 				}
 			}
 			// }

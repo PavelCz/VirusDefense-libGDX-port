@@ -15,7 +15,7 @@ public abstract class GUI {
 	}
 
 	protected void draw(RenderObject renderObject, SpriteBatch batch) {
-		renderObject.draw(this.x, this.y, Gameplay.GLOBAL_GUI_SCALE, batch);
+		renderObject.draw(this.x, this.y,  batch);
 
 	}
 

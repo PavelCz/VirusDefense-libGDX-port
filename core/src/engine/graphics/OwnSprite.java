@@ -22,19 +22,21 @@ public class OwnSprite extends RenderObject {
 	public OwnSprite(String imagePath, float scale) {
 
 		this(imagePath);
-
 		this.defaultScale = scale;
 
 	}
 
-	@Override
-	public void draw(float xCoordinate, float yCoordinate, float globalScale, SpriteBatch batch) {
-		float scaling = this.defaultScale * globalScale;
+	public void draw(float xCoordinate, float yCoordinate, float scale,  SpriteBatch batch) {
+		float scaling = this.defaultScale * scale;
 		this.sprite.setSize(this.img.getWidth() * scaling, this.img.getHeight() * scaling);
-		// float x = xCoordinate;
-		// float y = yCoordinate;
-		// y = TowerDefense.getHeight() - y; // sets coordinate System from up - right to down - right
-		// y = y - this.img.getHeight() * scaling; // sets picture anchor to top left corner instead of bottom left
+		this.sprite.setPosition(xCoordinate, yCoordinate);
+		this.sprite.draw(batch);
+	}
+
+	@Override
+	public void draw(float xCoordinate, float yCoordinate, SpriteBatch batch) {
+		float scaling = this.defaultScale;
+		this.sprite.setSize(this.img.getWidth() * scaling, this.img.getHeight() * scaling);
 		this.sprite.setPosition(xCoordinate, yCoordinate);
 		this.sprite.draw(batch);
 	}

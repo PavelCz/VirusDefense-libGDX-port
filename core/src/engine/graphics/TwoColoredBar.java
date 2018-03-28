@@ -2,11 +2,12 @@ package engine.graphics;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 public class TwoColoredBar extends RenderObject {
 	private LibGDXRectangle base;
 	private LibGDXRectangle health;
-	LibGDXUnfilledRectangle border;
+	private LibGDXRectangle border;
 	private float length;
 	private float height;
 	private float length2;
@@ -16,20 +17,20 @@ public class TwoColoredBar extends RenderObject {
 	public TwoColoredBar(float length, float height) {
 		this.length = length;
 		this.height = height;
-		this.border = new LibGDXUnfilledRectangle(this.length, this.height, Color.BLACK);
-		this.base = new LibGDXRectangle((int) this.length, (int) this.height, Color.RED);
-		this.health = new LibGDXRectangle((int) this.length, (int) this.height, Color.GREEN);
+		this.border = new LibGDXRectangle(this.length, this.height, Color.BLACK, ShapeRenderer.ShapeType.Line);
+		this.base = new LibGDXRectangle((int) this.length, (int) this.height, Color.RED, ShapeRenderer.ShapeType.Filled);
+		this.health = new LibGDXRectangle((int) this.length, (int) this.height, Color.GREEN, ShapeRenderer.ShapeType.Filled);
 
 		this.length2 = length;
 	}
 
 	@Override
-	public void draw(float x, float y, float globalScale, SpriteBatch batch) {
-		this.base.draw(x, y, globalScale, batch);
+	public void draw(float x, float y,  SpriteBatch batch) {
+		this.base.draw(x, y,  batch);
 		this.health.setWidth(this.length2);
-		this.health.draw(x, y, globalScale, batch);
+		this.health.draw(x, y,  batch);
 		if (this.bordered) {
-			this.border.draw(x, y, globalScale, batch);
+			this.border.draw(x, y,  batch);
 
 		}
 

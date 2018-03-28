@@ -11,6 +11,7 @@ import com.badlogic.gdx.Graphics.DisplayMode;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
@@ -18,9 +19,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 
 import engine.GameComponent;
-import engine.gui.Clickable;
 import engine.gui.SetGameModeAction;
-import engine.gui.StaticText;
 
 public class Settings extends GameComponent {
 
@@ -28,10 +27,10 @@ public class Settings extends GameComponent {
 	private TextField heightField;
 
 	private TextButton apply;
-	private StaticText warning;
+	private Label warning;
 	private TextButton back;
 	private TextButton fullscreen;
-	private StaticText supportedResolutionsText;
+	private Label supportedResolutionsText;
 	private TextButton[] resolutionClickables;
 	private Integer[][] resolutions;
 	private final int minWidth = 600, minHeight = 480;
@@ -74,9 +73,11 @@ public class Settings extends GameComponent {
 
 		fieldsX += this.apply.getWidth() + 10;
 
-		this.warning = new StaticText(fieldsX, fieldsY, Color.RED, "Please enter a number.");
+		this.warning = new Label("Please enter a number.", this.game.getLabelStyle());
+		this.warning.setColor( Color.RED);
+		this.warning.setPosition(fieldsX, fieldsY);
+		this.addActor(this.warning);
 		this.warning.setVisible(false);
-		this.guiElements.add(this.warning);
 
 		fieldsX = 0;
 		fieldsY -= this.widthField.getHeight();
@@ -87,9 +88,10 @@ public class Settings extends GameComponent {
 
 		Integer[][] supportedResolutions = new Integer[0][0];
 		supportedResolutions = this.getSupportedDisplayModes();
-		this.supportedResolutionsText = new StaticText(0, 0, 15, Color.BLACK, "Supported Fullscreen\nResolutions:");
-
-		this.guiElements.add(this.supportedResolutionsText);
+		this.supportedResolutionsText = new Label("Supported Fullscreen\nResolutions:", this.game.getLabelStyle());
+		this.supportedResolutionsText.setHeight(15);
+		this.supportedResolutionsText.setColor(Color.BLACK);
+		this.addActor(this.supportedResolutionsText);
 
 		this.resolutionClickables = new TextButton[supportedResolutions.length];
 		this.resolutions = supportedResolutions;
@@ -105,7 +107,7 @@ public class Settings extends GameComponent {
 					// Settings.this.heightField.setText(Settings.this.resolutions[i][1].toString());
 				}
 			});
-			this.stage.addActor(this.resolutionClickables[i]);
+			this.addActor(this.resolutionClickables[i]);
 
 		}
 		// set Listeners for button click functionality
@@ -130,8 +132,8 @@ public class Settings extends GameComponent {
 		this.getStage().addActor(this.heightField);
 		this.getStage().addActor(this.widthField);
 		this.getStage().addActor(this.back);
-		this.stage.addActor(this.apply);
-		this.stage.addActor(this.fullscreen);
+		this.addActor(this.apply);
+		this.addActor(this.fullscreen);
 
 		this.updateResolutionsPosition();
 
@@ -161,8 +163,6 @@ public class Settings extends GameComponent {
 	public void render(SpriteBatch batch) {
 		super.render(batch);
 
-		super.renderGUI(batch);
-		this.warning.draw(batch);
 		// this.fullscreen.draw(batch);
 		// this.supportedResolutions.draw(batch);
 	}
@@ -172,40 +172,13 @@ public class Settings extends GameComponent {
 		super.update(delta);
 		float x = TowerDefense.getMouseX();
 		float y = TowerDefense.getMouseY();
-		super.updateHovering(x, y);
 		if (Gdx.input.justTouched()) {
 			if (Gdx.input.isButtonPressed(com.badlogic.gdx.Input.Buttons.LEFT)) {
 				this.mouseWasClicked = true;
-
-				for (Clickable clickable : this.clickables) {
-					clickable.update(x, y);
-				}
 			}
 
 		} else if (this.mouseWasClicked && !Gdx.input.isButtonPressed(com.badlogic.gdx.Input.Buttons.LEFT)) {
 			this.mouseWasClicked = false;
-			for (Clickable clickable : this.clickables) {
-				if (!clickable.isStayClicked()) {
-					if (clickable.isClicked() && clickable.collides((int) x, (int) y, Gameplay.GLOBAL_GUI_SCALE)) {
-						clickable.onRelease();
-						/*
-						 * if (clickable == this.apply) { this.updateApplyButton(); } else
-						 */
-						/*
-						 * if (clickable == this.fullscreen) { this.updateFullscreenButton(); }
-						 */
-						/*
-						 * for (int i = 0; i < this.resolutions.length; ++i) { if (this.resolutionClickables[i] == clickable) { //
-						 * this.widthField.setText(this.resolutions[i][0].toString()); //
-						 * this.heightField.setText(this.resolutions[i][1].toString()); } }
-						 */
-
-					} else if (clickable.isClicked()) {
-						clickable.setClicked(false);
-					}
-				}
-
-			}
 		}
 		// if (input.isKeyPressed(Input.KEY_TAB)) {
 		// // if (this.widthField.hasFocus()) {
@@ -337,7 +310,7 @@ public class Settings extends GameComponent {
 	}
 
 	public void initStage() {
-
+		// TODO: remove? seems not needed anymore
 	}
 
 }
