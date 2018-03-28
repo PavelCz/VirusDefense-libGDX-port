@@ -13,17 +13,22 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
  *         seem to work anymore
  */
 public class LibGDXEllipse extends LibGDXRectangle {
+	// Set this to ShapeType.Line for unfilled ellipses and to ShapeType.Filled for filled ones
+	protected ShapeType shapeType;
 
 	public LibGDXEllipse(float width, float height, Color color) {
 		super(width, height, color);
+		this.shapeType = ShapeType.Filled;
 	}
 
 	public LibGDXEllipse(float width, float height) {
 		super(width, height);
+		this.shapeType = ShapeType.Filled;
 	}
 
 	public LibGDXEllipse(float width, float height, float r, float g, float b) {
 		super(width, height, r, g, b);
+		this.shapeType = ShapeType.Filled;
 	}
 
 	@Override
@@ -34,7 +39,7 @@ public class LibGDXEllipse extends LibGDXRectangle {
 		ShapeRenderer shapeRenderer = new ShapeRenderer();
 		//shapeRenderer.setProjectionMatrix(camera.combined);
 		shapeRenderer.setProjectionMatrix(batch.getProjectionMatrix());
-		shapeRenderer.begin(ShapeType.Filled);
+		shapeRenderer.begin(this.shapeType);
 		shapeRenderer.setColor(this.color.r, this.color.g, this.color.b, 1); // r g b a
 		shapeRenderer.circle(x, y, this.width / 2 * globalScale);
 		shapeRenderer.end();
