@@ -1,15 +1,12 @@
 package engine.graphics;
 
-import towerDefense.Gameplay;
-
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 
 /**
- * @author Pavel A Rectangle based on my other Project JBreakout. This Rectangle is based on LWJGL. I tworked once, but now it doesn't
- *         seem to work anymore
+ * @author Pavel A Rectangle based on my other Project JBreakout. This Rectangle is based on LWJGL.
  */
 public class LibGDXRectangle extends RenderObject {
 	protected Color color;
@@ -27,21 +24,14 @@ public class LibGDXRectangle extends RenderObject {
 
 	@Override
 	public void draw(float x, float y, float globalScale, SpriteBatch batch) {
-		batch.end();
-
-		//float scaling = globalScale;
-		// y = TowerDefense.getHeight() - y; // sets coordinate System from up -
-		// right to down - right
-		// y = y - this.height * scaling; // sets picture anchor to top left corner
-		// // instead of bottom left
-		//y = y + Gameplay.DEFAULT_SIZE * Gameplay.CURRENT_GAME_SCALE;
+		batch.end(); // pause batch drawing and start shape drawing
 		ShapeRenderer shapeRenderer = new ShapeRenderer();
 		shapeRenderer.setProjectionMatrix(batch.getProjectionMatrix());
 		shapeRenderer.begin(this.shapeType);
 		shapeRenderer.setColor(this.color.r, this.color.g, this.color.b, 1); // r g b a
 		shapeRenderer.rect(x, y, this.width * globalScale, this.height * globalScale);
 		shapeRenderer.end();
-		batch.begin();
+		batch.begin(); // restart batch drawing
 	}
 
 	public void setWidth(float width) {

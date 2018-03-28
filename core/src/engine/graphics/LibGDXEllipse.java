@@ -1,16 +1,12 @@
 package engine.graphics;
 
-import towerDefense.TowerDefense;
-
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 
 /**
- * @author Pavel A Rectangle based on my other Project JBreakout. This Rectangle is based on LWJGL. I tworked once, but now it doesn't
- *         seem to work anymore
+ * @author Pavel A Rectangle based on my other Project JBreakout. This Rectangle is based on LWJGL.
  */
 public class LibGDXEllipse extends LibGDXRectangle {
 
@@ -21,10 +17,7 @@ public class LibGDXEllipse extends LibGDXRectangle {
 	@Override
 	public void draw(float x, float y, float globalScale, SpriteBatch batch) {
 		batch.end();
-		//OrthographicCamera camera = new OrthographicCamera();
-		//camera.setToOrtho(false, TowerDefense.getWidth(), TowerDefense.getHeight());
 		ShapeRenderer shapeRenderer = new ShapeRenderer();
-		//shapeRenderer.setProjectionMatrix(camera.combined);
 		shapeRenderer.setProjectionMatrix(batch.getProjectionMatrix());
 		shapeRenderer.begin(this.shapeType);
 		shapeRenderer.setColor(this.color.r, this.color.g, this.color.b, 1); // r g b a
