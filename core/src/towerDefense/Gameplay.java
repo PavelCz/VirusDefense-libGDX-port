@@ -66,7 +66,6 @@ public class Gameplay extends GameComponent {
     private float towerShadowX, towerShadowY;
     protected ConcurrentLinkedQueue<Projectile> projectiles;
 
-    public static float CURRENT_GAME_SCALE;
     public static float MAX_GAME_SCALE;
     public static float GLOBAL_GUI_SCALE = 1f;
 
@@ -114,7 +113,6 @@ public class Gameplay extends GameComponent {
         // this.game.viewport.setWorldWidth(Gameplay.INTERFACE_START_X);
         float scale1 = Gameplay.INTERFACE_START_X / this.width;
         float scale2 = TowerDefense.getHeight() / this.height;
-        Gameplay.CURRENT_GAME_SCALE = 1f;
         Gameplay.MAX_GAME_SCALE = Math.max(scale1, scale2);
         Gameplay.SIZE = (int) (64);
 
