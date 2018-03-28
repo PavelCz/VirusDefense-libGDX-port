@@ -44,7 +44,6 @@ public class Gameplay extends GameComponent {
     private OrthographicCamera gameCamera;
     private float cameraWidth, cameraHeight;
     private Healthbar h;
-    // private static Camera camera;
     private float height, width;
     private ConcurrentLinkedQueue<Enemy> enemies;
     private boolean debugMode;
@@ -78,7 +77,6 @@ public class Gameplay extends GameComponent {
     private float speed;
     // Tests:
 
-    //
     public Gameplay(TowerDefense game, Level level) {
         super(game);
         //Gdx.input.setInputProcessor(this);
@@ -89,9 +87,6 @@ public class Gameplay extends GameComponent {
     @Override
     public void init() {
         super.init();
-
-        // this.gameCamera.translate(1024 / 2, 768 / 2);
-        // this.gameCamera.zoom = 2;
         this.h = new Healthbar(0, 0, 0, 30, 7);
         this.currentLevel.setGame(this);
         this.initDefaults();
@@ -101,7 +96,6 @@ public class Gameplay extends GameComponent {
         this.width = Gameplay.DEFAULT_SIZE * this.getHorizontalTiles();
 
         // Set Constants:
-
         Gameplay.INTERFACE_START_X = TowerDefense.getWidth() - 3 * 64;
         this.cameraWidth = Gameplay.INTERFACE_START_X; // (832)
         this.cameraHeight = TowerDefense.getHeight();
@@ -127,10 +121,7 @@ public class Gameplay extends GameComponent {
         this.projectiles = new ConcurrentLinkedQueue<Projectile>();
 
         this.initButtons();
-
-        //
         this.initGUI();
-
     }
 
     private void initButtons() {
@@ -259,8 +250,6 @@ public class Gameplay extends GameComponent {
         this.gameCamera.update();
         Matrix4 projectionBuffer = batch.getProjectionMatrix().cpy();
         Matrix4 transformBuffer = batch.getTransformMatrix().cpy();
-        // super.render(batch);
-        // Gdx.gl.glViewport(0, 0, (int) this.cameraWidth, (int) this.cameraHeight);
         batch.setProjectionMatrix(this.gameCamera.combined);
 
         this.drawBackground(batch);
@@ -455,17 +444,13 @@ public class Gameplay extends GameComponent {
             // this.currentTower.getSprite().getWidth() / 2);
             // this.towerShadowY = (int) (input.getMouseY() -
             // this.currentTower.getSprite().getHeight() / 2);
-
             // this.towerShadowX = this.gameCamera.position.x - this.width / 2 * this.gameCamera.zoom + TowerDefense
-            // .getMouseX()
-            // * this.gameCamera.zoom;
+            // .getMouseX() * this.gameCamera.zoom;
             // this.towerShadowY = TowerDefense.getMouseY() * this.gameCamera.zoom;
             int newX = (int) (x / Gameplay.SIZE);
             int newY = (int) (y / Gameplay.SIZE);
             this.towerShadowX = newX * Gameplay.SIZE;
             this.towerShadowY = newY * Gameplay.SIZE;
-            // this.towerShadowX = newX * Gameplay.SIZE - Gameplay.getCameraX();
-            // this.towerShadowY = newY * Gameplay.SIZE - Gameplay.getCameraY();
             int[][] path = this.currentLevel.getPath();
             if (this.player.getMoney() < this.currentTower.getCost()) {
                 this.currentTowerPlaceable = false;
@@ -481,7 +466,6 @@ public class Gameplay extends GameComponent {
     /**
      * updates keyboard events i.e. button presses
      *
-     * @param container
      * @param delta
      */
     private void keyboardEvents(int delta) {
@@ -507,22 +491,16 @@ public class Gameplay extends GameComponent {
 
         if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
             this.gameCamera.translate(-scrollDistance, 0);
-
         }
-
         if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
             this.gameCamera.translate(+scrollDistance, 0);
-
         }
         if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
             this.gameCamera.translate(0, +scrollDistance);
-
         }
         if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
             this.gameCamera.translate(0, -scrollDistance);
-
         }
-
         ensureCameraBounds();
 
         if (this.debugMode) {
@@ -531,10 +509,6 @@ public class Gameplay extends GameComponent {
     }
 
     private void ensureCameraBounds() {
-        float xOrigin = Gdx.graphics.getWidth() / 2;
-        float yOrigin = Gdx.graphics.getHeight() / 2;
-        float rightBoundary = INTERFACE_START_X;
-        float topBoundary = TowerDefense.getHeight();
         float interfaceWidth = TowerDefense.getWidth() - INTERFACE_START_X;
         float zoomedInterfaceWidth = interfaceWidth * this.gameCamera.zoom;
 
@@ -570,7 +544,6 @@ public class Gameplay extends GameComponent {
     /**
      * updates the keyboard events(button presse) only occuring in debug mode
      *
-     * @param container
      * @param delta
      */
     private void debugKeyboardEvents(int delta) {
@@ -588,7 +561,6 @@ public class Gameplay extends GameComponent {
     /**
      * handles mouse events like clicks
      *
-     * @param container
      * @param delta
      */
     private void mouseEvents(int delta) {
@@ -609,17 +581,8 @@ public class Gameplay extends GameComponent {
     }
 
     private void placeTower() {
-        // Vector2 vec = new Vector2(TowerDefense.getMouseX(), TowerDefense.getMouseY());
-        // vec.mul(this.gameCamera.)
-        // Vector3 vec = this.gameCamera.unproject(new Vector3(TowerDefense.getMouseX(), TowerDefense.getMouseY(), 0)
-        // , 0, 0,
-        // this.height,
-        // this.width);
-        // float x = vec.x;
-        // float y = vec.y;
         float x = this.getMouseX();
         float y = this.getMouseY();
-
         int newX = (int) x / Gameplay.SIZE;
         int newY = (int) y / Gameplay.SIZE;
 
@@ -633,7 +596,6 @@ public class Gameplay extends GameComponent {
                 this.towers[newY][newX] = bufferTower;
                 this.player.reduceMoney(cost);
                 this.game.getSoundHandler().play("place");
-
                 // if this is included buttons are unpressed after each tower placement
                 this.towerButtonGroup.uncheckAll();
 
@@ -664,7 +626,6 @@ public class Gameplay extends GameComponent {
             coordinates.add(new MyVector2f(waypoint.getX(), waypoint.getY()));
         }
         return coordinates;
-
     }
 
     public void reduceLives() {
@@ -753,14 +714,6 @@ public class Gameplay extends GameComponent {
         return this.currentTowerPlaceable;
     }
 
-    /*public StaticText getScore() {
-        return this.score;
-    }*/
-
-    /*public void setScore(StaticText score) {
-        this.score = score;
-    }*/
-
     public void setPlayerName(String playerName) {
         this.player.setName(playerName);
         this.playerName.setText("Player: " + this.player.getName());
@@ -769,20 +722,6 @@ public class Gameplay extends GameComponent {
     @Override
     public boolean scrolled(int amount) {
         super.scrolled(amount);
-        // int mouseWheel = -amount;
-        // if (mouseWheel > 0) { // mouse wheel up
-        // Gameplay.CURRENT_GAME_SCALE *= 1.1f;
-        // if (Gameplay.CURRENT_GAME_SCALE > 6) {
-        // Gameplay.CURRENT_GAME_SCALE = 6f;
-        // }
-        // Gameplay.SIZE = (int) (Gameplay.DEFAULT_SIZE * Gameplay.CURRENT_GAME_SCALE);
-        // } else if (mouseWheel < 0) {// mouse wheel down
-        // Gameplay.CURRENT_GAME_SCALE *= 0.9f;
-        // if (Gameplay.CURRENT_GAME_SCALE < Gameplay.MAX_GAME_SCALE) {
-        // Gameplay.CURRENT_GAME_SCALE = Gameplay.MAX_GAME_SCALE;
-        // }
-        // Gameplay.SIZE = (int) (Gameplay.DEFAULT_SIZE * Gameplay.CURRENT_GAME_SCALE);
-        // }
 
         this.gameCamera.zoom += amount / 8.0;
         if (this.gameCamera.zoom < 0.2f) {
