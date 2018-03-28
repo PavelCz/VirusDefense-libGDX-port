@@ -543,6 +543,7 @@ public class Gameplay extends GameComponent {
 
         }
 
+        if(this.gameCamera.zoom <= 1f) {
         if (this.gameCamera.position.x - (cameraWidth + zoomedInterfaceWidth) < 0) { // limit camera left
             this.gameCamera.position.x = cameraWidth + zoomedInterfaceWidth;
         }
@@ -554,7 +555,7 @@ public class Gameplay extends GameComponent {
         }
         if (this.gameCamera.position.y - cameraHeight < 0) { // limit camera top
             this.gameCamera.position.y = cameraHeight;
-        }
+        }}
 
         if (this.debugMode) {
             this.debugKeyboardEvents(delta);
@@ -786,8 +787,8 @@ public class Gameplay extends GameComponent {
         this.gameCamera.zoom += amount / 8.0;
         if (this.gameCamera.zoom < 0.2f) {
             this.gameCamera.zoom = 0.2f;
-        } else if (this.gameCamera.zoom > 1f) {
-            this.gameCamera.zoom = 1f;
+        } else if (this.gameCamera.zoom > 2f) {
+            this.gameCamera.zoom = 2f;
         }
 
         return true;
