@@ -29,17 +29,17 @@ public class BombTower extends Tower {
 		if (this.building) {
 			float scale = (this.buildingTime - this.buildingTimer) / this.buildingTime;
 			float size = (Gameplay.DEFAULT_SIZE - this.sprite.getWidth() * scale) / 2;
-			//this.sprite.draw((this.x * Gameplay.DEFAULT_SIZE + size) ,
-			//		(this.y * Gameplay.DEFAULT_SIZE + size) , Gameplay.CURRENT_GAME_SCALE * scale, batch);
 			this.sprite.draw((this.x * Gameplay.DEFAULT_SIZE + size) ,
-							(this.y * Gameplay.DEFAULT_SIZE + size) , batch);
+					(this.y * Gameplay.DEFAULT_SIZE + size) , scale, batch);
+			//this.sprite.draw((this.x * Gameplay.DEFAULT_SIZE + size) ,
+			//				(this.y * Gameplay.DEFAULT_SIZE + size) , batch);
 		} else if (this.wobble) {
 			float scale = this.wobbleFactor;
 			float size = (Gameplay.DEFAULT_SIZE - this.sprite.getWidth() * scale) / 2;
-			//this.sprite.draw((this.x * Gameplay.DEFAULT_SIZE + size) ,
-			//		(this.y * Gameplay.DEFAULT_SIZE + size) , scale * Gameplay.CURRENT_GAME_SCALE, batch);
 			this.sprite.draw((this.x * Gameplay.DEFAULT_SIZE + size) ,
-					(this.y * Gameplay.DEFAULT_SIZE + size) , batch);
+					(this.y * Gameplay.DEFAULT_SIZE + size) , scale, batch);
+			//this.sprite.draw((this.x * Gameplay.DEFAULT_SIZE + size) ,
+			//		(this.y * Gameplay.DEFAULT_SIZE + size) , batch);
 		} else {
 			this.sprite.draw(this.x * Gameplay.SIZE, this.y * Gameplay.SIZE, batch);
 		}
