@@ -502,23 +502,6 @@ public class Gameplay extends GameComponent {
             this.game.setMode(TowerDefense.MODE_MENU);
         }
 
-        // else if ((Gameplay.getCameraX() + cameraWidth) / Gameplay.CURRENT_GAME_SCALE > this.getHorizontalTiles()
-        // * Gameplay.DEFAULT_SIZE) {
-        // Gameplay.camera.setX((this.getHorizontalTiles() * Gameplay.DEFAULT_SIZE) * Gameplay.CURRENT_GAME_SCALE -
-        // cameraWidth);
-        //
-        // } else if ((Gameplay.getCameraY() + cameraHeight) / Gameplay.CURRENT_GAME_SCALE > this.getVerticalTiles()
-        // * Gameplay.DEFAULT_SIZE) {
-        // Gameplay.camera.setY((this.getVerticalTiles() * Gameplay.DEFAULT_SIZE) * Gameplay.CURRENT_GAME_SCALE -
-        // cameraHeight);
-        //
-        // }
-        float xOrigin = Gdx.graphics.getWidth() / 2;
-        float yOrigin = Gdx.graphics.getHeight() / 2;
-        float rightBoundary = INTERFACE_START_X;
-        float topBoundary = TowerDefense.getHeight();
-
-
 
         float scrollSpeed = 0.5f;
         float scrollDistance = scrollSpeed * delta;
@@ -546,14 +529,13 @@ public class Gameplay extends GameComponent {
         if (this.debugMode) {
             this.debugKeyboardEvents(delta);
         }
-        // this.gameCamera.position.x = MathUtils.clamp(this.gameCamera.position.x, effectiveCameraWidth / 2f,
-        // this.gameCamera.viewportWidth - effectiveCameraWidth / 2f);
-        // this.gameCamera.position.y = MathUtils.clamp(this.gameCamera.position.y, effectiveCameraHeight / 2f,
-        // this.gameCamera.viewportHeight - effectiveCameraHeight / 2f);
-
     }
 
     private void ensureCameraBounds() {
+        float xOrigin = Gdx.graphics.getWidth() / 2;
+        float yOrigin = Gdx.graphics.getHeight() / 2;
+        float rightBoundary = INTERFACE_START_X;
+        float topBoundary = TowerDefense.getHeight();
         float interfaceWidth = TowerDefense.getWidth() - INTERFACE_START_X;
         float zoomedInterfaceWidth = interfaceWidth * this.gameCamera.zoom;
 
