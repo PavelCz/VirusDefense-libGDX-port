@@ -256,6 +256,9 @@ public class Gameplay extends GameComponent {
         this.currentLevel.renderPath(batch);
 
         this.renderEnemies(batch);
+        for (Projectile projectiles : this.projectiles) {
+            projectiles.draw(batch);
+        }
         this.renderTowers(batch);
 
         this.renderTowerShadow(batch);
@@ -266,9 +269,6 @@ public class Gameplay extends GameComponent {
         // Gdx.gl.glViewport(0, 0, Gdx.graphics.getWidth(), (int) this.cameraHeight);
         this.renderGUI(batch);
 
-        for (Projectile projectiles : this.projectiles) {
-            projectiles.draw(batch);
-        }
         if (this.currentTower != null) {
             this.currentTower.getSprite().draw(INTERFACE_START_X, TowerDefense.getHeight() - 80,
                     batch);
