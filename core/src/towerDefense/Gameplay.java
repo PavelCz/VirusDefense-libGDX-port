@@ -273,8 +273,8 @@ public class Gameplay extends GameComponent {
 
         this.renderTowerShadow(batch);
 
-        batch.setProjectionMatrix(projectionBuffer);
-        batch.setTransformMatrix(transformBuffer);
+        //batch.setProjectionMatrix(projectionBuffer);
+        //batch.setTransformMatrix(transformBuffer);
 
         // Gdx.gl.glViewport(0, 0, Gdx.graphics.getWidth(), (int) this.cameraHeight);
         this.renderGUI(batch);

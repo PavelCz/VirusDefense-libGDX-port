@@ -34,13 +34,14 @@ public class LibGDXRectangle extends RenderObject {
 	protected void drawAux(float x, float y, float globalScale, SpriteBatch batch, ShapeType shapeType) {
 		batch.end();
 
-		float scaling = globalScale;
+		//float scaling = globalScale;
 		// y = TowerDefense.getHeight() - y; // sets coordinate System from up -
 		// right to down - right
 		// y = y - this.height * scaling; // sets picture anchor to top left corner
 		// // instead of bottom left
-		y = y + Gameplay.DEFAULT_SIZE * Gameplay.CURRENT_GAME_SCALE;
+		//y = y + Gameplay.DEFAULT_SIZE * Gameplay.CURRENT_GAME_SCALE;
 		ShapeRenderer shapeRenderer = new ShapeRenderer();
+		shapeRenderer.setProjectionMatrix(batch.getProjectionMatrix());
 		shapeRenderer.begin(shapeType);
 		shapeRenderer.setColor(this.color.r, this.color.g, this.color.b, 1); // r
 																				// g
