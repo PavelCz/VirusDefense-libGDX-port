@@ -1,7 +1,5 @@
 package engine.gui;
 
-import towerDefense.Gameplay;
-
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import engine.graphics.RenderObject;
