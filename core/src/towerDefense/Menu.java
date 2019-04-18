@@ -72,6 +72,12 @@ public class Menu extends GameComponent {
 		this.settingsButton.setY(y);
 		y -= this.startButton.getHeight() + 1;
 
+		TextButton settingsButton2 = new TextButton("SettingsNew", textButtonStyle);
+		settingsButton2.setX(TowerDefense.getWidth() / 2 - settingsButton2.getWidth() / 2);
+		settingsButton2.setY(y);
+		y -= this.startButton.getHeight() + 1;
+
+
 		this.highscoresButton = new TextButton("Highscores", textButtonStyle);
 		this.highscoresButton.setX(TowerDefense.getWidth() / 2 - this.highscoresButton.getWidth() / 2);
 		this.highscoresButton.setY(y);
@@ -106,6 +112,15 @@ public class Menu extends GameComponent {
 			@Override
 			public void changed(ChangeEvent event, Actor actor) {
 				game.setMode(TowerDefense.MODE_SETTINGS);
+				game.deactivateMenu();
+			}
+		});
+
+		// sets Click event of button "Settings" to go to Settings
+		this.settingsButton.addListener(new ChangeListener() {
+			@Override
+			public void changed(ChangeEvent event, Actor actor) {
+				game.setMode(TowerDefense.MODE_SETTINGS_NEW);
 				game.deactivateMenu();
 			}
 		});
