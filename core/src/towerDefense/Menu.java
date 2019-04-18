@@ -10,6 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 
 import engine.GameComponent;
 import engine.gui.SetGameModeAction;
+import towerDefense.towers.Tower;
 
 public class Menu extends GameComponent {
 
@@ -109,7 +110,14 @@ public class Menu extends GameComponent {
 			}
 		});
 
-		this.highscoresButton.addListener(new SetGameModeAction(this.game, TowerDefense.MODE_SCORES));
+		this.highscoresButton.addListener(new ChangeListener() {
+			@Override
+			public void changed(ChangeEvent event, Actor actor) {
+				game.setMode(TowerDefense.MODE_SCORES);
+			}
+		});
+
+
 
 		// sets Click event of button "Exit Game" to close game
 		this.exitGameButton.addListener(new ChangeListener() {
