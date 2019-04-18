@@ -28,6 +28,7 @@ allprojects {
         box2DLightsVersion = '1.4'
         ashleyVersion = '1.7.0'
         aiVersion = '1.8.0'
+        ktxVersion = '1.9.9-b1'
     }
 
     repositories {
@@ -113,6 +114,8 @@ project(":core") {
     dependencies {
         compile "com.badlogicgames.gdx:gdx:$gdxVersion"
         compile "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
+
+        compile "io.github.libktx:ktx-actors:$ktxVersion"
 
     }
 }
